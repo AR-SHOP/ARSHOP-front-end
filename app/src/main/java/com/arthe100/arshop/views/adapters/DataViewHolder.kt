@@ -1,9 +1,9 @@
-package com.arthe100.arshop.scripts
+package com.arthe100.arshop.views.adapters
 
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.arthe100.arshop.models.Data
+import com.arthe100.arshop.views.Data
 import kotlinx.android.synthetic.main.data_layout.view.*
 
 

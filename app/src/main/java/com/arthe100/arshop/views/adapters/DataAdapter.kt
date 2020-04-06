@@ -1,10 +1,10 @@
-package com.arthe100.arshop.scripts
+package com.arthe100.arshop.views.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
-import com.arthe100.arshop.models.Data
+import com.arthe100.arshop.views.Data
 
 class DataAdapter(private val dataList: ArrayList<Data>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
