@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ArShop</string>
+    <string name="home_btn_name">خانه</string>
+    <string name="categories_btn_name">دسته بندی ها</string>
+    <string name="cart_btn_name">سبد خرید</string>
+    <string name="profile_btn_name">فروشگاه من</string>
 </resources>
