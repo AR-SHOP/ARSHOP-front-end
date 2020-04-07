@@ -2,17 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:icon="@drawable/ic_action_home"
         android:id="@+id/home"
         android:title="خانه" />
     <item
+        android:icon="@drawable/ic_action_categories"
         android:id="@+id/categories"
         android:title="دسته بندی ها" />
     <item
+        android:icon="@drawable/ic_action_cart"
         android:id="@+id/cart"
-        android:title="سبد خرید" />
+        android:title="سبد خرید"/>
     <item
+        android:icon="@drawable/ic_action_profile"
         android:id="@+id/profile"
-        android:title="فروشگاه من" />
-
+        android:title="فروشگاه من"/>
 
 </menu>
