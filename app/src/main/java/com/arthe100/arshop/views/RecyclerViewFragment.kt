@@ -1,10 +1,11 @@
 package com.arthe100.arshop.views
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 
-class RecyclerViewActivity : AppCompatActivity() {
+class RecyclerViewFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 }
