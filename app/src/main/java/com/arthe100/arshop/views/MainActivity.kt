@@ -20,37 +20,37 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
 
-        var selectedFragment: Fragment = setBtmViewSelectedListener(bottom_navbar)
-        loadFragment(selectedFragment, R.id.fragment_container)
 
-    }
-
-    private fun loadFragment(selectedFragment: Fragment, fragmentContainer: Int) {
-        supportFragmentManager.beginTransaction()
-                .replace(fragmentContainer, selectedFragment)
-                .commit()
-    }
-
-    private fun setBtmViewSelectedListener(bottomNavbar: BottomNavigationView?) : Fragment {
-        var selectedFragment: Fragment = Fragment()
-        bottom_navbar.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
+        bottom_navbar.setOnNavigationItemSelectedListener {item ->
+            when (item.itemId) {
                 R.id.btm_navbar_home -> {
-                    selectedFragment = HomeFragment()
+                    loadFragment(HomeFragment())
                 }
                 R.id.btm_navbar_categories -> {
-                    selectedFragment = CategoriesFragment()
+                    loadFragment(CategoriesFragment())
                 }
                 R.id.btm_navbar_cart -> {
-                    selectedFragment = CartFragment()
+                    loadFragment(CartFragment())
                 }
                 R.id.btm_navbar_profile -> {
-                    selectedFragment = ProfileFragment()
+                    loadFragment(ProfileFragment())
                 }
             }
             return@setOnNavigationItemSelectedListener true
         }
-        return selectedFragment
+
+
+        if (savedInstanceState == null) {
+            bottom_navbar.selectedItemId = R.id.btm_navbar_home
+            loadFragment(HomeFragment())
+        }
+
+    }
+
+    private fun loadFragment(selectedFragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, selectedFragment)
+                .commit()
     }
 
 }
