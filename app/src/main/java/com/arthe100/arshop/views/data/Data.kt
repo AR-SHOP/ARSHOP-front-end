@@ -1,4 +1,4 @@
-package com.arthe100.arshop.views
+package com.arthe100.arshop.views.data
 
 class Data private constructor(builder: DataBuilder) {
     var title: String? = null

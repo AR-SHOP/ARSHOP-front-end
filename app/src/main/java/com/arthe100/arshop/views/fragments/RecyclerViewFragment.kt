@@ -1,4 +1,4 @@
-package com.arthe100.arshop.views
+package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

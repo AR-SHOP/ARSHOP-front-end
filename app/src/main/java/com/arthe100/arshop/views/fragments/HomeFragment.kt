@@ -1,4 +1,4 @@
-package com.arthe100.arshop.views.adapters
+package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
