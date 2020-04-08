@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/profile"
+    <item android:id="@+id/btm_navbar_profile"
         android:title="@string/profile_btn_name"
         android:icon="@drawable/ic_action_profile" />
-    <item android:id="@+id/cart"
+    <item android:id="@+id/btm_navbar_cart"
         android:title="@string/cart_btn_name"
         android:icon="@drawable/ic_action_cart" />
-    <item android:id="@+id/categories"
+    <item android:id="@+id/btm_navbar_categories"
         android:title="@string/categories_btn_name"
         android:icon="@drawable/ic_action_categories"/>
-    <item android:id="@+id/home"
+    <item android:id="@+id/btm_navbar_home"
         android:title="@string/home_btn_name"
         android:icon="@drawable/ic_action_home" />
 </menu>
