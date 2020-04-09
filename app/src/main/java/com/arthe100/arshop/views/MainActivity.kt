@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
 
-        var bottomNavBar = BottomNavigationViewAdapter(this, savedInstanceState)
+        BottomNavigationViewAdapter(this, savedInstanceState)
                 .setBottomNavigationView()
 
         var toolbar: Toolbar = tool_bar
