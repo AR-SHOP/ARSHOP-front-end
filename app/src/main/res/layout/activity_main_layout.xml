@@ -8,23 +8,42 @@
     android:layout_height="match_parent"
     tools:context=".views.MainActivity">
 
-<!--    <androidx.appcompat.widget.SearchView-->
-<!--        android:id="@+id/search_bar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/material_on_background_disabled"-->
-<!--        android:elevation="10dp"-->
-<!--        android:layoutDirection="rtl"-->
-<!--        android:textDirection="rtl"-->
-<!--        app:queryHint="@string/search_hint"-->
-<!--        app:iconifiedByDefault="false"-->
-<!--        android:paddingHorizontal="10dp" />-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:textAlignment="center"
+            app:titleTextColor="@color/colorPrimary"/>
+
+        <com.miguelcatalan.materialsearchview.MaterialSearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:layoutDirection="rtl"
+            android:textColor="@color/colorHint"
+            android:textColorHint="@color/colorHint"
+            app:searchBackIcon="@drawable/ic_action_navigation_arrow_back_inverted"
+            app:searchCloseIcon="@drawable/ic_action_close"
+            app:searchSuggestionIcon="@drawable/ic_suggestion" />
+
+    </FrameLayout>
+
+
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_bar">
     </FrameLayout>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navbar"
@@ -36,7 +55,14 @@
         app:itemIconTint="@color/colorPrimary"
         app:itemTextColor="@color/colorPrimary"
         app:labelVisibilityMode="selected"
-        app:menu="@menu/bottom_navbar_layout"
+        app:menu="@menu/bottom_navbar_menu_layout"
         android:background="?android:attr/windowBackground" />
+
+
+
+
+
+
+
 
 </RelativeLayout>

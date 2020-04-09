@@ -36,7 +36,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_home_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_arrow_forward_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -70,9 +70,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_action_home" />
+                                      <entry key="imageAsset" value="F:\ARSHOP\icons\icons8-categorize-96.png" />
+                                      <entry key="outputName" value="ic_action_navigation_arrow_back_inverted" />
                                       <entry key="theme" value="HOLO_DARK" />
-                                      <entry key="themeColor" value="ffffff" />
+                                      <entry key="themeColor" value="ff0808" />
                                     </map>
                                   </option>
                                 </PersistentState>
