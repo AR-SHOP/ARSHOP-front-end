@@ -6,6 +6,7 @@
     android:background="@color/colorBackgroud"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:alpha="0.8"
     tools:context=".views.MainActivity">
 
     <FrameLayout
@@ -16,7 +17,7 @@
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorBackgroud"
             android:textAlignment="center"
             app:titleTextColor="@color/colorPrimary"/>
 
@@ -25,12 +26,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="10dp"
+            android:layout_margin="8dp"
             android:layoutDirection="rtl"
             android:textColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
             app:searchBackIcon="@drawable/ic_action_navigation_arrow_back_inverted"
             app:searchCloseIcon="@drawable/ic_action_close"
-            app:searchSuggestionIcon="@drawable/ic_suggestion" />
+            app:searchSuggestionIcon="@drawable/ic_suggestion"/>
 
     </FrameLayout>
 
@@ -44,12 +46,12 @@
     </FrameLayout>
 
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        app:elevation="10dp"
         android:layout_gravity="bottom"
         app:backgroundTint="@color/colorBackgroud"
         app:itemIconTint="@color/colorPrimary"
