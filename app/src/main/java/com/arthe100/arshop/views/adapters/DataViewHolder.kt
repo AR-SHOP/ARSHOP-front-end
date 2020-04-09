@@ -3,7 +3,7 @@ package com.arthe100.arshop.views.adapters
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.arthe100.arshop.views.Data
+import com.arthe100.arshop.views.data.Data
 import kotlinx.android.synthetic.main.data_layout.view.*
 
 
