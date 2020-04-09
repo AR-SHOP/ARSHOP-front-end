@@ -2,107 +2,113 @@ package com.arthe100.arshop.scripts.ar
 
 import android.content.Context
 import android.net.Uri
-import android.nfc.Tag
 import android.util.Log
-import android.view.Gravity
-import android.widget.Toast
+import com.arthe100.arshop.scripts.messege.MessageManager
 import com.google.ar.core.Anchor
 import com.google.ar.sceneform.AnchorNode
-import com.google.ar.sceneform.FrameTime
+import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.assets.RenderableSource
-import com.google.ar.sceneform.rendering.Color
-import com.google.ar.sceneform.rendering.ModelRenderable
-import com.google.ar.sceneform.rendering.PlaneRenderer
-import com.google.ar.sceneform.rendering.Renderable
+import com.google.ar.sceneform.math.Vector3
+import com.google.ar.sceneform.rendering.*
 import com.google.ar.sceneform.ux.ArFragment
-import java.lang.NullPointerException
-import java.util.logging.Logger
+import com.google.ar.sceneform.ux.TransformableNode
+import javax.inject.Inject
 
 
-class ArManager(fragment: ArFragment) {
-private val TAG = ArManager::class.simpleName
+class ArManager @Inject constructor(context : Context , fragment: ArFragment , infoCardLayoutId : Int , messageManager: MessageManager) {
 
-    private val models : MutableMap<String , Renderable> = mutableMapOf()
+
+    private val TAG = ArManager::class.simpleName
+    private val models : MutableMap<String , ModelRenderable> = mutableMapOf()
+    private var arInfoCardManager : ArInfoCardManager
     private var currentUri : String = ""
-    private var context : Context? = null
+    private val context : Context
+
+    val messageManager : MessageManager
 
 
     init {
         val sceneView = fragment.arSceneView
         sceneView.scene.addOnUpdateListener{
             fragment.onUpdate(it)
-
             val plane = sceneView.planeRenderer
 
             plane.material.thenAccept{mat ->
-                mat.setFloat(PlaneRenderer.MATERIAL_SPOTLIGHT_RADIUS , 100f)
+                mat.setFloat(PlaneRenderer.MATERIAL_SPOTLIGHT_RADIUS , 5f)
                 mat.setFloat3(PlaneRenderer.MATERIAL_COLOR , Color(0f, 255f, 165f))
             }
+
         }
 
         fragment.setOnTapArPlaneListener { hitResult, plane, motionEvent ->
             if(plane.isPoseInExtents(hitResult.hitPose))
                 setModel(currentUri , fragment , hitResult.createAnchor())
         }
-    }
 
-
-    public fun setContext(context: Context)
-    {
+        arInfoCardManager = ArInfoCardManager(context , infoCardLayoutId)
+        this.messageManager = messageManager
         this.context = context
+
     }
-    public fun setUri(uri: String)
+
+    fun showInfo(parent : Node , root : Node){
+        arInfoCardManager.addInfoOn(parent
+        ) {
+            root.renderable = null
+            root.removeChild(parent) }
+
+        messageManager.toast(context , "model hit!")
+    }
+
+    fun hideInfo(parent: Node){
+        arInfoCardManager.removeInfoFrom(parent)
+    }
+
+    fun setUri(uri: String)
     {
         this.currentUri = uri
     }
 
+    private fun setModel(uri: String, fragment : ArFragment, anchor: Anchor){
 
+        if(models.containsKey(uri))
+        {
+            placeModel(fragment , models[uri]!! , anchor)
+            return
+        }
 
-
-    public fun setModel(uri: String , fragment : ArFragment , anchor: Anchor){
         ModelRenderable.Builder()
                 .setSource(context , RenderableSource.Builder().setSource(
                         context,
                         Uri.parse(uri),
                         RenderableSource.SourceType.GLTF2)
-                        .setScale(0.5f)
+                        .setScale(0.1f)
                         .setRecenterMode(RenderableSource.RecenterMode.ROOT)
                         .build())
                 .setRegistryId(uri)
                 .build()
                 .thenAccept{
+
+                    models[uri] = it
                     placeModel(fragment , it , anchor)
                 }
                 .exceptionally {
-                    showMSG("Unable to load renderable $uri")
+                    messageManager.toast(context, "Unable to load renderable $uri")
                     return@exceptionally null
                 }
     }
 
-    fun placeModel(fragment : ArFragment , model : ModelRenderable , anchor: Anchor){
-        if(model == null){
-            Log.e(TAG , "model is not loaded!")
-            return
-        }
+    private fun placeModel(fragment : ArFragment, model : ModelRenderable, anchor: Anchor){
 
         val anchorNode = AnchorNode(anchor)
-        anchorNode.renderable = model
         fragment.arSceneView.scene.addChild(anchorNode)
 
+        val node = TransformableNode(fragment.transformationSystem)
+        anchorNode.addChild(node)
+        node.renderable = model
+        node.localScale = Vector3(0.1f , 0.1f , 0.1f)
+        node.setOnTapListener{ _, _ -> showInfo(node , anchorNode) }
     }
-
-
-    fun showMSG(msg : String){
-
-        if(context == null){
-            Log.e(TAG , "context can't be null!")
-            return
-        }
-
-        val toast = Toast.makeText(context, msg , Toast.LENGTH_LONG)
-        toast.setGravity(Gravity.CENTER, 0, 0)
-        toast.show()
-    }
-
-
 }
+
+
