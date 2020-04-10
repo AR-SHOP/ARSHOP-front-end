@@ -25,42 +25,41 @@ class MainActivity : AppCompatActivity() {
         BottomNavigationViewAdapter(this, savedInstanceState)
                 .setBottomNavigationView()
 
-        var toolbar: Toolbar = tool_bar
-        setSupportActionBar(toolbar)
-        toolbar.setTitleTextColor(Color.RED)
-
-        searchView = MaterialSearchView(this)
-        searchView = search_view
-        searchView.setCursorDrawable(R.drawable.cursor)
-
-        searchView.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                //Do some magic
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                //Do some magic
-                return false
-            }
-        })
-
-        searchView.setOnSearchViewListener(object : SearchViewListener {
-            override fun onSearchViewShown() {
-                //Do some magic
-            }
-
-            override fun onSearchViewClosed() {
-                //Do some magic
-            }
-        })
-
+//        var toolbar: Toolbar = tool_bar
+//        setSupportActionBar(toolbar)
+//        toolbar.setTitleTextColor(Color.RED)
+//
+//        searchView = MaterialSearchView(this)
+//        searchView = search_view
+//        searchView.setCursorDrawable(R.drawable.cursor)
+//
+//        searchView.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String): Boolean {
+//                //Do some magic
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(newText: String): Boolean {
+//                //Do some magic
+//                return false
+//            }
+//        })
+//
+//        searchView.setOnSearchViewListener(object : SearchViewListener {
+//            override fun onSearchViewShown() {
+//                //Do some magic
+//            }
+//
+//            override fun onSearchViewClosed() {
+//                //Do some magic
+//            }
+//        })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu_layout, menu)
-        val item: MenuItem = menu.findItem(R.id.action_search)
-        searchView.setMenuItem(item)
-        return super.onCreateOptionsMenu(menu)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.toolbar_menu_layout, menu)
+//        val item: MenuItem = menu.findItem(R.id.action_search)
+//        searchView.setMenuItem(item)
+//        return super.onCreateOptionsMenu(menu)
+//    }
 }
