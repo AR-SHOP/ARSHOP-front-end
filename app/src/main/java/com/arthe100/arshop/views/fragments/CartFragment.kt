@@ -16,4 +16,9 @@ class CartFragment : Fragment() {
         return inflater.inflate(R.layout.cart_fragment_layout, container, false)
     }
 
+    override fun toString(): String {
+        return "Cart"
+    }
+
+
 }

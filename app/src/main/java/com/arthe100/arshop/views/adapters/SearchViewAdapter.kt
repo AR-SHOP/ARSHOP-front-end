@@ -10,8 +10,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import com.miguelcatalan.materialsearchview.MaterialSearchView.SearchViewListener
 
-class SearchViewAdapter (private var activity: FragmentActivity,
-                        private var selectedFragment: Fragment) : AppCompatActivity() {
+class SearchViewAdapter (private var activity: FragmentActivity) : AppCompatActivity() {
 
     var searchView: MaterialSearchView = MaterialSearchView(activity)
         private set

@@ -1,6 +1,8 @@
 package com.arthe100.arshop.views.adapters
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.arthe100.arshop.R
@@ -20,28 +22,34 @@ class BottomNavigationViewAdapter (private var activity: FragmentActivity,
     init {
         if (savedInstanceState == null) {
             activity.bottom_navbar.selectedItemId = R.id.btm_navbar_home
-            loadFragment(HomeFragment())
+            selectedFragment = HomeFragment()
+            loadFragment(selectedFragment)
         }
     }
 
-    public fun setBottomNavigationView() : BottomNavigationViewAdapter {
+    public fun setBottomNavigationView() {
         activity.bottom_navbar.setOnNavigationItemSelectedListener {item ->
-            selectedFragment = Fragment()
             when (item.itemId) {
                 R.id.btm_navbar_home -> {
                     selectedFragment = HomeFragment()
+                    activity.toolbar_container.visibility = View.VISIBLE
                 }
-                R.id.btm_navbar_categories ->
+                R.id.btm_navbar_categories -> {
                     selectedFragment = CategoriesFragment()
-                R.id.btm_navbar_cart ->
+                    activity.toolbar_container.visibility = View.VISIBLE
+                }
+                R.id.btm_navbar_cart -> {
                     selectedFragment = CartFragment()
-                R.id.btm_navbar_profile ->
+                    activity.toolbar_container.visibility = View.INVISIBLE
+                }
+                R.id.btm_navbar_profile -> {
                     selectedFragment = ProfileFragment()
+                    activity.toolbar_container.visibility = View.INVISIBLE
+                }
             }
             loadFragment(selectedFragment)
             return@setOnNavigationItemSelectedListener true
         }
-        return this
     }
 
     private fun loadFragment(selectedFragment: Fragment) {
@@ -49,10 +57,4 @@ class BottomNavigationViewAdapter (private var activity: FragmentActivity,
                 .replace(R.id.fragment_container, selectedFragment)
                 .commit()
     }
-
-
-
-
-
-
 }

@@ -10,8 +10,10 @@
     tools:context=".views.MainActivity">
 
     <FrameLayout
+        android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="invisible">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
@@ -19,14 +21,16 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorBackgroud"
             android:textAlignment="center"
-            app:titleTextColor="@color/colorPrimary"/>
+            app:titleTextColor="@color/colorPrimary"
+            android:elevation="6dp"
+            android:layout_margin="6dp" />
 
         <com.miguelcatalan.materialsearchview.MaterialSearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="10dp"
-            android:layout_margin="8dp"
+            android:elevation="6dp"
+            android:layout_margin="6dp"
             android:layoutDirection="rtl"
             android:textColor="@color/colorHint"
             android:textColorHint="@color/colorHint"
@@ -58,7 +62,7 @@
         app:itemTextColor="@color/colorPrimary"
         app:labelVisibilityMode="selected"
         app:menu="@menu/bottom_navbar_menu_layout"
-        android:background="?android:attr/windowBackground" />
+        android:background="?android:attr/windowBackground"/>
 
 
 

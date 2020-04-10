@@ -16,4 +16,8 @@ class ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.profile_fragment_layout, container, false)
     }
 
+    override fun toString(): String {
+        return "Profile"
+    }
+
 }

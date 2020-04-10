@@ -16,4 +16,8 @@ class CategoriesFragment : Fragment() {
         return inflater.inflate(R.layout.categories_fragment_layout, container, false)
     }
 
+    override fun toString(): String {
+        return "Categories"
+    }
+
 }
