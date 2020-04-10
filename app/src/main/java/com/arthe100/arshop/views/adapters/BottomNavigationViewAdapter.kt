@@ -14,7 +14,8 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 class BottomNavigationViewAdapter (private var activity: FragmentActivity,
                                    private var savedInstanceState: Bundle?) {
 
-    private lateinit var selectedFragment: Fragment
+    var selectedFragment: Fragment = Fragment()
+        private set
 
     init {
         if (savedInstanceState == null) {
@@ -23,7 +24,7 @@ class BottomNavigationViewAdapter (private var activity: FragmentActivity,
         }
     }
 
-    public fun setBottomNavigationView() {
+    public fun setBottomNavigationView() : BottomNavigationViewAdapter {
         activity.bottom_navbar.setOnNavigationItemSelectedListener {item ->
             selectedFragment = Fragment()
             when (item.itemId) {
@@ -40,6 +41,7 @@ class BottomNavigationViewAdapter (private var activity: FragmentActivity,
             loadFragment(selectedFragment)
             return@setOnNavigationItemSelectedListener true
         }
+        return this
     }
 
     private fun loadFragment(selectedFragment: Fragment) {
