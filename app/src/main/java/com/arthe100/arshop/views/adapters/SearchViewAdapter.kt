@@ -1,6 +1,7 @@
 package com.arthe100.arshop.views.adapters
 
 import android.graphics.Color
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -10,7 +11,8 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import com.miguelcatalan.materialsearchview.MaterialSearchView.SearchViewListener
 
-class SearchViewAdapter (private var activity: FragmentActivity) : AppCompatActivity() {
+class SearchViewAdapter (var activity: FragmentActivity) : AppCompatActivity() {
+
 
     var searchView: MaterialSearchView = MaterialSearchView(activity)
         private set
@@ -22,7 +24,6 @@ class SearchViewAdapter (private var activity: FragmentActivity) : AppCompatActi
         searchView.setOnSearchViewListener(searchViewListener)
         return this
     }
-
 
     private object queryTextListener: MaterialSearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {

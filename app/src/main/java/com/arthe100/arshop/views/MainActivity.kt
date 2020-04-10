@@ -43,9 +43,6 @@ class MainActivity : AppCompatActivity() {
                 .setSearchView().searchView
 
 
-
-
-
     }
 
 
@@ -57,11 +54,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeToolBar() {
-        toolbar_container.visibility = View.VISIBLE
         var toolbar: Toolbar = Toolbar(this)
         toolbar = tool_bar
         setSupportActionBar(toolbar)
-        toolbar.setTitleTextColor(resources.getColor(R.color.colorSecondary))
     }
 
 }

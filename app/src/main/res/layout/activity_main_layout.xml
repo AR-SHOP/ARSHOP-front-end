@@ -21,7 +21,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorBackgroud"
             android:textAlignment="center"
-            app:titleTextColor="@color/colorPrimary"
+            app:titleTextColor="@color/colorSecondary"
             android:elevation="6dp"
             android:layout_margin="6dp" />
 
@@ -62,7 +62,7 @@
         app:itemTextColor="@color/colorPrimary"
         app:labelVisibilityMode="selected"
         app:menu="@menu/bottom_navbar_menu_layout"
-        android:background="?android:attr/windowBackground"/>
+        android:background="?android:attr/windowBackground" />
 
 
 

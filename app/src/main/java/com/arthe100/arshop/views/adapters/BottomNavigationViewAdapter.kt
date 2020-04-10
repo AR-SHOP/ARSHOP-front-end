@@ -22,6 +22,7 @@ class BottomNavigationViewAdapter (private var activity: FragmentActivity,
     init {
         if (savedInstanceState == null) {
             activity.bottom_navbar.selectedItemId = R.id.btm_navbar_home
+            activity.toolbar_container.visibility = View.VISIBLE
             selectedFragment = HomeFragment()
             loadFragment(selectedFragment)
         }
