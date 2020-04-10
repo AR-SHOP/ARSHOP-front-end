@@ -9,32 +9,32 @@
     android:alpha="0.8"
     tools:context=".views.MainActivity">
 
-<!--    <FrameLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/tool_bar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            android:background="@color/colorBackgroud"-->
-<!--            android:textAlignment="center"-->
-<!--            app:titleTextColor="@color/colorPrimary"/>-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorBackgroud"
+            android:textAlignment="center"
+            app:titleTextColor="@color/colorPrimary"/>
 
-<!--        <com.miguelcatalan.materialsearchview.MaterialSearchView-->
-<!--            android:id="@+id/search_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:elevation="10dp"-->
-<!--            android:layout_margin="8dp"-->
-<!--            android:layoutDirection="rtl"-->
-<!--            android:textColor="@color/colorHint"-->
-<!--            android:textColorHint="@color/colorHint"-->
-<!--            app:searchBackIcon="@drawable/ic_action_navigation_arrow_back_inverted"-->
-<!--            app:searchCloseIcon="@drawable/ic_action_close"-->
-<!--            app:searchSuggestionIcon="@drawable/ic_suggestion"/>-->
+        <com.miguelcatalan.materialsearchview.MaterialSearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:layout_margin="8dp"
+            android:layoutDirection="rtl"
+            android:textColor="@color/colorHint"
+            android:textColorHint="@color/colorHint"
+            app:searchBackIcon="@drawable/ic_action_navigation_arrow_back_inverted"
+            app:searchCloseIcon="@drawable/ic_action_close"
+            app:searchSuggestionIcon="@drawable/ic_suggestion"/>
 
-<!--    </FrameLayout>-->
+    </FrameLayout>
 
 
 
