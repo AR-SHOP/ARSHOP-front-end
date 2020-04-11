@@ -27,8 +27,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
 
     private val TAG : String? = MainActivity::class.simpleName
-    val duckUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
-    val bedUrl = "https://poly.googleapis.com/downloads/fp/1586167422468753/8mkAgVYGbL4/5oNDqZI-I0J/Bed_01.gltf"
 
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var customArFragment: CustomArFragment
@@ -47,24 +45,13 @@ class MainActivity : BaseActivity(), ILoadFragment {
 //        messageManager.toast(this , "hey this works")
 
 
-
         BottomNavigationViewAdapter(this, savedInstanceState)
                 .setBottomNavigationView()
-
 
         initializeToolBar()
         searchView = SearchViewAdapter(this)
                 .setSearchView().searchView
 
-
-        var btn: Button = Button(this)
-        btn = ar_btn
-        btn.setOnClickListener {
-            loadFragment(customArFragment)
-            btn.visibility = View.INVISIBLE
-            bottom_navbar.visibility = View.INVISIBLE
-            toolbar_container.visibility = View.INVISIBLE
-        }
     }
 
 

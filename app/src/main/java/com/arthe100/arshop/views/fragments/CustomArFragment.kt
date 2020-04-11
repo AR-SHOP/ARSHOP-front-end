@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.ar.InfoManager.IInfoManager
 import com.arthe100.arshop.scripts.di.BaseApplication
@@ -23,20 +24,31 @@ import com.google.ar.sceneform.rendering.Color
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.PlaneRenderer
 import com.google.ar.sceneform.ux.TransformableNode
+import kotlinx.android.synthetic.main.ar_fragment_layout.*
+import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
 
 
 class CustomArFragment : CustomBaseArFragment() {
 
-    val tableUrl = "https://poly.googleapis.com/downloads/fp/1586167353776716/8cnrwlAWqx7/cfVCFxWqtbc/Table_Large_Rectangular_01.gltf"
+    public val tableUrl = "https://poly.googleapis.com/downloads/fp/1586167353776716/8cnrwlAWqx7/cfVCFxWqtbc/Table_Large_Rectangular_01.gltf"
+    public val duckUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
+    public val bedUrl = "https://poly.googleapis.com/downloads/fp/1586167422468753/8mkAgVYGbL4/5oNDqZI-I0J/Bed_01.gltf"
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.ar_fragment_layout, container, false)
-    }
-
+//    override fun onStart() {
+//        table_btn.setOnClickListener {
+//            setUri(tableUrl)
+//        }
+//        duck_btn.setOnClickListener {
+//            setUri(duckUrl)
+//        }
+//        bed_btn.setOnClickListener {
+//            setUri(bedUrl)
+//        }
+//        super.onStart()
+//    }
 
     override fun inject() {
-
         (activity?.application as BaseApplication)
                 .mainComponent(activity!!)
                 .arComponent().create(arSceneView.scene).inject(this)
@@ -50,9 +62,9 @@ class CustomArFragment : CustomBaseArFragment() {
     @Inject lateinit var messageManager : MessageManager
 
 
-    init {
-        setUri(tableUrl)
-    }
+//    init {
+//        setUri(tableUrl)
+//    }
 
     private fun init() {
 
@@ -63,23 +75,23 @@ class CustomArFragment : CustomBaseArFragment() {
 //
 //        }
 
-            sceneView.scene.addOnUpdateListener{
-                this.onUpdate(it)
-                val plane = sceneView.planeRenderer
+        sceneView.scene.addOnUpdateListener{
+            this.onUpdate(it)
+            val plane = sceneView.planeRenderer
 
-                plane.material.thenAccept{mat ->
-                    mat.setFloat(PlaneRenderer.MATERIAL_SPOTLIGHT_RADIUS , 4f)
-                    mat.setFloat3(PlaneRenderer.MATERIAL_COLOR , Color(0f, 255f, 165f))
-                }
-
+            plane.material.thenAccept{mat ->
+                mat.setFloat(PlaneRenderer.MATERIAL_SPOTLIGHT_RADIUS , 4f)
+                mat.setFloat3(PlaneRenderer.MATERIAL_COLOR , Color(0f, 255f, 165f))
             }
 
-            this.setOnTapArPlaneListener { hitResult, plane, _ ->
-                if(plane.isPoseInExtents(hitResult.hitPose) && plane.type == Plane.Type.HORIZONTAL_UPWARD_FACING)
-                    setModel(currentUri , hitResult.createAnchor())
-            }
+        }
 
-            arInfoCardManager.init()
+        this.setOnTapArPlaneListener { hitResult, plane, _ ->
+            if(plane.isPoseInExtents(hitResult.hitPose) && plane.type == Plane.Type.HORIZONTAL_UPWARD_FACING)
+                setModel(currentUri , hitResult.createAnchor())
+        }
+
+        arInfoCardManager.init()
 //        arInfoCardManager = BasicArInfoCardManager(activity!!)
 
     }
@@ -95,8 +107,7 @@ class CustomArFragment : CustomBaseArFragment() {
 
 
     fun showInfo(parent : Node , root : Node){
-        arInfoCardManager.addInfo(parent
-        ) {
+        arInfoCardManager.addInfo(parent) {
             root.renderable = null
             root.removeChild(parent) }
 
@@ -104,12 +115,11 @@ class CustomArFragment : CustomBaseArFragment() {
     }
 
 
-    fun hideInfo(parent: Node){
+    fun hideInfo(parent: Node) {
         arInfoCardManager.removeInfo(parent)
     }
 
-    fun setUri(uri: String)
-    {
+    fun setUri(uri: String) {
         this.currentUri = uri
     }
 

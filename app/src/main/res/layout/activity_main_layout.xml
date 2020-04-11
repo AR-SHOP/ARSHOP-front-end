@@ -9,19 +9,6 @@
     tools:context=".views.MainActivity">
 
 
-    <Button
-        android:id="@+id/ar_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/ar_view_btn"
-        android:textAlignment="center"
-        android:shadowColor="@color/colorPrimary"
-        android:padding="10dp"
-        android:elevation="10dp"
-        android:textColor="@color/colorBackgroud"
-        android:background="@color/colorSecondary"/>
-
 
     <FrameLayout
         android:id="@+id/toolbar_container"
@@ -61,7 +48,39 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
     </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ar_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/table_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="@string/btnTable" />
+
+        <Button
+            android:id="@+id/bed_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnBed" />
+
+        <Button
+            android:id="@+id/duck_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnDuck" />
+
+    </LinearLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
