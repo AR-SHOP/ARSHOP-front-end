@@ -46,7 +46,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
         BottomNavigationViewAdapter(this, savedInstanceState)
                 .setBottomNavigationView()
 
-        bottom_navbar.visibility = View.INVISIBLE
+        bottom_navbar.visibility = View.VISIBLE
 
 
 

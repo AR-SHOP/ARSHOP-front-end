@@ -14,4 +14,5 @@
     <string name="cart_btn_name">سبد خرید</string>
     <string name="profile_btn_name">فروشگاه من</string>
     <string name="search_hint">جستجو در همه کالاها</string>
+    <string name="ar_view_btn">صفحه واقعیت افزوده</string>
 </resources>
