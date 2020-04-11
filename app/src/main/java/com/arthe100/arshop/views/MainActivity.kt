@@ -34,7 +34,7 @@ class MainActivity : BaseActivity() {
         Log.d(TAG , "injected MainActivity")
     }
 
-//    private lateinit var selectedFragment: Fragment
+    private lateinit var selectedFragment: Fragment
     private lateinit var searchView: MaterialSearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,10 +43,8 @@ class MainActivity : BaseActivity() {
         messageManager.toast(this , "hey this works")
 
 
-//        BottomNavigationViewAdapter(this, savedInstanceState)
-//                .setBottomNavigationView()
-
-        loadFragment(customArFragment)
+        BottomNavigationViewAdapter(this, savedInstanceState)
+                .setBottomNavigationView()
 
         bottom_navbar.visibility = View.INVISIBLE
 
