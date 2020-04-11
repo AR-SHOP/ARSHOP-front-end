@@ -43,17 +43,18 @@ class MainActivity : BaseActivity(), ILoadFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
-        messageManager.toast(this , "hey this works")
+//        messageManager.toast(this , "hey this works")
 
-        bottom_navbar.visibility = View.VISIBLE
 
 
         BottomNavigationViewAdapter(this, savedInstanceState)
                 .setBottomNavigationView()
 
+
         initializeToolBar()
         searchView = SearchViewAdapter(this)
                 .setSearchView().searchView
+
 
         var btn: Button = Button(this)
         btn = ar_btn
@@ -63,8 +64,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
             bottom_navbar.visibility = View.INVISIBLE
             toolbar_container.visibility = View.INVISIBLE
         }
-
-
     }
 
 
@@ -86,7 +85,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
     override fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
                 .commit()
     }
 }

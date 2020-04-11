@@ -9,6 +9,21 @@
     android:alpha="0.8"
     tools:context=".views.MainActivity">
 
+
+    <Button
+        android:id="@+id/ar_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/ar_view_btn"
+        android:textAlignment="center"
+        android:shadowColor="@color/colorPrimary"
+        android:padding="10dp"
+        android:elevation="10dp"
+        android:textColor="@color/colorBackgroud"
+        android:background="@color/colorSecondary"/>
+
+
     <FrameLayout
         android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
@@ -62,8 +77,7 @@
         app:itemTextColor="@color/colorPrimary"
         app:labelVisibilityMode="selected"
         app:menu="@menu/bottom_navbar_menu_layout"
-        android:background="?android:attr/windowBackground"
-        android:visibility="invisible"/>
+        android:background="?android:attr/windowBackground" />
 
 
 
