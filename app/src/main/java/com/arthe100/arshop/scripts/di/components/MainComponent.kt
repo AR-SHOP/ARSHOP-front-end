@@ -5,6 +5,7 @@ import com.arthe100.arshop.scripts.di.modules.MainModule
 import com.arthe100.arshop.scripts.di.modules.SubComponentModules.MainSubComponentModule
 import com.arthe100.arshop.scripts.di.scopes.MainScope
 import com.arthe100.arshop.views.MainActivity
+import com.arthe100.arshop.views.fragments.HomeFragment
 import dagger.BindsInstance
 import dagger.Subcomponent
 
@@ -21,4 +22,5 @@ interface MainComponent  {
     fun arComponent() : ArComponent.Factory
 
     fun inject(activity : MainActivity)
+    fun inject(fragment: HomeFragment)
 }

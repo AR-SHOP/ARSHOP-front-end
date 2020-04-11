@@ -45,7 +45,7 @@ class CustomArFragment : CustomBaseArFragment() {
         setUri(tableUrl)
     }
 
-    private fun init(){
+    private fun init() {
 
         val sceneView = this.arSceneView
 //        sceneView.planeRenderer.material.thenAccept{
