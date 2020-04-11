@@ -13,10 +13,15 @@ abstract class CustomBaseArFragment : ArFragment() {
     abstract fun inject()
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = super.onCreateView(inflater, container, savedInstanceState)
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        val view = super.onCreateView(inflater, container, savedInstanceState)
+//        inject()
+//        return view
+//    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         inject()
-        return view
+        super.onViewCreated(view, savedInstanceState)
     }
 
 }
