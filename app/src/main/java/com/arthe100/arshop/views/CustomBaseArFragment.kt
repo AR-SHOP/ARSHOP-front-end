@@ -17,7 +17,6 @@ abstract class CustomBaseArFragment : ArFragment() {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         inject()
         return view
-
     }
 
 }

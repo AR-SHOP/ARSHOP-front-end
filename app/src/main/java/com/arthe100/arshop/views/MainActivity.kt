@@ -8,7 +8,7 @@ import android.view.View
 import com.arthe100.arshop.R
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import com.arthe100.arshop.scripts.ar.CustomArFragment
+import com.arthe100.arshop.views.fragments.CustomArFragment
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.views.adapters.BottomNavigationViewAdapter
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 import javax.inject.Inject
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), ILoadFragment {
 
 
     private val TAG : String? = MainActivity::class.simpleName
@@ -57,12 +57,6 @@ class MainActivity : BaseActivity() {
 
     }
 
-    private fun loadFragment(selectedFragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, selectedFragment)
-                .commit()
-    }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -73,9 +67,14 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initializeToolBar() {
-        var toolbar: Toolbar = Toolbar(this)
-        toolbar = tool_bar
+        var toolbar: Toolbar = tool_bar
         setSupportActionBar(toolbar)
     }
 
+    override fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .add(R.id.fragment_container, selectedFragment)
+                .commit()
+    }
 }

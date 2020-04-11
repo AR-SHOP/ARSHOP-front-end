@@ -1,12 +1,10 @@
-package com.arthe100.arshop.scripts.ar
+package com.arthe100.arshop.views.fragments
 
 import android.net.Uri
 import android.util.Log
 import com.arthe100.arshop.scripts.ar.InfoManager.IInfoManager
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.scripts.di.components.ArComponent
 import com.arthe100.arshop.scripts.messege.MessageManager
-import com.arthe100.arshop.views.BaseActivity
 import com.arthe100.arshop.views.CustomBaseArFragment
 import com.google.ar.core.Anchor
 import com.google.ar.core.Config

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.arthe100.arshop.R
+import com.arthe100.arshop.views.ILoadFragment
 import com.arthe100.arshop.views.fragments.CartFragment
 import com.arthe100.arshop.views.fragments.CategoriesFragment
 import com.arthe100.arshop.views.fragments.HomeFragment
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 
 
 class BottomNavigationViewAdapter (private var activity: FragmentActivity,
-                                   private var savedInstanceState: Bundle?) {
+                                   private var savedInstanceState: Bundle?) : ILoadFragment {
 
     var selectedFragment: Fragment = Fragment()
         private set
@@ -53,7 +54,7 @@ class BottomNavigationViewAdapter (private var activity: FragmentActivity,
         }
     }
 
-    private fun loadFragment(selectedFragment: Fragment) {
+    override fun loadFragment(selectedFragment: Fragment) {
         activity.supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, selectedFragment)
                 .commit()

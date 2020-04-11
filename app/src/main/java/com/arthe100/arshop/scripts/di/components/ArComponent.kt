@@ -1,6 +1,6 @@
 package com.arthe100.arshop.scripts.di.components
 
-import com.arthe100.arshop.scripts.ar.CustomArFragment
+import com.arthe100.arshop.views.fragments.CustomArFragment
 import com.arthe100.arshop.scripts.di.modules.ArModule
 import com.arthe100.arshop.scripts.di.scopes.FragmentScope
 import com.google.ar.sceneform.Scene

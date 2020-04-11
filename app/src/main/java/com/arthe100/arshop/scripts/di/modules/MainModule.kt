@@ -1,6 +1,6 @@
 package com.arthe100.arshop.scripts.di.modules
 
-import com.arthe100.arshop.scripts.ar.CustomArFragment
+import com.arthe100.arshop.views.fragments.CustomArFragment
 import com.arthe100.arshop.scripts.di.scopes.MainScope
 import dagger.Module
 import dagger.Provides
@@ -11,7 +11,7 @@ object MainModule{
     @JvmStatic
     @MainScope
     @Provides
-    fun createArFragment() : CustomArFragment{
+    fun createArFragment() : CustomArFragment {
         return CustomArFragment()
     }
 }
