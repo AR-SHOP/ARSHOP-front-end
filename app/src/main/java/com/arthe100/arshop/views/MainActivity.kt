@@ -80,6 +80,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
         var toolbar: Toolbar = Toolbar(this)
         toolbar = tool_bar
         setSupportActionBar(toolbar)
+        toolbar_container.visibility = View.VISIBLE
     }
 
     override fun loadFragment(fragment: Fragment) {

@@ -31,7 +31,6 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
         return inflater.inflate(R.layout.home_fragment_layout, container, false)
     }
 
