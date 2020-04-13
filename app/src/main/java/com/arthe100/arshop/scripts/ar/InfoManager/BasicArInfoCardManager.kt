@@ -13,17 +13,21 @@ import com.google.ar.sceneform.rendering.ViewRenderable
 import com.google.ar.sceneform.ux.ArFragment
 
 
-class BasicArInfoCardManager (private val context: Context , private var scene: Scene) : IInfoManager {
+class BasicArInfoCardManager (private val context: Context) : IInfoManager {
 
     private val TAG = BasicArInfoCardManager::class.simpleName
     
     private lateinit var infoCard : ViewRenderable
+    private lateinit var scene: Scene
     private var parent : Node? = null
     private var current : Node? = null
     private var onDelete : (() -> Unit)? = null
 
 
-    override fun init(){
+    override fun init(scene: Scene){
+
+        this.scene = scene
+
         ViewRenderable.builder()
                 .setView(context, R.layout.ar_model_detail)
                 .build()

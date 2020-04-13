@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.FrameLayout
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.ar.InfoManager.IInfoManager
 import com.arthe100.arshop.scripts.di.BaseApplication
@@ -24,8 +24,6 @@ import com.google.ar.sceneform.rendering.Color
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.PlaneRenderer
 import com.google.ar.sceneform.ux.TransformableNode
-import kotlinx.android.synthetic.main.ar_fragment_layout.*
-import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
 
 
@@ -48,10 +46,11 @@ class CustomArFragment : CustomBaseArFragment() {
 //        super.onStart()
 //    }
 
+
     override fun inject() {
         (activity?.application as BaseApplication)
                 .mainComponent(activity!!)
-                .arComponent().create(arSceneView.scene).inject(this)
+                .arComponent().create().inject(this)
     }
 
     private val TAG = CustomArFragment::class.simpleName
@@ -91,22 +90,17 @@ class CustomArFragment : CustomBaseArFragment() {
                 setModel(currentUri , hitResult.createAnchor())
         }
 
-        arInfoCardManager.init()
-//        arInfoCardManager = BasicArInfoCardManager(activity!!)
-
+        arInfoCardManager.init(sceneView.scene)
     }
 
     override fun getSessionConfiguration(session: Session?): Config {
-        Log.d("CustomArFragment", "ABCD before session$arSceneView" )
         val conf = super.getSessionConfiguration(session)
-        Log.d("CustomArFragment", "ABCD after session$arSceneView" )
         init()
-
         return conf
     }
 
 
-    fun showInfo(parent : Node , root : Node){
+    private fun showInfo(parent : Node , root : Node){
         arInfoCardManager.addInfo(parent) {
             root.renderable = null
             root.removeChild(parent) }
@@ -114,10 +108,6 @@ class CustomArFragment : CustomBaseArFragment() {
         messageManager.toast(context!! , "model hit!")
     }
 
-
-    fun hideInfo(parent: Node) {
-        arInfoCardManager.removeInfo(parent)
-    }
 
     fun setUri(uri: String) {
         this.currentUri = uri
@@ -162,6 +152,26 @@ class CustomArFragment : CustomBaseArFragment() {
         node.renderable = model
         node.localScale = Vector3(0.1f , 0.1f , 0.1f)
         node.setOnTapListener{ _, _ -> showInfo(node , anchorNode) }
+    }
+
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        val view = inflater.inflate(R.layout.ar_fragment_layout , container , false)
+//        val arFrameParent = view.findViewById<FrameLayout>(R.id.arFrame)
+        val arFrame = view.findViewById<FrameLayout>(R.id.arFrame)
+
+//        Log.d("abcd" , "${container}")
+//
+//      if(arFrame.parent != null)
+//            (arFrame.parent as ViewGroup).removeView(arFrame)
+
+        val v = super.onCreateView(inflater, arFrame, savedInstanceState)
+        Log.d("abcd" , "${v}")
+
+        (view as ViewGroup).addView(v)
+
+        return view
     }
 
 }

@@ -8,6 +8,7 @@ import com.arthe100.arshop.views.MainActivity
 import com.arthe100.arshop.views.fragments.HomeFragment
 import dagger.BindsInstance
 import dagger.Subcomponent
+import javax.inject.Named
 
 @MainScope
 @Subcomponent(modules = [MainModule::class , MainSubComponentModule::class])

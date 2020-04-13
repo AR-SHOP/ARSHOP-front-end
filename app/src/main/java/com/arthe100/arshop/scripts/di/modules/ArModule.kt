@@ -15,7 +15,7 @@ object ArModule{
     @JvmStatic
     @Provides
     @FragmentScope
-    fun createInfoCard(context: Context , scene: Scene) : IInfoManager {
-        return BasicArInfoCardManager(context , scene)
+    fun createInfoCard(context: Context) : IInfoManager {
+        return BasicArInfoCardManager(context)
     }
 }

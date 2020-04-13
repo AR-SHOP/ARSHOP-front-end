@@ -15,7 +15,7 @@ interface ArComponent{
 
     @Subcomponent.Factory
     interface Factory{
-        fun create(@BindsInstance scene: Scene) : ArComponent
+        fun create() : ArComponent
     }
 
     fun inject(customArFragment: CustomArFragment)
