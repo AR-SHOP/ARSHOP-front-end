@@ -12,8 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
+import com.arthe100.arshop.scripts.network.Service.FileDownloadClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class Downloader {
     private static final int PERMISSION_STORAGE_CODE = 1000;
@@ -74,5 +79,28 @@ public class Downloader {
                 }
             }
         }
+    }
+
+    private void downloadFile() {
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("//.....");
+
+        Retrofit retrofit = builder.build();
+
+        FileDownloadClient fileDownloadClient = retrofit.create(FileDownloadClient.class);
+
+        Call<ResponseBody> call = fileDownloadClient.downloadFile();
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 }
