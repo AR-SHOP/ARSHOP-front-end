@@ -1,20 +1,10 @@
 package com.arthe100.arshop.scripts.network.DownloadManager;
 
-import android.Manifest;
-import android.app.DownloadManager;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.arthe100.arshop.scripts.network.Service.FileDownloadClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
