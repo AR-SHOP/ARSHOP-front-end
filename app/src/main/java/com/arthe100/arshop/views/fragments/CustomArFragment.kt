@@ -24,6 +24,9 @@ import com.google.ar.sceneform.rendering.Color
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.PlaneRenderer
 import com.google.ar.sceneform.ux.TransformableNode
+import kotlinx.android.synthetic.main.activity_main_layout.*
+import kotlinx.android.synthetic.main.ar_fragment_layout.*
+import kotlinx.android.synthetic.main.ar_fragment_layout.view.*
 import javax.inject.Inject
 
 
@@ -33,18 +36,19 @@ class CustomArFragment : CustomBaseArFragment() {
     public val duckUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
     public val bedUrl = "https://poly.googleapis.com/downloads/fp/1586167422468753/8mkAgVYGbL4/5oNDqZI-I0J/Bed_01.gltf"
 
-//    override fun onStart() {
-//        table_btn.setOnClickListener {
-//            setUri(tableUrl)
-//        }
-//        duck_btn.setOnClickListener {
-//            setUri(duckUrl)
-//        }
-//        bed_btn.setOnClickListener {
-//            setUri(bedUrl)
-//        }
-//        super.onStart()
-//    }
+    override fun onStart() {
+        activity!!.ar_buttons.visibility = View.VISIBLE
+        activity!!.table_btn.setOnClickListener {
+            setUri(tableUrl)
+        }
+        activity!!.duck_btn.setOnClickListener {
+            setUri(duckUrl)
+        }
+        activity!!.bed_btn.setOnClickListener {
+            setUri(bedUrl)
+        }
+        super.onStart()
+    }
 
 
     override fun inject() {
@@ -159,7 +163,7 @@ class CustomArFragment : CustomBaseArFragment() {
 
         val view = inflater.inflate(R.layout.ar_fragment_layout , container , false)
 //        val arFrameParent = view.findViewById<FrameLayout>(R.id.arFrame)
-        val arFrame = view.findViewById<FrameLayout>(R.id.arFrame)
+        val arFrame = view.findViewById<FrameLayout>(R.id.ar_container)
 
 //        Log.d("abcd" , "${container}")
 //
@@ -169,8 +173,8 @@ class CustomArFragment : CustomBaseArFragment() {
         val v = super.onCreateView(inflater, arFrame, savedInstanceState)
         Log.d("abcd" , "${v}")
 
-        (view as ViewGroup).addView(v)
 
+        (view as ViewGroup).addView(v)
         return view
     }
 

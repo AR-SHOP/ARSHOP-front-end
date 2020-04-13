@@ -9,12 +9,19 @@
     tools:context=".views.MainActivity">
 
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+
+
 
     <FrameLayout
         android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
@@ -43,45 +50,6 @@
 
 
 
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-    </FrameLayout>
-
-    <LinearLayout
-        android:id="@+id/ar_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="invisible">
-
-        <Button
-            android:id="@+id/table_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:text="@string/btnTable" />
-
-        <Button
-            android:id="@+id/bed_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btnBed" />
-
-        <Button
-            android:id="@+id/duck_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btnDuck" />
-
-    </LinearLayout>
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navbar"
         android:layout_width="match_parent"
@@ -95,6 +63,38 @@
         app:labelVisibilityMode="selected"
         app:menu="@menu/bottom_navbar_menu_layout"
         android:background="?android:attr/windowBackground" />
+
+    <LinearLayout
+        android:id="@+id/ar_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/table_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="@string/btnTable" />
+
+        <Button
+            android:id="@+id/bed_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="@string/btnBed" />
+
+        <Button
+            android:id="@+id/duck_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="@string/btnDuck"/>
+
+    </LinearLayout>
+
 
 
 

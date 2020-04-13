@@ -37,20 +37,9 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     override fun onStart() {
         ar_btn.setOnClickListener {
             loadFragment(customArFragment)
-            ar_btn.visibility = View.INVISIBLE
+//            ar_btn.visibility = View.INVISIBLE
             activity!!.bottom_navbar.visibility = View.INVISIBLE
-            activity!!.search_view.visibility = View.INVISIBLE
-            activity!!.ar_buttons.visibility = View.VISIBLE
-
-            activity!!.table_btn.setOnClickListener {
-                customArFragment.setUri(customArFragment.tableUrl)
-            }
-            activity!!.bed_btn.setOnClickListener {
-                customArFragment.setUri(customArFragment.bedUrl)
-            }
-            activity!!.duck_btn.setOnClickListener {
-                customArFragment.setUri(customArFragment.duckUrl)
-            }
+//            activity!!.search_view.visibility = View.INVISIBLE
         }
         super.onStart()
     }
