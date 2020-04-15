@@ -43,7 +43,7 @@ class BottomNavigationViewAdapter (private var activity: BaseActivity,
                     activity.toolbar_container.visibility = View.INVISIBLE
                 }
                 R.id.btm_navbar_profile -> {
-                    selectedFragment = SignUpFragment()
+                    selectedFragment = LoginFragment()
                     activity.toolbar_container.visibility = View.INVISIBLE
                 }
             }

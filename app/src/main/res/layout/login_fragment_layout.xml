@@ -40,14 +40,13 @@
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="225dp"
+        android:layout_centerInParent="true"
         android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:background="@color/colorEditText"
         android:hint="@string/username_hint"
-        android:padding="8dp" />
+        android:padding="8dp"
+        />
 
     <EditText
         android:id="@+id/password"
@@ -63,33 +62,51 @@
         android:layout_below="@id/username"
         android:background="@color/colorEditText" />
 
-    <EditText
-        android:id="@+id/repeat_password"
-        android:padding="8dp"
-        android:hint="@string/pass_hint"
+    <TextView
+        android:id="@+id/forget_pass_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="10dp"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="10dp"
-        android:layout_below="@id/password"
-        android:background="@color/colorEditText" />
+        android:layout_marginTop="424dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/forget_pass_hint"
+        android:textAlignment="center"
+        android:textColor="@color/colorSecondary" />
 
 
     <Button
         android:id="@+id/login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/repeat_password"
+        android:layout_below="@id/forget_pass_link"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="60dp"
         android:layout_marginRight="30dp"
         android:background="@color/colorPrimary"
-        android:text="@string/create_acc_link"
+        android:text="@string/login_btn_text"
         android:textColor="@color/colorBackgroud"
-        android:textSize="18sp" />
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/new_acc_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="536dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/create_acc_link"
+        android:textAlignment="center"
+        android:textColor="@color/colorSecondary" />
 
 
 </RelativeLayout>

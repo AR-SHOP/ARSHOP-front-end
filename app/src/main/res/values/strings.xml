@@ -20,6 +20,7 @@
     <string name="forget_pass_hint">آیا کلمه عبور خود را فراموش کرده اید؟</string>
     <string name="login_btn_text">ورود</string>
     <string name="create_acc_link">ایجاد حساب کاربری جدید</string>
+    <string name="repeat_password">تکرار کلمه عبور</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
