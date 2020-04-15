@@ -70,6 +70,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
     override fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
                 .commit()
     }
 }

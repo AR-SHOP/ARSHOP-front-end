@@ -37,9 +37,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     override fun onStart() {
         ar_btn.setOnClickListener {
             loadFragment(customArFragment)
-//            ar_btn.visibility = View.INVISIBLE
             activity!!.bottom_navbar.visibility = View.INVISIBLE
-//            activity!!.search_view.visibility = View.INVISIBLE
         }
         super.onStart()
     }
@@ -47,6 +45,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     override fun loadFragment(fragment: Fragment) {
         activity!!.supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
                 .commit()
     }
 
