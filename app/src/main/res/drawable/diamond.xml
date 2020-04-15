@@ -4,16 +4,14 @@
 
     <corners
         android:topLeftRadius="30dp"
-        android:bottomRightRadius="30dp"
-        />
+        android:bottomRightRadius="30dp" />
+
     <gradient
         android:angle="45"
-        android:centerX="float"
-        android:centerY="float"
         android:endColor="@color/colorSecondary"
-        android:gradientRadius="integer"
         android:startColor="@color/colorPrimary"
         android:type="linear"/>
+
     <size
         android:width="82dp"
         android:height="82dp"/>

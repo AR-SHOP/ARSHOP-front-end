@@ -15,6 +15,12 @@
     <string name="profile_btn_name">فروشگاه من</string>
     <string name="search_hint">جستجو در همه کالاها</string>
     <string name="ar_view_btn">صفحه واقعیت افزوده</string>
+    <string name="username_hint">پست الکترونیک یا شماره موبایل</string>
+    <string name="pass_hint">کلمه عبور</string>
+    <string name="forget_pass_hint">آیا کلمه عبور خود را فراموش کرده اید؟</string>
+    <string name="login_btn_text">ورود</string>
+    <string name="create_acc_link">ایجاد حساب کاربری جدید</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

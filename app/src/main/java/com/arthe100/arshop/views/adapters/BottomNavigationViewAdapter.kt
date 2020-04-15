@@ -8,10 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import com.arthe100.arshop.R
 import com.arthe100.arshop.views.BaseActivity
 import com.arthe100.arshop.views.ILoadFragment
-import com.arthe100.arshop.views.fragments.CartFragment
-import com.arthe100.arshop.views.fragments.CategoriesFragment
-import com.arthe100.arshop.views.fragments.HomeFragment
-import com.arthe100.arshop.views.fragments.ProfileFragment
+import com.arthe100.arshop.views.fragments.*
 import kotlinx.android.synthetic.main.activity_main_layout.*
 
 
@@ -46,7 +43,7 @@ class BottomNavigationViewAdapter (private var activity: BaseActivity,
                     activity.toolbar_container.visibility = View.INVISIBLE
                 }
                 R.id.btm_navbar_profile -> {
-                    selectedFragment = ProfileFragment()
+                    selectedFragment = SignUpFragment()
                     activity.toolbar_container.visibility = View.INVISIBLE
                 }
             }
