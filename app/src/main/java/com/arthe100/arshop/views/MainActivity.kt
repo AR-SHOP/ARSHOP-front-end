@@ -61,8 +61,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
     }
 
     private fun initializeToolBar() {
-        var toolbar: Toolbar = Toolbar(this)
-        toolbar = tool_bar
+        var toolbar = tool_bar
         setSupportActionBar(toolbar)
         toolbar_container.visibility = View.VISIBLE
     }
