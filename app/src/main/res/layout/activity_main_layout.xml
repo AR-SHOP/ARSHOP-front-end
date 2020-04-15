@@ -32,7 +32,7 @@
             android:textAlignment="center"
             app:titleTextColor="@color/colorSecondary"
             android:elevation="6dp"
-            android:layout_margin="6dp" />
+            android:layout_margin="6dp"/>
 
         <com.miguelcatalan.materialsearchview.MaterialSearchView
             android:id="@+id/search_view"
