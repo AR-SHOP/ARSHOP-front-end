@@ -39,6 +39,7 @@ class CustomArFragment : CustomBaseArFragment() {
     public val bedUrl = "https://poly.googleapis.com/downloads/fp/1586167422468753/8mkAgVYGbL4/5oNDqZI-I0J/Bed_01.gltf"
 
     override fun onStart() {
+        activity!!.bottom_navbar.visibility = View.INVISIBLE
         activity!!.ar_buttons.visibility = View.VISIBLE
         activity!!.table_btn.setOnClickListener {
             setUri(tableUrl)
@@ -168,6 +169,7 @@ class CustomArFragment : CustomBaseArFragment() {
 
         val v = super.onCreateView(inflater, arFrame, savedInstanceState)
         Log.d("abcd" , "$v")
+
 
 
         (view as ViewGroup).addView(v)
