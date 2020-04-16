@@ -4,7 +4,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-//import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import com.arthe100.arshop.scripts.network.services.FileDownloadClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -12,11 +12,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class Downloader //extends AppCompatActivity
+public class Downloader extends AppCompatActivity
 {
 
     private static final int PERMISSION_STORAGE_CODE = 1000;
-    /*
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +33,7 @@ public class Downloader //extends AppCompatActivity
                 }
             }
         }
-    }*/
+    }
 
     private void downloadFile() {
         Retrofit.Builder builder = new Retrofit.Builder()
