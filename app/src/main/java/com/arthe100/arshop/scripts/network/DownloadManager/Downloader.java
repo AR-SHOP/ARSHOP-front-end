@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.arthe100.arshop.scripts.network.Service.FileDownloadClient;
+import com.arthe100.arshop.scripts.network.services.FileDownloadClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
