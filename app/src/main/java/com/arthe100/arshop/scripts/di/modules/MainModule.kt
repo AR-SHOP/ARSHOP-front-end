@@ -14,4 +14,16 @@ object MainModule{
     fun createArFragment() : CustomArFragment {
         return CustomArFragment()
     }
+
+
+    @JvmStatic
+    @MainScope
+    @Provides
+    fun provideFakeClass() : FakeClass{
+        return FakeClass()
+    }
+
 }
+class FakeClass
+
+

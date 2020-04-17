@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.scripts.di.modules.FakeClass
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.views.adapters.BottomNavigationViewAdapter
 import com.arthe100.arshop.views.adapters.SearchViewAdapter
@@ -25,12 +26,11 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var customArFragment: CustomArFragment
+    @Inject lateinit var fake: FakeClass
 
     override fun inject() {
         (application as BaseApplication)
-                .appComponent
-                .mainComponent()
-                .create(this) // add this context to the container
+                .mainComponent(this)
                 .inject(this) // i want to get injected
     }
 
@@ -39,7 +39,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
-//        messageManager.toast(this , "hey this works")
+        messageManager.toast(this , "$fake")
 
 
         BottomNavigationViewAdapter(this, savedInstanceState)
