@@ -5,10 +5,7 @@ import com.arthe100.arshop.scripts.di.modules.MainModule
 import com.arthe100.arshop.scripts.di.modules.SubComponentModules.MainSubComponentModule
 import com.arthe100.arshop.scripts.di.scopes.MainScope
 import com.arthe100.arshop.views.MainActivity
-import com.arthe100.arshop.views.fragments.CartFragment
-import com.arthe100.arshop.views.fragments.CategoriesFragment
-import com.arthe100.arshop.views.fragments.HomeFragment
-import com.arthe100.arshop.views.fragments.ProfileFragment
+import com.arthe100.arshop.views.fragments.*
 import dagger.BindsInstance
 import dagger.Subcomponent
 import javax.inject.Named
@@ -30,4 +27,6 @@ interface MainComponent  {
     fun inject(fragment: ProfileFragment)
     fun inject(fragment: CategoriesFragment)
     fun inject(fragment: CartFragment)
+    fun inject(fragment: SignUpFragment)
+    fun inject(fragment: LoginFragment)
 }
