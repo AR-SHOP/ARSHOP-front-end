@@ -61,15 +61,17 @@ class MainActivity : BaseActivity(), ILoadFragment {
     }
 
     private fun initializeToolBar() {
-        var toolbar: Toolbar = Toolbar(this)
-        toolbar = tool_bar
+        var toolbar = tool_bar
         setSupportActionBar(toolbar)
         toolbar_container.visibility = View.VISIBLE
     }
 
     override fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
+                        R.anim.enter_from_right, R.anim.exit_to_right)
                 .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
                 .commit()
     }
 }

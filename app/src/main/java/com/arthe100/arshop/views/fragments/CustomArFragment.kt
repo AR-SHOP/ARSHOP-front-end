@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.activity.OnBackPressedDispatcher
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.ar.InfoManager.IInfoManager
 import com.arthe100.arshop.scripts.di.BaseApplication
@@ -27,6 +28,7 @@ import com.google.ar.sceneform.ux.TransformableNode
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.ar_fragment_layout.*
 import kotlinx.android.synthetic.main.ar_fragment_layout.view.*
+import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
 
 
@@ -37,6 +39,7 @@ class CustomArFragment : CustomBaseArFragment() {
     public val bedUrl = "https://poly.googleapis.com/downloads/fp/1586167422468753/8mkAgVYGbL4/5oNDqZI-I0J/Bed_01.gltf"
 
     override fun onStart() {
+        activity!!.bottom_navbar.visibility = View.INVISIBLE
         activity!!.ar_buttons.visibility = View.VISIBLE
         activity!!.table_btn.setOnClickListener {
             setUri(tableUrl)
@@ -158,26 +161,29 @@ class CustomArFragment : CustomBaseArFragment() {
         node.setOnTapListener{ _, _ -> showInfo(node , anchorNode) }
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.ar_fragment_layout , container , false)
-//        val arFrameParent = view.findViewById<FrameLayout>(R.id.arFrame)
         val arFrame = view.findViewById<FrameLayout>(R.id.ar_container)
 
-//        Log.d("abcd" , "${container}")
-//
-//      if(arFrame.parent != null)
-//            (arFrame.parent as ViewGroup).removeView(arFrame)
 
         val v = super.onCreateView(inflater, arFrame, savedInstanceState)
-        Log.d("abcd" , "${v}")
+        Log.d("abcd" , "$v")
+
 
 
         (view as ViewGroup).addView(v)
         return view
     }
 
+    override fun onDetach() {
+        activity!!.bottom_navbar.visibility = View.VISIBLE
+        activity!!.ar_buttons.visibility = View.INVISIBLE
+        super.onDetach()
+    }
+
+
 }
+
 
 

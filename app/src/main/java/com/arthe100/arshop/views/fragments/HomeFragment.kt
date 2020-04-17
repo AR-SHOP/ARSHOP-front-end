@@ -36,16 +36,16 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     override fun onStart() {
         ar_btn.setOnClickListener {
             loadFragment(customArFragment)
-//            ar_btn.visibility = View.INVISIBLE
-            activity!!.bottom_navbar.visibility = View.INVISIBLE
-//            activity!!.search_view.visibility = View.INVISIBLE
         }
         super.onStart()
     }
 
     override fun loadFragment(fragment: Fragment) {
         activity!!.supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
+                        R.anim.enter_from_right, R.anim.exit_to_right)
                 .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
                 .commit()
     }
 
