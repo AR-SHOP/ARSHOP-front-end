@@ -7,10 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.arthe100.arshop.R
+import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
 import kotlinx.android.synthetic.main.login_fragment_layout.*
+import javax.inject.Inject
 
-class LoginFragment : Fragment(), ILoadFragment {
+class LoginFragment : BaseFragment(), ILoadFragment {
+
+    private val TAG = SignUpFragment::class.simpleName
+
+
+
+    override fun inject() {
+        (activity!!.application as BaseApplication).mainComponent().inject(this)
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -28,6 +41,7 @@ class LoginFragment : Fragment(), ILoadFragment {
             loadFragment(SignUpFragment())
         }
         super.onStart()
+
     }
 
     override fun loadFragment(fragment: Fragment) {
