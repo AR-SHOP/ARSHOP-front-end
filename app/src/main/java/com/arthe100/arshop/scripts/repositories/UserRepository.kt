@@ -15,16 +15,16 @@ class UserRepository @Inject constructor(private val service: UserService) {
     }
 
     suspend fun Signup(email: String, password: String, username: String): AuthState {
-        try {
+        return try {
             val user = service.signup(
                 UserSignUp(
-                username = username,
-                password = password,
-                email = email)
+                    username = username,
+                    password = password,
+                    email = email)
             )
-            return AuthState.Success(user)
+            AuthState.Success(user)
         }catch (t: Throwable){
-            return AuthState.Failure(t)
+            AuthState.Failure(t)
         }
     }
 

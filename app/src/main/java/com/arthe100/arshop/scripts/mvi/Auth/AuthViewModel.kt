@@ -36,7 +36,7 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
         _currentViewState.value = AuthState.LoadingState
 
         viewModelScope.launch {
-            val user = userRepo.Signup(
+            _currentViewState.value = userRepo.Signup(
                 email = action.email,
                 username = action.username,
                 password = action.password

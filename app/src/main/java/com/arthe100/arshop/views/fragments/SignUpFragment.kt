@@ -52,6 +52,9 @@ class SignUpFragment : BaseFragment(){
 
         btnSignUp.setOnClickListener{
 
+            if(authViewModel.currentViewState.value !is AuthState.Idle)
+                return@setOnClickListener
+
             val isValid =
                 password.text.trim().toString() == repeat_password.text.trim().toString()
             if(!isValid){
