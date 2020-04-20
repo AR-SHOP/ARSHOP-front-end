@@ -5,8 +5,13 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.afollestad.materialdialogs.DialogBehavior
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.ModalDialog
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
@@ -14,6 +19,7 @@ import com.arthe100.arshop.views.adapters.BottomNavigationViewAdapter
 import com.arthe100.arshop.views.adapters.SearchViewAdapter
 import com.arthe100.arshop.views.fragments.CustomArFragment
 import com.arthe100.arshop.views.fragments.LoadingFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.victor.loading.newton.NewtonCradleLoading
 import kotlinx.android.synthetic.main.activity_main_layout.*
@@ -49,6 +55,14 @@ class MainActivity : BaseActivity(), ILoadFragment {
                 .setBottomNavigationView()
 
 
+        button.setOnClickListener {
+            MaterialDialog(this)
+                    .show {
+                        title = "Error"
+                        message(R.string.username_hint)
+                        positiveButton(R.string.ok)
+                    }
+        }
 
         initializeToolBar()
         searchView = SearchViewAdapter(this)
