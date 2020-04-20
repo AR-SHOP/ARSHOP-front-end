@@ -15,6 +15,7 @@ import com.arthe100.arshop.views.adapters.SearchViewAdapter
 import com.arthe100.arshop.views.fragments.CustomArFragment
 import com.arthe100.arshop.views.fragments.LoadingFragment
 import com.miguelcatalan.materialsearchview.MaterialSearchView
+import com.victor.loading.newton.NewtonCradleLoading
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.loading_layout.*
 import javax.inject.Inject
@@ -44,11 +45,10 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
 
 
-
         BottomNavigationViewAdapter(this, savedInstanceState)
                 .setBottomNavigationView()
 
-        messageManager.toast(this, supportFragmentManager.backStackEntryCount.toString())
+
 
         initializeToolBar()
         searchView = SearchViewAdapter(this)
@@ -56,30 +56,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     }
 
-    override fun onStart() {
-        loading_btn.setOnClickListener(View.OnClickListener {
-            var loadingFragment = LoadingFragment()
-            when (loading_btn.text) {
-                "loading" -> {
-                    loadFragment(loadingFragment)
-                    loading_btn.setText("stop")
-                }
-                "stop" -> {
-                    supportFragmentManager.popBackStack()
-                    loading_btn.setText("loading")
-                }
-            }
-            var count = supportFragmentManager.backStackEntryCount
-            var string = ""
-            for (i in 0 until count - 1) {
-                string += "${supportFragmentManager.fragments[i].toString()} - "
-            }
-            messageManager.toast(this, string)
-        })
-
-
-        super.onStart()
-    }
 
 
 

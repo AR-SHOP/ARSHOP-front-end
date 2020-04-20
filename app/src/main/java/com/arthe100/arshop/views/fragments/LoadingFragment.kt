@@ -18,10 +18,9 @@ class LoadingFragment : Fragment() {
         return inflater.inflate(R.layout.loading_layout, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
-        loading_view.start()
-    }
+//    override fun onStart() {
+//        super.onStart()
+//    }
 
     override fun toString(): String {
         return "Loading"
