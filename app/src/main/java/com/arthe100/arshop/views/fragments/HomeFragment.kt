@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -15,6 +16,7 @@ import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.views.BaseActivity
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
+import com.arthe100.arshop.views.atoms.ButtonAV
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.activity_main_layout.view.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
@@ -31,7 +33,19 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.home_fragment_layout, container, false)
+
+        val view = inflater.inflate(R.layout.home_fragment_layout, container, false)
+
+        var btn = ButtonAV(view.context).make()
+        var params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT)
+        params.setMargins(10,10,10,10)
+        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
+        params.addRule(RelativeLayout.ABOVE, R.id.bottom_navbar)
+        btn.layoutParams = params
+        (view as ViewGroup).addView(btn)
+
+        return view
     }
 
     override fun onStart() {
