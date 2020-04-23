@@ -7,53 +7,68 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RelativeLayout
+import android.widget.RelativeLayout.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.views.BaseActivity
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
+import com.arthe100.arshop.views.IRenderView
 import com.arthe100.arshop.views.atoms.ButtonAV
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.activity_main_layout.view.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
 
-class HomeFragment: BaseFragment(), ILoadFragment {
+class HomeFragment: BaseFragment(), ILoadFragment, IRenderView {
 
     @Inject lateinit var customArFragment: CustomArFragment
+    private lateinit var homeView: View
+    private lateinit var homeLayoutParams: LayoutParams
+
     override fun inject() {
         (activity!!.application as BaseApplication).mainComponent(activity!!)
                 .inject(this)
-        Log.v("abcd", "true")
+//        Log.v("abcd", "true")
     }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.home_fragment_layout, container, false)
-
-        var btn = ButtonAV(view.context).make()
-        var params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT)
-        params.setMargins(10,10,10,10)
-        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
-        params.addRule(RelativeLayout.ABOVE, R.id.bottom_navbar)
-        btn.layoutParams = params
-        (view as ViewGroup).addView(btn)
-
-        return view
+        homeView = inflater.inflate(R.layout.home_fragment_layout, container, false)
+        renderView()
+        return homeView
     }
 
-    override fun onStart() {
-        ar_btn.setOnClickListener {
-            loadFragment(customArFragment)
+    override fun renderView() {
+        setLayout()
+        var button = ButtonAV(requireContext()).apply {
+            state.apply {
+                textSize = 14f
+                text = "My button"
+                layoutParams = homeLayoutParams
+                onClick = { action() }
+            }
         }
-        super.onStart()
+        (homeView as ViewGroup).addView(button.getView())
     }
+
+    private fun action() {
+        return Toast.makeText(requireContext(), "Welcome!", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setLayout() {
+        homeLayoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        homeLayoutParams.setMargins(10,10,10,10)
+        homeLayoutParams.addRule(ALIGN_PARENT_BOTTOM)
+        homeLayoutParams.addRule(ABOVE, R.id.bottom_navbar)
+    }
+
 
     override fun loadFragment(fragment: Fragment) {
         activity!!.supportFragmentManager.beginTransaction()
