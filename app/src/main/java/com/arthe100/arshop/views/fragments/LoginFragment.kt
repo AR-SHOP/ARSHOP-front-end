@@ -52,8 +52,6 @@ class LoginFragment : Fragment(), ILoadFragment {
 
     override fun loadFragment(fragment: Fragment) {
         activity!!.supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
-                        R.anim.enter_from_right, R.anim.exit_to_right)
                 .add(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit()
