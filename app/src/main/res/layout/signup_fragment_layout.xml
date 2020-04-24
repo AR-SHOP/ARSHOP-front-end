@@ -50,7 +50,7 @@
         android:padding="8dp" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/login_password"
         android:padding="8dp"
         android:hint="@string/pass_hint"
         android:layout_width="match_parent"
@@ -74,7 +74,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_below="@id/password"
+        android:layout_below="@id/login_password"
         android:background="@color/colorEditText" />
 
 

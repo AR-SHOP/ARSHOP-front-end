@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ArShop</string>
+    <string name="app_name">ARSHOP</string>
     <string name="btnTable">Table</string>
     <string name="btnBed">Bed</string>
     <string name="btnDuck">Duck</string>
@@ -20,6 +20,7 @@
     <string name="forget_pass_hint">آیا کلمه عبور خود را فراموش کرده اید؟</string>
     <string name="login_btn_text">ورود</string>
     <string name="create_acc_link">ایجاد حساب کاربری جدید</string>
+    <string name="privacy_terms_link">قوانین حریم خصوصی</string>
     <string name="repeat_password">تکرار کلمه عبور</string>
     <string name="error">خطا</string>
     <string name="ok">باشه</string>
