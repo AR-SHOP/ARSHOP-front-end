@@ -1,11 +1,9 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.RelativeLayout
 import android.widget.RelativeLayout.*
 import android.widget.Toast
@@ -28,7 +26,7 @@ class HomeFragment: BaseFragment(), ILoadFragment, IRenderView {
 
     @Inject lateinit var customArFragment: CustomArFragment
     private lateinit var homeView: View
-    private lateinit var homeLayoutParams: LayoutParams
+    private lateinit var btnLayoutParams: LayoutParams
 
     override fun inject() {
         (activity!!.application as BaseApplication).mainComponent(activity!!)
@@ -51,7 +49,7 @@ class HomeFragment: BaseFragment(), ILoadFragment, IRenderView {
             state.apply {
                 textSize = 14f
                 text = "My button"
-                layoutParams = homeLayoutParams
+                layoutParams = btnLayoutParams
                 onClick = { action() }
             }
         }
@@ -62,11 +60,11 @@ class HomeFragment: BaseFragment(), ILoadFragment, IRenderView {
         return Toast.makeText(requireContext(), "Welcome!", Toast.LENGTH_SHORT).show()
     }
 
-    override fun setLayout() {
-        homeLayoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        homeLayoutParams.setMargins(10,10,10,10)
-        homeLayoutParams.addRule(ALIGN_PARENT_BOTTOM)
-        homeLayoutParams.addRule(ABOVE, R.id.bottom_navbar)
+    private fun setLayout() {
+        btnLayoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        btnLayoutParams.setMargins(10,10,10,10)
+        btnLayoutParams.addRule(ALIGN_PARENT_BOTTOM)
+        btnLayoutParams.addRule(ABOVE, R.id.bottom_navbar)
     }
 
 

@@ -8,15 +8,16 @@ import com.arthe100.arshop.R
 import javax.inject.Singleton
 
 @Singleton
-class MessageManager (var context: Context) {
+class MessageManager () {
 
-    fun toast(msg : String){
+
+    fun toast(context: Context, msg : String){
         val toast = Toast.makeText(context, msg , Toast.LENGTH_LONG)
         toast.setGravity(Gravity.CENTER, 0, 0)
         toast.show()
     }
 
-    fun showDialog(dialogTitle: String?, message: String?) {
+    fun showDialog(context: Context, dialogTitle: String?, message: String?) {
 
         MaterialDialog(context).show {
             title(null, dialogTitle)
