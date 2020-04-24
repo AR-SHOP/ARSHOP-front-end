@@ -76,9 +76,9 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
 
 
-        initializeToolBar()
-        searchView = SearchViewAdapter(this)
-                .setSearchView().searchView
+//        initializeToolBar()
+//        searchView = SearchViewAdapter(this)
+//                .setSearchView().searchView
 
     }
 
@@ -92,11 +92,11 @@ class MainActivity : BaseActivity(), ILoadFragment {
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun initializeToolBar() {
-        var toolbar = tool_bar
-        setSupportActionBar(toolbar)
-        toolbar_container.visibility = View.VISIBLE
-    }
+//    private fun initializeToolBar() {
+//        var toolbar = tool_bar
+//        setSupportActionBar(toolbar)
+//        toolbar_container.visibility = View.VISIBLE
+//    }
 
     override fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
