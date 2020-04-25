@@ -27,5 +27,4 @@ class UserRepository @Inject constructor(private val service: UserService) {
             AuthState.Failure(t)
         }
     }
-
 }
