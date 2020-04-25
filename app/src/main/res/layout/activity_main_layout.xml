@@ -10,96 +10,22 @@
     android:id="@+id/main_layout">
 
 
-    <!--    <FrameLayout-->
-<!--            android:id="@+id/toolbar_container"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_marginStart="24dp"-->
-<!--            android:layout_marginLeft="24dp"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:layout_marginEnd="24dp"-->
-<!--            android:layout_marginRight="24dp"-->
-<!--            android:layout_marginBottom="8dp"-->
-<!--            android:visibility="visible"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
-
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--                android:id="@+id/tool_bar"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="?attr/actionBarSize"-->
-<!--                android:layout_margin="6dp"-->
-<!--                android:background="@color/colorBackgroud"-->
-<!--                android:elevation="6dp"-->
-<!--                android:textAlignment="center"-->
-<!--                app:titleTextColor="@color/colorSecondary" />-->
-
-<!--        <com.miguelcatalan.materialsearchview.MaterialSearchView-->
-<!--                android:id="@+id/search_view"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="6dp"-->
-<!--                android:elevation="6dp"-->
-<!--                android:layoutDirection="rtl"-->
-<!--                android:textColor="@color/colorHint"-->
-<!--                android:textColorHint="@color/colorHint"-->
-<!--                app:searchBackIcon="@drawable/ic_action_navigation_arrow_back_inverted"-->
-<!--                app:searchCloseIcon="@drawable/ic_action_close"-->
-<!--                app:searchSuggestionIcon="@drawable/ic_suggestion" />-->
-
-<!--    </FrameLayout>-->
-
-
-
-    <!--    <LinearLayout-->
-<!--        android:id="@+id/ar_buttons"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:visibility="invisible">-->
-
-<!--        <Button-->
-<!--            android:id="@+id/table_btn"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="6dp"-->
-<!--            android:text="@string/btnTable" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/bed_btn"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="6dp"-->
-<!--            android:text="@string/btnBed" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/duck_btn"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="6dp"-->
-<!--            android:text="@string/btnDuck"/>-->
-
-<!--    </LinearLayout>-->
-
     <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/bottom_navbar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.538"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.107" />
+            app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navbar"
-            android:layout_width="400dp"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="false"
+            android:layout_width="396dp"
+            android:layout_height="65dp"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
