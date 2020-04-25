@@ -31,7 +31,6 @@ class LoginFragment : Fragment(), ILoadFragment {
 
 
         new_acc_link.setOnClickListener{
-            loadFragment(SignUpFragment())
         }
 
         var passwordVisible = false
