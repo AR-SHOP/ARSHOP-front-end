@@ -17,13 +17,13 @@ class SearchViewAdapter (var activity: FragmentActivity) : AppCompatActivity() {
     var searchView: MaterialSearchView = MaterialSearchView(activity)
         private set
 
-    public fun setSearchView() : SearchViewAdapter {
-        searchView = activity.search_view
-        searchView.setCursorDrawable(R.drawable.cursor)
-        searchView.setOnQueryTextListener(queryTextListener)
-        searchView.setOnSearchViewListener(searchViewListener)
-        return this
-    }
+//    public fun setSearchView() : SearchViewAdapter {
+//        searchView = activity.search_view
+//        searchView.setCursorDrawable(R.drawable.cursor)
+//        searchView.setOnQueryTextListener(queryTextListener)
+//        searchView.setOnSearchViewListener(searchViewListener)
+//        return this
+//    }
 
     private object queryTextListener: MaterialSearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {

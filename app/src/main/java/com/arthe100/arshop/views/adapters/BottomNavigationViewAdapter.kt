@@ -15,42 +15,45 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 class BottomNavigationViewAdapter (private var activity: BaseActivity,
                                    private var savedInstanceState: Bundle?) : ILoadFragment {
 
+    private var bottomNavBar = activity.bottom_navbar
     var selectedFragment: Fragment = Fragment()
         private set
 
     init {
         if (savedInstanceState == null) {
-            activity.bottom_navbar.selectedItemId = R.id.btm_navbar_home
-            activity.toolbar_container.visibility = View.VISIBLE
+            activity!!.bottom_navbar.selectedItemId = R.id.btm_navbar_home
             selectedFragment = HomeFragment()
             loadFragment(selectedFragment)
         }
     }
 
     public fun setBottomNavigationView() {
-        activity.bottom_navbar.setOnNavigationItemSelectedListener {item ->
+        bottomNavBar.setOnNavigationItemSelectedListener {item ->
             when (item.itemId) {
                 R.id.btm_navbar_home -> {
                     selectedFragment = HomeFragment()
-                    activity.toolbar_container.visibility = View.VISIBLE
+                    Log.v("id", "${activity.bottom_navbar.selectedItemId}")
                 }
                 R.id.btm_navbar_categories -> {
                     selectedFragment = CategoriesFragment()
-                    activity.toolbar_container.visibility = View.VISIBLE
+                    Log.v("id", "${activity.bottom_navbar.selectedItemId}")
                 }
                 R.id.btm_navbar_cart -> {
                     selectedFragment = CartFragment()
-                    activity.toolbar_container.visibility = View.INVISIBLE
+                    Log.v("id", "${activity.bottom_navbar.selectedItemId}")
                 }
                 R.id.btm_navbar_profile -> {
                     selectedFragment = LoginFragment()
-                    activity.toolbar_container.visibility = View.INVISIBLE
+                    Log.v("id", "${activity.bottom_navbar.selectedItemId}")
                 }
             }
             loadFragment(selectedFragment)
             return@setOnNavigationItemSelectedListener true
         }
+
     }
+
+
 
     override fun loadFragment(fragment: Fragment) {
         activity.supportFragmentManager.beginTransaction()

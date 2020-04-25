@@ -57,4 +57,8 @@ class LoginFragment : Fragment(), ILoadFragment {
                 .commit()
     }
 
+    override fun toString(): String {
+        return "Login"
+    }
+
 }

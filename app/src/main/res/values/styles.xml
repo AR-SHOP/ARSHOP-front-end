@@ -9,4 +9,12 @@
         <item name="fontFamily">@font/iran_sans</item>
     </style>
 
+    <style name="bottomNavBarStyle">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">@font/iran_sans</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
 </resources>
