@@ -182,6 +182,10 @@ class CustomArFragment : CustomBaseArFragment() {
         super.onDetach()
     }
 
+
+    override fun toString(): String {
+        return "AR Fragment"
+    }
 }
 
 

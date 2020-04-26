@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
 import com.arthe100.arshop.views.ILoadFragment
+import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.login_fragment_layout.*
 import org.w3c.dom.Text
 import kotlin.math.log
@@ -28,9 +29,11 @@ class LoginFragment : Fragment(), ILoadFragment {
 
     override fun onStart() {
         super.onStart()
+        activity!!.bottom_navbar.visibility = View.VISIBLE
 
 
         new_acc_link.setOnClickListener{
+            loadFragment(PhoneNumberFragment())
         }
 
         var passwordVisible = false
@@ -49,10 +52,11 @@ class LoginFragment : Fragment(), ILoadFragment {
         }
     }
 
+
     override fun loadFragment(fragment: Fragment) {
         activity!!.supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, fragment)
-                .addToBackStack(null)
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(fragment.toString())
                 .commit()
     }
 

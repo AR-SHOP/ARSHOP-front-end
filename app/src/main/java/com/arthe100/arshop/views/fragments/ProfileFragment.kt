@@ -19,5 +19,4 @@ class ProfileFragment : Fragment() {
     override fun toString(): String {
         return "Profile"
     }
-
 }

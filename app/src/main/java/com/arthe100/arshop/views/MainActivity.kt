@@ -1,6 +1,8 @@
 package com.arthe100.arshop.views
 
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
@@ -25,6 +27,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     private var selectedFragment: Fragment = HomeFragment()
     private var selectedItemIdStack: Stack<Int> = Stack()
+    private var doubleBackPressed: Boolean = false
 
 
 
@@ -41,28 +44,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
-
         setBottomNavigationView(savedInstanceState)
-
-
-
-
-
-
-//        button.setOnClickListener {
-//            MaterialDialog(this)
-//                        title = "Error"
-//                        message(R.string.username_hint)
-//                        positiveButton(R.string.ok)
-//                    }
-//        }
-
-
-
-//        initializeToolBar()
-//        searchView = SearchViewAdapter(this)
-//                .setSearchView().searchView
-
     }
 
     private fun setBottomNavigationView(savedInstanceState: Bundle?) {
@@ -97,18 +79,34 @@ class MainActivity : BaseActivity(), ILoadFragment {
         }
     }
 
-
     override fun onBackPressed() {
-        selectedItemIdStack.pop()
+        when(selectedFragment) {
+            is HomeFragment, is CategoriesFragment, is CartFragment, is LoginFragment -> {
+                selectedItemIdStack.pop()
+            }
+        }
+
         if (selectedItemIdStack.size >= 1) {
             bottom_navbar.selectedItemId = selectedItemIdStack.peek()
             supportFragmentManager.popBackStack()
+            selectedFragment = getTheLastFragment()
             super.onBackPressed()
         }
         else {
             this.finish()
             exitProcess(0)
         }
+    }
+
+    private fun getTheLastFragment() : Fragment {
+        var backStackSize = supportFragmentManager.backStackEntryCount
+        val fragmentTag: String? =
+            supportFragmentManager.getBackStackEntryAt(0).name
+        var lastFragment: Fragment = HomeFragment()
+        if (supportFragmentManager.findFragmentByTag(fragmentTag) != null) {
+            lastFragment = supportFragmentManager.findFragmentByTag(fragmentTag)!!
+        }
+        return lastFragment
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -122,7 +120,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
     override fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
+                .addToBackStack(fragment.toString())
                 .commit()
     }
 }

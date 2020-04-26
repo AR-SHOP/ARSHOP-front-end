@@ -32,7 +32,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     override fun loadFragment(fragment: Fragment) {
         activity!!.supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, fragment)
-                .addToBackStack(null)
+                .addToBackStack(fragment.toString())
                 .commit()
     }
 

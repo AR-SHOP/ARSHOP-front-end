@@ -25,6 +25,9 @@
     <string name="error">خطا</string>
     <string name="ok">باشه</string>
     <string name="cancel">لغو</string>
+    <string name="phone_number_hint">شماره تلفن</string>
+    <string name="enter_phone_number">لطفا شماره تلفن خود را وارد کنید</string>
+    <string name="recieve_verify_code">ادامه و دریافت کد تایید</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
