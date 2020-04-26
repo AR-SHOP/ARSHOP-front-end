@@ -40,16 +40,6 @@ class CustomArFragment : CustomBaseArFragment() {
 
     override fun onStart() {
         activity!!.bottom_navbar.visibility = View.INVISIBLE
-//        activity!!.ar_buttons.visibility = View.VISIBLE
-//        activity!!.table_btn.setOnClickListener {
-//            setUri(tableUrl)
-//        }
-//        activity!!.duck_btn.setOnClickListener {
-//            setUri(duckUrl)
-//        }
-//        activity!!.bed_btn.setOnClickListener {
-//            setUri(bedUrl)
-//        }
         super.onStart()
     }
 

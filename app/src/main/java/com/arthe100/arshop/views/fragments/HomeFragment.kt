@@ -21,7 +21,6 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     override fun inject() {
         (activity!!.application as BaseApplication).mainComponent(activity!!)
                 .inject(this)
-//        Log.v("abcd", "true")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +35,10 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     }
 
 
-    override fun loadFragment(fragment: Fragment) {
+    override fun loadFragment(fragment: Fragment?) {
         activity!!.supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, fragment)
-                .addToBackStack(fragment.toString())
+                .add(R.id.fragment_container, fragment!!)
+                .addToBackStack(fragment.tag)
                 .commit()
     }
 

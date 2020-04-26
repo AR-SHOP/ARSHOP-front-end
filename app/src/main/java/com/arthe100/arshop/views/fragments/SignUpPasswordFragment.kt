@@ -9,11 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.arthe100.arshop.R
+import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.views.BaseFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.login_fragment_layout.visibility_icon
 import kotlinx.android.synthetic.main.sign_up_password_fragment.*
+import javax.inject.Inject
 
-class SignUpPasswordFragment : Fragment() {
+class SignUpPasswordFragment : BaseFragment() {
+
+    override fun inject() {
+        (activity!!.application as BaseApplication).mainComponent(activity!!)
+            .inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

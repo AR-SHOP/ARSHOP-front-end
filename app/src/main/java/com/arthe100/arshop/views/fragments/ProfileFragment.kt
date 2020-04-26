@@ -7,9 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 import com.arthe100.arshop.R
+import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.views.BaseFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment() {
+
+    override fun inject() {
+        (activity!!.application as BaseApplication).mainComponent(activity!!)
+            .inject(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

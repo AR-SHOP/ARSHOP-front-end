@@ -7,11 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.*
 import com.arthe100.arshop.R
+import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.phone_number_fragment_layout.*
+import javax.inject.Inject
 
-class PhoneNumberFragment : Fragment(), ILoadFragment {
+class PhoneNumberFragment : BaseFragment(), ILoadFragment {
+
+    @Inject lateinit var verifyFragment: VerifyFragment
+
+    override fun inject() {
+        (activity!!.application as BaseApplication).mainComponent(activity!!)
+            .inject(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -24,15 +34,15 @@ class PhoneNumberFragment : Fragment(), ILoadFragment {
         super.onStart()
 
         recieve_code_btn.setOnClickListener{
-            loadFragment(VerifyFragment())
+            loadFragment(verifyFragment)
         }
 
     }
 
-    override fun loadFragment(fragment: Fragment) {
+    override fun loadFragment(fragment: Fragment?) {
         activity!!.supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(fragment.toString())
+            .replace(R.id.fragment_container, fragment!!)
+            .addToBackStack(fragment.tag)
             .commit()
     }
 
