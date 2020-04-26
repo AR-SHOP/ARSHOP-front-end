@@ -10,6 +10,7 @@ import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
 import com.arthe100.arshop.views.adapters.SearchViewAdapter
+import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
 
@@ -25,9 +26,15 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
+        activity!!.bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.home_fragment_layout, container, false)
     }
+
+
+    override fun onStart() {
+        super.onStart()
+    }
+
 
     override fun loadFragment(fragment: Fragment) {
         activity!!.supportFragmentManager.beginTransaction()

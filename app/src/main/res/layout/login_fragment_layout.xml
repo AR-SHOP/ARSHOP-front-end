@@ -103,7 +103,7 @@
 
 
     <Button
-            android:id="@+id/login_btn"
+            android:id="@+id/verify_continue_btn"
             android:layout_width="300dp"
             android:layout_height="45dp"
             android:layout_below="@id/forget_pass_link"
@@ -122,32 +122,32 @@
             android:id="@+id/new_acc_link"
             android:layout_width="264dp"
             android:layout_height="20dp"
-            android:layout_below="@id/login_btn"
+            android:layout_below="@id/verify_continue_btn"
             android:layout_margin="10dp"
             android:layout_marginTop="2dp"
             android:text="@string/create_acc_link"
             android:textAlignment="center"
             android:textColor="@color/colorSecondary"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/login_btn"
-            app:layout_constraintStart_toStartOf="@+id/login_btn"
-            app:layout_constraintTop_toBottomOf="@+id/login_btn"
+            app:layout_constraintEnd_toEndOf="@+id/verify_continue_btn"
+            app:layout_constraintStart_toStartOf="@+id/verify_continue_btn"
+            app:layout_constraintTop_toBottomOf="@+id/verify_continue_btn"
             app:layout_constraintVertical_bias="0.0" />
 
     <TextView
             android:id="@+id/privacy_terms"
             android:layout_width="264dp"
             android:layout_height="20dp"
-            android:layout_below="@id/login_btn"
+            android:layout_below="@id/verify_continue_btn"
             android:layout_margin="10dp"
             android:layout_marginTop="32dp"
             android:text="@string/privacy_terms_link"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/login_btn"
+            app:layout_constraintEnd_toEndOf="@+id/verify_continue_btn"
             app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="@+id/login_btn"
+            app:layout_constraintStart_toStartOf="@+id/verify_continue_btn"
             app:layout_constraintTop_toBottomOf="@+id/new_acc_link"
             app:layout_constraintVertical_bias="0.07" />
 

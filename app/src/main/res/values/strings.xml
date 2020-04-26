@@ -28,6 +28,10 @@
     <string name="phone_number_hint">شماره تلفن</string>
     <string name="enter_phone_number">لطفا شماره تلفن خود را وارد کنید</string>
     <string name="recieve_verify_code">ادامه و دریافت کد تایید</string>
+    <string name="enter_verify_code">لطفا کد تایید را وارد نمایید</string>
+    <string name="continue_btn">ادامه</string>
+    <string name="enter_password">لطفا رمز ورود خود را وارد نمایید</string>
+    <string name="confirm_password">تایید رمز عبور</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

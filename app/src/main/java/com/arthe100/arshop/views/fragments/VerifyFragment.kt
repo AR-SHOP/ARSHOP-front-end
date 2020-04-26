@@ -5,28 +5,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.*
+
 import com.arthe100.arshop.R
 import com.arthe100.arshop.views.ILoadFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.phone_number_fragment_layout.*
+import kotlinx.android.synthetic.main.verify_fragment_layout.*
 
-class PhoneNumberFragment : Fragment(), ILoadFragment {
+class VerifyFragment : Fragment(), ILoadFragment {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         activity!!.bottom_navbar.visibility = View.INVISIBLE
-        return inflater.inflate(R.layout.phone_number_fragment_layout, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.verify_fragment_layout, container, false)
     }
 
     override fun onStart() {
-        super.onStart()
-
-        recieve_code_btn.setOnClickListener{
-            loadFragment(VerifyFragment())
+        verify_continue_btn.setOnClickListener {
+            loadFragment(SignUpPasswordFragment())
         }
-
+        super.onStart()
     }
 
     override fun loadFragment(fragment: Fragment) {
@@ -35,10 +35,4 @@ class PhoneNumberFragment : Fragment(), ILoadFragment {
             .addToBackStack(fragment.toString())
             .commit()
     }
-
-    override fun toString(): String {
-        return "Phone Number Fragment"
-    }
-
-
 }

@@ -5,6 +5,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
@@ -14,6 +15,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 import kotlin.system.exitProcess
 
 
@@ -44,6 +46,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
+        bottom_navbar.visibility = View.VISIBLE
         setBottomNavigationView(savedInstanceState)
     }
 
@@ -80,28 +83,33 @@ class MainActivity : BaseActivity(), ILoadFragment {
     }
 
     override fun onBackPressed() {
-        when(selectedFragment) {
-            is HomeFragment, is CategoriesFragment, is CartFragment, is LoginFragment -> {
-                selectedItemIdStack.pop()
+
+        if (selectedFragment is HomeFragment || selectedFragment is CategoriesFragment ||
+                selectedFragment is CartFragment || selectedFragment is LoginFragment) {
+            selectedItemIdStack.pop()
+            if (selectedItemIdStack.size >= 1) {
+                bottom_navbar.selectedItemId = selectedItemIdStack.peek()
+                supportFragmentManager.popBackStack()
+                Log.v("backStackSize", "${supportFragmentManager.backStackEntryCount}")
+                selectedFragment = getTheLastFragment()
+                Log.v("lastFragment", "$selectedFragment")
+                super.onBackPressed()
+            }
+
+            else {
+                this.finish()
+                exitProcess(0)
             }
         }
-
-        if (selectedItemIdStack.size >= 1) {
-            bottom_navbar.selectedItemId = selectedItemIdStack.peek()
-            supportFragmentManager.popBackStack()
-            selectedFragment = getTheLastFragment()
-            super.onBackPressed()
-        }
         else {
-            this.finish()
-            exitProcess(0)
+            supportFragmentManager.popBackStack()
         }
     }
 
     private fun getTheLastFragment() : Fragment {
         var backStackSize = supportFragmentManager.backStackEntryCount
         val fragmentTag: String? =
-            supportFragmentManager.getBackStackEntryAt(0).name
+            supportFragmentManager.getBackStackEntryAt(backStackSize - 1).name
         var lastFragment: Fragment = HomeFragment()
         if (supportFragmentManager.findFragmentByTag(fragmentTag) != null) {
             lastFragment = supportFragmentManager.findFragmentByTag(fragmentTag)!!
