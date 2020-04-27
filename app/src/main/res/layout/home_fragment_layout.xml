@@ -9,37 +9,49 @@
 
     <androidx.appcompat.widget.SearchView
             android:id="@+id/home_search_view"
-            android:layout_width="345dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
+            style="@style/AppTheme"
+            android:layout_width="360dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            style="@style/AppTheme"
             android:background="@drawable/search_bar_rounded"
             android:layoutDirection="rtl"
             android:textDirection="rtl"
             app:defaultQueryHint="@string/search_hint"
-            app:layout_constraintBottom_toTopOf="@+id/ar_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.004" />
+            app:layout_constraintVertical_bias="0.0"
+            android:elevation="10dp"/>
 
-    <Button
-            android:id="@+id/ar_btn"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:background="@drawable/button_rounded"
-            android:elevation="10dp"
-            android:padding="10dp"
-            android:shadowColor="@color/colorPrimary"
-            android:text="@string/ar_view_btn"
-            android:textAlignment="center"
-            android:textColor="@color/colorBackgroud"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="360dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="68dp"
+            android:layout_marginTop="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/home_search_view"
             app:layout_constraintStart_toStartOf="@+id/home_search_view"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/home_search_view" />
+
+    <!--    <Button-->
+<!--            android:id="@+id/ar_btn"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:background="@drawable/button_rounded"-->
+<!--            android:elevation="10dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:shadowColor="@color/colorPrimary"-->
+<!--            android:text="@string/ar_view_btn"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/colorBackgroud"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/home_search_view"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/home_search_view"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
 
 

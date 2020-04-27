@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.SearchView
             android:id="@+id/category_search_view"
-            android:layout_width="345dp"
+            android:layout_width="360dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"

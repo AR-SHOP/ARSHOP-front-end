@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.views.adapters.ProductAdapter.ProductAdapter
 import com.arthe100.arshop.views.fragments.*
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main_layout.*
