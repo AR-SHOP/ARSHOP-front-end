@@ -1,6 +1,6 @@
 package com.arthe100.arshop.views.data
 
-class Data private constructor(builder: DataBuilder) {
+class Product private constructor(builder: ProductBuilder) {
     var title: String? = null
     var description: String? = null
     var imageUrl: String? = null
@@ -13,7 +13,7 @@ class Data private constructor(builder: DataBuilder) {
         this.price = builder.price
     }
 
-    class DataBuilder {
+    class ProductBuilder {
         var title: String? = null
             private set
         var description: String? = null
@@ -27,6 +27,6 @@ class Data private constructor(builder: DataBuilder) {
         fun setDescription(description: String) = apply { this.description = description }
         fun setImageUrl(imageUrl: String) = apply { this.imageUrl = imageUrl }
         fun setPrice(price: Int) = apply { this.price = price }
-        public fun build() = Data(this)
+        public fun build() = Product(this)
     }
 }

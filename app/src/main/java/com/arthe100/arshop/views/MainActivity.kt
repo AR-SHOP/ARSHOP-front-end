@@ -5,18 +5,16 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.scripts.di.modules.FakeClass
 import com.arthe100.arshop.scripts.messege.MessageManager
-import com.arthe100.arshop.views.adapters.BottomNavigationViewAdapter
-import com.arthe100.arshop.views.adapters.SearchViewAdapter
-import com.arthe100.arshop.views.fragments.CustomArFragment
+import com.arthe100.arshop.views.fragments.*
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main_layout.*
+import java.util.*
 import javax.inject.Inject
+import kotlin.system.exitProcess
 
 
 class MainActivity : BaseActivity(), ILoadFragment {
@@ -26,7 +24,11 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var customArFragment: CustomArFragment
-    @Inject lateinit var fake: FakeClass
+
+    private var selectedFragment: Fragment? = HomeFragment()
+    private var selectedItemIdStack: Stack<Int> = Stack()
+
+
 
     override fun inject() {
         (application as BaseApplication)
@@ -39,19 +41,78 @@ class MainActivity : BaseActivity(), ILoadFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
-        messageManager.toast(this , "$fake")
 
-
-        BottomNavigationViewAdapter(this, savedInstanceState)
-                .setBottomNavigationView()
-
-        initializeToolBar()
-        searchView = SearchViewAdapter(this)
-                .setSearchView().searchView
-
+        setBottomNavigationView(savedInstanceState)
     }
 
+    override fun onResume() {
+        bottom_navbar.visibility = View.VISIBLE
+        super.onResume()
+    }
 
+    private fun setBottomNavigationView(savedInstanceState: Bundle?) {
+
+        if (savedInstanceState == null) {
+            bottom_navbar.selectedItemId = R.id.btm_navbar_home
+            selectedItemIdStack.push(bottom_navbar.selectedItemId)
+            loadFragment(selectedFragment)
+        }
+
+        bottom_navbar.setOnNavigationItemSelectedListener {item ->
+            when (item.itemId) {
+                R.id.btm_navbar_home -> {
+                    selectedFragment = HomeFragment()
+                    if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
+                }
+                R.id.btm_navbar_categories -> {
+                    selectedFragment = CategoriesFragment()
+                    if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
+                }
+                R.id.btm_navbar_cart -> {
+                    selectedFragment = CartFragment()
+                    if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
+                }
+                R.id.btm_navbar_profile -> {
+                    selectedFragment = LoginFragment()
+                    if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
+                }
+            }
+            loadFragment(selectedFragment)
+            return@setOnNavigationItemSelectedListener true
+        }
+    }
+
+    override fun onBackPressed() {
+        var bottomNavbarFragments =
+            arrayListOf("Home", "Categories", "Cart", "Login", "Profile")
+        selectedFragment = getTheLastFragment()
+        var fragmentTag = selectedFragment!!.tag
+        Log.v("fragmentTag", fragmentTag)
+
+        if (fragmentTag in bottomNavbarFragments) {
+            selectedItemIdStack.pop()
+            if (selectedItemIdStack.size >= 1) {
+                bottom_navbar.selectedItemId = selectedItemIdStack.peek()
+                supportFragmentManager.popBackStack()
+                selectedFragment = getTheLastFragment()
+                super.onBackPressed()
+            }
+            else {
+                this.finish()
+                exitProcess(0)
+            }
+        }
+        else {
+            supportFragmentManager.popBackStack()
+        }
+    }
+
+    private fun getTheLastFragment() : Fragment? {
+        var backStackSize = supportFragmentManager.backStackEntryCount
+        val fragmentTag: String? =
+            supportFragmentManager.getBackStackEntryAt(backStackSize - 1).name
+        return supportFragmentManager.findFragmentByTag(fragmentTag)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu_layout, menu)
@@ -60,18 +121,11 @@ class MainActivity : BaseActivity(), ILoadFragment {
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun initializeToolBar() {
-        var toolbar = tool_bar
-        setSupportActionBar(toolbar)
-        toolbar_container.visibility = View.VISIBLE
-    }
 
-    override fun loadFragment(fragment: Fragment) {
+    override fun loadFragment(fragment: Fragment?) {
         supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
-                        R.anim.enter_from_right, R.anim.exit_to_right)
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
+                .replace(R.id.fragment_container, fragment!!, fragment.toString())
+                .addToBackStack(fragment.tag)
                 .commit()
     }
 }

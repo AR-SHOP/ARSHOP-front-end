@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
+
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.arthe100.arshop"
         minSdkVersion 25
@@ -58,22 +58,40 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
+    //Alert Dialog
+    def dialogVer = "3.3.0"
 
-    implementation 'com.google.android.material:material:1.2.0-alpha05'
+    implementation "com.afollestad.material-dialogs:core:$dialogVer"
+    implementation "com.afollestad.material-dialogs:input:$dialogVer"
+    implementation "com.afollestad.material-dialogs:files:$dialogVer"
+    implementation "com.afollestad.material-dialogs:color:$dialogVer"
+    implementation "com.afollestad.material-dialogs:datetime:$dialogVer"
+    implementation "com.afollestad.material-dialogs:bottomsheets:$dialogVer"
+    implementation "com.afollestad.material-dialogs:lifecycle:$dialogVer"
 
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-
+    //Loading Progress Bar
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha06'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
-
+    implementation 'com.victor:lib:1.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    // Navigation
     def nav_version = "1.0.0"
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+
+
+    // Glide
+    def glideVer = "4.11.0"
+    implementation "com.github.bumptech.glide:glide:$glideVer"
+
+    // RxJava
+    def rxJavaVersion = "2.2.19"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
 
 
     // Network

@@ -27,6 +27,8 @@ interface MainComponent  {
     fun inject(fragment: ProfileFragment)
     fun inject(fragment: CategoriesFragment)
     fun inject(fragment: CartFragment)
-    fun inject(fragment: SignUpFragment)
     fun inject(fragment: LoginFragment)
+    fun inject(fragment: PhoneNumberFragment)
+    fun inject(fragment: VerifyFragment)
+    fun inject(fragment: SignUpPasswordFragment)
 }
