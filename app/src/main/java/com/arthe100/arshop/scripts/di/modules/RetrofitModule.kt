@@ -16,7 +16,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 @Module
 object RetrofitModule {
 
-    private val baseUrl = "http://babk.pythonanywhere.com/shop_core/api/"
+    private val baseUrl = "http://babk.pythonanywhere.com/core/api/"
 
     @JvmStatic
     @AppScope

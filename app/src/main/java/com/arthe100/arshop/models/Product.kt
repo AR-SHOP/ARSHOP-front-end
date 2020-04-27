@@ -1,4 +1,5 @@
 package com.arthe100.arshop.models
+import com.google.gson.annotations.SerializedName
 
 sealed class Product
 {
@@ -7,13 +8,17 @@ sealed class Product
         , val description : String
         , val manufacturer : String
         , val price : Long
-        , val image : String
-    ): Product(){}
+        , @SerializedName("image") val thumbnail : String
+        , @SerializedName("ar_model") val arModel: String
+    ): Product()
 
     data class NormalProduct(
         val name : String
         , val description : String
         , val manufacturer : String
         , val price : Long
-    ): Product(){}
+        , @SerializedName("image") val thumbnail : String
+    ): Product()
 }
+
+

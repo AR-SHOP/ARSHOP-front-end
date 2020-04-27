@@ -1,16 +1,16 @@
 package com.arthe100.arshop.scripts.network.services
 
-import com.arthe100.arshop.models.User
-import com.arthe100.arshop.models.UserSignUp
+import com.arthe100.arshop.models.*
+import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface UserService  {
-    @GET("users/")
-    suspend fun getUsers() : List<User>
-
 
     @POST("signup/")
-    suspend fun signup(@Body user: UserSignUp) : User
+    suspend fun signup(@Body user: AuthUser)
+
+    @POST("login/")
+    suspend fun login(@Body user: AuthUser) : UserToken
+
 }
