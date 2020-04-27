@@ -37,6 +37,7 @@ object RetrofitModule {
             .addInterceptor(interceptor)
             .build()
     }
+
     @JvmStatic
     @AppScope
     @Provides
