@@ -41,8 +41,12 @@ class VerifyFragment : BaseFragment(), ILoadFragment {
 
     override fun loadFragment(fragment: Fragment?) {
         activity!!.supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment!!)
+            .replace(R.id.fragment_container, fragment!!, fragment.toString())
             .addToBackStack(fragment.tag)
             .commit()
+    }
+
+    override fun toString(): String {
+        return "Verify"
     }
 }

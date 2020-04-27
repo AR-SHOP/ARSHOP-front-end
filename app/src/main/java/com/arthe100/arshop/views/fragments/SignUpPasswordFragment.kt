@@ -74,4 +74,8 @@ class SignUpPasswordFragment : BaseFragment() {
         }
     }
 
+    override fun toString(): String {
+        return "SignUpPassword"
+    }
+
 }

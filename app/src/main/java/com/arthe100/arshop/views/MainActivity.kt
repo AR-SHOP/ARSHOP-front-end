@@ -6,14 +6,17 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.views.fragments.*
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main_layout.*
+import java.io.StringReader
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 import kotlin.system.exitProcess
 
 
@@ -27,7 +30,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     private var selectedFragment: Fragment? = HomeFragment()
     private var selectedItemIdStack: Stack<Int> = Stack()
-    private var doubleBackPressed: Boolean = false
 
 
 
@@ -81,19 +83,18 @@ class MainActivity : BaseActivity(), ILoadFragment {
     }
 
     override fun onBackPressed() {
+        var bottomNavbarFragments = arrayListOf("Home", "Categories", "Cart", "Login")
+        selectedFragment = getTheLastFragment()
+        var fragmentTag = selectedFragment!!.tag
 
-        if (selectedFragment is HomeFragment || selectedFragment is CategoriesFragment ||
-                selectedFragment is CartFragment || selectedFragment is LoginFragment) {
+        if (fragmentTag in bottomNavbarFragments) {
             selectedItemIdStack.pop()
             if (selectedItemIdStack.size >= 1) {
                 bottom_navbar.selectedItemId = selectedItemIdStack.peek()
                 supportFragmentManager.popBackStack()
                 selectedFragment = getTheLastFragment()
-                Log.v("lastFragment", "Fragment: ${selectedFragment} +" +
-                        " Size: ${selectedItemIdStack.size}")
                 super.onBackPressed()
             }
-
             else {
                 this.finish()
                 exitProcess(0)
@@ -121,7 +122,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     override fun loadFragment(fragment: Fragment?) {
         supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment!!)
+                .replace(R.id.fragment_container, fragment!!, fragment.toString())
                 .addToBackStack(fragment.tag)
                 .commit()
     }

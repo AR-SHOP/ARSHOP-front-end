@@ -37,7 +37,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
     override fun loadFragment(fragment: Fragment?) {
         activity!!.supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, fragment!!)
+                .add(R.id.fragment_container, fragment!!, fragment.toString())
                 .addToBackStack(fragment.tag)
                 .commit()
     }

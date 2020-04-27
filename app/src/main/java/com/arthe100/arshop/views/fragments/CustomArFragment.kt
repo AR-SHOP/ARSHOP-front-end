@@ -174,7 +174,7 @@ class CustomArFragment : CustomBaseArFragment() {
 
 
     override fun toString(): String {
-        return "AR Fragment"
+        return "AR"
     }
 }
 
