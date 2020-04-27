@@ -46,8 +46,12 @@ class MainActivity : BaseActivity(), ILoadFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
-        bottom_navbar.visibility = View.VISIBLE
         setBottomNavigationView(savedInstanceState)
+    }
+
+    override fun onResume() {
+        bottom_navbar.visibility = View.VISIBLE
+        super.onResume()
     }
 
     private fun setBottomNavigationView(savedInstanceState: Bundle?) {
@@ -83,9 +87,11 @@ class MainActivity : BaseActivity(), ILoadFragment {
     }
 
     override fun onBackPressed() {
-        var bottomNavbarFragments = arrayListOf("Home", "Categories", "Cart", "Login")
+        var bottomNavbarFragments =
+            arrayListOf("Home", "Categories", "Cart", "Login", "Profile")
         selectedFragment = getTheLastFragment()
         var fragmentTag = selectedFragment!!.tag
+        Log.v("fragmentTag", fragmentTag)
 
         if (fragmentTag in bottomNavbarFragments) {
             selectedItemIdStack.pop()

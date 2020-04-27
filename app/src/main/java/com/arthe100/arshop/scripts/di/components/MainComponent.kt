@@ -31,5 +31,4 @@ interface MainComponent  {
     fun inject(fragment: PhoneNumberFragment)
     fun inject(fragment: VerifyFragment)
     fun inject(fragment: SignUpPasswordFragment)
-    fun inject(fragment: LoadingFragment)
 }
