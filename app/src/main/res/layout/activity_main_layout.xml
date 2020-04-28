@@ -1,106 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/colorBackgroud"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.MainActivity">
+    tools:context=".views.MainActivity"
+    android:id="@+id/main_layout">
 
 
     <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
-
-
-
-
-    <FrameLayout
-        android:id="@+id/toolbar_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tool_bar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorBackgroud"
-            android:textAlignment="center"
-            app:titleTextColor="@color/colorSecondary"
-            android:elevation="6dp"
-            android:layout_margin="6dp" />
-
-        <com.miguelcatalan.materialsearchview.MaterialSearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="6dp"
-            android:layout_margin="6dp"
-            android:layoutDirection="rtl"
-            android:textColor="@color/colorHint"
-            android:textColorHint="@color/colorHint"
-            app:searchBackIcon="@drawable/ic_action_navigation_arrow_back_inverted"
-            app:searchCloseIcon="@drawable/ic_action_close"
-            app:searchSuggestionIcon="@drawable/ic_suggestion"/>
-
-    </FrameLayout>
-
-
+            android:id="@+id/fragment_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bottom_navbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.538"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:elevation="10dp"
-        android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorBackgroud"
-        app:itemIconTint="@color/colorPrimary"
-        app:itemTextColor="@color/colorPrimary"
-        app:labelVisibilityMode="selected"
-        app:menu="@menu/bottom_navbar_menu_layout"
-        android:background="?android:attr/windowBackground" />
-
-    <LinearLayout
-        android:id="@+id/ar_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_alignParentBottom="true"
-        android:visibility="invisible">
-
-        <Button
-            android:id="@+id/table_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:text="@string/btnTable" />
-
-        <Button
-            android:id="@+id/bed_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:text="@string/btnBed" />
-
-        <Button
-            android:id="@+id/duck_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:text="@string/btnDuck"/>
-
-    </LinearLayout>
+            android:id="@+id/bottom_navbar"
+            android:layout_width="385dp"
+            android:layout_height="65dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="?android:attr/windowBackground"
+            app:backgroundTint="@color/colorBackgroud"
+            app:elevation="10dp"
+            app:itemIconTint="@color/colorPrimary"
+            app:itemTextColor="@color/colorPrimary"
+            app:labelVisibilityMode="selected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:menu="@menu/bottom_navbar_menu_layout" />
 
 
-
-
-
-
-
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

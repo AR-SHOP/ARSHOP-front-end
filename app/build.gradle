@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
+
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.arthe100.arshop"
         minSdkVersion 25
@@ -40,6 +40,10 @@ android {
 repositories {
     mavenCentral()
     google()
+    jcenter()
+}
+buildscript {
+    ext.kotlin_version = '1.3.70'
 }
 
 apply plugin: 'kotlin-kapt'
@@ -54,44 +58,93 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    //Alert Dialog
+    def dialogVer = "3.3.0"
 
-    // Dagger
-    implementation "com.google.dagger:dagger:2.27"
-    kapt "com.google.dagger:dagger-compiler:2.27"
+    implementation "com.afollestad.material-dialogs:core:$dialogVer"
+    implementation "com.afollestad.material-dialogs:input:$dialogVer"
+    implementation "com.afollestad.material-dialogs:files:$dialogVer"
+    implementation "com.afollestad.material-dialogs:color:$dialogVer"
+    implementation "com.afollestad.material-dialogs:datetime:$dialogVer"
+    implementation "com.afollestad.material-dialogs:bottomsheets:$dialogVer"
+    implementation "com.afollestad.material-dialogs:lifecycle:$dialogVer"
 
-    // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
-
-    // RxJava
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
-
-    implementation 'com.google.android.material:material:1.2.0-alpha05'
-
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-    implementation("com.squareup.moshi:moshi-kotlin:1.9.2")
-
+    //Loading Progress Bar
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha06'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
-    // Provides ARCore Session and related resources.
-    implementation 'com.google.ar:core:1.16.0'
-
-    // Sceneform
-    // Provides ArFragment, and other UX resources.
-    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
-
-    // Alternatively, use ArSceneView without the UX dependency.
-    implementation 'com.google.ar.sceneform:core:1.15.0'
-
-    implementation 'com.google.ar.sceneform:assets:1.15.0'
-
-
+    implementation 'com.victor:lib:1.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    // Navigation
     def nav_version = "1.0.0"
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+
+
+    // Glide
+    def glideVer = "4.11.0"
+    implementation "com.github.bumptech.glide:glide:$glideVer"
+
+    // RxJava
+    def rxJavaVersion = "2.2.19"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+
+
+    // Network
+    def retrofitVer = "2.8.1"
+
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVer"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVer"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVer"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+    implementation "com.squareup.moshi:moshi-kotlin:1.9.2"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5"
+
+    // Dagger
+    def daggerVer = "2.27"
+
+    implementation "com.google.dagger:dagger:$daggerVer"
+    kapt "com.google.dagger:dagger-compiler:$daggerVer"
+
+
+    //Ar
+    def arCoreVer = "1.16.0"
+    def sceneFormVer = "1.15.0"
+
+    implementation "com.google.ar:core:$arCoreVer"
+    implementation "com.google.ar.sceneform.ux:sceneform-ux:$sceneFormVer"
+    implementation "com.google.ar.sceneform:core:$sceneFormVer"
+    implementation "com.google.ar.sceneform:assets:$sceneFormVer"
+
+    def flowbinding_version = "0.10.2"
+
+    //Platform Bindings
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-android:${flowbinding_version}"
+    //AndroidX Bindings
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-activity:${flowbinding_version}"
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-appcompat:${flowbinding_version}"
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-core:${flowbinding_version}"
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-drawerlayout:${flowbinding_version}"
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-lifecycle:${flowbinding_version}"
+//    implementation "io.github.reactivecircus.flowbinding:flowbinding-navigation:${flowbinding_version}"
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-preference:${flowbinding_version}"
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-recyclerview:${flowbinding_version}"
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-swiperefreshlayout:${flowbinding_version}"
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-viewpager2:${flowbinding_version}"
+    //Material Components Bindings
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-material:${flowbinding_version}"
+
+
+    def architecturecomponentsVer  = "2.3.0-alpha01"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$architecturecomponentsVer"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$architecturecomponentsVer"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$architecturecomponentsVer"
 
 }
