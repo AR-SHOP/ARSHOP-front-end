@@ -14,16 +14,15 @@ class ProfileFragment : BaseFragment() {
     private val TAG = ProfileFragment::class.simpleName
 
     override fun inject() {
-        (activity!!.application as BaseApplication).mainComponent(activity!!)
+        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
             .inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        activity!!.bottom_navbar.visibility = View.VISIBLE
+        requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.profile_fragment_layout, container, false)
-
     }
 
 

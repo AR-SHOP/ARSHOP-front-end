@@ -39,14 +39,14 @@ class CustomArFragment : CustomBaseArFragment() {
     public val bedUrl = "https://poly.googleapis.com/downloads/fp/1586167422468753/8mkAgVYGbL4/5oNDqZI-I0J/Bed_01.gltf"
 
     override fun onStart() {
-        activity!!.bottom_navbar.visibility = View.INVISIBLE
+        requireActivity().bottom_navbar.visibility = View.INVISIBLE
         super.onStart()
     }
 
 
     override fun inject() {
         (activity?.application as BaseApplication)
-                .mainComponent(activity!!)
+                .mainComponent(requireActivity())
                 .arComponent().create().inject(this)
     }
 
@@ -102,7 +102,7 @@ class CustomArFragment : CustomBaseArFragment() {
             root.renderable = null
             root.removeChild(parent) }
 
-        messageManager.toast(context!! , "model hit!")
+        messageManager.toast(requireContext() , "model hit!")
     }
 
 
@@ -134,7 +134,7 @@ class CustomArFragment : CustomBaseArFragment() {
                     placeModel(it , anchor)
                 }
                 .exceptionally {
-                    messageManager.toast(context!!, "Unable to load renderable $uri")
+                    messageManager.toast(requireContext(), "Unable to load renderable $uri")
                     return@exceptionally null
                 }
     }
@@ -167,7 +167,7 @@ class CustomArFragment : CustomBaseArFragment() {
     }
 
     override fun onDetach() {
-        activity!!.bottom_navbar.visibility = View.VISIBLE
+        requireActivity().bottom_navbar.visibility = View.VISIBLE
 //        activity!!.ar_buttons.visibility = View.INVISIBLE
         super.onDetach()
     }

@@ -40,7 +40,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        model = ViewModelProvider(activity!! , viewModelProviderFactory).get(AuthViewModel::class.java)
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
 
         model.currentViewState.observe(this , Observer(::render))
     }
@@ -56,25 +56,25 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             is AuthState.LoginSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
                 session.saveUser(state.user)
-                messageManager.toast(context!! , "Welcome ${state.user.username}")
+                messageManager.toast(requireContext() , "Welcome ${state.user.username}")
             }
             is AuthState.Failure -> {
                 loading_bar.visibility = View.INVISIBLE
-                messageManager.toast(context!! , state.err.toString())
+                messageManager.toast(requireContext() , state.err.toString())
             }
         }
     }
 
 
     override fun inject() {
-        (activity!!.application as BaseApplication).mainComponent(activity!!)
+        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
             .inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        activity!!.bottom_navbar.visibility = View.VISIBLE
+        requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.login_fragment_layout, container, false)
     }
 
@@ -82,13 +82,13 @@ class LoginFragment : BaseFragment(), ILoadFragment {
         super.onStart()
         new_acc_link.setOnClickListener{
 
-            val pref = PreferenceManager.getDefaultSharedPreferences(context!!)
+            val pref = PreferenceManager.getDefaultSharedPreferences(requireContext())
             val user = pref.getString("userData" , null)
 
             if(user == null)
                 loadFragment(phoneNumberFragment)
             else
-                messageManager.toast(context!! , "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
+                messageManager.toast(requireContext() , "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
         }
 
         verify_continue_btn.setOnClickListener {
@@ -113,7 +113,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
 
 
     override fun loadFragment(fragment: Fragment?) {
-        activity!!.supportFragmentManager.beginTransaction()
+        requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment!!, fragment.toString())
                 .addToBackStack(fragment.tag)
                 .commit()

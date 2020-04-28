@@ -15,12 +15,12 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 class CartFragment : BaseFragment() {
 
     override fun inject() {
-        (activity!!.application as BaseApplication).mainComponent().inject(this)
+        (requireActivity().application as BaseApplication).mainComponent().inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        activity!!.bottom_navbar.visibility = View.VISIBLE
+        requireActivity().bottom_navbar.visibility = View.VISIBLE
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.cart_fragment_layout, container, false)
     }

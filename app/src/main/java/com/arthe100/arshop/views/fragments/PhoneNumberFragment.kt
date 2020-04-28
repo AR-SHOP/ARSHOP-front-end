@@ -27,11 +27,11 @@ class PhoneNumberFragment : BaseFragment(), ILoadFragment {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        model = ViewModelProvider(activity!! , viewModelProviderFactory).get(AuthViewModel::class.java)
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
     }
 
     override fun inject() {
-        (activity!!.application as BaseApplication).mainComponent(activity!!)
+        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
             .inject(this)
     }
 
@@ -41,7 +41,7 @@ class PhoneNumberFragment : BaseFragment(), ILoadFragment {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        activity!!.bottom_navbar.visibility = View.INVISIBLE
+        requireActivity().bottom_navbar.visibility = View.INVISIBLE
         return inflater.inflate(R.layout.phone_number_fragment_layout, container, false)
     }
 
@@ -56,7 +56,7 @@ class PhoneNumberFragment : BaseFragment(), ILoadFragment {
     }
 
     override fun loadFragment(fragment: Fragment?) {
-        activity!!.supportFragmentManager.beginTransaction()
+        requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment!!, fragment.toString())
             .addToBackStack(fragment.tag)
             .commit()

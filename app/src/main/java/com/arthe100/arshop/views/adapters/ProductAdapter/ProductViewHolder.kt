@@ -9,12 +9,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.product_card_view.view.*
 
-internal class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+internal class ProductViewHolder(itemView: View)
+    : RecyclerView.ViewHolder(itemView) {
     private var dataTitle: TextView? = itemView.product_title
     private var dataImageUrl = itemView.product_image
     private var dataPrice: TextView? = itemView.product_price
 
-    fun bind(data: Product) {
+    fun bind(data: Product, listener: OnItemClickListener) {
 
         dataTitle?.text = data.description
         dataPrice?.text = data.price.toString()
@@ -29,8 +30,14 @@ internal class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
             .load(data.thumbnail)
             .into(dataImageUrl)
 
-
-
+        itemView.setOnClickListener{
+            var position: Int = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
     }
+
+
 
 }

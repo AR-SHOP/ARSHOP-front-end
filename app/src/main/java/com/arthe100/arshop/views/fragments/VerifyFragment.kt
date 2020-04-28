@@ -33,7 +33,7 @@ class VerifyFragment : BaseFragment(), ILoadFragment {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        model = ViewModelProvider(activity!! , viewModelProviderFactory).get(AuthViewModel::class.java)
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         model.currentViewState.observe(this , Observer(::render))
 
     }
@@ -42,7 +42,7 @@ class VerifyFragment : BaseFragment(), ILoadFragment {
         when(state){
             is AuthState.Failure -> {
                 loading_bar.visibility = View.INVISIBLE
-                messageManager.toast(activity!! , state.err.toString())
+                messageManager.toast(requireActivity() , state.err.toString())
             }
             is AuthState.CodeSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
@@ -55,7 +55,7 @@ class VerifyFragment : BaseFragment(), ILoadFragment {
     }
 
     override fun inject() {
-        (activity!!.application as BaseApplication).mainComponent(activity!!)
+        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
             .inject(this)
     }
 
@@ -63,7 +63,7 @@ class VerifyFragment : BaseFragment(), ILoadFragment {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        activity!!.bottom_navbar.visibility = View.INVISIBLE
+        requireActivity().bottom_navbar.visibility = View.INVISIBLE
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.verify_fragment_layout, container, false)
     }
@@ -77,7 +77,7 @@ class VerifyFragment : BaseFragment(), ILoadFragment {
     }
 
     override fun loadFragment(fragment: Fragment?) {
-        activity!!.supportFragmentManager.beginTransaction()
+        requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment!!, fragment.toString())
             .addToBackStack(fragment.tag)
             .commit()
