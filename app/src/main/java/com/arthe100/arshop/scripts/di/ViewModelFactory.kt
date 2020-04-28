@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.scripts.di.scopes.AppScope
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
+import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -31,6 +32,11 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(AuthViewModel::class)
-    internal abstract fun postListViewModel(viewModel: AuthViewModel): ViewModel
+    internal abstract fun authViewModel(viewModel: AuthViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProductViewModel::class)
+    internal abstract fun productViewModel(viewModel: ProductViewModel): ViewModel
 
 }

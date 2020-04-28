@@ -2,10 +2,13 @@ package com.arthe100.arshop.scripts.di
 
 import android.app.Application
 import android.content.Context
+import androidx.preference.PreferenceManager
+import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.components.AppComponent
 import com.arthe100.arshop.scripts.di.components.ArComponent
 import com.arthe100.arshop.scripts.di.components.DaggerAppComponent
 import com.arthe100.arshop.scripts.di.components.MainComponent
+import com.google.gson.Gson
 import java.lang.NullPointerException
 
 class BaseApplication : Application(){
@@ -30,6 +33,8 @@ class BaseApplication : Application(){
             mainComponent = appComponent
                     .mainComponent()
                     .create(context)
+
+
 
         return mainComponent!!
     }

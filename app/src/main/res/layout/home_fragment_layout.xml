@@ -54,5 +54,7 @@
 <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
 
-
+    <include layout="@layout/loading_fragment"
+             android:id="@+id/loading_bar"
+             android:visibility="invisible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

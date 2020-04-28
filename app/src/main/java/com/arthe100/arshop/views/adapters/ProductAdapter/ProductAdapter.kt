@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
-import com.arthe100.arshop.views.data.Product
+import com.arthe100.arshop.models.Product
 
 class ProductAdapter()
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

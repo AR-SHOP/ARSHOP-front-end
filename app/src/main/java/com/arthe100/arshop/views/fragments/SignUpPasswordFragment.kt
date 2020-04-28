@@ -9,14 +9,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
-
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
-import com.arthe100.arshop.scripts.mvi.Auth.AuthInternalAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
+import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.BaseFragment
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main_layout.*
@@ -26,6 +25,7 @@ import javax.inject.Inject
 class SignUpPasswordFragment : BaseFragment() {
 
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
+    @Inject lateinit var session: UserSession
     @Inject lateinit var messageManager: MessageManager
 
     private lateinit var model: AuthViewModel
@@ -52,11 +52,7 @@ class SignUpPasswordFragment : BaseFragment() {
             is AuthState.LoginSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
 
-                val pref = PreferenceManager.getDefaultSharedPreferences(context!!)
-                with(pref.edit()){
-                    putString("userData" , Gson().toJson(state.user))
-                    commit()
-                }
+                session.saveUser(state.user)
 
                 messageManager.toast(activity!! , "Welcome!")
             }

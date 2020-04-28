@@ -27,7 +27,7 @@ class UserRepository @Inject constructor(private val service: UserService) {
 
             val user = AuthUser(password , phone)
             val token = service.login(user)
-            val currentUser = User(
+            val currentUser = User.User(
                 username = token.username,
                 password = password,
                 email = "",

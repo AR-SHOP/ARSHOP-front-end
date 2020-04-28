@@ -29,7 +29,6 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
             _phone = value
         }
 
-    private lateinit var user: User
 
     fun onEvent(action: Action){
 

@@ -1,6 +1,9 @@
 package com.arthe100.arshop.scripts.di.modules
 
+import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.scopes.AppScope
+import com.arthe100.arshop.scripts.mvi.Auth.UserSession
+import com.arthe100.arshop.scripts.network.services.ProductService
 import com.arthe100.arshop.scripts.network.services.UserService
 import com.google.gson.Gson
 import com.squareup.moshi.Moshi
@@ -32,10 +35,28 @@ object RetrofitModule {
     @JvmStatic
     @AppScope
     @Provides
-    fun provideOkHttpClient(interceptor : Interceptor) : OkHttpClient{
-        return OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .build()
+    fun provideOkHttpClient(interceptor : Interceptor , session: UserSession) : OkHttpClient{
+
+        val user = session.user
+
+        return when(user)
+        {
+            is User.User -> {
+                 OkHttpClient.Builder()
+                    .addInterceptor {
+                        val req = it.request().newBuilder()
+                            .addHeader("Authorization" , "Bearer " + user.token.token)
+                            .build()
+                        it.proceed(req)
+                    }
+                    .addInterceptor(interceptor)
+                    .build()
+            }
+            else -> OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .build()
+        }
+
     }
 
     @JvmStatic
@@ -51,5 +72,12 @@ object RetrofitModule {
     @Provides
     fun provideUserService(retrofit: Retrofit) : UserService{
         return retrofit.create(UserService::class.java)
+    }
+
+    @JvmStatic
+    @AppScope
+    @Provides
+    fun provideProductService(retrofit: Retrofit) : ProductService{
+        return retrofit.create(ProductService::class.java)
     }
 }

@@ -8,6 +8,6 @@ sealed class AuthState{
     object LoadingState : AuthState()
     object CodeSuccess : AuthState()
     object SingupSuccess : AuthState()
-    data class LoginSuccess(val user: User): AuthState()
+    data class LoginSuccess(val user: User.User): AuthState()
     data class Failure(val err : Throwable) : AuthState()
 }
