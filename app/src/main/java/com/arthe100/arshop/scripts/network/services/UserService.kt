@@ -7,7 +7,7 @@ import retrofit2.http.*
 interface UserService  {
 
     @GET("profile/")
-    suspend fun getInfo()
+    suspend fun getInfo() : Call<User.User>
 
     @POST("signup/")
     suspend fun signup(@Body user: AuthUser)
