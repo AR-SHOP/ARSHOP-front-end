@@ -16,7 +16,7 @@ class UserRepository @Inject constructor(private val service: UserService) {
     suspend fun getInfo(): ProfileState {
         return try {
             val userInfo = service.getInfo()
-            ProfileState.GetProfileSuccess(userInfo)
+            ProfileState.GetProfileSuccess()
 
         }catch (t: Throwable) {
             ProfileState.GetProfileFailure(t)
