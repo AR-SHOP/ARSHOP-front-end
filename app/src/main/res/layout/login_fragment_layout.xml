@@ -42,7 +42,7 @@
 
     <EditText
             android:id="@+id/username"
-            android:layout_width="330dp"
+            android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_centerInParent="true"
             android:layout_marginStart="32dp"
@@ -65,7 +65,7 @@
 
     <EditText
             android:id="@+id/login_password"
-            android:layout_width="330dp"
+            android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_below="@id/username"
             android:layout_marginTop="8dp"
@@ -87,7 +87,7 @@
 
     <TextView
             android:id="@+id/forget_pass_link"
-            android:layout_width="313dp"
+            android:layout_width="0dp"
             android:layout_height="24dp"
             android:layout_below="@id/login_password"
             android:layout_margin="8dp"
@@ -105,12 +105,14 @@
 
     <Button
             android:id="@+id/verify_continue_btn"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_below="@id/forget_pass_link"
             android:layout_marginTop="32dp"
             android:background="@drawable/button_rounded"
             android:text="@string/login_btn_text"
+            android:layout_marginRight="32dp"
+            android:layout_marginLeft="32dp"
             android:textColor="@color/colorBackgroud"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -121,7 +123,7 @@
 
     <TextView
             android:id="@+id/new_acc_link"
-            android:layout_width="264dp"
+            android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_below="@id/verify_continue_btn"
             android:layout_margin="10dp"
@@ -137,7 +139,7 @@
 
     <TextView
             android:id="@+id/privacy_terms"
-            android:layout_width="264dp"
+            android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_below="@id/verify_continue_btn"
             android:layout_margin="10dp"

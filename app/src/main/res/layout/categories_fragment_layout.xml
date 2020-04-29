@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.SearchView
             android:id="@+id/category_search_view"
-            android:layout_width="360dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
@@ -28,10 +28,11 @@
 
     <TextView
             android:id="@+id/category_text"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_centerVertical="true"
             android:text="@string/categories"
+            android:layout_margin="32dp"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="40sp"

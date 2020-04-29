@@ -26,7 +26,6 @@ class UserSession{
         }
 
         this.user =user
-        this.user = user
     }
 
 }

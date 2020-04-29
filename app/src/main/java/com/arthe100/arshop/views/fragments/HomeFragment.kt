@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
@@ -31,6 +32,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     @Inject lateinit var customArFragment: CustomArFragment
     @Inject lateinit var session: UserSession
     @Inject lateinit var messageManager: MessageManager
+    @Inject lateinit var productFragment: ProductFragment
 
     private lateinit var productAdapter: ProductAdapter
     private lateinit var model: ProductViewModel
@@ -91,7 +93,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
         super.onStart()
     }
 
-    private fun addProducts(products: List<com.arthe100.arshop.models.Product>) {
+    private fun addProducts(products: List<Product>) {
         productAdapter.submitList(products)
     }
 
@@ -99,8 +101,10 @@ class HomeFragment: BaseFragment(), ILoadFragment {
         productAdapter = ProductAdapter()
         productAdapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
-                customArFragment.setUri(productAdapter.dataList[position].arModel)
-                loadFragment(customArFragment)
+                productFragment.setProduct(productAdapter.dataList[position])
+                loadFragment(productFragment)
+//                customArFragment.setUri(productAdapter.dataList[position].arModel)
+//                loadFragment(customArFragment)
             }
         })
         recycler_view.apply {
