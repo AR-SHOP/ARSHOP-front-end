@@ -19,7 +19,6 @@ class ProductViewModel @Inject constructor(private val productRepo: ProductRepos
         _currentViewState.value = ProductState.Idle
     }
 
-
     fun onEvent(state: ProductUiAction){
         when(state)
         {

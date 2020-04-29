@@ -13,10 +13,6 @@ sealed class User{
     object GuestUser : com.arthe100.arshop.models.User()
 }
 
-
-
-
-
 data class UserToken(
     val username: String,
     val token: String
