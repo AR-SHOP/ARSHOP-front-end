@@ -29,6 +29,4 @@ class ProductViewModel @Inject constructor(private val productRepo: ProductRepos
             }
         }
     }
-
-
 }
