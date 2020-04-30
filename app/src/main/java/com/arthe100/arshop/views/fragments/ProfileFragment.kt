@@ -1,19 +1,16 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
-import android.se.omapi.Session
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
-import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
-import com.arthe100.arshop.scripts.mvi.Profile.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.views.BaseFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
@@ -60,7 +57,6 @@ class ProfileFragment : BaseFragment() {
                 messageManager.toast(requireContext() ,
                     "" + state.userInfo.username +
                             " " + state.userInfo.password +
-                            " " + state.userInfo.email +
                             " " + state.userInfo.phone
                 )
                 loading_bar.visibility = View.INVISIBLE
@@ -74,18 +70,6 @@ class ProfileFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-
-
-            when (session.user){
-
-                is User.User -> {
-                    model.onEvent(ProfileUiAction.GetHomePageProfileAction)
-                }
-
-                is User.GuestUser -> {
-                    messageManager.toast(requireContext(), "Log in first!!!")
-                }
-            }
     }
 
     override fun toString(): String {

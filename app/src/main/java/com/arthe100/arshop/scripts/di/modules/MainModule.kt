@@ -48,5 +48,11 @@ object MainModule{
         return ProductFragment()
     }
 
+    @JvmStatic
+    @MainScope
+    @Provides
+    fun createProfileFragment() : ProfileFragment {
+        return ProfileFragment()
+    }
 
 }

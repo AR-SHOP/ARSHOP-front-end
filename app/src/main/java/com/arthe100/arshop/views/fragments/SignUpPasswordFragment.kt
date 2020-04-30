@@ -6,6 +6,7 @@ import android.text.method.SingleLineTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
@@ -16,16 +17,18 @@ import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.views.ILoadFragment
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.sign_up_password_fragment.*
 import javax.inject.Inject
 
-class SignUpPasswordFragment : BaseFragment() {
+class SignUpPasswordFragment : BaseFragment(), ILoadFragment{
 
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
     @Inject lateinit var messageManager: MessageManager
+    @Inject lateinit var profileFragment: ProfileFragment
 
     private lateinit var model: AuthViewModel
 
@@ -53,7 +56,7 @@ class SignUpPasswordFragment : BaseFragment() {
 
                 session.saveUser(state.user)
 
-                messageManager.toast(requireActivity() , "Welcome!")
+                loadFragment(profileFragment)
             }
             is AuthState.LoadingState -> {
                 loading_bar.visibility = View.VISIBLE
@@ -124,6 +127,13 @@ class SignUpPasswordFragment : BaseFragment() {
                 signup_visibility_icon.setColorFilter(resources.getColor(R.color.colorPrimary, null))
             }
         }
+    }
+
+    override fun loadFragment(fragment: Fragment?) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment!!, fragment.toString())
+            .addToBackStack(fragment.tag)
+            .commit()
     }
 
     override fun toString(): String {

@@ -7,8 +7,10 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.fragments.*
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main_layout.*
@@ -24,6 +26,8 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var customArFragment: CustomArFragment
+    @Inject lateinit var session: UserSession
+    @Inject lateinit var profileFragment: ProfileFragment
 
     private var selectedFragment: Fragment? = HomeFragment()
     private var selectedItemIdStack: Stack<Int> = Stack()
@@ -73,8 +77,20 @@ class MainActivity : BaseActivity(), ILoadFragment {
                     if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                 }
                 R.id.btm_navbar_profile -> {
-                    selectedFragment = LoginFragment()
-                    if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
+                    val userSess = session.user
+
+                    when (userSess){
+                        is User.User ->{
+                            selectedFragment = profileFragment
+                            if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
+                        }
+
+                        is User.GuestUser ->{
+                            selectedFragment = LoginFragment()
+                            if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
+                        }
+                    }
+
                 }
             }
             loadFragment(selectedFragment)
