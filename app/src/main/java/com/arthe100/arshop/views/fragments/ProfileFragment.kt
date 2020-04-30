@@ -27,6 +27,8 @@ class ProfileFragment : BaseFragment() {
 
 
     override fun onStart() {
+        //do what you want with 'name', 'email', 'phone_number' text views here
+
         super.onStart()
     }
 
