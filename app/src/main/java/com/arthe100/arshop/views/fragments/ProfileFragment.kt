@@ -58,7 +58,12 @@ class ProfileFragment : BaseFragment() {
             }
 
             is ProfileState.GetProfileSuccess -> {
-                messageManager.toast(requireActivity() ,"success")
+                messageManager.toast(requireActivity() ,
+                    "" + state.userInfo.username +
+                            " " + state.userInfo.password +
+                            " " + state.userInfo.email +
+                            " " + state.userInfo.phone
+                )
                 loading_bar.visibility = View.INVISIBLE
             }
 

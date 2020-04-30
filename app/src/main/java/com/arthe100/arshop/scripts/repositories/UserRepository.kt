@@ -20,7 +20,7 @@ class UserRepository @Inject constructor(private val service: UserService) {
                     ProfileState.GetProfileSuccess(userInfo)
                 }
                 else -> {
-                    throw Exception("hay there!!!")
+                    throw Exception("Not User.User!!! WTF?")
                 }
             }
 
