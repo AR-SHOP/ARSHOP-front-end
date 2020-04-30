@@ -45,13 +45,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
-
         setBottomNavigationView(savedInstanceState)
-    }
-
-    override fun onResume() {
-        bottom_navbar.visibility = View.VISIBLE
-        super.onResume()
     }
 
     private fun setBottomNavigationView(savedInstanceState: Bundle?) {
