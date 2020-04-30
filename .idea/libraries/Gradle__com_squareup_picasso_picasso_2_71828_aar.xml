@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.squareup.picasso:picasso:2.71828@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/68b0a4a1489392c8756f3784926d0352/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/68b0a4a1489392c8756f3784926d0352/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7375cdcb2f49007ee85a2a2f17f87e69/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7375cdcb2f49007ee85a2a2f17f87e69/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

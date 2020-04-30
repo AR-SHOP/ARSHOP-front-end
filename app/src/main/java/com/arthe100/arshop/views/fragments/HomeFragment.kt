@@ -85,7 +85,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
                 messageManager.toast(requireContext() , "not logged in!")
             }
             is User.User ->{
-                messageManager.toast(requireContext(), session.user.toString())
+//                messageManager.toast(requireContext(), session.user.toString())
                 model.onEvent(ProductUiAction.GetHomePageProducts)
             }
         }

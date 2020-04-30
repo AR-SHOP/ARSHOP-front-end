@@ -1,6 +1,6 @@
 package com.arthe100.arshop.models
 
-import com.arthe100.arshop.models.User
+import com.google.gson.annotations.SerializedName
 
 sealed class User{
     data class User(
@@ -22,3 +22,12 @@ data class AuthUser(
     val password: String,
     val phone: String
 )
+
+data class UserProfile(
+    @SerializedName("first_name") val fName : String,
+    @SerializedName("last_name") val lName : String,
+    @SerializedName("phone_number") val phone : String,
+    val email : String,
+    @SerializedName("social_security_number") val ssId : String
+)
+

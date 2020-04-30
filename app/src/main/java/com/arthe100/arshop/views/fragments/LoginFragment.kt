@@ -32,6 +32,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     @Inject lateinit var phoneNumberFragment: PhoneNumberFragment
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var session: UserSession
+    @Inject lateinit var profileFragment: ProfileFragment
 
     private val TAG = LoginFragment::class.simpleName
 
@@ -55,7 +56,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             is AuthState.LoginSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
                 session.saveUser(state.user)
-                messageManager.toast(requireContext() , "Welcome ${state.user.username}")
+                loadFragment(profileFragment)
             }
             is AuthState.Failure -> {
                 loading_bar.visibility = View.INVISIBLE

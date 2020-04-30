@@ -14,15 +14,7 @@ class UserRepository @Inject constructor(private val service: UserService) {
 
     suspend fun getInfo(): ProfileState {
         return try {
-
-            when (val userInfo = service.getInfo()) {
-                is User.User -> {
-                    ProfileState.GetProfileSuccess(userInfo)
-                }
-                else -> {
-                    throw Exception("Not User.User!!! WTF?")
-                }
-            }
+            ProfileState.GetProfileSuccess(service.getInfo())
 
         }catch (t: Throwable) {
             ProfileState.GetProfileFailure(t)

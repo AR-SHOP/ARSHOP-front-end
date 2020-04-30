@@ -16,42 +16,42 @@ object MainModule{
     @JvmStatic
     @MainScope
     @Provides
-    fun createArFragment() : CustomArFragment {
+    fun provideArFragment() : CustomArFragment {
         return CustomArFragment()
     }
 
     @JvmStatic
     @MainScope
     @Provides
-    fun createPhoneNumberFragment() : PhoneNumberFragment {
+    fun providePhoneNumberFragment() : PhoneNumberFragment {
         return PhoneNumberFragment()
     }
 
     @JvmStatic
     @MainScope
     @Provides
-    fun createVerifyFragment() : VerifyFragment {
+    fun provideVerifyFragment() : VerifyFragment {
         return VerifyFragment()
     }
 
     @JvmStatic
     @MainScope
     @Provides
-    fun createSignUpPasswordFragment() : SignUpPasswordFragment {
+    fun provideSignUpPasswordFragment() : SignUpPasswordFragment {
         return SignUpPasswordFragment()
     }
 
     @JvmStatic
     @MainScope
     @Provides
-    fun createProductFragment() : ProductFragment {
+    fun provideProductFragment() : ProductFragment {
         return ProductFragment()
     }
 
     @JvmStatic
     @MainScope
     @Provides
-    fun createProfileFragment() : ProfileFragment {
+    fun provideProfileFragment() : ProfileFragment {
         return ProfileFragment()
     }
 

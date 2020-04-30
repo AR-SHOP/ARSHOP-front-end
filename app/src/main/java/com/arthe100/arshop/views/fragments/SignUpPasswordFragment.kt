@@ -55,7 +55,7 @@ class SignUpPasswordFragment : BaseFragment(), ILoadFragment{
                 loading_bar.visibility = View.INVISIBLE
 
                 session.saveUser(state.user)
-
+                messageManager.toast(requireContext() , "user logged in!")
                 loadFragment(profileFragment)
             }
             is AuthState.LoadingState -> {
