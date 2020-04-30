@@ -4,10 +4,9 @@ import com.arthe100.arshop.models.*
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.network.services.UserService
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
-import retrofit2.Response
 import javax.inject.Inject
+import kotlin.Exception
 
 class UserRepository @Inject constructor(private val service: UserService) {
 
@@ -15,8 +14,15 @@ class UserRepository @Inject constructor(private val service: UserService) {
 
     suspend fun getInfo(): ProfileState {
         return try {
-            val userInfo = service.getInfo()
-            ProfileState.GetProfileSuccess()
+
+            when (val userInfo = service.getInfo()) {
+                is User.User -> {
+                    ProfileState.GetProfileSuccess(userInfo)
+                }
+                else -> {
+                    throw Exception("hay there!!!")
+                }
+            }
 
         }catch (t: Throwable) {
             ProfileState.GetProfileFailure(t)

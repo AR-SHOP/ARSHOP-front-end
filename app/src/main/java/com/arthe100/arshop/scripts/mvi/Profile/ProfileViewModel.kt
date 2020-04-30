@@ -29,6 +29,4 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
             }
         }
     }
-
-
 }
