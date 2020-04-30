@@ -39,6 +39,7 @@ class ProfileFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
+        model.onEvent(ProfileUiAction.GetHomePageProfileAction)
         model.currentViewState.observe(this , Observer(::render))
     }
 
@@ -57,7 +58,12 @@ class ProfileFragment : BaseFragment() {
             }
 
             is ProfileState.GetProfileSuccess -> {
-                model.onEvent(ProfileUiAction.GetHomePageProfileAction)
+                messageManager.toast(requireActivity() ,"success")
+                loading_bar.visibility = View.INVISIBLE
+            }
+
+            is ProfileState.LoadingState -> {
+                loading_bar.visibility = View.VISIBLE
             }
         }
     }
