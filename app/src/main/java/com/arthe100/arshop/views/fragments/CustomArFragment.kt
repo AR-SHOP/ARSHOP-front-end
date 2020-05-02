@@ -1,5 +1,6 @@
 package com.arthe100.arshop.views.fragments
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -7,11 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.activity.OnBackPressedDispatcher
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.ar.InfoManager.IInfoManager
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.scripts.mvi.ar.ArState
+import com.arthe100.arshop.scripts.mvi.ar.ArViewModel
 import com.arthe100.arshop.views.CustomBaseArFragment
 import com.google.ar.core.Anchor
 import com.google.ar.core.Config
@@ -27,8 +32,6 @@ import com.google.ar.sceneform.rendering.PlaneRenderer
 import com.google.ar.sceneform.ux.TransformableNode
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.ar_fragment_layout.*
-import kotlinx.android.synthetic.main.ar_fragment_layout.view.*
-import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
 
 
@@ -51,18 +54,16 @@ class CustomArFragment : CustomBaseArFragment() {
     }
 
     private val TAG = CustomArFragment::class.simpleName
-    private val models : MutableMap<String , ModelRenderable> = mutableMapOf()
-    private var currentUri : String = ""
+    private lateinit var model: ArViewModel
+    private lateinit var currentUri: String
 
+    @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var arInfoCardManager : IInfoManager
     @Inject lateinit var messageManager : MessageManager
 
 
-//    init {
-//        setUri(tableUrl)
-//    }
-
     private fun init() {
+
 
         val sceneView = this.arSceneView
 //        sceneView.planeRenderer.material.thenAccept{
@@ -71,15 +72,17 @@ class CustomArFragment : CustomBaseArFragment() {
 //
 //        }
 
+
+
         sceneView.scene.addOnUpdateListener{
             this.onUpdate(it)
+
             val plane = sceneView.planeRenderer
 
             plane.material.thenAccept{mat ->
                 mat.setFloat(PlaneRenderer.MATERIAL_SPOTLIGHT_RADIUS , 4f)
                 mat.setFloat3(PlaneRenderer.MATERIAL_COLOR , Color(0f, 255f, 165f))
             }
-
         }
 
         this.setOnTapArPlaneListener { hitResult, plane, _ ->
@@ -96,6 +99,11 @@ class CustomArFragment : CustomBaseArFragment() {
         return conf
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ArViewModel::class.java)
+        model.currentViewState.observe(requireActivity(), Observer(::render))
+    }
 
     private fun showInfo(parent : Node , root : Node){
         arInfoCardManager.addInfo(parent) {
@@ -107,14 +115,21 @@ class CustomArFragment : CustomBaseArFragment() {
 
 
     fun setUri(uri: String) {
-        this.currentUri = uri
+        currentUri = uri
     }
 
     private fun setModel(uri: String , anchor: Anchor){
 
-        if(models.containsKey(uri))
+        if(model.currentViewState.value != ArState.IdleState){
+            messageManager.toast(requireContext() , "A process already running!")
+            return
+        }
+
+        model.currentViewState.value = ArState.LoadingState
+
+        if(model.contains(uri))
         {
-            placeModel(models[uri]!! , anchor)
+            model.currentViewState.value = ArState.ModelSuccess(uri , model.getModel(uri)!! , anchor)
             return
         }
 
@@ -129,14 +144,33 @@ class CustomArFragment : CustomBaseArFragment() {
                 .setRegistryId(uri)
                 .build()
                 .thenAccept{
-
-                    models[uri] = it
-                    placeModel(it , anchor)
+                    model.currentViewState.value = ArState.ModelSuccess(uri , it , anchor)
                 }
                 .exceptionally {
-                    messageManager.toast(requireContext(), "Unable to load renderable $uri")
+                    model.currentViewState.value = ArState.ModelFailure(it)
                     return@exceptionally null
                 }
+    }
+
+    private fun render(state: ArState){
+        when(state)
+        {
+            is ArState.IdleState -> {
+                view?.findViewById<ConstraintLayout>(R.id.loading_bar)?.visibility = View.INVISIBLE
+            }
+            is ArState.ModelSuccess ->{
+                model.currentViewState.value = ArState.IdleState
+                model.addModel(state.uri , state.model)
+                placeModel(state.model , state.anchor)
+            }
+            is ArState.LoadingState -> {
+                view?.findViewById<ConstraintLayout>(R.id.loading_bar)?.visibility = View.VISIBLE
+            }
+            is ArState.ModelFailure -> {
+                model.currentViewState.value = ArState.IdleState
+                messageManager.toast(requireContext() , state.err.toString())
+            }
+        }
     }
 
     private fun placeModel(model : ModelRenderable, anchor: Anchor){
@@ -156,13 +190,13 @@ class CustomArFragment : CustomBaseArFragment() {
         val view = inflater.inflate(R.layout.ar_fragment_layout , container , false)
         val arFrame = view.findViewById<FrameLayout>(R.id.ar_container)
 
-
         val v = super.onCreateView(inflater, arFrame, savedInstanceState)
-        Log.d("abcd" , "$v")
-
-
+        val loadingBar = inflater.inflate(R.layout.loading_fragment , container , false)
+        loadingBar.visibility = View.INVISIBLE
+        loadingBar.id = R.id.loading_bar
 
         (view as ViewGroup).addView(v)
+        view.addView(loadingBar)
         return view
     }
 
@@ -172,10 +206,6 @@ class CustomArFragment : CustomBaseArFragment() {
         super.onDetach()
     }
 
-
-    override fun toString(): String {
-        return "AR"
-    }
 }
 
 

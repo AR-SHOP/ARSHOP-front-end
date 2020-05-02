@@ -43,9 +43,7 @@ class BasicArInfoCardManager (private val context: Context) : IInfoManager {
     }
 
     private fun onUpdate(){
-        
-        Log.d(TAG , "ABCD on Update")
-        
+
         if(current == null)
             return
         scene.let {
