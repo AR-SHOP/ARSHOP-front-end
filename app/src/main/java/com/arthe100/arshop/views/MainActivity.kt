@@ -108,14 +108,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
         return supportFragmentManager.findFragmentByTag(fragmentTag)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu_layout, menu)
-        val item: MenuItem = menu.findItem(R.id.action_search)
-        searchView.setMenuItem(item)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-
     override fun loadFragment(fragment: Fragment?) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment!!, fragment.toString())
