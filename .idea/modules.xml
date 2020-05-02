@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< Updated upstream
-=======
       <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-arshop.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-arshop.iml" />
->>>>>>> Stashed changes
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="arshop/app" />
       <module fileurl="file://$PROJECT_DIR$/arshop.iml" filepath="$PROJECT_DIR$/arshop.iml" group="arshop" />
     </modules>
