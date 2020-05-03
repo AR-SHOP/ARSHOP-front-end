@@ -30,11 +30,38 @@ class SignUpPasswordFragment : BaseFragment() {
 
     private lateinit var model: AuthViewModel
 
+    override fun inject() {
+        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
+            .inject(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
-
         model.currentViewState.observe(this , Observer(::render))
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
+        requireActivity().bottom_navbar.visibility = View.INVISIBLE
+        return inflater.inflate(R.layout.sign_up_password_fragment, container, false)
+    }
+
+    override fun onStart() {
+        setPasswordEditText()
+        setRepeatPasswordEditText()
+
+        confirm_password_btn.setOnClickListener {
+            model.onEvent(AuthUiAction
+                .SignupAction(
+                    password = signup_password.text.toString(),
+                    phone = model.phone))
+        }
+        super.onStart()
+    }
+
+    override fun toString(): String {
+        return "SignUpPassword Fragment"
     }
 
     private fun render(state: AuthState){
@@ -61,37 +88,6 @@ class SignUpPasswordFragment : BaseFragment() {
             }
         }
     }
-
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-            .inject(this)
-    }
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        requireActivity().bottom_navbar.visibility = View.INVISIBLE
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.sign_up_password_fragment, container, false)
-    }
-
-
-    override fun onStart() {
-        setPasswordEditText()
-        setRepeatPasswordEditText()
-
-        confirm_password_btn.setOnClickListener {
-            model.onEvent(AuthUiAction
-                .SignupAction(
-                    password = signup_password.text.toString(),
-                    phone = model.phone))
-        }
-
-        super.onStart()
-    }
-
     private fun setRepeatPasswordEditText() {
         var passwordVisible = false
 
@@ -125,10 +121,6 @@ class SignUpPasswordFragment : BaseFragment() {
                 signup_visibility_icon.setColorFilter(resources.getColor(R.color.colorPrimary, null))
             }
         }
-    }
-
-    override fun toString(): String {
-        return "SignUpPassword"
     }
 
 }

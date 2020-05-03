@@ -24,18 +24,44 @@ import kotlinx.android.synthetic.main.verify_fragment_layout.loading_bar
 import javax.inject.Inject
 import kotlin.math.log
 
-class VerifyFragment : BaseFragment(), ILoadFragment {
+class VerifyFragment : BaseFragment(){
 
-    @Inject lateinit var signUpPasswordFragment: SignUpPasswordFragment
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var messageManager: MessageManager
+    lateinit var signUpPasswordFragment: SignUpPasswordFragment
+
     private lateinit var model: AuthViewModel
+
+    override fun inject() {
+        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
+            .inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        signUpPasswordFragment = FragmentFactory.create(FragmentType.SIGNUP_PASSWORD)
+                as SignUpPasswordFragment
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         model.currentViewState.observe(this , Observer(::render))
 
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
+        requireActivity().bottom_navbar.visibility = View.INVISIBLE
+        return inflater.inflate(R.layout.verify_fragment_layout, container, false)
+    }
+
+    override fun onStart() {
+
+        verify_continue_btn.setOnClickListener {
+            model.onEvent(AuthUiAction.CheckCodeAction(code_input.text.toString()))
+        }
+        super.onStart()
+    }
+
+    override fun toString(): String {
+        return "Verify Fragment"
     }
 
     private fun render(state: AuthState){
@@ -54,36 +80,4 @@ class VerifyFragment : BaseFragment(), ILoadFragment {
         }
     }
 
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-            .inject(this)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        requireActivity().bottom_navbar.visibility = View.INVISIBLE
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.verify_fragment_layout, container, false)
-    }
-
-    override fun onStart() {
-
-        verify_continue_btn.setOnClickListener {
-            model.onEvent(AuthUiAction.CheckCodeAction(code_input.text.toString()))
-        }
-        super.onStart()
-    }
-
-    override fun loadFragment(fragment: Fragment?) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment!!, fragment.toString())
-            .addToBackStack(fragment.tag)
-            .commit()
-    }
-
-    override fun toString(): String {
-        return "Verify"
-    }
 }
