@@ -21,6 +21,7 @@ import javax.inject.Inject
 class PhoneNumberFragment : BaseFragment(){
 
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
+    @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var verifyFragment: VerifyFragment
 
     private lateinit var model: AuthViewModel
@@ -32,7 +33,7 @@ class PhoneNumberFragment : BaseFragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        verifyFragment = FragmentFactory.create(FragmentType.VERIFY) as VerifyFragment
+        verifyFragment = fragmentFactory.create<VerifyFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
     }
 

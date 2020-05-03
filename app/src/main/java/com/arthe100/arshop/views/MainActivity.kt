@@ -25,6 +25,7 @@ class MainActivity : BaseActivity(){
 
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var customArFragment: CustomArFragment
+    @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var homeFragment: HomeFragment
     lateinit var categoriesFragment: CategoriesFragment
     lateinit var cartFragment: CartFragment
@@ -45,17 +46,20 @@ class MainActivity : BaseActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
-        setBottomNavigationView(savedInstanceState)
-        homeFragment = FragmentFactory.create(FragmentType.HOME) as HomeFragment
-        categoriesFragment = FragmentFactory.create(FragmentType.CATEGORIES) as CategoriesFragment
-        cartFragment = FragmentFactory.create(FragmentType.CART) as CartFragment
-        loginFragment = FragmentFactory.create(FragmentType.LOGIN) as LoginFragment
+
+        homeFragment = fragmentFactory.create<HomeFragment>()
+        categoriesFragment = fragmentFactory.create<CategoriesFragment>()
+        cartFragment = fragmentFactory.create<CartFragment>()
+        loginFragment = fragmentFactory.create<LoginFragment>()
         selectedFragment = homeFragment
+
+        setBottomNavigationView(savedInstanceState)
     }
 
     override fun onBackPressed() {
         var bottomNavbarFragments =
-            arrayListOf("Home", "Categories", "Cart", "Login", "Profile")
+            arrayListOf("Home Fragment", "Categories Fragment", "Cart Fragment",
+                "Login Fragment", "Profile Fragment")
         selectedFragment = getTheLastFragment()
         var fragmentTag = selectedFragment!!.tag
 

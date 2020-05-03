@@ -1,6 +1,7 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.text.method.PasswordTransformationMethod
 import android.text.method.SingleLineTransformationMethod
 import android.util.Log
@@ -32,6 +33,7 @@ class LoginFragment : BaseFragment(){
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var session: UserSession
+    @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var phoneNumberFragment: PhoneNumberFragment
 
     private val TAG = LoginFragment::class.simpleName
@@ -44,7 +46,7 @@ class LoginFragment : BaseFragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        phoneNumberFragment = FragmentFactory.create(FragmentType.PHONE_NUMBER) as PhoneNumberFragment
+        phoneNumberFragment = fragmentFactory.create<PhoneNumberFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         model.currentViewState.observe(this , Observer(::render))
     }

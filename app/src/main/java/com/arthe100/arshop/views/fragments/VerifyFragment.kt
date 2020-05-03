@@ -28,6 +28,7 @@ class VerifyFragment : BaseFragment(){
 
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var messageManager: MessageManager
+    @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var signUpPasswordFragment: SignUpPasswordFragment
 
     private lateinit var model: AuthViewModel
@@ -39,11 +40,9 @@ class VerifyFragment : BaseFragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        signUpPasswordFragment = FragmentFactory.create(FragmentType.SIGNUP_PASSWORD)
-                as SignUpPasswordFragment
+        signUpPasswordFragment = fragmentFactory.create<SignUpPasswordFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         model.currentViewState.observe(this , Observer(::render))
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

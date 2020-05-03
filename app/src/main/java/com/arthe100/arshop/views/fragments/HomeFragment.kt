@@ -32,6 +32,7 @@ class HomeFragment: BaseFragment(){
     @Inject lateinit var session: UserSession
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var customArFragment: CustomArFragment
+    @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var productFragment : ProductFragment
 
     private lateinit var productAdapter: ProductAdapter
@@ -45,7 +46,7 @@ class HomeFragment: BaseFragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        productFragment = FragmentFactory.create(FragmentType.PRODUCT) as ProductFragment
+        productFragment = fragmentFactory.create<ProductFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
         model.currentViewState.observe(this , Observer(::render))
     }

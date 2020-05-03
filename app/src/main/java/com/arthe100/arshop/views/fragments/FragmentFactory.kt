@@ -5,31 +5,30 @@ import com.arthe100.arshop.views.BaseFragment
 import javax.inject.Inject
 
 
-class FragmentFactory {
+class FragmentFactory
+    @Inject constructor(
+        val homeFragment: HomeFragment,
+        val categoriesFragment: CategoriesFragment,
+        val cartFragment: CartFragment,
+        val profileFragment: ProfileFragment,
+        val loginFragment: LoginFragment,
+        val phoneNumberFragment: PhoneNumberFragment,
+        val productFragment: ProductFragment,
+        val signUpPasswordFragment: SignUpPasswordFragment,
+        val verifyFragment: VerifyFragment) {
 
-    companion object {
-        @Inject lateinit var homeFragment: HomeFragment
-        @Inject lateinit var categoriesFragment: CategoriesFragment
-        @Inject lateinit var cartFragment: CartFragment
-        @Inject lateinit var profileFragment: ProfileFragment
-        @Inject lateinit var loginFragment: LoginFragment
-        @Inject lateinit var phoneNumberFragment: PhoneNumberFragment
-        @Inject lateinit var productFragment: ProductFragment
-        @Inject lateinit var signUpPasswordFragment: SignUpPasswordFragment
-        @Inject lateinit var verifyFragment: VerifyFragment
-
-        fun create(type: FragmentType) : BaseFragment {
-            return when (type) {
-                FragmentType.HOME -> { homeFragment }
-                FragmentType.CATEGORIES -> { categoriesFragment }
-                FragmentType.CART -> { cartFragment }
-                FragmentType.PROFILE -> { profileFragment }
-                FragmentType.LOGIN -> { loginFragment }
-                FragmentType.PHONE_NUMBER -> { phoneNumberFragment }
-                FragmentType.PRODUCT -> { productFragment }
-                FragmentType.SIGNUP_PASSWORD -> { signUpPasswordFragment }
-                FragmentType.VERIFY -> { verifyFragment }
-            }
+    inline fun <reified T> create() : T {
+        return when(T::class) {
+            HomeFragment::class -> homeFragment as T
+            CategoriesFragment::class ->  categoriesFragment as T
+            CartFragment::class ->  cartFragment as T
+            ProfileFragment::class ->  profileFragment as T
+            LoginFragment::class ->  loginFragment as T
+            PhoneNumberFragment::class -> phoneNumberFragment as T
+            ProductFragment::class -> productFragment as T
+            SignUpPasswordFragment::class -> signUpPasswordFragment as T
+            VerifyFragment::class -> verifyFragment as T
+            else -> throw Exception("the fragment of type: ${T::class} doesn't exists!" )
         }
     }
 }
