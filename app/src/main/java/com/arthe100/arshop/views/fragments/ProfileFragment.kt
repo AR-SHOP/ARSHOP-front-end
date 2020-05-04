@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 
 
 class ProfileFragment : BaseFragment() {
+
     private val TAG = ProfileFragment::class.simpleName
 
     override fun inject() {
@@ -20,19 +21,16 @@ class ProfileFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.profile_fragment_layout, container, false)
     }
 
-
     override fun onStart() {
         //do what you want with 'name', 'email', 'phone_number' text views here
-
         super.onStart()
     }
 
     override fun toString(): String {
-        return "Profile"
+        return "Profile Fragment"
     }
 }

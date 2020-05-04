@@ -18,53 +18,40 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.phone_number_fragment_layout.*
 import javax.inject.Inject
 
-class PhoneNumberFragment : BaseFragment(), ILoadFragment {
+class PhoneNumberFragment : BaseFragment(){
 
-    @Inject lateinit var verifyFragment: VerifyFragment
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
+    @Inject lateinit var fragmentFactory: FragmentFactory
+    lateinit var verifyFragment: VerifyFragment
 
     private lateinit var model: AuthViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
-    }
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent(requireActivity())
             .inject(this)
     }
 
-
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        verifyFragment = fragmentFactory.create<VerifyFragment>()
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
         return inflater.inflate(R.layout.phone_number_fragment_layout, container, false)
     }
 
     override fun onStart() {
         super.onStart()
-
         recieve_code_btn.setOnClickListener{
-            // TODO validation for phone number
             model.phone = code_input.text.toString()
             loadFragment(verifyFragment)
         }
     }
 
-    override fun loadFragment(fragment: Fragment?) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment!!, fragment.toString())
-            .addToBackStack(fragment.tag)
-            .commit()
-    }
-
     override fun toString(): String {
-        return "PhoneNumber"
+        return "PhoneNumber Fragment"
     }
-
-
 }

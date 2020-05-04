@@ -1,6 +1,7 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.text.method.PasswordTransformationMethod
 import android.text.method.SingleLineTransformationMethod
 import android.util.Log
@@ -26,49 +27,28 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.login_fragment_layout.*
 import javax.inject.Inject
 
-class LoginFragment : BaseFragment(), ILoadFragment {
+class LoginFragment : BaseFragment(){
 
 
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var phoneNumberFragment: PhoneNumberFragment
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var session: UserSession
+    @Inject lateinit var fragmentFactory: FragmentFactory
+    lateinit var phoneNumberFragment: PhoneNumberFragment
 
     private val TAG = LoginFragment::class.simpleName
-
     private lateinit var model: AuthViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
-
-        model.currentViewState.observe(this , Observer(::render))
-    }
-
-    private fun render(state: AuthState){
-        when(state){
-            is AuthState.Idle -> {
-                loading_bar.visibility = View.INVISIBLE
-            }
-            is AuthState.LoadingState -> {
-                loading_bar.visibility = View.VISIBLE
-            }
-            is AuthState.LoginSuccess -> {
-                loading_bar.visibility = View.INVISIBLE
-                session.saveUser(state.user)
-                messageManager.toast(requireContext() , "Welcome ${state.user.username}")
-            }
-            is AuthState.Failure -> {
-                loading_bar.visibility = View.INVISIBLE
-                messageManager.toast(requireContext() , state.err.toString())
-            }
-        }
-    }
-
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent(requireActivity())
             .inject(this)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        phoneNumberFragment = fragmentFactory.create<PhoneNumberFragment>()
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
+        model.currentViewState.observe(this , Observer(::render))
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -111,16 +91,28 @@ class LoginFragment : BaseFragment(), ILoadFragment {
         }
     }
 
-
-    override fun loadFragment(fragment: Fragment?) {
-        requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment!!, fragment.toString())
-                .addToBackStack(fragment.tag)
-                .commit()
+    override fun toString(): String {
+        return "Login Fragment"
     }
 
-    override fun toString(): String {
-        return "Login"
+    private fun render(state: AuthState){
+        when(state){
+            is AuthState.Idle -> {
+                loading_bar.visibility = View.INVISIBLE
+            }
+            is AuthState.LoadingState -> {
+                loading_bar.visibility = View.VISIBLE
+            }
+            is AuthState.LoginSuccess -> {
+                loading_bar.visibility = View.INVISIBLE
+                session.saveUser(state.user)
+                messageManager.toast(requireContext() , "Welcome ${state.user.username}")
+            }
+            is AuthState.Failure -> {
+                loading_bar.visibility = View.INVISIBLE
+                messageManager.toast(requireContext() , state.err.toString())
+            }
+        }
     }
 
 }

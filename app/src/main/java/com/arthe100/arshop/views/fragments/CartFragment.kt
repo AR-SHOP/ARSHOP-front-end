@@ -21,17 +21,10 @@ class CartFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.cart_fragment_layout, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
     override fun toString(): String {
-        return "Cart"
+        return "Cart Fragment"
     }
-
-
 }
