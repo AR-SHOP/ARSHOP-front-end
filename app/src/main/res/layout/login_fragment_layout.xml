@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackgroud"
+        android:background="@color/colorBackground"
         tools:context=".views.fragments.LoginFragment">
 
 
@@ -16,7 +16,7 @@
             android:layout_margin="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@color/colorBackgroud"
+            android:background="@color/colorBackground"
             android:src="@drawable/ic_action_setting"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +113,7 @@
             android:text="@string/login_btn_text"
             android:layout_marginRight="32dp"
             android:layout_marginLeft="32dp"
-            android:textColor="@color/colorBackgroud"
+            android:textColor="@color/colorBackground"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/forget_pass_link"

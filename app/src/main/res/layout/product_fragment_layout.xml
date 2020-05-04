@@ -112,7 +112,7 @@
             android:background="@drawable/button_rounded"
             android:text="@string/ar_view_btn"
             android:textSize="20dp"
-            android:textColor="@color/colorBackgroud"
+            android:textColor="@color/colorBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/description_text"
             app:layout_constraintHorizontal_bias="0.0"

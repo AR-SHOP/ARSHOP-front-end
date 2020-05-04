@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: io.github.reactivecircus.flowbinding:flowbinding-recyclerview:0.10.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fd1b00f3fde388772c4764164371370f/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fd1b00f3fde388772c4764164371370f/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bb5fac6223a0e755f5cee69493acbc7d/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bb5fac6223a0e755f5cee69493acbc7d/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
