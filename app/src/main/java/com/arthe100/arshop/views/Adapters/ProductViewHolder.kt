@@ -1,4 +1,4 @@
-package com.arthe100.arshop.views.adapters.ProductAdapter
+package com.arthe100.arshop.views.Adapters
 
 import android.view.View
 import android.widget.TextView

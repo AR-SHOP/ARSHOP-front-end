@@ -2,9 +2,12 @@ package com.arthe100.arshop.scripts.di.modules
 
 import android.content.Context
 import android.util.Log
+import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
+import androidx.viewpager.widget.ViewPager
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.scopes.MainScope
+import com.arthe100.arshop.views.Adapters.ViewPagerAdapter
 import com.arthe100.arshop.views.fragments.*
 import com.google.gson.Gson
 import dagger.Module
@@ -26,12 +29,15 @@ object MainModule{
         phoneNumberFragment: PhoneNumberFragment,
         productFragment: ProductFragment,
         signUpPasswordFragment: SignUpPasswordFragment,
-        verifyFragment: VerifyFragment) : FragmentFactory {
+        verifyFragment: VerifyFragment,
+        ordersFragment: OrdersFragment,
+        customerCartFragment: CustomerCartFragment) : FragmentFactory {
 
         return FragmentFactory(homeFragment, categoriesFragment, cartFragment, profileFragment,
                                 loginFragment, phoneNumberFragment, productFragment,
-                                signUpPasswordFragment, verifyFragment)
+                                signUpPasswordFragment, verifyFragment, ordersFragment, customerCartFragment)
     }
+
 
     @JvmStatic
     @MainScope
@@ -101,5 +107,19 @@ object MainModule{
     @Provides
     fun provideProductFragment() : ProductFragment {
         return ProductFragment()
+    }
+
+    @JvmStatic
+    @MainScope
+    @Provides
+    fun createOrdersFragment() : OrdersFragment {
+        return OrdersFragment()
+    }
+
+    @JvmStatic
+    @MainScope
+    @Provides
+    fun createCustomerCartFragment() : CustomerCartFragment {
+        return CustomerCartFragment()
     }
 }

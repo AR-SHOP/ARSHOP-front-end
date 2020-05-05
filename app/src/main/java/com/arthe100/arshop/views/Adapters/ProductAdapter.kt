@@ -1,4 +1,4 @@
-package com.arthe100.arshop.views.adapters.ProductAdapter
+package com.arthe100.arshop.views.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -18,7 +18,8 @@ class ProductAdapter()
 
         return ProductViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.product_card_view, parent, false))
+                .inflate(R.layout.product_card_view, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

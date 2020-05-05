@@ -1,11 +1,9 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,8 +18,8 @@ import com.arthe100.arshop.scripts.mvi.Products.ProductUiAction
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
-import com.arthe100.arshop.views.adapters.ProductAdapter.OnItemClickListener
-import com.arthe100.arshop.views.adapters.ProductAdapter.ProductAdapter
+import com.arthe100.arshop.views.Adapters.OnItemClickListener
+import com.arthe100.arshop.views.Adapters.ProductAdapter
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
@@ -99,7 +97,8 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
     private fun setRecyclerView() {
         productAdapter = ProductAdapter()
-        productAdapter.setOnItemClickListener(object : OnItemClickListener {
+        productAdapter.setOnItemClickListener(object :
+            OnItemClickListener {
             override fun onItemClick(position: Int) {
                 productFragment.setProduct(productAdapter.dataList[position])
                 loadFragment(productFragment)
