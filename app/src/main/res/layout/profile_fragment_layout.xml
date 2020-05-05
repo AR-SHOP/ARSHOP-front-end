@@ -8,6 +8,10 @@
     android:layout_below="@+id/search_bar">
 
 
+    <include android:id="@+id/loading_bar"
+             layout="@layout/loading_fragment"
+             android:visibility="invisible"/>
+
     <TextView
             android:id="@+id/name"
             android:layout_width="0dp"

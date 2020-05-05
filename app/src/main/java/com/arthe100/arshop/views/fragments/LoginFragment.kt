@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.method.PasswordTransformationMethod
 import android.text.method.SingleLineTransformationMethod
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +34,7 @@ class LoginFragment : BaseFragment(){
     @Inject lateinit var session: UserSession
     @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var phoneNumberFragment: PhoneNumberFragment
+    lateinit var profileFragment: ProfileFragment
 
     private val TAG = LoginFragment::class.simpleName
     private lateinit var model: AuthViewModel
@@ -47,6 +47,7 @@ class LoginFragment : BaseFragment(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         phoneNumberFragment = fragmentFactory.create<PhoneNumberFragment>()
+        profileFragment = fragmentFactory.create<ProfileFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         model.currentViewState.observe(this , Observer(::render))
     }

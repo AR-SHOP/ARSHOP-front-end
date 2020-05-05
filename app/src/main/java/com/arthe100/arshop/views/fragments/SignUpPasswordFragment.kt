@@ -6,9 +6,9 @@ import android.text.method.SingleLineTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.preference.PreferenceManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
@@ -17,16 +17,19 @@ import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.views.ILoadFragment
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.sign_up_password_fragment.*
 import javax.inject.Inject
 
-class SignUpPasswordFragment : BaseFragment() {
+class SignUpPasswordFragment : BaseFragment(), ILoadFragment{
 
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
     @Inject lateinit var messageManager: MessageManager
+    @Inject lateinit var fragmentFactory: FragmentFactory
+    lateinit var profileFragment: ProfileFragment
 
     private lateinit var model: AuthViewModel
 
@@ -37,6 +40,7 @@ class SignUpPasswordFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        profileFragment = fragmentFactory.create<ProfileFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         model.currentViewState.observe(this , Observer(::render))
     }
@@ -80,8 +84,8 @@ class SignUpPasswordFragment : BaseFragment() {
                 loading_bar.visibility = View.INVISIBLE
 
                 session.saveUser(state.user)
-
-                messageManager.toast(requireActivity() , "Welcome!")
+                messageManager.toast(requireContext() , "user logged in!")
+                loadFragment(profileFragment)
             }
             is AuthState.LoadingState -> {
                 loading_bar.visibility = View.VISIBLE
@@ -122,5 +126,4 @@ class SignUpPasswordFragment : BaseFragment() {
             }
         }
     }
-
 }

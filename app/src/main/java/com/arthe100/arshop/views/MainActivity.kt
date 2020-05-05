@@ -7,8 +7,10 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.fragments.*
 import com.google.android.material.badge.BadgeDrawable
 import com.miguelcatalan.materialsearchview.MaterialSearchView
@@ -26,10 +28,12 @@ class MainActivity : BaseActivity(){
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var customArFragment: CustomArFragment
     @Inject lateinit var fragmentFactory: FragmentFactory
+    @Inject lateinit var session: UserSession
     lateinit var homeFragment: HomeFragment
     lateinit var categoriesFragment: CategoriesFragment
     lateinit var cartFragment: CartFragment
     lateinit var loginFragment: LoginFragment
+    lateinit var profileFragment: ProfileFragment
 
 
     private var selectedFragment: Fragment? = null
@@ -51,6 +55,7 @@ class MainActivity : BaseActivity(){
         categoriesFragment = fragmentFactory.create<CategoriesFragment>()
         cartFragment = fragmentFactory.create<CartFragment>()
         loginFragment = fragmentFactory.create<LoginFragment>()
+        profileFragment = fragmentFactory.create<ProfileFragment>()
         selectedFragment = homeFragment
 
         setBottomNavigationView(savedInstanceState)
@@ -110,6 +115,18 @@ class MainActivity : BaseActivity(){
                 R.id.btm_navbar_profile -> {
                     selectedFragment = loginFragment
                     if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
+                    val userSess = session.user
+                    when (userSess){
+                        is User.User ->{
+                            selectedFragment = profileFragment
+                            if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
+                        }
+
+                        is User.GuestUser ->{
+                            selectedFragment = LoginFragment()
+                            if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
+                        }
+                    }
                 }
             }
             loadFragment(selectedFragment)

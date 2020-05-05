@@ -98,6 +98,7 @@ class HomeFragment: BaseFragment(){
         }
     }
 
+
     private fun addProducts(products: List<Product>) {
         productAdapter.submitList(products)
     }
