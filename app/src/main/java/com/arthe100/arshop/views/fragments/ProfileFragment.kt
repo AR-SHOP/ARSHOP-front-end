@@ -1,7 +1,6 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +14,8 @@ import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.scripts.di.modules.DialogBoxModule
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.login_fragment_layout.*
 import kotlinx.android.synthetic.main.profile_fragment_layout.*
 import kotlinx.android.synthetic.main.sign_up_password_fragment.loading_bar
 import javax.inject.Inject
@@ -62,8 +61,9 @@ class ProfileFragment : BaseFragment() {
                 loading_bar.visibility = View.INVISIBLE
                 val user = state.userInfo
 
-
-//                Log.d("abcd" , "${user.fName == "null"}")
+                DialogBoxModule.createDialog(activity, "hey",
+                    "u r bitch as u know!!!",
+                    true, false).show()
 
                 name.text = if(user.fName.isEmpty())
                     "نام و نام‌خانوادگی"
