@@ -25,8 +25,5 @@ class MessageManager () {
             positiveButton(null, context.resources.getString(R.string.ok))
             negativeButton(null, context.resources.getString(R.string.cancel))
         }
-
     }
-
-
 }

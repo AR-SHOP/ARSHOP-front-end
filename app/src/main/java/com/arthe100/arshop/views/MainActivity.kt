@@ -12,7 +12,6 @@ import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.fragments.*
-import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import java.util.*
 import javax.inject.Inject
@@ -44,8 +43,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
                 .mainComponent(this)
                 .inject(this) // i want to get injected
     }
-
-    private lateinit var searchView: MaterialSearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
