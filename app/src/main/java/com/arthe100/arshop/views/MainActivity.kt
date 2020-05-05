@@ -12,7 +12,6 @@ import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.fragments.*
-import com.google.android.material.badge.BadgeDrawable
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import java.util.*
@@ -20,7 +19,7 @@ import javax.inject.Inject
 import kotlin.system.exitProcess
 
 
-class MainActivity : BaseActivity(){
+class MainActivity : BaseActivity(), ILoadFragment {
 
 
     private val TAG : String? = MainActivity::class.simpleName
@@ -35,8 +34,7 @@ class MainActivity : BaseActivity(){
     lateinit var loginFragment: LoginFragment
     lateinit var profileFragment: ProfileFragment
 
-
-    private var selectedFragment: Fragment? = null
+    private var selectedFragment: Fragment? = HomeFragment()
     private var selectedItemIdStack: Stack<Int> = Stack()
 
 
@@ -47,47 +45,18 @@ class MainActivity : BaseActivity(){
                 .inject(this) // i want to get injected
     }
 
+    private lateinit var searchView: MaterialSearchView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
-
         homeFragment = fragmentFactory.create<HomeFragment>()
         categoriesFragment = fragmentFactory.create<CategoriesFragment>()
         cartFragment = fragmentFactory.create<CartFragment>()
         loginFragment = fragmentFactory.create<LoginFragment>()
         profileFragment = fragmentFactory.create<ProfileFragment>()
         selectedFragment = homeFragment
-
         setBottomNavigationView(savedInstanceState)
-    }
-
-    override fun onBackPressed() {
-        var bottomNavbarFragments =
-            arrayListOf("Home Fragment", "Categories Fragment", "Cart Fragment",
-                "Login Fragment", "Profile Fragment")
-        selectedFragment = getTheLastFragment()
-        var fragmentTag = selectedFragment!!.tag
-
-        if (fragmentTag in bottomNavbarFragments) {
-            selectedItemIdStack.pop()
-            if (selectedItemIdStack.size >= 1) {
-                bottom_navbar.selectedItemId = selectedItemIdStack.peek()
-                supportFragmentManager.popBackStack()
-                selectedFragment = getTheLastFragment()
-                super.onBackPressed()
-            }
-            else {
-                this.finish()
-                exitProcess(0)
-            }
-        }
-        else {
-            supportFragmentManager.popBackStack()
-        }
-    }
-
-    override fun toString(): String {
-        return "Main Activity"
     }
 
     private fun setBottomNavigationView(savedInstanceState: Bundle?) {
@@ -101,15 +70,15 @@ class MainActivity : BaseActivity(){
         bottom_navbar.setOnNavigationItemSelectedListener {item ->
             when (item.itemId) {
                 R.id.btm_navbar_home -> {
-                    selectedFragment = homeFragment
+                    selectedFragment = HomeFragment()
                     if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                 }
                 R.id.btm_navbar_categories -> {
-                    selectedFragment = categoriesFragment
+                    selectedFragment = CategoriesFragment()
                     if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                 }
                 R.id.btm_navbar_cart -> {
-                    selectedFragment = cartFragment
+                    selectedFragment = CartFragment()
                     if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                 }
                 R.id.btm_navbar_profile -> {
@@ -134,11 +103,35 @@ class MainActivity : BaseActivity(){
         }
     }
 
+    override fun onBackPressed() {
+        var bottomNavbarFragments =
+            arrayListOf("Home", "Categories", "Cart", "Login", "Profile")
+        selectedFragment = getTheLastFragment()
+        var fragmentTag = selectedFragment!!.tag
+        Log.v("fragmentTag", fragmentTag)
+
+        if (fragmentTag in bottomNavbarFragments) {
+            selectedItemIdStack.pop()
+            if (selectedItemIdStack.size >= 1) {
+                bottom_navbar.selectedItemId = selectedItemIdStack.peek()
+                supportFragmentManager.popBackStack()
+                selectedFragment = getTheLastFragment()
+                super.onBackPressed()
+            }
+            else {
+                this.finish()
+                exitProcess(0)
+            }
+        }
+        else {
+            supportFragmentManager.popBackStack()
+        }
+    }
+
     private fun getTheLastFragment() : Fragment? {
         var backStackSize = supportFragmentManager.backStackEntryCount
         val fragmentTag: String? =
             supportFragmentManager.getBackStackEntryAt(backStackSize - 1).name
         return supportFragmentManager.findFragmentByTag(fragmentTag)
     }
-
 }

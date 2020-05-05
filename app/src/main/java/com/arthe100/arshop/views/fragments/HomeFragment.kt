@@ -26,54 +26,23 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
 
-class HomeFragment: BaseFragment(){
+class HomeFragment: BaseFragment(), ILoadFragment {
 
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
+    @Inject lateinit var customArFragment: CustomArFragment
     @Inject lateinit var session: UserSession
     @Inject lateinit var messageManager: MessageManager
-    @Inject lateinit var customArFragment: CustomArFragment
-    @Inject lateinit var fragmentFactory: FragmentFactory
-    lateinit var productFragment : ProductFragment
+    @Inject lateinit var productFragment: ProductFragment
 
     private lateinit var productAdapter: ProductAdapter
     private lateinit var model: ProductViewModel
 
 
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-                .inject(this)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        productFragment = fragmentFactory.create<ProductFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
+
         model.currentViewState.observe(this , Observer(::render))
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        requireActivity().bottom_navbar.visibility = View.VISIBLE
-        return inflater.inflate(R.layout.home_fragment_layout, container, false)
-    }
-
-    override fun onStart() {
-
-        when(session.user){
-            is User.GuestUser ->{
-                messageManager.toast(requireContext() , "not logged in!")
-            }
-            is User.User ->{
-                messageManager.toast(requireContext(), session.user.toString())
-                model.onEvent(ProductUiAction.GetHomePageProducts)
-            }
-        }
-
-        super.onStart()
-    }
-
-    override fun toString(): String {
-        return "Home Fragment"
     }
 
     private fun render(state: ProductState){
@@ -98,6 +67,31 @@ class HomeFragment: BaseFragment(){
         }
     }
 
+    override fun inject() {
+        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
+                .inject(this)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        requireActivity().bottom_navbar.visibility = View.VISIBLE
+        return inflater.inflate(R.layout.home_fragment_layout, container, false)
+    }
+
+    override fun onStart() {
+
+        when(session.user){
+            is User.GuestUser ->{
+                messageManager.toast(requireContext() , "not logged in!")
+            }
+            is User.User ->{
+//                messageManager.toast(requireContext(), session.user.toString())
+                model.onEvent(ProductUiAction.GetHomePageProducts)
+            }
+        }
+
+        super.onStart()
+    }
 
     private fun addProducts(products: List<Product>) {
         productAdapter.submitList(products)
@@ -109,11 +103,18 @@ class HomeFragment: BaseFragment(){
             override fun onItemClick(position: Int) {
                 productFragment.setProduct(productAdapter.dataList[position])
                 loadFragment(productFragment)
+//                customArFragment.setUri(productAdapter.dataList[position].arModel)
+//                loadFragment(customArFragment)
             }
         })
         recycler_view.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = productAdapter
         }
+    }
+
+
+    override fun toString(): String {
+        return "Home"
     }
 }

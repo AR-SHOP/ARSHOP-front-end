@@ -12,6 +12,7 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="6634bee0-b39e-4528-8cca-2a1a15b6e59a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
@@ -23,6 +24,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_navigation_navigation_runtime_ktx_1_0_0_aar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_navigation_navigation_ui_1_0_0_aar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_navigation_navigation_ui_ktx_1_0_0_aar.xml" beforeDir="false" />
+=======
+    <list default="true" id="17053b2a-4f8d-46cd-a78b-dfbf8af29ccc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+>>>>>>> 602c88995ef2b6a9a6c2a09786c9eb127c01a6f8
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_activity_activity_1_2_0_alpha01_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_activity_activity_1_2_0_alpha01_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_activity_activity_ktx_1_2_0_alpha01_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_activity_activity_ktx_1_2_0_alpha01_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_annotation_annotation_experimental_1_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_annotation_annotation_experimental_1_0_0_aar.xml" afterDir="false" />
@@ -108,6 +114,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_github_reactivecircus_flowbinding_flowbinding_swiperefreshlayout_0_10_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_github_reactivecircus_flowbinding_flowbinding_swiperefreshlayout_0_10_2_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
     </list>
 =======
     <list default="true" id="17053b2a-4f8d-46cd-a78b-dfbf8af29ccc" name="Default Changelist" comment="">
@@ -147,6 +154,10 @@
     <ignored path="$PROJECT_DIR$/app/build/outputs/" />
     <ignored path="$PROJECT_DIR$/app/build/tmp/" />
 >>>>>>> develop
+=======
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+    </list>
+>>>>>>> 602c88995ef2b6a9a6c2a09786c9eb127c01a6f8
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,9 +168,13 @@
     <option name="isMigrated" value="true" />
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_27" />
 =======
 >>>>>>> develop
+=======
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_26" />
+>>>>>>> 602c88995ef2b6a9a6c2a09786c9eb127c01a6f8
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -177,6 +192,7 @@
       </state>
     </system>
   </component>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   <component name="FileEditorManager">
@@ -280,12 +296,15 @@
     </leaf>
   </component>
 >>>>>>> develop
+=======
+>>>>>>> 602c88995ef2b6a9a6c2a09786c9eb127c01a6f8
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Object" />
         <option value="Class" />
         <option value="Interface" />
+<<<<<<< HEAD
 <<<<<<< HEAD
         <option value="Kotlin File" />
         <option value="Kotlin Class" />
@@ -295,6 +314,11 @@
         <option value="Kotlin Class" />
         <option value="Kotlin File" />
 >>>>>>> develop
+=======
+        <option value="Kotlin File" />
+        <option value="Kotlin Class" />
+        <option value="Kotlin Interface" />
+>>>>>>> 602c88995ef2b6a9a6c2a09786c9eb127c01a6f8
       </list>
     </option>
   </component>
@@ -307,18 +331,22 @@
       <find>lifecycle</find>
       <find>navigation</find>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       <find>handleSignUp</find>
       <find>GetHomePageProfileAction</find>
       <find>requireActivity()</find>
       <find>requireContext</find>
 >>>>>>> develop
+=======
+>>>>>>> 602c88995ef2b6a9a6c2a09786c9eb127c01a6f8
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
+<<<<<<< HEAD
 <<<<<<< HEAD
         <entry key="$PROJECT_DIR$" value="network" />
       </map>
@@ -539,11 +567,22 @@
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_26" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-29T12:33:45.381Z" />
 >>>>>>> develop
+=======
+        <entry key="$PROJECT_DIR$" value="network" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectId" id="1bTvZsfzI81BnR6UsQu9rzVolvd" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_26" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-27T13:40:51.931Z" />
+>>>>>>> 602c88995ef2b6a9a6c2a09786c9eb127c01a6f8
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="device.picker.selection" value="Pixel_2_API_27" />
     <property name="last_opened_file_path" value="E:/Backups/Programming/tempAr" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
+<<<<<<< HEAD
 <<<<<<< HEAD
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.17" />
@@ -554,10 +593,9 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
 >>>>>>> develop
+=======
+>>>>>>> 602c88995ef2b6a9a6c2a09786c9eb127c01a6f8
     <property name="show.migrate.to.gradle.popup" value="false" />
-  </component>
-  <component name="PsdUISettings">
-    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -606,10 +644,13 @@
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
 >>>>>>> develop
+=======
+>>>>>>> 602c88995ef2b6a9a6c2a09786c9eb127c01a6f8
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
@@ -691,6 +732,7 @@
       <updated>1587992344515</updated>
     </task>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <option name="localTasksCounter" value="5" />
 =======
     <task id="LOCAL-00005" summary="attached profileFragment to server (not completed)">
@@ -744,6 +786,9 @@
     </task>
     <option name="localTasksCounter" value="12" />
 >>>>>>> develop
+=======
+    <option name="localTasksCounter" value="5" />
+>>>>>>> 602c88995ef2b6a9a6c2a09786c9eb127c01a6f8
     <servers />
   </component>
   <component name="TodoView">
@@ -755,6 +800,7 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
+<<<<<<< HEAD
 <<<<<<< HEAD
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -837,41 +883,16 @@
     </layout-to-restore>
 >>>>>>> develop
   </component>
+=======
+>>>>>>> 602c88995ef2b6a9a6c2a09786c9eb127c01a6f8
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
+              <option name="COLUMN_ORDER" />
             </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list />
-          </value>
-        </entry>
-        <entry key="User">
-          <value>
-            <list />
           </value>
         </entry>
       </map>
@@ -882,6 +903,7 @@
     <MESSAGE value="edit .idea" />
     <MESSAGE value="added ProductService, model.Product, ProductRep" />
     <MESSAGE value="deleted useless files.&#10;edited Product model.&#10;edited APIs.&#10;change java files to .kt.&#10;remove not completed files.&#10;modified APIs and adapt them with new models." />
+<<<<<<< HEAD
 <<<<<<< HEAD
     <option name="LAST_COMMIT_MESSAGE" value="deleted useless files.&#10;edited Product model.&#10;edited APIs.&#10;change java files to .kt.&#10;remove not completed files.&#10;modified APIs and adapt them with new models." />
 =======
@@ -1274,5 +1296,8 @@
       </provider>
     </entry>
 >>>>>>> develop
+=======
+    <option name="LAST_COMMIT_MESSAGE" value="deleted useless files.&#10;edited Product model.&#10;edited APIs.&#10;change java files to .kt.&#10;remove not completed files.&#10;modified APIs and adapt them with new models." />
+>>>>>>> 602c88995ef2b6a9a6c2a09786c9eb127c01a6f8
   </component>
 </project>

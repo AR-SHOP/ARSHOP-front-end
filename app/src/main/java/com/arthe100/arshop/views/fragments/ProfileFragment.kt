@@ -46,10 +46,10 @@ class ProfileFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.profile_fragment_layout, container, false)
     }
-
 
     private fun render(state: ProfileState){
         when(state){
@@ -95,6 +95,6 @@ class ProfileFragment : BaseFragment() {
     }
 
     override fun toString(): String {
-        return "Profile Fragment"
+        return "Profile"
     }
 }
