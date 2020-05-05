@@ -1,10 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: io.github.reactivecircus.flowbinding:flowbinding-lifecycle:0.10.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8fe50a1f3921803b7f679158ebc00fa/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8fe50a1f3921803b7f679158ebc00fa/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/af87372ab1f8440539cf07cb81f6720e/jetified-flowbinding-lifecycle-0.10.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/af87372ab1f8440539cf07cb81f6720e/jetified-flowbinding-lifecycle-0.10.2/res" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.reactivecircus.flowbinding/flowbinding-lifecycle/0.10.2/7c7d51ae040b90b0b55fb42b930fd7b59c0c61fe/flowbinding-lifecycle-0.10.2-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.reactivecircus.flowbinding/flowbinding-lifecycle/0.10.2/bd9234c13e64de2e5b9c5378ac49305083dac1bb/flowbinding-lifecycle-0.10.2-sources.jar!/" />
     </SOURCES>

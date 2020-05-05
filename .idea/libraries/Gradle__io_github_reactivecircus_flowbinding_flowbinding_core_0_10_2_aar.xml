@@ -1,10 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: io.github.reactivecircus.flowbinding:flowbinding-core:0.10.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1e5187730f8482b269402d29b6d55d9a/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1e5187730f8482b269402d29b6d55d9a/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/da29a8d5d6f6a986c755afe5beed80e4/jetified-flowbinding-core-0.10.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/da29a8d5d6f6a986c755afe5beed80e4/jetified-flowbinding-core-0.10.2/res" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.reactivecircus.flowbinding/flowbinding-core/0.10.2/9993a297b0ce1b0dbf7cf1e83f5d29c720bde2be/flowbinding-core-0.10.2-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.reactivecircus.flowbinding/flowbinding-core/0.10.2/847965ec3c38f53cacba37c31dfbc3def6a68131/flowbinding-core-0.10.2-sources.jar!/" />
     </SOURCES>
