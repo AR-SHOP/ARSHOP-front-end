@@ -1,14 +1,12 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
@@ -18,11 +16,9 @@ import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.sign_up_password_fragment.*
 import kotlinx.android.synthetic.main.verify_fragment_layout.*
 import kotlinx.android.synthetic.main.verify_fragment_layout.loading_bar
 import javax.inject.Inject
-import kotlin.math.log
 
 class VerifyFragment : BaseFragment(){
 
