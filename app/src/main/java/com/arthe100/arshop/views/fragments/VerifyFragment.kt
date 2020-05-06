@@ -9,7 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.scripts.messege.DialogBoxManager
 import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.scripts.messege.MessageType
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
@@ -21,12 +23,9 @@ import kotlinx.android.synthetic.main.verify_fragment_layout.loading_bar
 import javax.inject.Inject
 
 class VerifyFragment : BaseFragment(){
-
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var fragmentFactory: FragmentFactory
-    lateinit var signUpPasswordFragment: SignUpPasswordFragment
-
+    private lateinit var signUpPasswordFragment: SignUpPasswordFragment
     private lateinit var model: AuthViewModel
 
     override fun inject() {
@@ -63,12 +62,14 @@ class VerifyFragment : BaseFragment(){
         when(state){
             is AuthState.Failure -> {
                 loading_bar.visibility = View.INVISIBLE
-                messageManager.toast(requireActivity() , state.err.toString())
+                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.err.toString())
             }
+
             is AuthState.CodeSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
                 loadFragment(signUpPasswordFragment)
             }
+
             is AuthState.LoadingState ->{
                 loading_bar.visibility = View.VISIBLE
             }

@@ -1,11 +1,9 @@
 package com.arthe100.arshop.views.fragments
 
-import androidx.fragment.app.Fragment
-import com.arthe100.arshop.views.BaseFragment
 import javax.inject.Inject
 
-
 class FragmentFactory
+
     @Inject constructor(
         val homeFragment: HomeFragment,
         val categoriesFragment: CategoriesFragment,

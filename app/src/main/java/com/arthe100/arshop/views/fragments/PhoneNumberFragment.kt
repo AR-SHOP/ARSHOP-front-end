@@ -21,7 +21,7 @@ import javax.inject.Inject
 class PhoneNumberFragment : BaseFragment(){
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var fragmentFactory: FragmentFactory
-    lateinit var verifyFragment: VerifyFragment
+    private lateinit var verifyFragment: VerifyFragment
 
     private lateinit var model: AuthViewModel
 

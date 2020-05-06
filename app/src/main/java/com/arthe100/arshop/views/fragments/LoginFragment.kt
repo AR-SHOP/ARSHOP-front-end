@@ -12,7 +12,7 @@ import androidx.preference.PreferenceManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.scripts.messege.DialogBox
+import com.arthe100.arshop.scripts.messege.DialogBoxManager
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.messege.MessageType
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
@@ -28,7 +28,6 @@ import javax.inject.Inject
 
 class LoginFragment : BaseFragment(), ILoadFragment {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var session: UserSession
     @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var phoneNumberFragment: PhoneNumberFragment
@@ -53,16 +52,17 @@ class LoginFragment : BaseFragment(), ILoadFragment {
                 loading_bar.visibility = View.INVISIBLE
             }
             is AuthState.LoadingState -> {
-                DialogBox.createDialog(activity, MessageType.LOAD).show()
+                loading_bar.visibility = View.VISIBLE
             }
             is AuthState.LoginSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
+                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
                 session.saveUser(state.user)
                 loadFragment(profileFragment)
             }
             is AuthState.Failure -> {
                 loading_bar.visibility = View.INVISIBLE
-                messageManager.toast(requireContext() , state.err.toString())
+                DialogBoxManager.createDialog(activity, MessageType.ERROR).show()
             }
         }
     }
@@ -90,7 +90,9 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             if(user == null)
                 loadFragment(phoneNumberFragment)
             else
-                messageManager.toast(requireContext() , "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
+                DialogBoxManager.createDialog(activity, MessageType.ERROR,
+                    "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
+                    .show()
         }
 
         verify_continue_btn.setOnClickListener {

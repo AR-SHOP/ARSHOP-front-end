@@ -21,7 +21,6 @@ import javax.inject.Inject
 
 class ProductFragment : BaseFragment() {
     @Inject lateinit var customArFragment: CustomArFragment
-
     private lateinit var product: Product
 
     override fun inject() {
@@ -64,5 +63,4 @@ class ProductFragment : BaseFragment() {
     fun setProduct(product: Product) {
         this.product = product
     }
-
 }

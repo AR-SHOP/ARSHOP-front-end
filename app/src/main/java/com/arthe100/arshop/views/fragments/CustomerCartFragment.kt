@@ -21,7 +21,6 @@ class CustomerCartFragment : BaseFragment() {
         return inflater.inflate(R.layout.customer_cart_fragment_layout, container, false)
     }
 
-
     override fun toString(): String {
         return super.toString()
     }
