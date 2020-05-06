@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.scripts.di.modules.DialogBoxModule
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.fragments.*
@@ -33,8 +34,8 @@ class MainActivity : BaseActivity(), ILoadFragment {
     lateinit var loginFragment: LoginFragment
     lateinit var profileFragment: ProfileFragment
 
+    var selectedItemIdStack: Stack<Int> = Stack()
     private var selectedFragment: Fragment? = HomeFragment()
-    private var selectedItemIdStack: Stack<Int> = Stack()
 
 
 
@@ -67,20 +68,18 @@ class MainActivity : BaseActivity(), ILoadFragment {
         bottom_navbar.setOnNavigationItemSelectedListener {item ->
             when (item.itemId) {
                 R.id.btm_navbar_home -> {
-                    selectedFragment = HomeFragment()
+                    selectedFragment = homeFragment
                     if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                 }
                 R.id.btm_navbar_categories -> {
-                    selectedFragment = CategoriesFragment()
+                    selectedFragment = categoriesFragment
                     if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                 }
                 R.id.btm_navbar_cart -> {
-                    selectedFragment = CartFragment()
+                    selectedFragment = cartFragment
                     if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                 }
                 R.id.btm_navbar_profile -> {
-                    selectedFragment = loginFragment
-                    if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                     val userSess = session.user
                     when (userSess){
                         is User.User ->{
@@ -89,7 +88,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
                         }
 
                         is User.GuestUser ->{
-                            selectedFragment = LoginFragment()
+                            selectedFragment = loginFragment
                             if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                         }
                     }
@@ -102,13 +101,16 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     override fun onBackPressed() {
         var bottomNavbarFragments =
-            arrayListOf("Home", "Categories", "Cart", "Login", "Profile")
+            arrayListOf("$homeFragment", "$categoriesFragment", "$cartFragment",
+                "$loginFragment", "$profileFragment")
         selectedFragment = getTheLastFragment()
         var fragmentTag = selectedFragment!!.tag
-        Log.v("fragmentTag", fragmentTag)
 
         if (fragmentTag in bottomNavbarFragments) {
-            selectedItemIdStack.pop()
+            if (fragmentTag == loginFragment.toString() && loginFragment.inCartFragment) { }
+            else {
+                selectedItemIdStack.pop()
+            }
             if (selectedItemIdStack.size >= 1) {
                 bottom_navbar.selectedItemId = selectedItemIdStack.peek()
                 supportFragmentManager.popBackStack()

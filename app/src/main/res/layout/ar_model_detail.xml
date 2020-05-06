@@ -5,7 +5,7 @@
     android:id="@+id/layout"
     android:layout_width="375dp"
     android:layout_height="576dp"
-    android:background="@color/colorWhite">
+    android:background="@color/colorBackground">
 
     <TextView
         android:id="@+id/txtName"
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtName" />
+        app:layout_constraintTop_toBottomOf="@id/txtName" />
 
     <TextView
         android:id="@+id/txtPrice"
@@ -49,7 +49,7 @@
         android:textAlignment="textStart"
         android:textSize="24sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/btnPurchace"
+        app:layout_constraintBottom_toTopOf="@id/btnPurchace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
@@ -70,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDetails" />
+        app:layout_constraintTop_toBottomOf="@id/txtDetails" />
 
     <Button
         android:id="@+id/btnPurchace"
@@ -81,7 +81,7 @@
         android:layout_marginBottom="8dp"
         android:background="#3CE4D6"
         android:text="@string/purchaseText"
-        app:layout_constraintBottom_toTopOf="@+id/btnDelete"
+        app:layout_constraintBottom_toTopOf="@id/btnDelete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />

@@ -14,7 +14,7 @@ abstract class BaseActivity : AppCompatActivity(), ILoadFragment {
         super.onCreate(savedInstanceState)
     }
 
-    override fun loadFragment(fragment: Fragment?, type: LoadFragmentType) {
+    override fun loadFragment(fragment: Fragment?) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment!!, fragment.toString())
             .addToBackStack(fragment.tag)

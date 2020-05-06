@@ -39,6 +39,9 @@
             android:layoutDirection="rtl"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
-
+    <FrameLayout
+            android:id="@+id/cart_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

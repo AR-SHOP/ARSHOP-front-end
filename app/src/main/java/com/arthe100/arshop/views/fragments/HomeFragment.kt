@@ -102,8 +102,6 @@ class HomeFragment: BaseFragment(), ILoadFragment {
             override fun onItemClick(position: Int) {
                 productFragment.setProduct(productAdapter.dataList[position])
                 loadFragment(productFragment)
-//                customArFragment.setUri(productAdapter.dataList[position].arModel)
-//                loadFragment(customArFragment)
             }
         })
         recycler_view.apply {

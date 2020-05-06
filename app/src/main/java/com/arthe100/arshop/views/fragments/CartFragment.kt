@@ -2,12 +2,12 @@ package com.arthe100.arshop.views.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.views.Adapters.ViewPagerAdapter
@@ -20,7 +20,9 @@ import javax.inject.Inject
 
 class CartFragment : BaseFragment() {
 
-
+    @Inject lateinit var fragmentFactory: FragmentFactory
+    lateinit var customerCartFragment: CustomerCartFragment
+    lateinit var ordersFragment: OrdersFragment
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent().inject(this)
@@ -29,13 +31,15 @@ class CartFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
+        customerCartFragment = fragmentFactory.create<CustomerCartFragment>()
+        ordersFragment = fragmentFactory.create<OrdersFragment>()
         return inflater.inflate(R.layout.cart_fragment_layout, container, false)
     }
 
     override fun onStart() {
         super.onStart()
 
-        var viewPagerAdapter: ViewPagerAdapter = ViewPagerAdapter(this)
+        var viewPagerAdapter: ViewPagerAdapter = ViewPagerAdapter(requireActivity())
         view_pager.adapter = viewPagerAdapter
 
         var tabLayoutMediator: TabLayoutMediator =
@@ -52,7 +56,16 @@ class CartFragment : BaseFragment() {
                 })
         tabLayoutMediator.attach()
     }
+
     override fun toString(): String {
         return "Cart Fragment"
     }
+
+    private fun getTheLastFragment() : Fragment? {
+        var backStackSize = requireActivity().supportFragmentManager.backStackEntryCount
+        val fragmentTag: String? =
+            requireActivity().supportFragmentManager.getBackStackEntryAt(backStackSize - 1).name
+        return requireActivity().supportFragmentManager.findFragmentByTag(fragmentTag)
+    }
+
 }

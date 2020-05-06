@@ -20,7 +20,6 @@ import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
-import com.arthe100.arshop.views.LoadFragmentType
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.login_fragment_layout.*
@@ -35,6 +34,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var phoneNumberFragment: PhoneNumberFragment
     lateinit var profileFragment: ProfileFragment
+    var inCartFragment: Boolean = false
 
     private val TAG = LoginFragment::class.simpleName
 
@@ -45,7 +45,6 @@ class LoginFragment : BaseFragment(), ILoadFragment {
         phoneNumberFragment = fragmentFactory.create<PhoneNumberFragment>()
         profileFragment = fragmentFactory.create<ProfileFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
-
         model.currentViewState.observe(this , Observer(::render))
     }
 
@@ -78,7 +77,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        requireActivity().bottom_navbar.visibility = View.VISIBLE
+//        requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.login_fragment_layout, container, false)
     }
 
