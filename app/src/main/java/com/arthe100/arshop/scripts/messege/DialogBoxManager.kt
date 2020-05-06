@@ -1,10 +1,12 @@
-package com.arthe100.arshop.scripts.di.modules
+package com.arthe100.arshop.scripts.messege
 
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
+import javax.inject.Singleton
 
-object DialogBoxModule {
+@Singleton
+class DialogBoxManager {
     fun createDialog(
         activity: Activity?, title: String?,
         message: String?, hasPosBtn: Boolean, hasNegBtn: Boolean

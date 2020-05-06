@@ -14,7 +14,7 @@ import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.scripts.di.modules.DialogBoxModule
+import com.arthe100.arshop.scripts.messege.DialogBoxManager
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.profile_fragment_layout.*
 import kotlinx.android.synthetic.main.sign_up_password_fragment.loading_bar
@@ -25,6 +25,7 @@ class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var session: UserSession
+    @Inject lateinit var dialogBoxModule: DialogBoxManager
 
     private val TAG = ProfileFragment::class.simpleName
     private lateinit var model: ProfileViewModel
@@ -61,7 +62,7 @@ class ProfileFragment : BaseFragment() {
                 loading_bar.visibility = View.INVISIBLE
                 val user = state.userInfo
 
-                DialogBoxModule.createDialog(activity, "hey",
+                dialogBoxModule.createDialog(activity, "hey",
                     "u r bitch as u know!!!",
                     true, false).show()
 

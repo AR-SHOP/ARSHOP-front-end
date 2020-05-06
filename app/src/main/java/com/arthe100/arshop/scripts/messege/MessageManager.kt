@@ -10,7 +10,6 @@ import javax.inject.Singleton
 @Singleton
 class MessageManager () {
 
-
     fun toast(context: Context, msg : String){
         val toast = Toast.makeText(context, msg , Toast.LENGTH_LONG)
         toast.setGravity(Gravity.CENTER, 0, 0)
