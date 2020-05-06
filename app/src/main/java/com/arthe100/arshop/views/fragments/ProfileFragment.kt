@@ -14,7 +14,8 @@ import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.scripts.di.modules.DialogBoxModule
+import com.arthe100.arshop.scripts.messege.DialogBox
+import com.arthe100.arshop.scripts.messege.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.profile_fragment_layout.*
 import kotlinx.android.synthetic.main.sign_up_password_fragment.loading_bar
@@ -79,9 +80,7 @@ class ProfileFragment : BaseFragment() {
             is ProfileState.LoadingState -> {
                 loading_bar.visibility = View.VISIBLE
 
-                DialogBoxModule.createDialog(activity, "Loading",
-                    "Please wait for information to load.",
-                    false, false).show()
+                DialogBox.createDialog(activity, MessageType.LOAD).show()
             }
         }
     }

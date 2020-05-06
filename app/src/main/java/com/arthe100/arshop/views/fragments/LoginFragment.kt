@@ -12,8 +12,9 @@ import androidx.preference.PreferenceManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.scripts.di.modules.DialogBoxModule
+import com.arthe100.arshop.scripts.messege.DialogBox
 import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.scripts.messege.MessageType
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
@@ -52,9 +53,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
                 loading_bar.visibility = View.INVISIBLE
             }
             is AuthState.LoadingState -> {
-                DialogBoxModule.createDialog(activity, "Loading",
-                    "Please wait for information to load.",
-                    false, false).show()
+                DialogBox.createDialog(activity, MessageType.LOAD).show()
             }
             is AuthState.LoginSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
@@ -117,5 +116,4 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     override fun toString(): String {
         return "Login"
     }
-
 }

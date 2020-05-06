@@ -11,11 +11,15 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17053b2a-4f8d-46cd-a78b-dfbf8af29ccc" name="Default Changelist" comment="">
+    <list default="true" id="17053b2a-4f8d-46cd-a78b-dfbf8af29ccc" name="Default Changelist" comment="set dialog states.&#10;set dialog strings.&#10;set dialog actions.">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/messege/DialogBox.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/messege/DialogBoxManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/modules/DialogBoxModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/modules/DialogBoxModule.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/LoginFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/LoginFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProfileFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProfileFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/phone_number_fragment_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/phone_number_fragment_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,21 +52,11 @@
         <option value="Interface" />
         <option value="Kotlin File" />
         <option value="Kotlin Interface" />
+        <option value="resourceFile" />
         <option value="Kotlin Class" />
         <option value="Class" />
-        <option value="resourceFile" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>rxJa</find>
-      <find>rxJava</find>
-      <find>ofType</find>
-      <find>filterIsInstance</find>
-      <find>lifecycle</find>
-      <find>navigation</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -90,8 +84,8 @@
       <recent name="com.arthe100.arshop.repositories" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
-      <recent name="com.arthe100.arshop.scripts.di.modules" />
       <recent name="com.arthe100.arshop.scripts.messege" />
+      <recent name="com.arthe100.arshop.scripts.di.modules" />
       <recent name="com.arthe100.arshop.scripts.di.modules.SubComponentModules" />
       <recent name="com.arthe100.arshop.views" />
       <recent name="com.arthe100.arshop.scripts.mvi.Auth" />
@@ -243,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588757356083</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="debugged the problems.">
+      <created>1588757925617</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1588757925617</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -278,6 +279,8 @@
     <MESSAGE value="added anim sources." />
     <MESSAGE value="changed DialogBox to manager and added it to DAGGER2." />
     <MESSAGE value="debugged DialogBoxManager and removed it from DAGGER2.&#10;removed useless imports.&#10;added animationActivity style." />
-    <option name="LAST_COMMIT_MESSAGE" value="debugged DialogBoxManager and removed it from DAGGER2.&#10;removed useless imports.&#10;added animationActivity style." />
+    <MESSAGE value="debugged the problems." />
+    <MESSAGE value="set dialog states.&#10;set dialog strings.&#10;set dialog actions." />
+    <option name="LAST_COMMIT_MESSAGE" value="set dialog states.&#10;set dialog strings.&#10;set dialog actions." />
   </component>
 </project>
