@@ -24,13 +24,10 @@ import kotlinx.android.synthetic.main.sign_up_password_fragment.*
 import javax.inject.Inject
 
 class SignUpPasswordFragment : BaseFragment(), ILoadFragment{
-
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
-    @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var profileFragment: ProfileFragment
-
     private lateinit var model: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,22 +41,24 @@ class SignUpPasswordFragment : BaseFragment(), ILoadFragment{
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-                messageManager.toast(requireActivity() , state.err.toString())
                 loading_bar.visibility = View.INVISIBLE
+//                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.err.toString()).show()
             }
+
             is AuthState.SingupSuccess -> {
                 model.onEvent(AuthUiAction
                     .LoginAction(
                         password = signup_password.text.toString(),
                         phone = model.phone))
             }
+
             is AuthState.LoginSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
-
                 session.saveUser(state.user)
-                messageManager.toast(requireContext() , "user logged in!")
+//                DialogBoxManager.createDialog(activity, MessageType.SUCCESS, "user logged in!").show()
                 loadFragment(profileFragment)
             }
+
             is AuthState.LoadingState -> {
                 loading_bar.visibility = View.VISIBLE
             }
@@ -71,7 +70,6 @@ class SignUpPasswordFragment : BaseFragment(), ILoadFragment{
             .inject(this)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -80,7 +78,6 @@ class SignUpPasswordFragment : BaseFragment(), ILoadFragment{
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sign_up_password_fragment, container, false)
     }
-
 
     override fun onStart() {
         setPasswordEditText()
@@ -111,7 +108,6 @@ class SignUpPasswordFragment : BaseFragment(), ILoadFragment{
                 repeat_visibility_icon.setColorFilter(resources.getColor(R.color.colorPrimary, null))
             }
         }
-
     }
 
     private fun setPasswordEditText() {

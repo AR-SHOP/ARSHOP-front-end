@@ -11,7 +11,6 @@ import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.views.BaseFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 
-
 class CategoriesFragment : BaseFragment() {
 
     override fun inject() {

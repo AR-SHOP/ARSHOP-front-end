@@ -27,7 +27,7 @@ class CustomerCartFragment() : BaseFragment() {
     lateinit var loginFragment: LoginFragment
     lateinit var productFragment: ProductFragment
     lateinit var productAdapter: ProductAdapter
-    var loggedIn: Boolean = true
+    var loggedIn: Boolean = false
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent().inject(this)
@@ -39,7 +39,6 @@ class CustomerCartFragment() : BaseFragment() {
         productFragment = fragmentFactory.create<ProductFragment>()
         return inflater.inflate(R.layout.customer_cart_fragment_layout, container, false)
     }
-
 
     override fun onStart() {
         super.onStart()

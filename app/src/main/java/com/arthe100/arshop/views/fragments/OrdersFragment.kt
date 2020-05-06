@@ -26,7 +26,7 @@ class OrdersFragment : BaseFragment() {
     lateinit var loginFragment: LoginFragment
     lateinit var productFragment: ProductFragment
     lateinit var productAdapter: ProductAdapter
-    var loggedIn: Boolean = true
+    var loggedIn: Boolean = false
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent(requireActivity())

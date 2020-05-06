@@ -14,16 +14,13 @@ import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.scripts.di.modules.DialogBoxModule
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.profile_fragment_layout.*
 import kotlinx.android.synthetic.main.sign_up_password_fragment.loading_bar
 import javax.inject.Inject
 
-
 class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var session: UserSession
 
     private val TAG = ProfileFragment::class.simpleName
@@ -54,16 +51,14 @@ class ProfileFragment : BaseFragment() {
         when(state){
             is ProfileState.GetProfileFailure -> {
                 loading_bar.visibility = View.INVISIBLE
-                messageManager.toast(requireActivity() , "$state: ${state.throwable}")
+//                DialogBoxManager.createDialog(activity, MessageType.ERROR, "$state: ${state.throwable}").show()
             }
 
             is ProfileState.GetProfileSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
-                val user = state.userInfo
+//                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
 
-                DialogBoxModule.createDialog(activity, "hey",
-                    "u r bitch as u know!!!",
-                    true, false).show()
+                val user = state.userInfo
 
                 name.text = if(user.fName.isEmpty())
                     "نام و نام‌خانوادگی"
@@ -83,6 +78,8 @@ class ProfileFragment : BaseFragment() {
 
             is ProfileState.LoadingState -> {
                 loading_bar.visibility = View.VISIBLE
+
+//                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
             }
         }
     }

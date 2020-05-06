@@ -33,15 +33,12 @@ import javax.inject.Inject
 
 
 class CustomArFragment : CustomBaseArFragment() {
+    @Inject lateinit var arInfoCardManager : IInfoManager
+    @Inject lateinit var messageManager : MessageManager
 
 //    public val tableUrl = "https://poly.googleapis.com/downloads/fp/1586167353776716/8cnrwlAWqx7/cfVCFxWqtbc/Table_Large_Rectangular_01.gltf"
 //    public val duckUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
 //    public val bedUrl = "https://poly.googleapis.com/downloads/fp/1586167422468753/8mkAgVYGbL4/5oNDqZI-I0J/Bed_01.gltf"
-
-
-    @Inject lateinit var arInfoCardManager : IInfoManager
-    @Inject lateinit var messageManager : MessageManager
-
 
     private val TAG = CustomArFragment::class.simpleName
     private val models : MutableMap<String , ModelRenderable> = mutableMapOf()

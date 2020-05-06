@@ -6,7 +6,6 @@ import android.text.method.SingleLineTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
@@ -26,10 +25,7 @@ import kotlinx.android.synthetic.main.login_fragment_layout.*
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment(), ILoadFragment {
-
-
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var session: UserSession
     @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var phoneNumberFragment: PhoneNumberFragment
@@ -58,12 +54,13 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             }
             is AuthState.LoginSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
+//                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
                 session.saveUser(state.user)
                 loadFragment(profileFragment)
             }
             is AuthState.Failure -> {
                 loading_bar.visibility = View.INVISIBLE
-                messageManager.toast(requireContext() , state.err.toString())
+//                DialogBoxManager.createDialog(activity, MessageType.ERROR).show()
             }
         }
     }
@@ -90,8 +87,10 @@ class LoginFragment : BaseFragment(), ILoadFragment {
 
             if(user == null)
                 loadFragment(phoneNumberFragment)
-            else
-                messageManager.toast(requireContext() , "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
+            else { }
+//                DialogBoxManager.createDialog(activity, MessageType.ERROR,
+//                    "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
+//                    .show()
         }
 
         verify_continue_btn.setOnClickListener {
@@ -117,5 +116,4 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     override fun toString(): String {
         return "Login"
     }
-
 }

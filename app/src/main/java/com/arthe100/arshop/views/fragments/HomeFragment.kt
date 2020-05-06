@@ -25,13 +25,10 @@ import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
 
 class HomeFragment: BaseFragment(), ILoadFragment {
-
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var customArFragment: CustomArFragment
     @Inject lateinit var session: UserSession
-    @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var productFragment: ProductFragment
-
     private lateinit var productAdapter: ProductAdapter
     private lateinit var model: ProductViewModel
 
@@ -48,10 +45,11 @@ class HomeFragment: BaseFragment(), ILoadFragment {
             is ProductState.Idle -> {
                 loading_bar.visibility = View.INVISIBLE
             }
+
             is ProductState.LoadingState -> {
                 loading_bar.visibility = View.VISIBLE
-
             }
+
             is ProductState.GetProductsSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
                 setRecyclerView()
@@ -60,7 +58,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
             is ProductState.GetProductsFaliure -> {
                 loading_bar.visibility = View.INVISIBLE
-                messageManager.toast(requireContext() , state.throwable.toString())
+//                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.throwable.toString())
             }
         }
     }
@@ -80,10 +78,9 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
         when(session.user){
             is User.GuestUser ->{
-                messageManager.toast(requireContext() , "not logged in!")
+//                DialogBoxManager.createDialog(activity, MessageType.ERROR, "not logged in!")
             }
             is User.User ->{
-//                messageManager.toast(requireContext(), session.user.toString())
                 model.onEvent(ProductUiAction.GetHomePageProducts)
             }
         }
