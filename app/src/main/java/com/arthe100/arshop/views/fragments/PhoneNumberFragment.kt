@@ -22,7 +22,6 @@ class PhoneNumberFragment : BaseFragment(){
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var fragmentFactory: FragmentFactory
     private lateinit var verifyFragment: VerifyFragment
-
     private lateinit var model: AuthViewModel
 
     override fun inject() {

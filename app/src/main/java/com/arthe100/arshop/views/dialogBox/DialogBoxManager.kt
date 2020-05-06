@@ -1,4 +1,4 @@
-package com.arthe100.arshop.scripts.messege
+package com.arthe100.arshop.views.dialogBox
 
 import android.app.Activity
 import android.app.AlertDialog

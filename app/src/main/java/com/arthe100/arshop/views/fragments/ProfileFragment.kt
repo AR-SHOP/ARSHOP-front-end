@@ -8,7 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileUiAction
@@ -50,12 +51,12 @@ class ProfileFragment : BaseFragment() {
         when(state){
             is ProfileState.GetProfileFailure -> {
                 loading_bar.visibility = View.INVISIBLE
-//                DialogBoxManager.createDialog(activity, MessageType.ERROR, "$state: ${state.throwable}").show()
+                DialogBoxManager.createDialog(activity, MessageType.ERROR, "$state: ${state.throwable}").show()
             }
 
             is ProfileState.GetProfileSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
-//                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
+                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
 
                 val user = state.userInfo
 
@@ -78,7 +79,7 @@ class ProfileFragment : BaseFragment() {
             is ProfileState.LoadingState -> {
                 loading_bar.visibility = View.VISIBLE
 
-//                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
+                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
             }
         }
     }

@@ -1,25 +1,20 @@
 package com.arthe100.arshop.views.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.views.Adapters.ViewPagerAdapter
 import com.arthe100.arshop.views.BaseFragment
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.cart_fragment_layout.*
 import javax.inject.Inject
 
 class CartFragment : BaseFragment() {
-
     @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var customerCartFragment: CustomerCartFragment
     lateinit var ordersFragment: OrdersFragment
@@ -50,7 +45,7 @@ class CartFragment : BaseFragment() {
                             tab.text = "سبد خرید"
                         }
                         1 -> {
-                            tab.text = "سفارش ها"
+                            tab.text = "سفارش\u200Cها"
                         }
                     }
                 })
@@ -67,5 +62,4 @@ class CartFragment : BaseFragment() {
             requireActivity().supportFragmentManager.getBackStackEntryAt(backStackSize - 1).name
         return requireActivity().supportFragmentManager.findFragmentByTag(fragmentTag)
     }
-
 }

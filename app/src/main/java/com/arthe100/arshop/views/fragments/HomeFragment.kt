@@ -11,9 +11,8 @@ import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.scripts.messege.DialogBoxManager
-import com.arthe100.arshop.scripts.messege.MessageManager
-import com.arthe100.arshop.scripts.messege.MessageType
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductState
 import com.arthe100.arshop.scripts.mvi.Products.ProductUiAction

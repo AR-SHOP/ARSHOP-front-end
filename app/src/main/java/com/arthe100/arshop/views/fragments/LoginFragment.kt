@@ -12,7 +12,8 @@ import androidx.preference.PreferenceManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
@@ -20,7 +21,6 @@ import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.login_fragment_layout.*
 import javax.inject.Inject
 
@@ -54,13 +54,13 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             }
             is AuthState.LoginSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
-//                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
+                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
                 session.saveUser(state.user)
                 loadFragment(profileFragment)
             }
             is AuthState.Failure -> {
                 loading_bar.visibility = View.INVISIBLE
-//                DialogBoxManager.createDialog(activity, MessageType.ERROR).show()
+                DialogBoxManager.createDialog(activity, MessageType.ERROR).show()
             }
         }
     }
@@ -73,7 +73,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+//         Inflate the layout for this fragment
 //        requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.login_fragment_layout, container, false)
     }
@@ -88,9 +88,9 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             if(user == null)
                 loadFragment(phoneNumberFragment)
             else { }
-//                DialogBoxManager.createDialog(activity, MessageType.ERROR,
-//                    "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
-//                    .show()
+                DialogBoxManager.createDialog(activity, MessageType.ERROR,
+                    "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
+                    .show()
         }
 
         verify_continue_btn.setOnClickListener {
