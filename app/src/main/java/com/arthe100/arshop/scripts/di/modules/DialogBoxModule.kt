@@ -1,10 +1,10 @@
-package com.arthe100.arshop.scripts.messege
+package com.arthe100.arshop.scripts.di.modules
 
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 
-class DialogBoxManager {
+object DialogBoxModule {
 
     fun createDialog(
         activity: Activity?, title: String?,

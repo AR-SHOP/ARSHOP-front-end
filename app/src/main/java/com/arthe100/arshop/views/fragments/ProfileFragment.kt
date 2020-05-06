@@ -14,7 +14,7 @@ import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.scripts.messege.DialogBoxManager
+import com.arthe100.arshop.scripts.di.modules.DialogBoxModule
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.profile_fragment_layout.*
 import kotlinx.android.synthetic.main.sign_up_password_fragment.loading_bar
@@ -24,7 +24,6 @@ class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var session: UserSession
-    lateinit var dialogBoxManager: DialogBoxManager
 
     private val TAG = ProfileFragment::class.simpleName
     private lateinit var model: ProfileViewModel
@@ -80,7 +79,7 @@ class ProfileFragment : BaseFragment() {
             is ProfileState.LoadingState -> {
                 loading_bar.visibility = View.VISIBLE
 
-                dialogBoxManager.createDialog(activity, "Loading",
+                DialogBoxModule.createDialog(activity, "Loading",
                     "Please wait for information to load.",
                     false, false).show()
             }

@@ -6,14 +6,13 @@ import android.text.method.SingleLineTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.scripts.messege.DialogBoxManager
+import com.arthe100.arshop.scripts.di.modules.DialogBoxModule
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
@@ -21,7 +20,6 @@ import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
-import com.arthe100.arshop.views.LoadFragmentType
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.login_fragment_layout.*
@@ -32,7 +30,6 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var session: UserSession
     @Inject lateinit var fragmentFactory: FragmentFactory
-    lateinit var dialogBoxManager: DialogBoxManager
     lateinit var phoneNumberFragment: PhoneNumberFragment
     lateinit var profileFragment: ProfileFragment
 
@@ -55,7 +52,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
                 loading_bar.visibility = View.INVISIBLE
             }
             is AuthState.LoadingState -> {
-                dialogBoxManager.createDialog(activity, "Loading",
+                DialogBoxModule.createDialog(activity, "Loading",
                     "Please wait for information to load.",
                     false, false).show()
             }

@@ -13,13 +13,9 @@
   <component name="ChangeListManager">
     <list default="true" id="17053b2a-4f8d-46cd-a78b-dfbf8af29ccc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/messege/DialogBoxManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/messege/DialogBoxManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/messege/MessageManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/messege/MessageManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/messege/DialogBoxManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/modules/DialogBoxModule.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/LoginFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/LoginFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/PhoneNumberFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/PhoneNumberFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProductFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProductFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProfileFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProfileFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,8 +90,8 @@
       <recent name="com.arthe100.arshop.repositories" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
-      <recent name="com.arthe100.arshop.scripts.messege" />
       <recent name="com.arthe100.arshop.scripts.di.modules" />
+      <recent name="com.arthe100.arshop.scripts.messege" />
       <recent name="com.arthe100.arshop.scripts.di.modules.SubComponentModules" />
       <recent name="com.arthe100.arshop.views" />
       <recent name="com.arthe100.arshop.scripts.mvi.Auth" />
@@ -240,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588754800146</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="debugged DialogBoxManager and removed it from DAGGER2.&#10;removed useless imports.&#10;added animationActivity style.">
+      <created>1588757356082</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1588757356083</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">
@@ -274,6 +277,7 @@
     <MESSAGE value="added DialogBoxModule and tested in profileFragment." />
     <MESSAGE value="added anim sources." />
     <MESSAGE value="changed DialogBox to manager and added it to DAGGER2." />
-    <option name="LAST_COMMIT_MESSAGE" value="changed DialogBox to manager and added it to DAGGER2." />
+    <MESSAGE value="debugged DialogBoxManager and removed it from DAGGER2.&#10;removed useless imports.&#10;added animationActivity style." />
+    <option name="LAST_COMMIT_MESSAGE" value="debugged DialogBoxManager and removed it from DAGGER2.&#10;removed useless imports.&#10;added animationActivity style." />
   </component>
 </project>
