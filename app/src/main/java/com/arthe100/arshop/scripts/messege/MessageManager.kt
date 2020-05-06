@@ -17,7 +17,6 @@ class MessageManager () {
     }
 
     fun showDialog(context: Context, dialogTitle: String?, message: String?) {
-
         MaterialDialog(context).show {
             title(null, dialogTitle)
             message(null, message)

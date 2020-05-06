@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.phone_number_fragment_layout.*
 import javax.inject.Inject
 
 class PhoneNumberFragment : BaseFragment(){
-
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var verifyFragment: VerifyFragment

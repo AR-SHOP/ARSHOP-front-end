@@ -20,7 +20,6 @@ import java.net.URI
 import javax.inject.Inject
 
 class ProductFragment : BaseFragment() {
-
     @Inject lateinit var customArFragment: CustomArFragment
 
     private lateinit var product: Product

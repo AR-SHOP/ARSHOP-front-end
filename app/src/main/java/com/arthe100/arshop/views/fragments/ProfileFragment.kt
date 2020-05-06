@@ -20,12 +20,11 @@ import kotlinx.android.synthetic.main.profile_fragment_layout.*
 import kotlinx.android.synthetic.main.sign_up_password_fragment.loading_bar
 import javax.inject.Inject
 
-
 class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var session: UserSession
-    @Inject lateinit var dialogBoxModule: DialogBoxManager
+    lateinit var dialogBoxManager: DialogBoxManager
 
     private val TAG = ProfileFragment::class.simpleName
     private lateinit var model: ProfileViewModel
@@ -62,10 +61,6 @@ class ProfileFragment : BaseFragment() {
                 loading_bar.visibility = View.INVISIBLE
                 val user = state.userInfo
 
-                dialogBoxModule.createDialog(activity, "hey",
-                    "u r bitch as u know!!!",
-                    true, false).show()
-
                 name.text = if(user.fName.isEmpty())
                     "نام و نام‌خانوادگی"
                 else
@@ -84,6 +79,10 @@ class ProfileFragment : BaseFragment() {
 
             is ProfileState.LoadingState -> {
                 loading_bar.visibility = View.VISIBLE
+
+                dialogBoxManager.createDialog(activity, "Loading",
+                    "Please wait for information to load.",
+                    false, false).show()
             }
         }
     }

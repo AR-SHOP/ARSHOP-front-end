@@ -13,6 +13,7 @@ import androidx.preference.PreferenceManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.scripts.messege.DialogBoxManager
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
@@ -27,12 +28,11 @@ import kotlinx.android.synthetic.main.login_fragment_layout.*
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment(), ILoadFragment {
-
-
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var session: UserSession
     @Inject lateinit var fragmentFactory: FragmentFactory
+    lateinit var dialogBoxManager: DialogBoxManager
     lateinit var phoneNumberFragment: PhoneNumberFragment
     lateinit var profileFragment: ProfileFragment
 
@@ -55,7 +55,9 @@ class LoginFragment : BaseFragment(), ILoadFragment {
                 loading_bar.visibility = View.INVISIBLE
             }
             is AuthState.LoadingState -> {
-                loading_bar.visibility = View.VISIBLE
+                dialogBoxManager.createDialog(activity, "Loading",
+                    "Please wait for information to load.",
+                    false, false).show()
             }
             is AuthState.LoginSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
