@@ -60,7 +60,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
             is ProductState.GetProductsFaliure -> {
                 loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.throwable.toString())
+                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.throwable.toString()).show()
             }
         }
     }
@@ -80,7 +80,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
         when(session.user){
             is User.GuestUser ->{
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, "not logged in!")
+                DialogBoxManager.createDialog(activity, MessageType.ERROR, "not logged in!").show()
             }
             is User.User ->{
                 model.onEvent(ProductUiAction.GetHomePageProducts)

@@ -62,7 +62,7 @@ class VerifyFragment : BaseFragment(){
         when(state){
             is AuthState.Failure -> {
                 loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.err.toString())
+                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.err.toString()).show()
             }
 
             is AuthState.CodeSuccess -> {

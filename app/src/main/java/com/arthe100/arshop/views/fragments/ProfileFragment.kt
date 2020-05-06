@@ -24,9 +24,8 @@ import javax.inject.Inject
 class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
-
-    private val TAG = ProfileFragment::class.simpleName
     private lateinit var model: ProfileViewModel
+    private val TAG = ProfileFragment::class.simpleName
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent(requireActivity())

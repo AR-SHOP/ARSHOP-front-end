@@ -166,6 +166,3 @@ class CustomArFragment : CustomBaseArFragment() {
     }
 
 }
-
-
-
