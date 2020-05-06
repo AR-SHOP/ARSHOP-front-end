@@ -11,9 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.scripts.messege.DialogBoxManager
 import com.arthe100.arshop.scripts.messege.MessageManager
-import com.arthe100.arshop.scripts.messege.MessageType
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
@@ -44,7 +42,7 @@ class SignUpPasswordFragment : BaseFragment(), ILoadFragment{
         when(state){
             is AuthState.Failure -> {
                 loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.err.toString()).show()
+//                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.err.toString()).show()
             }
 
             is AuthState.SingupSuccess -> {
@@ -57,7 +55,7 @@ class SignUpPasswordFragment : BaseFragment(), ILoadFragment{
             is AuthState.LoginSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
                 session.saveUser(state.user)
-                DialogBoxManager.createDialog(activity, MessageType.SUCCESS, "user logged in!").show()
+//                DialogBoxManager.createDialog(activity, MessageType.SUCCESS, "user logged in!").show()
                 loadFragment(profileFragment)
             }
 

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.ar.sceneform:filament-android:1.15.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9045f6bc5bbf9712cac44ba207b5cc79/jetified-filament-android-1.15.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9045f6bc5bbf9712cac44ba207b5cc79/jetified-filament-android-1.15.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/647a9f872f1177ea32f8ff09620f0563/jetified-filament-android-1.15.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/647a9f872f1177ea32f8ff09620f0563/jetified-filament-android-1.15.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
