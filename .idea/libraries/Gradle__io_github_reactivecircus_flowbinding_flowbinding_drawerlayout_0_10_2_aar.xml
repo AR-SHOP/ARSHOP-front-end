@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: io.github.reactivecircus.flowbinding:flowbinding-drawerlayout:0.10.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1e8daa19c1570053ff4fd586980c41af/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1e8daa19c1570053ff4fd586980c41af/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/03fa5c7c73754ec970b48c18dd1ba344/jetified-flowbinding-drawerlayout-0.10.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/03fa5c7c73754ec970b48c18dd1ba344/jetified-flowbinding-drawerlayout-0.10.2/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.reactivecircus.flowbinding/flowbinding-drawerlayout/0.10.2/98d2368a250367680d066159469ff37748066e7d/flowbinding-drawerlayout-0.10.2-javadoc.jar!/" />

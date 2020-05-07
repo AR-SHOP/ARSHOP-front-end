@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.victor:lib:1.0.4@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bbc1720b729380b4922e8ec9cb328e59/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bbc1720b729380b4922e8ec9cb328e59/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/411a799d2290e1856256d486a407aa4e/jetified-lib-1.0.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/411a799d2290e1856256d486a407aa4e/jetified-lib-1.0.4/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.victor/lib/1.0.4/46bd7bfe79eb0a150197c894ce1e571ea4aab833/lib-1.0.4-javadoc.jar!/" />

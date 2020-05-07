@@ -36,7 +36,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/product_image"
+            app:layout_constraintTop_toBottomOf="@id/product_image"
             app:layout_constraintVertical_bias="0.0"
             />
 
@@ -47,7 +47,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_text"
+            app:layout_constraintTop_toBottomOf="@id/name_text"
             app:layout_constraintVertical_bias="0.0"
             android:orientation="horizontal">
 
@@ -94,10 +94,10 @@
             android:textAlignment="center"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/product_brand"
+            app:layout_constraintEnd_toEndOf="@id/product_brand"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/product_brand"
-            app:layout_constraintTop_toBottomOf="@+id/product_brand"
+            app:layout_constraintStart_toStartOf="@id/product_brand"
+            app:layout_constraintTop_toBottomOf="@id/product_brand"
             app:layout_constraintVertical_bias="0.0"
             android:textDirection="rtl"
             android:layoutDirection="rtl"/>
@@ -109,15 +109,17 @@
             android:layout_margin="50dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="32dp"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="@color/colorPrimary"
+            android:elevation="10dp"
             android:text="@string/ar_view_btn"
             android:textSize="20dp"
-            android:textColor="@color/colorBackgroud"
+            android:textColor="@color/colorBackground"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/description_text"
+            app:layout_constraintEnd_toEndOf="@id/description_text"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/description_text"
-            app:layout_constraintTop_toBottomOf="@+id/description_text"
+            app:layout_constraintStart_toStartOf="@id/description_text"
+            app:layout_constraintTop_toBottomOf="@id/description_text"
             app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17053b2a-4f8d-46cd-a78b-dfbf8af29ccc" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_navigation_navigation_common_1_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_navigation_navigation_common_1_0_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_navigation_navigation_common_ktx_1_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_navigation_navigation_common_ktx_1_0_0_aar.xml" afterDir="false" />
@@ -106,6 +107,18 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_github_reactivecircus_flowbinding_flowbinding_swiperefreshlayout_0_10_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_github_reactivecircus_flowbinding_flowbinding_swiperefreshlayout_0_10_2_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/messege/DialogBoxManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/dialogBox/DialogBoxManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/CartFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/CartFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/CustomerCartFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/CustomerCartFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/HomeFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/LoginFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/LoginFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/OrdersFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/OrdersFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProfileFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProfileFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/SignUpPasswordFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/SignUpPasswordFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/VerifyFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/VerifyFragment.kt" afterDir="false" />
+>>>>>>> ui
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -113,10 +126,14 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_27" />
+=======
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_26" />
+>>>>>>> ui
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -125,7 +142,12 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
@@ -133,57 +155,38 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Object" />
-        <option value="Class" />
         <option value="Interface" />
-        <option value="Kotlin Interface" />
-        <option value="Kotlin Class" />
         <option value="Kotlin File" />
+        <option value="Kotlin Interface" />
+        <option value="resourceFile" />
+        <option value="Kotlin Class" />
+        <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>rxJa</find>
-      <find>rxJava</find>
-      <find>ofType</find>
-      <find>filterIsInstance</find>
-      <find>lifecycle</find>
-      <find>navigation</find>
-      <find>handleSignUp</find>
-      <find>GetHomePageProfileAction</find>
-      <find>requireActivity()</find>
-      <find>requireContext</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="network" />
       </map>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectId" id="1bajaUogycon4A2iBueazHJyZmO" />
+=======
+  <component name="ProjectId" id="1bTvZsfzI81BnR6UsQu9rzVolvd" />
+>>>>>>> ui
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="DEBUGGABLE_DEVICE" value="emulator-5554" />
-    <property name="DEBUGGABLE_PROCESS" value="com.arthe100.arshop" />
-    <property name="DEBUGGER_ID" value="Auto" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_26" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-29T12:33:45.381Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-05T09:30:25.695Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="device.picker.selection" value="Pixel_2_API_27" />
-    <property name="last_opened_file_path" value="E:/Backups/Programming/tempAr" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../animation" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
-    <property name="project.structure.last.edited" value="Dependencies" />
-    <property name="project.structure.proportion" value="0.17" />
-    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="show.migrate.to.gradle.popup" value="false" />
-  </component>
-  <component name="PsdUISettings">
-    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -191,9 +194,11 @@
       <recent name="com.arthe100.arshop.repositories" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.arthe100.arshop.scripts.messege" />
+      <recent name="com.arthe100.arshop.scripts.di.modules" />
+      <recent name="com.arthe100.arshop.scripts.di.modules.SubComponentModules" />
+      <recent name="com.arthe100.arshop.views" />
       <recent name="com.arthe100.arshop.scripts.mvi.Auth" />
-      <recent name="com.arthe100.arshop.scripts.mvi.mviBase" />
-      <recent name="com.arthe100.arshop.repositories" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -307,58 +312,91 @@
       <option name="project" value="LOCAL" />
       <updated>1587992344515</updated>
     </task>
-    <task id="LOCAL-00005" summary="attached profileFragment to server (not completed)">
-      <created>1588176751022</created>
+    <task id="LOCAL-00005" summary="changed color.&#10;fixed problem.">
+      <created>1588669386582</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1588176751022</updated>
+      <updated>1588669386582</updated>
     </task>
-    <task id="LOCAL-00006" summary="developed profileFragment (not completed yet)">
-      <created>1588179368436</created>
+    <task id="LOCAL-00006" summary="added DialogBoxModule and tested in profileFragment.">
+      <created>1588688500480</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1588179368436</updated>
+      <updated>1588688500515</updated>
     </task>
-    <task id="LOCAL-00007" summary="developed profileFragment (not completed yet) part 2.">
-      <created>1588180566929</created>
+    <task id="LOCAL-00007" summary="added anim sources.">
+      <created>1588754192625</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1588180566929</updated>
+      <updated>1588754192625</updated>
     </task>
-    <task id="LOCAL-00008" summary="fixed the error.">
-      <created>1588232169028</created>
+    <task id="LOCAL-00008" summary="changed DialogBox to manager and added it to DAGGER2.">
+      <created>1588754800146</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1588232169029</updated>
+      <updated>1588754800146</updated>
     </task>
-    <task id="LOCAL-00009" summary="changed the render to display success.">
-      <created>1588234238756</created>
+    <task id="LOCAL-00009" summary="debugged DialogBoxManager and removed it from DAGGER2.&#10;removed useless imports.&#10;added animationActivity style.">
+      <created>1588757356082</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1588234238757</updated>
+      <updated>1588757356083</updated>
     </task>
-    <task id="LOCAL-00010" summary="changed the render to display the userInfo">
-      <created>1588234767078</created>
+    <task id="LOCAL-00010" summary="debugged the problems.">
+      <created>1588757925617</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1588234767078</updated>
+      <updated>1588757925617</updated>
     </task>
-    <task id="LOCAL-00011" summary="developed profile">
-      <created>1588239147343</created>
+    <task id="LOCAL-00011" summary="set dialog states.&#10;set dialog strings.&#10;set dialog actions.">
+      <created>1588767150142</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1588239147343</updated>
+      <updated>1588767150142</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="replaced messageManager with dialog.&#10;removed useless codes.&#10;finished DialogBox messages.">
+      <created>1588773223908</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1588773223908</updated>
+    </task>
+    <task id="LOCAL-00013" summary="debugged dialogs usage.">
+      <created>1588774040650</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1588774040650</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added DialogBox again.">
+      <created>1588774611803</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1588774611803</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+>>>>>>> ui
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -371,26 +409,13 @@
         </entry>
       </map>
     </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list />
-          </value>
-        </entry>
-        <entry key="User">
-          <value>
-            <list />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added kotlinx-coroutines-android.&#10;get sure to sync first." />
     <MESSAGE value="edit .idea" />
     <MESSAGE value="added ProductService, model.Product, ProductRep" />
     <MESSAGE value="deleted useless files.&#10;edited Product model.&#10;edited APIs.&#10;change java files to .kt.&#10;remove not completed files.&#10;modified APIs and adapt them with new models." />
+<<<<<<< HEAD
     <MESSAGE value="attached profileFragment to server (not completed)" />
     <MESSAGE value="developed profileFragment (not completed yet)" />
     <MESSAGE value="developed profileFragment (not completed yet) part 2." />
@@ -416,5 +441,18 @@
         <watch expression="this.this$0" custom="com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener" />
       </configuration>
     </watches-manager>
+=======
+    <MESSAGE value="changed color.&#10;fixed problem." />
+    <MESSAGE value="added DialogBoxModule and tested in profileFragment." />
+    <MESSAGE value="added anim sources." />
+    <MESSAGE value="changed DialogBox to manager and added it to DAGGER2." />
+    <MESSAGE value="debugged DialogBoxManager and removed it from DAGGER2.&#10;removed useless imports.&#10;added animationActivity style." />
+    <MESSAGE value="debugged the problems." />
+    <MESSAGE value="set dialog states.&#10;set dialog strings.&#10;set dialog actions." />
+    <MESSAGE value="replaced messageManager with dialog.&#10;removed useless codes.&#10;finished DialogBox messages." />
+    <MESSAGE value="debugged dialogs usage." />
+    <MESSAGE value="added DialogBox again." />
+    <option name="LAST_COMMIT_MESSAGE" value="added DialogBox again." />
+>>>>>>> ui
   </component>
 </project>

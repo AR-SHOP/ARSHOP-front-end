@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: io.github.reactivecircus.flowbinding:flowbinding-android:0.10.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/49e4863a38c12ce35231e8e2f37fa8ca/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/49e4863a38c12ce35231e8e2f37fa8ca/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1dbcc98f04c1895094d1828316b2c6f0/jetified-flowbinding-android-0.10.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1dbcc98f04c1895094d1828316b2c6f0/jetified-flowbinding-android-0.10.2/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.reactivecircus.flowbinding/flowbinding-android/0.10.2/948d051e32f936952d5e66f0a4af1fbc304d3960/flowbinding-android-0.10.2-javadoc.jar!/" />

@@ -33,16 +33,16 @@ import javax.inject.Inject
 
 
 class CustomArFragment : CustomBaseArFragment() {
+    @Inject lateinit var arInfoCardManager : IInfoManager
+    @Inject lateinit var messageManager : MessageManager
 
-    public val tableUrl = "https://poly.googleapis.com/downloads/fp/1586167353776716/8cnrwlAWqx7/cfVCFxWqtbc/Table_Large_Rectangular_01.gltf"
-    public val duckUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
-    public val bedUrl = "https://poly.googleapis.com/downloads/fp/1586167422468753/8mkAgVYGbL4/5oNDqZI-I0J/Bed_01.gltf"
+//    public val tableUrl = "https://poly.googleapis.com/downloads/fp/1586167353776716/8cnrwlAWqx7/cfVCFxWqtbc/Table_Large_Rectangular_01.gltf"
+//    public val duckUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
+//    public val bedUrl = "https://poly.googleapis.com/downloads/fp/1586167422468753/8mkAgVYGbL4/5oNDqZI-I0J/Bed_01.gltf"
 
-    override fun onStart() {
-        requireActivity().bottom_navbar.visibility = View.INVISIBLE
-        super.onStart()
-    }
-
+    private val TAG = CustomArFragment::class.simpleName
+    private val models : MutableMap<String , ModelRenderable> = mutableMapOf()
+    private var currentUri : String = ""
 
     override fun inject() {
         (activity?.application as BaseApplication)
@@ -50,13 +50,39 @@ class CustomArFragment : CustomBaseArFragment() {
                 .arComponent().create().inject(this)
     }
 
-    private val TAG = CustomArFragment::class.simpleName
-    private val models : MutableMap<String , ModelRenderable> = mutableMapOf()
-    private var currentUri : String = ""
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-    @Inject lateinit var arInfoCardManager : IInfoManager
-    @Inject lateinit var messageManager : MessageManager
+        val view = inflater.inflate(R.layout.ar_fragment_layout , container , false)
+        val arFrame = view.findViewById<FrameLayout>(R.id.ar_container)
+        val v = super.onCreateView(inflater, arFrame, savedInstanceState)
+        Log.d("abcd" , "$v")
+        (view as ViewGroup).addView(v)
+        return view
+    }
 
+    override fun onDetach() {
+        requireActivity().bottom_navbar.visibility = View.VISIBLE
+        super.onDetach()
+    }
+
+    override fun onStart() {
+        requireActivity().bottom_navbar.visibility = View.INVISIBLE
+        super.onStart()
+    }
+
+    override fun getSessionConfiguration(session: Session?): Config {
+        val conf = super.getSessionConfiguration(session)
+        init()
+        return conf
+    }
+
+    fun setUri(uri: String) {
+        this.currentUri = uri
+    }
+
+    override fun toString(): String {
+        return "AR Fragment"
+    }
 
 //    init {
 //        setUri(tableUrl)
@@ -90,24 +116,12 @@ class CustomArFragment : CustomBaseArFragment() {
         arInfoCardManager.init(sceneView.scene)
     }
 
-    override fun getSessionConfiguration(session: Session?): Config {
-        val conf = super.getSessionConfiguration(session)
-        init()
-        return conf
-    }
-
-
     private fun showInfo(parent : Node , root : Node){
         arInfoCardManager.addInfo(parent) {
             root.renderable = null
             root.removeChild(parent) }
 
         messageManager.toast(requireContext() , "model hit!")
-    }
-
-
-    fun setUri(uri: String) {
-        this.currentUri = uri
     }
 
     private fun setModel(uri: String , anchor: Anchor){
@@ -151,32 +165,4 @@ class CustomArFragment : CustomBaseArFragment() {
         node.setOnTapListener{ _, _ -> showInfo(node , anchorNode) }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        val view = inflater.inflate(R.layout.ar_fragment_layout , container , false)
-        val arFrame = view.findViewById<FrameLayout>(R.id.ar_container)
-
-
-        val v = super.onCreateView(inflater, arFrame, savedInstanceState)
-        Log.d("abcd" , "$v")
-
-
-
-        (view as ViewGroup).addView(v)
-        return view
-    }
-
-    override fun onDetach() {
-        requireActivity().bottom_navbar.visibility = View.VISIBLE
-//        activity!!.ar_buttons.visibility = View.INVISIBLE
-        super.onDetach()
-    }
-
-
-    override fun toString(): String {
-        return "AR"
-    }
 }
-
-
-

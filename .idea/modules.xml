@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-arshop.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-arshop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Hossein-AndroidStudioProjects-arshop.iml" filepath="$PROJECT_DIR$/Hossein-AndroidStudioProjects-arshop.iml" group="arshop" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="arshop/app" />
       <module fileurl="file://$PROJECT_DIR$/arshop.iml" filepath="$PROJECT_DIR$/arshop.iml" group="arshop" />
     </modules>

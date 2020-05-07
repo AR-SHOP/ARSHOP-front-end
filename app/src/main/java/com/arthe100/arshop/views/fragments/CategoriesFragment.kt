@@ -11,7 +11,6 @@ import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.views.BaseFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 
-
 class CategoriesFragment : BaseFragment() {
 
     override fun inject() {
@@ -21,18 +20,11 @@ class CategoriesFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.categories_fragment_layout, container, false)
     }
 
-
-    override fun onStart() {
-        super.onStart()
-    }
-
-
     override fun toString(): String {
-        return "Categories"
+        return "Categories Fragment"
     }
 
 }

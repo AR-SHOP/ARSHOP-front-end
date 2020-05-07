@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.afollestad.material-dialogs:input:3.3.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/141bd4b20c7f91fba4a66a2f0db30f22/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/141bd4b20c7f91fba4a66a2f0db30f22/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b76ba61679a972103adbca09477fcf93/jetified-input-3.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b76ba61679a972103adbca09477fcf93/jetified-input-3.3.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.afollestad.material-dialogs/input/3.3.0/9981511576fca2c01f51b58703337c5475b3e64a/input-3.3.0-javadoc.jar!/" />

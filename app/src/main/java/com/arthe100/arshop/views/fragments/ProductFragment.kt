@@ -19,26 +19,20 @@ import kotlinx.android.synthetic.main.product_fragment_layout.*
 import java.net.URI
 import javax.inject.Inject
 
-class ProductFragment : BaseFragment(), ILoadFragment {
-
+class ProductFragment : BaseFragment() {
     @Inject lateinit var customArFragment: CustomArFragment
     private lateinit var product: Product
-
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent(requireActivity())
             .inject(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.product_fragment_layout, container, false)
     }
-
 
     override fun onStart() {
         name_text.text = product.name
@@ -62,15 +56,11 @@ class ProductFragment : BaseFragment(), ILoadFragment {
         super.onStart()
     }
 
+    override fun toString(): String {
+        return "Product Fragment"
+    }
+
     fun setProduct(product: Product) {
         this.product = product
     }
-
-    override fun loadFragment(fragment: Fragment?) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment!!, fragment.toString())
-            .addToBackStack(fragment.tag)
-            .commit()
-    }
-
 }

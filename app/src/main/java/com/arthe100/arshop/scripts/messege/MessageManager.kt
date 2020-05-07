@@ -10,7 +10,6 @@ import javax.inject.Singleton
 @Singleton
 class MessageManager () {
 
-
     fun toast(context: Context, msg : String){
         val toast = Toast.makeText(context, msg , Toast.LENGTH_LONG)
         toast.setGravity(Gravity.CENTER, 0, 0)
@@ -18,15 +17,11 @@ class MessageManager () {
     }
 
     fun showDialog(context: Context, dialogTitle: String?, message: String?) {
-
         MaterialDialog(context).show {
             title(null, dialogTitle)
             message(null, message)
             positiveButton(null, context.resources.getString(R.string.ok))
             negativeButton(null, context.resources.getString(R.string.cancel))
         }
-
     }
-
-
 }

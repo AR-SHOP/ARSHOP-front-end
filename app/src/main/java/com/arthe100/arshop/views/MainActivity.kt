@@ -12,7 +12,6 @@ import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.fragments.*
-import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import java.util.*
 import javax.inject.Inject
@@ -26,11 +25,16 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var customArFragment: CustomArFragment
+    @Inject lateinit var fragmentFactory: FragmentFactory
     @Inject lateinit var session: UserSession
-    @Inject lateinit var profileFragment: ProfileFragment
+    lateinit var homeFragment: HomeFragment
+    lateinit var categoriesFragment: CategoriesFragment
+    lateinit var cartFragment: CartFragment
+    lateinit var loginFragment: LoginFragment
+    lateinit var profileFragment: ProfileFragment
 
+    var selectedItemIdStack: Stack<Int> = Stack()
     private var selectedFragment: Fragment? = HomeFragment()
-    private var selectedItemIdStack: Stack<Int> = Stack()
 
 
 
@@ -40,11 +44,15 @@ class MainActivity : BaseActivity(), ILoadFragment {
                 .inject(this) // i want to get injected
     }
 
-    private lateinit var searchView: MaterialSearchView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
+        homeFragment = fragmentFactory.create<HomeFragment>()
+        categoriesFragment = fragmentFactory.create<CategoriesFragment>()
+        cartFragment = fragmentFactory.create<CartFragment>()
+        loginFragment = fragmentFactory.create<LoginFragment>()
+        profileFragment = fragmentFactory.create<ProfileFragment>()
+        selectedFragment = homeFragment
         setBottomNavigationView(savedInstanceState)
     }
 
@@ -59,20 +67,19 @@ class MainActivity : BaseActivity(), ILoadFragment {
         bottom_navbar.setOnNavigationItemSelectedListener {item ->
             when (item.itemId) {
                 R.id.btm_navbar_home -> {
-                    selectedFragment = HomeFragment()
+                    selectedFragment = homeFragment
                     if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                 }
                 R.id.btm_navbar_categories -> {
-                    selectedFragment = CategoriesFragment()
+                    selectedFragment = categoriesFragment
                     if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                 }
                 R.id.btm_navbar_cart -> {
-                    selectedFragment = CartFragment()
+                    selectedFragment = cartFragment
                     if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                 }
                 R.id.btm_navbar_profile -> {
                     val userSess = session.user
-
                     when (userSess){
                         is User.User ->{
                             selectedFragment = profileFragment
@@ -80,11 +87,10 @@ class MainActivity : BaseActivity(), ILoadFragment {
                         }
 
                         is User.GuestUser ->{
-                            selectedFragment = LoginFragment()
+                            selectedFragment = loginFragment
                             if (selectedItemIdStack.peek() != item.itemId) selectedItemIdStack.push(item.itemId)
                         }
                     }
-
                 }
             }
             loadFragment(selectedFragment)
@@ -94,13 +100,16 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     override fun onBackPressed() {
         var bottomNavbarFragments =
-            arrayListOf("Home", "Categories", "Cart", "Login", "Profile")
+            arrayListOf("$homeFragment", "$categoriesFragment", "$cartFragment",
+                "$loginFragment", "$profileFragment")
         selectedFragment = getTheLastFragment()
         var fragmentTag = selectedFragment!!.tag
-        Log.v("fragmentTag", fragmentTag)
 
         if (fragmentTag in bottomNavbarFragments) {
-            selectedItemIdStack.pop()
+            if (fragmentTag == loginFragment.toString() && loginFragment.inCartFragment) { }
+            else {
+                selectedItemIdStack.pop()
+            }
             if (selectedItemIdStack.size >= 1) {
                 bottom_navbar.selectedItemId = selectedItemIdStack.peek()
                 supportFragmentManager.popBackStack()
@@ -122,20 +131,5 @@ class MainActivity : BaseActivity(), ILoadFragment {
         val fragmentTag: String? =
             supportFragmentManager.getBackStackEntryAt(backStackSize - 1).name
         return supportFragmentManager.findFragmentByTag(fragmentTag)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu_layout, menu)
-        val item: MenuItem = menu.findItem(R.id.action_search)
-        searchView.setMenuItem(item)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-
-    override fun loadFragment(fragment: Fragment?) {
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment!!, fragment.toString())
-                .addToBackStack(fragment.tag)
-                .commit()
     }
 }
