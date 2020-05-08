@@ -7,7 +7,9 @@ import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.product_card_view.view.*
+
+
+
 internal class ProductViewHolder(itemView: View)
     : RecyclerView.ViewHolder(itemView) {
 //    private var dataTitle: TextView? = itemView.product_title

@@ -18,7 +18,7 @@ class ProductAdapter()
 
         return ProductViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.product_card_view, parent, false)
+                .inflate(R.layout.product_grid_item, parent, false)
         )
     }
 

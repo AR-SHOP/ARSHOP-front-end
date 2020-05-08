@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,6 +24,7 @@ import com.arthe100.arshop.views.ILoadFragment
 import com.arthe100.arshop.views.Adapters.OnItemClickListener
 import com.arthe100.arshop.views.Adapters.ProductAdapter
 import com.arthe100.arshop.views.adapters.DiscountAdapter
+import com.arthe100.arshop.views.adapters.HomeGridViewAdapter
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
@@ -39,13 +41,8 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     private lateinit var discountAdapter: DiscountAdapter
     private lateinit var model: ProductViewModel
     private lateinit var messageManager: MessageManager
+    private lateinit var gridViewAdapter: HomeGridViewAdapter
 
-
-//    var images: List<String> =
-//        arrayListOf("https://cdn.pixabay.com/photo/2017/10/27/12/28/discounts-2894129_1280.png",
-//        "https://cdn.pixabay.com/photo/2017/11/29/13/28/a-discount-2986181_1280.jpg",
-//        "https://cdn.pixabay.com/photo/2020/04/23/19/25/symbol-5083746_1280.png")
-//
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         messageManager = MessageManager()
@@ -65,7 +62,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
             is ProductState.GetProductsSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
-                setRecyclerView()
+                setGridView()
                 addProducts(state.products)
             }
 
@@ -103,8 +100,8 @@ class HomeFragment: BaseFragment(), ILoadFragment {
         super.onStart()
     }
 
-    private fun addProducts(products: List<Product>) {
-        productAdapter.submitList(products)
+    private fun addProducts(data: List<Product>) {
+        gridViewAdapter.submitList(data)
     }
 
     private fun addDiscounts(discounts: List<String>) {
@@ -114,28 +111,28 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     private fun setRecyclerView() {
         discountAdapter = DiscountAdapter()
 
-//        productAdapter = ProductAdapter()
-//        productAdapter.setOnItemClickListener(object :
-//            OnItemClickListener {
-//            override fun onItemClick(position: Int) {
-//                productFragment.setProduct(productAdapter.dataList[position])
-//                loadFragment(productFragment)
-////                customArFragment.setUri(productAdapter.dataList[position].arModel)
-////                loadFragment(customArFragment)
-//            }
-//        })
         discountAdapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Toast.makeText(requireContext(),"Clicked", Toast.LENGTH_LONG).show()
             }
         })
 
-        Log.v("abc", "clicked")
-
-        recycler_view.apply {
+        discount_recycler_view.apply {
             layoutManager = LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false)
             adapter = discountAdapter
+        }
+    }
+
+    private fun setGridView() {
+        gridViewAdapter = HomeGridViewAdapter(requireContext())
+
+        home_grid_view.setOnItemClickListener { _, _, _, _ ->
+            messageManager.toast(requireContext(), "Clicked")
+        }
+
+        home_grid_view.apply {
+            adapter = gridViewAdapter
         }
     }
 
