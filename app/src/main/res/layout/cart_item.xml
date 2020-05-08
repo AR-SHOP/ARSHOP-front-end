@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:layoutDirection="rtl"
+            android:padding="10dp"
+            android:textDirection="rtl">
+
+        <ImageView
+                android:id="@+id/cart_item_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="6"/>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="4">
+
+            <TextView
+                    android:id="@+id/cart_item_name"
+                    android:text="محصول"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="25sp"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"/>
+
+            <TextView
+                    android:id="@+id/cart_item_price"
+                    android:text="قیمت"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorSecondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"/>
+            <Button
+                    android:id="@+id/delete_btn"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/colorBackground"
+                    android:background="@drawable/rounded_corners"/>
+        </LinearLayout>
+        
+
+    </LinearLayout>
+        
+    
+    
+</androidx.cardview.widget.CardView>

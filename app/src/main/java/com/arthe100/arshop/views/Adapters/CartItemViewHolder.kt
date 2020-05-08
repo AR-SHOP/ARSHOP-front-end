@@ -7,24 +7,28 @@ import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.views.Adapters.OnItemClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.discount_card_view.view.*
+import kotlinx.android.synthetic.main.cart_item.view.*
+import kotlinx.android.synthetic.main.categories_fragment_layout.view.*
 
-class DiscountViewHolder(itemView: View)
-    : BaseItemViewHolder<String>(itemView) {
-
-    var discountImageUrl = itemView.discount_card_image
+class CartItemViewHolder(itemView: View) : BaseItemViewHolder<Product>(itemView) {
 
 
-    override fun bind(imageUrl: String, listener: OnItemClickListener) {
+    var dataName = itemView.cart_item_name
+    var dataPrice = itemView.cart_item_price
+    var dataImage = itemView.cart_item_image
+
+    override fun bind(data: Product, listener: OnItemClickListener) {
+        dataName.text = data.name
+        dataPrice.text = data.price.toString()
+
         val requestOptions = RequestOptions()
             .placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_launcher_background)
 
         Glide.with(itemView.context)
             .applyDefaultRequestOptions(requestOptions)
-            .load(imageUrl)
-            .into(discountImageUrl)
-
+            .load(data.thumbnail)
+            .into(dataImage)
 
         itemView.setOnClickListener{
             var position: Int = adapterPosition
@@ -32,6 +36,5 @@ class DiscountViewHolder(itemView: View)
                 listener.onItemClick(position)
             }
         }
-
     }
 }

@@ -32,6 +32,7 @@
     <string name="continue_btn">ادامه</string>
     <string name="enter_password">لطفا رمز ورود خود را وارد نمایید</string>
     <string name="confirm_password">تایید رمز عبور</string>
+    <string name="add_to_cart">افزودن به سبد خرید</string>
 
     <!-- DialogBoxManager's strings -->
     <string name="dialog_positive_button">قبول</string>

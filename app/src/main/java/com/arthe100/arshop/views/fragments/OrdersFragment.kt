@@ -9,10 +9,10 @@ import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.views.Adapters.OnItemClickListener
-import com.arthe100.arshop.views.Adapters.ProductAdapter
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.views.adapters.CartItemAdapter
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.home_fragment_layout.*
+import kotlinx.android.synthetic.main.cart_item.*
 import kotlinx.android.synthetic.main.orders_fragment.*
 import kotlinx.android.synthetic.main.orders_fragment.login_btn
 import javax.inject.Inject
@@ -21,7 +21,7 @@ class OrdersFragment : BaseFragment() {
     @Inject lateinit var fragmentFactory: FragmentFactory
     lateinit var loginFragment: LoginFragment
     lateinit var productFragment: ProductFragment
-    lateinit var productAdapter: ProductAdapter
+    lateinit var cartItemAdapter: CartItemAdapter
     var loggedIn: Boolean = false
 
     override fun inject() {
@@ -43,7 +43,7 @@ class OrdersFragment : BaseFragment() {
             login_btn.visibility = View.INVISIBLE
             empty_orders_layout.visibility = View.VISIBLE
             ordered_items_list.visibility = View.VISIBLE
-
+            delete_btn.text = "حذف از لیست سفارش\u200Cها"
         }
         else {
             login_btn.visibility = View.VISIBLE
@@ -58,21 +58,21 @@ class OrdersFragment : BaseFragment() {
     }
 
     private fun addProducts(products: List<Product>) {
-        productAdapter.submitList(products)
+        cartItemAdapter.submitList(products)
     }
 
     private fun setRecyclerView() {
-        productAdapter = ProductAdapter()
-        productAdapter.setOnItemClickListener(object :
+        cartItemAdapter = CartItemAdapter()
+        cartItemAdapter.setOnItemClickListener(object :
             OnItemClickListener {
             override fun onItemClick(position: Int) {
-                productFragment.setProduct(productAdapter.dataList[position])
+                productFragment.setProduct(cartItemAdapter.dataList[position])
                 loadFragment(productFragment)
             }
         })
-        recycler_view.apply {
+        ordered_items_list.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = productAdapter
+            adapter = cartItemAdapter
         }
     }
 

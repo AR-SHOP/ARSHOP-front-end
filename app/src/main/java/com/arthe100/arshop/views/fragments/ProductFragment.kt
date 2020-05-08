@@ -31,9 +31,18 @@ class ProductFragment : BaseFragment() {
     }
 
     override fun onStart() {
-        name_text.text = product.name
-        brand_text.text = product.manufacturer
-        description_text.text = product.description
+
+        ar_btn.setOnClickListener {
+
+        }
+
+        add_to_cart_btn.setOnClickListener {
+
+        }
+
+        product_details_name.text = product.name
+        product_details_brand.text = product.manufacturer
+        product_details_description.text = product.description
 
         val requestOptions = RequestOptions()
             .placeholder(R.drawable.ic_launcher_background)
@@ -42,7 +51,7 @@ class ProductFragment : BaseFragment() {
         Glide.with(requireContext())
             .applyDefaultRequestOptions(requestOptions)
             .load(product.thumbnail)
-            .into(discount_card_image)
+            .into(product_details_image)
 
         ar_btn.setOnClickListener {
             customArFragment.setUri(product.arModel)

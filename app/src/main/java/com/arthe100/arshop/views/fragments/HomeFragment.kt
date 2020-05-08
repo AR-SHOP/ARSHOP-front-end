@@ -1,11 +1,9 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -22,7 +20,6 @@ import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
 import com.arthe100.arshop.views.Adapters.OnItemClickListener
-import com.arthe100.arshop.views.Adapters.ProductAdapter
 import com.arthe100.arshop.views.adapters.DiscountAdapter
 import com.arthe100.arshop.views.adapters.HomeGridViewAdapter
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
@@ -37,7 +34,6 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     @Inject lateinit var session: UserSession
     @Inject lateinit var productFragment: ProductFragment
 
-    private lateinit var productAdapter: ProductAdapter
     private lateinit var discountAdapter: DiscountAdapter
     private lateinit var model: ProductViewModel
     private lateinit var messageManager: MessageManager

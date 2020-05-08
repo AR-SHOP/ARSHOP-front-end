@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.views.Adapters.OnItemClickListener
 
-class DiscountAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DiscountAdapter : BaseItemAdapter<String>() {
     private lateinit var mListener: OnItemClickListener
     lateinit var imageList: List<String>
         private set
@@ -32,11 +32,11 @@ class DiscountAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
     override fun getItemCount(): Int = imageList.size
 
-    fun setOnItemClickListener(listener: OnItemClickListener) {
+    override fun setOnItemClickListener(listener: OnItemClickListener) {
         mListener = listener
     }
 
-    fun submitList(discountImages: List<String>){
+    override fun submitList(discountImages: List<String>){
         imageList = discountImages
     }
 
