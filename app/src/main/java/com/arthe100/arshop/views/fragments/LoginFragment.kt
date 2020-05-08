@@ -87,10 +87,11 @@ class LoginFragment : BaseFragment(), ILoadFragment {
 
             if(user == null)
                 loadFragment(phoneNumberFragment)
-            else { }
+            else {
                 DialogBoxManager.createDialog(activity, MessageType.ERROR,
                     "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
                     .show()
+            }
         }
 
         verify_continue_btn.setOnClickListener {
