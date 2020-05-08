@@ -39,8 +39,16 @@ class CustomArFragment : CustomBaseArFragment() {
 //    public val tableUrl = "https://poly.googleapis.com/downloads/fp/1586167353776716/8cnrwlAWqx7/cfVCFxWqtbc/Table_Large_Rectangular_01.gltf"
 //    public val duckUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
 //    public val bedUrl = "https://poly.googleapis.com/downloads/fp/1586167422468753/8mkAgVYGbL4/5oNDqZI-I0J/Bed_01.gltf"
+    private val TAG = CustomArFragment::class.simpleName
+    private lateinit var model: ArViewModel
+    private lateinit var currentUri: String
 
-    private val models : MutableMap<String , ModelRenderable> = mutableMapOf()
+    @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
+    @Inject lateinit var arInfoCardManager : IInfoManager
+    @Inject lateinit var messageManager : MessageManager
+
+
+
     override fun inject() {
         (activity?.application as BaseApplication)
                 .mainComponent(requireActivity())
@@ -55,13 +63,6 @@ class CustomArFragment : CustomBaseArFragment() {
         (view as ViewGroup).addView(v)
         return view
     }
-    private val TAG = CustomArFragment::class.simpleName
-    private lateinit var model: ArViewModel
-    private lateinit var currentUri: String
-
-    @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var arInfoCardManager : IInfoManager
-    @Inject lateinit var messageManager : MessageManager
     override fun onDetach() {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         super.onDetach()
