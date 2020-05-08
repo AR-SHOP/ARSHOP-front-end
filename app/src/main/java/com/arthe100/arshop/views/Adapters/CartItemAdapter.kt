@@ -1,13 +1,13 @@
-package com.arthe100.arshop.views.Adapters
+package com.arthe100.arshop.views.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.views.Adapters.OnItemClickListener
 
-class ProductAdapter()
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CartItemAdapter : BaseItemAdapter<Product>() {
 
     private lateinit var mListener: OnItemClickListener
     lateinit var dataList: List<Product>
@@ -15,29 +15,28 @@ class ProductAdapter()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-
-        return ProductViewHolder(
+        return CartItemViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.product_card_view, parent, false)
+                .inflate(R.layout.cart_item, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder) {
-            is ProductViewHolder -> {
+            is CartItemViewHolder -> {
                 holder.bind(dataList[position], mListener)
             }
         }
 
     }
+
     override fun getItemCount(): Int = dataList.size
 
-    fun setOnItemClickListener(listener: OnItemClickListener) {
+    override fun setOnItemClickListener(listener: OnItemClickListener) {
         mListener = listener
     }
 
-    fun submitList(productList: List<Product>){
-        dataList = productList
+    override fun submitList(data: List<Product>) {
+        dataList = data
     }
-
 }

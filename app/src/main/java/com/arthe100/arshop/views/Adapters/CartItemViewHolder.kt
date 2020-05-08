@@ -1,25 +1,25 @@
-package com.arthe100.arshop.views.Adapters
+package com.arthe100.arshop.views.adapters
 
 import android.view.View
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.views.Adapters.OnItemClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.product_card_view.view.*
+import kotlinx.android.synthetic.main.cart_item.view.*
+import kotlinx.android.synthetic.main.categories_fragment_layout.view.*
 
-internal class ProductViewHolder(itemView: View)
-    : RecyclerView.ViewHolder(itemView) {
-    private var dataTitle: TextView? = itemView.product_title
-    private var dataImageUrl = itemView.product_image
-    private var dataPrice: TextView? = itemView.product_price
+class CartItemViewHolder(itemView: View) : BaseItemViewHolder<Product>(itemView) {
 
-    fun bind(data: Product, listener: OnItemClickListener) {
 
-        dataTitle?.text = data.description
-        dataPrice?.text = data.price.toString()
+    var dataName = itemView.cart_item_name
+    var dataPrice = itemView.cart_item_price
+    var dataImage = itemView.cart_item_image
 
+    override fun bind(data: Product, listener: OnItemClickListener) {
+        dataName.text = data.name
+        dataPrice.text = data.price.toString()
 
         val requestOptions = RequestOptions()
             .placeholder(R.drawable.ic_launcher_background)
@@ -28,7 +28,7 @@ internal class ProductViewHolder(itemView: View)
         Glide.with(itemView.context)
             .applyDefaultRequestOptions(requestOptions)
             .load(data.thumbnail)
-            .into(dataImageUrl)
+            .into(dataImage)
 
         itemView.setOnClickListener{
             var position: Int = adapterPosition
@@ -37,7 +37,4 @@ internal class ProductViewHolder(itemView: View)
             }
         }
     }
-
-
-
 }

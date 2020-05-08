@@ -7,119 +7,118 @@
         tools:context=".views.fragments.ProductFragment">
 
     <ImageView
-            android:id="@+id/product_image"
+            android:id="@+id/product_details_image"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-            android:id="@+id/name_text"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:layoutDirection="rtl"
-            android:text="نام"
-            android:textAlignment="center"
-            android:textDirection="rtl"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:padding="25dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_image"
-            app:layout_constraintVertical_bias="0.0"
-            />
-
+    
+    
     <LinearLayout
-            android:id="@+id/product_brand"
+            android:id="@+id/details"
             android:layout_width="0dp"
-            android:layout_height="100dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/name_text"
-            app:layout_constraintVertical_bias="0.0"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl"
+            android:padding="20dp"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/product_details_image"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
 
         <TextView
-                android:id="@+id/brand_text"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_weight="1"
+                android:id="@+id/product_details_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layoutDirection="rtl"
-                android:text="نام سازنده"
-                android:textAlignment="center"
+                android:layout_weight="2"
+                android:text="نام"
+                android:textColor="@color/colorBackground"
+                android:textAlignment="viewStart"
                 android:textDirection="rtl"
-                android:textSize="15sp"
-                android:textStyle="normal"
-                android:padding="20dp"/>
+                android:textSize="30sp" />
+
         <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:id="@+id/product_details_brand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layoutDirection="rtl"
-                android:text="سازنده محصول: "
-                android:textAlignment="center"
+                android:text="سازنده محصول"
+                android:textColor="@color/colorBackground"
+                android:textSize="15sp"/>
+
+
+        <TextView
+                android:id="@+id/product_details_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:text="قیمت"
+                android:textAlignment="viewEnd"
                 android:textDirection="rtl"
                 android:textSize="18sp"
-                android:textStyle="normal"
-                android:padding="20dp"/>
-
+                android:textColor="@color/colorBackground"/>
 
 
     </LinearLayout>
-
-
+    
     <TextView
-            android:id="@+id/description_text"
+            android:id="@+id/product_details_description"
             android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
             android:text="توضیحات"
-            android:textStyle="normal"
-            android:textAlignment="center"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/product_brand"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/product_brand"
-            app:layout_constraintTop_toBottomOf="@id/product_brand"
-            app:layout_constraintVertical_bias="0.0"
-            android:textDirection="rtl"
-            android:layoutDirection="rtl"/>
+            android:padding="20dp"
+            android:textColor="@color/colorSecondary"
+            app:layout_constraintTop_toBottomOf="@id/details"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <Button
-            android:id="@+id/ar_btn"
+    <LinearLayout
+            android:id="@+id/buttons"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_margin="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="32dp"
-            android:background="@drawable/rounded_corners"
-            android:backgroundTint="@color/colorPrimary"
-            android:elevation="10dp"
-            android:text="@string/ar_view_btn"
-            android:textSize="20dp"
-            android:textColor="@color/colorBackground"
+            android:layout_height="65dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:layoutDirection="rtl"
+            android:textDirection="rtl"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/description_text"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/description_text"
-            app:layout_constraintTop_toBottomOf="@id/description_text"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_details_description"
+            app:layout_constraintVertical_bias="1.0">
+
+        <Button
+                android:id="@+id/ar_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="@color/colorBackground"
+                android:elevation="10dp"
+                android:layout_margin="10dp"
+                android:text="@string/ar_view_btn"
+                android:textSize="15dp"
+                android:textColor="@color/colorPrimary" />
+
+        <Button
+                android:id="@+id/add_to_cart_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="@color/colorBackground"
+                android:elevation="10dp"
+                android:layout_margin="10dp"
+                android:text="@string/add_to_cart"
+                android:textSize="15dp"
+                android:textColor="@color/colorPrimary" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

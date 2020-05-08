@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,8 +12,7 @@ import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.views.dialogBox.DialogBoxManager
-import com.arthe100.arshop.views.dialogBox.MessageType
+import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductState
 import com.arthe100.arshop.scripts.mvi.Products.ProductUiAction
@@ -20,7 +20,10 @@ import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
 import com.arthe100.arshop.views.Adapters.OnItemClickListener
-import com.arthe100.arshop.views.Adapters.ProductAdapter
+import com.arthe100.arshop.views.adapters.DiscountAdapter
+import com.arthe100.arshop.views.adapters.HomeGridViewAdapter
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
@@ -30,14 +33,16 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     @Inject lateinit var customArFragment: CustomArFragment
     @Inject lateinit var session: UserSession
     @Inject lateinit var productFragment: ProductFragment
-    private lateinit var productAdapter: ProductAdapter
-    private lateinit var model: ProductViewModel
 
+    private lateinit var discountAdapter: DiscountAdapter
+    private lateinit var model: ProductViewModel
+    private lateinit var messageManager: MessageManager
+    private lateinit var gridViewAdapter: HomeGridViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        messageManager = MessageManager()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
-
         model.currentViewState.observe(this , Observer(::render))
     }
 
@@ -53,7 +58,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
             is ProductState.GetProductsSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
-                setRecyclerView()
+                setGridView()
                 addProducts(state.products)
             }
 
@@ -62,6 +67,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
                 DialogBoxManager.createDialog(activity, MessageType.ERROR, state.throwable.toString()).show()
             }
         }
+
     }
 
     override fun inject() {
@@ -79,7 +85,8 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
         when(session.user){
             is User.GuestUser ->{
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, "not logged in!").show()
+                messageManager.toast(requireContext(), "Not logged in")
+//                DialogBoxManager.createDialog(activity, MessageType.ERROR, "not logged in!").show()
             }
             is User.User ->{
                 model.onEvent(ProductUiAction.GetHomePageProducts)
@@ -89,24 +96,39 @@ class HomeFragment: BaseFragment(), ILoadFragment {
         super.onStart()
     }
 
-    private fun addProducts(products: List<Product>) {
-        productAdapter.submitList(products)
+    private fun addProducts(data: List<Product>) {
+        gridViewAdapter.submitList(data)
+    }
+
+    private fun addDiscounts(discounts: List<String>) {
+        discountAdapter.submitList(discounts)
     }
 
     private fun setRecyclerView() {
-        productAdapter = ProductAdapter()
-        productAdapter.setOnItemClickListener(object :
-            OnItemClickListener {
+        discountAdapter = DiscountAdapter()
+
+        discountAdapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
-                productFragment.setProduct(productAdapter.dataList[position])
-                loadFragment(productFragment)
-//                customArFragment.setUri(productAdapter.dataList[position].arModel)
-//                loadFragment(customArFragment)
+                Toast.makeText(requireContext(),"Clicked", Toast.LENGTH_LONG).show()
             }
         })
-        recycler_view.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = productAdapter
+
+        discount_recycler_view.apply {
+            layoutManager = LinearLayoutManager(requireContext(),
+                LinearLayoutManager.HORIZONTAL, false)
+            adapter = discountAdapter
+        }
+    }
+
+    private fun setGridView() {
+        gridViewAdapter = HomeGridViewAdapter(requireContext())
+
+        home_grid_view.setOnItemClickListener { _, _, _, _ ->
+            messageManager.toast(requireContext(), "Clicked")
+        }
+
+        home_grid_view.apply {
+            adapter = gridViewAdapter
         }
     }
 
