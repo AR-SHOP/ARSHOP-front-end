@@ -74,12 +74,12 @@ class CustomerCartFragment : BaseFragment() {
 
     private fun render(state: CartState){
         when(state){
-            CartState.IdleState -> TODO()
-            CartState.LoadingState -> TODO()
-            is CartState.GetCartState -> TODO()
-            is CartState.AddToCartState -> TODO()
-            is CartState.RemoveFromCartState -> TODO()
-            is CartState.Failure -> TODO()
+//            CartState.IdleState -> TODO()
+//            CartState.LoadingState -> TODO()
+//            is CartState.GetCartState -> TODO()
+//            is CartState.AddToCartState -> TODO()
+//            is CartState.RemoveFromCartState -> TODO()
+//            is CartState.Failure -> TODO()
         }
     }
 
