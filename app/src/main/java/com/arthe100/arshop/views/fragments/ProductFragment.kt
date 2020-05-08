@@ -1,8 +1,6 @@
 package com.arthe100.arshop.views.fragments
 
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +9,10 @@ import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.ILoadFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.product_fragment_layout.*
-import java.net.URI
 import javax.inject.Inject
 
 class ProductFragment : BaseFragment() {
@@ -46,7 +42,7 @@ class ProductFragment : BaseFragment() {
         Glide.with(requireContext())
             .applyDefaultRequestOptions(requestOptions)
             .load(product.thumbnail)
-            .into(product_image)
+            .into(discount_card_image)
 
         ar_btn.setOnClickListener {
             customArFragment.setUri(product.arModel)

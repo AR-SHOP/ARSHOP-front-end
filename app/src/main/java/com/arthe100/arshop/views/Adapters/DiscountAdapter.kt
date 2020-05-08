@@ -1,0 +1,43 @@
+package com.arthe100.arshop.views.adapters
+
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
+import com.arthe100.arshop.R
+import com.arthe100.arshop.views.Adapters.OnItemClickListener
+
+class DiscountAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private lateinit var mListener: OnItemClickListener
+    lateinit var imageList: List<String>
+        private set
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+
+        return DiscountViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.discount_card_view, parent, false)
+        )
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when(holder) {
+            is DiscountViewHolder -> {
+                holder.bind(imageList[position], mListener)
+            }
+        }
+
+    }
+    override fun getItemCount(): Int = imageList.size
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        mListener = listener
+    }
+
+    fun submitList(discountImages: List<String>){
+        imageList = discountImages
+    }
+
+}

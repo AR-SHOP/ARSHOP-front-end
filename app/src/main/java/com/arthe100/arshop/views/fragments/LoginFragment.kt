@@ -73,8 +73,6 @@ class LoginFragment : BaseFragment(), ILoadFragment {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-//         Inflate the layout for this fragment
-//        requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.login_fragment_layout, container, false)
     }
 
