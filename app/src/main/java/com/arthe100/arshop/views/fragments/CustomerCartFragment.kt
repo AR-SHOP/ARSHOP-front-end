@@ -40,7 +40,6 @@ class CustomerCartFragment() : BaseFragment() {
             login_btn.visibility = View.INVISIBLE
             empty_cart_layout.visibility = View.VISIBLE
             cart_items_list.visibility = View.VISIBLE
-            delete_btn.text = "حذف از سبد خرید"
         }
         else {
             login_btn.visibility = View.VISIBLE

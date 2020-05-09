@@ -43,7 +43,6 @@ class OrdersFragment : BaseFragment() {
             login_btn.visibility = View.INVISIBLE
             empty_orders_layout.visibility = View.VISIBLE
             ordered_items_list.visibility = View.VISIBLE
-            delete_btn.text = "حذف از لیست سفارش\u200Cها"
         }
         else {
             login_btn.visibility = View.VISIBLE
