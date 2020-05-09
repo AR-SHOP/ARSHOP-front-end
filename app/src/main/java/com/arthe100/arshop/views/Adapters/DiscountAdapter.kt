@@ -10,7 +10,7 @@ import com.arthe100.arshop.views.Adapters.OnItemClickListener
 
 class DiscountAdapter : BaseItemAdapter<String>() {
     private lateinit var mListener: OnItemClickListener
-    lateinit var imageList: List<String>
+    private var imageList: List<String> = arrayListOf()
         private set
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

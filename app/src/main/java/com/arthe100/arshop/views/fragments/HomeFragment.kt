@@ -58,6 +58,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
             is ProductState.GetProductsSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
+                setRecyclerView()
                 setGridView()
                 addProducts(state.products)
             }
