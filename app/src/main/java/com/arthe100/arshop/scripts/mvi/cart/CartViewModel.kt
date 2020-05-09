@@ -17,8 +17,14 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
     val currentViewState : LiveData<CartState>
         get() = _currentViewState
 
+    private lateinit var currentCart: Cart
 
-
+    fun isInCart(id: Long) : Boolean{
+        if(!this::currentCart.isInitialized) return false
+        return currentCart.cartItems
+            .map { it.product.id }
+            .contains(id)
+    }
 
     fun onEvent(action: CartUiAction)
     {
@@ -32,7 +38,14 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
 
     private fun getCart(){
         viewModelScope.launch {
-            _currentViewState.value = cartRepo.get()
+
+            val state = cartRepo.get()
+            when(state){
+                is CartState.GetCartState -> {
+                    currentCart = state.cart
+                }
+            }
+            _currentViewState.value = state
         }
     }
 

@@ -62,8 +62,11 @@ class HomeFragment: BaseFragment(), ILoadFragment {
                 setGridView()
                 addProducts(state.products)
             }
+            is ProductState.ProductDetailSuccess -> {
+                loadFragment(productFragment)
+            }
 
-            is ProductState.GetProductsFaliure -> {
+            is ProductState.GetProductsFailure -> {
                 loading_bar.visibility = View.INVISIBLE
                 DialogBoxManager.createDialog(activity, MessageType.ERROR, state.throwable.toString()).show()
             }
@@ -124,8 +127,8 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     private fun setGridView() {
         gridViewAdapter = HomeGridViewAdapter(requireContext())
 
-        home_grid_view.setOnItemClickListener { _, _, _, _ ->
-            messageManager.toast(requireContext(), "Clicked")
+        home_grid_view.setOnItemClickListener { _, _, pos, _ ->
+            model.onEvent(ProductUiAction.GetProductDetails(gridViewAdapter.getItem(pos)))
         }
 
         home_grid_view.apply {
