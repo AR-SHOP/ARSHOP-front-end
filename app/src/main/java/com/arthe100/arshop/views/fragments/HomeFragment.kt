@@ -123,8 +123,8 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     private fun setGridView() {
         gridViewAdapter = HomeGridViewAdapter(requireContext())
 
-        home_grid_view.setOnItemClickListener { _, _, _, _ ->
-            messageManager.toast(requireContext(), "Clicked")
+        home_grid_view.setOnItemClickListener { adapterView, view, i, l ->
+
         }
 
         home_grid_view.apply {

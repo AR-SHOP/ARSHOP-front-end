@@ -1,8 +1,6 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
-import android.text.method.PasswordTransformationMethod
-import android.text.method.SingleLineTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +26,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
     @Inject lateinit var fragmentFactory: FragmentFactory
-    lateinit var phoneNumberFragment: PhoneNumberFragment
+    lateinit var signUpFragment: SignUpFragment
     lateinit var profileFragment: ProfileFragment
     var inCartFragment: Boolean = false
 
@@ -38,8 +36,8 @@ class LoginFragment : BaseFragment(), ILoadFragment {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        phoneNumberFragment = fragmentFactory.create<PhoneNumberFragment>()
         profileFragment = fragmentFactory.create<ProfileFragment>()
+        signUpFragment = fragmentFactory.create<SignUpFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         model.currentViewState.observe(this , Observer(::render))
     }
@@ -84,11 +82,12 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             val user = pref.getString("userData" , null)
 
             if(user == null)
-                loadFragment(phoneNumberFragment)
-            else { }
+                loadFragment(signUpFragment)
+            else {
                 DialogBoxManager.createDialog(activity, MessageType.ERROR,
                     "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
                     .show()
+            }
         }
 
         login_btn.setOnClickListener {

@@ -17,7 +17,6 @@ import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.views.BaseFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.profile_fragment_layout.*
-import kotlinx.android.synthetic.main.sign_up_password_fragment.loading_bar
 import javax.inject.Inject
 
 class ProfileFragment : BaseFragment() {
