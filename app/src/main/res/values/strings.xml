@@ -15,7 +15,7 @@
     <string name="profile">صفحه شخصی</string>
     <string name="search_hint">جستجو در همه کالاها</string>
     <string name="ar_view_btn">صفحه واقعیت افزوده</string>
-    <string name="username_hint">پست الکترونیک یا شماره موبایل</string>
+    <string name="username_hint">شماره موبایل</string>
     <string name="pass_hint">کلمه عبور</string>
     <string name="forget_pass_hint">آیا کلمه عبور خود را فراموش کرده اید؟</string>
     <string name="login_btn_text">ورود</string>

@@ -78,7 +78,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
 
     override fun onStart() {
         super.onStart()
-        new_acc_link.setOnClickListener{
+        login_new_account.setOnClickListener{
 
             val pref = PreferenceManager.getDefaultSharedPreferences(requireContext())
             val user = pref.getString("userData" , null)
@@ -91,24 +91,18 @@ class LoginFragment : BaseFragment(), ILoadFragment {
                     .show()
         }
 
-        verify_continue_btn.setOnClickListener {
-            model.onEvent(AuthUiAction.LoginAction(login_password.text.toString() , username.text.toString()))
+        login_btn.setOnClickListener {
+            model.onEvent(AuthUiAction.LoginAction(login_password.text.toString() , login_username.text.toString()))
         }
 
-        var passwordVisible = false
-
-        visibility_icon.setOnClickListener {
-            if (passwordVisible) {
-                login_password.transformationMethod = PasswordTransformationMethod.getInstance()
-                passwordVisible = false
-                visibility_icon.setColorFilter(resources.getColor(R.color.colorHint, null))
-            }
-                else {
-                login_password.transformationMethod = SingleLineTransformationMethod.getInstance()
-                passwordVisible = true
-                visibility_icon.setColorFilter(resources.getColor(R.color.colorPrimary, null))
-            }
+        login_username.apply {
+            error = null //you can set any error for username
         }
+
+        login_password.apply {
+            error = null //you can set any error for the password
+        }
+
     }
 
     override fun toString(): String {
