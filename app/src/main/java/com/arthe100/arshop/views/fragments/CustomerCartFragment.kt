@@ -47,7 +47,7 @@ class CustomerCartFragment() : BaseFragment() {
             cart_items_list.visibility = View.INVISIBLE
             login_btn.setOnClickListener {
                 requireActivity().bottom_navbar.visibility = View.INVISIBLE
-                loginFragment.inCartFragment = true
+                loginFragment.inMainPage = false
                 loadFragment(loginFragment)
             }
         }
