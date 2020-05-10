@@ -11,8 +11,8 @@ enum class ButtonNumber { TWO, ONE, NONE}
 
 object DialogBoxManager {
 
-    fun createDialog(activity: Activity?, messageType: MessageType, buttonNumber: ButtonNumber): Dialog {
-        val alert = AlertDialog.Builder(activity)
+    fun createDialog(activity: Activity?, messageType: MessageType): Dialog {
+        val alert = AlertDialog.Builder(activity, R.style.DialogStyle)
 
         when (messageType.name) {
             MessageType.LOAD.name -> {

@@ -5,7 +5,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/dialog_caution_shape">
+        android:background="@drawable/dialog_shape">
 
     <LinearLayout
             android:layout_width="wrap_content"
@@ -35,9 +35,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:textColor="@color/colorBtnText"
-                android:background="@drawable/dialog_caution_shape"
+                android:backgroundTint="@color/colorBackground"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/dialog_button_shape"
                 android:text="@string/dialog_negative_button" />
 
         <Button
@@ -48,9 +48,9 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:textColor="@color/colorBtnText"
-                android:background="@drawable/dialog_caution_shape"
+                android:backgroundTint="@color/colorBackground"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/dialog_button_shape"
                 android:text="@string/dialog_positive_button" />
     </LinearLayout>
 
