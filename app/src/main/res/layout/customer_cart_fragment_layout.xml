@@ -6,6 +6,11 @@
         android:layout_height="match_parent"
         tools:context=".views.fragments.CustomerCartFragment">
 
+    <include layout="@layout/loading_fragment"
+            android:id="@+id/loading_bar"
+            android:visibility="invisible"/>
+
+
     <Button
             android:id="@+id/login_btn"
             android:layout_width="0dp"

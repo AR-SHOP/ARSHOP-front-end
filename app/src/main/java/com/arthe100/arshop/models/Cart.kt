@@ -7,7 +7,7 @@ data class Cart(
     val id: Long,
     val user: Long,
     val details: CartDetails,
-    val cartItems: List<CartItem>
+    @SerializedName("cart_items") val cartItems: List<CartItem>
 )
 
 

@@ -11,6 +11,7 @@ import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.cart.CartState
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
@@ -19,7 +20,6 @@ import com.arthe100.arshop.views.Adapters.OnItemClickListener
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.CartItemAdapter
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.cart_item.*
 import kotlinx.android.synthetic.main.customer_cart_fragment_layout.*
 import javax.inject.Inject
 
@@ -27,6 +27,8 @@ class CustomerCartFragment : BaseFragment() {
     @Inject lateinit var fragmentFactory: FragmentFactory
     @Inject lateinit var session: UserSession
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
+    @Inject lateinit var messageManager: MessageManager
+
 
     lateinit var loginFragment: LoginFragment
     lateinit var productFragment: ProductFragment
@@ -74,13 +76,24 @@ class CustomerCartFragment : BaseFragment() {
 
 
     private fun render(state: CartState){
-        when(state){
-//            CartState.IdleState -> TODO()
-//            CartState.LoadingState -> TODO()
-//            is CartState.GetCartState -> TODO()
+        when(state) {
+            CartState.IdleState -> {
+                loading_bar?.visibility = View.INVISIBLE
+            }
+            CartState.LoadingState -> {
+                loading_bar?.visibility = View.VISIBLE
+            }
+            is CartState.GetCartState -> {
+                val products = state.cart.cartItems.map { it.product }
+                setRecyclerView()
+                addProducts(products)
+            }
 //            is CartState.AddToCartState -> TODO()
 //            is CartState.RemoveFromCartState -> TODO()
-//            is CartState.Failure -> TODO()
+            is CartState.Failure -> {
+                loading_bar?.visibility = View.INVISIBLE
+                messageManager.toast(requireContext() , state.err.toString())
+            }
         }
     }
 
@@ -98,7 +111,7 @@ class CustomerCartFragment : BaseFragment() {
         cartItemAdapter.setOnItemClickListener(object :
             OnItemClickListener {
             override fun onItemClick(position: Int) {
-                productFragment.setProduct(cartItemAdapter.dataList[position])
+//                productFragment.setProduct(cartItemAdapter.dataList[position])
                 loadFragment(productFragment)
             }
         })

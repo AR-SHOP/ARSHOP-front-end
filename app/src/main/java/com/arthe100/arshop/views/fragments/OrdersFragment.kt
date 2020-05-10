@@ -34,8 +34,8 @@ class OrdersFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        loginFragment = fragmentFactory.create<LoginFragment>()
-        productFragment = fragmentFactory.create<ProductFragment>()
+        loginFragment = fragmentFactory.create()
+        productFragment = fragmentFactory.create()
         return inflater.inflate(R.layout.orders_fragment, container, false)
     }
 
@@ -72,7 +72,7 @@ class OrdersFragment : BaseFragment() {
         cartItemAdapter.setOnItemClickListener(object :
             OnItemClickListener {
             override fun onItemClick(position: Int) {
-                productFragment.setProduct(cartItemAdapter.dataList[position])
+                //productFragment.setProduct(cartItemAdapter.dataList[position])
                 loadFragment(productFragment)
             }
         })

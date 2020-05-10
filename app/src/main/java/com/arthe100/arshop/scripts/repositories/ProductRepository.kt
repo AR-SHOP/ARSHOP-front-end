@@ -9,11 +9,20 @@ class ProductRepository @Inject constructor (private val service : ProductServic
 
     suspend fun getProducts() : ProductState{
         return try {
-            val product = service.getProduct()
+            val product = service.getProducts()
             ProductState.GetProductsSuccess(product)
         }catch (throwable : Throwable)
         {
-            ProductState.GetProductsFaliure(throwable)
+            ProductState.GetProductsFailure(throwable)
+        }
+    }
+    suspend fun getProduct(id: Long) : ProductState{
+        return try {
+            val product = service.getProduct(id)
+            ProductState.ProductDetailSuccess(product)
+        }catch (throwable : Throwable)
+        {
+            ProductState.GetProductsFailure(throwable)
         }
     }
 }
