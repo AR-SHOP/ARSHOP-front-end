@@ -52,11 +52,10 @@ class SignUpFragment : BaseFragment() {
         super.onStart()
 
         signup_btn.setOnClickListener {
-            model.phone = signup_username.text.toString()
             model.onEvent(AuthUiAction
                 .SignupAction(
                     password = signup_password.text.toString(),
-                    phone = model.phone))
+                    phone = signup_username.text.toString()))
         }
 
     }
@@ -75,17 +74,6 @@ class SignUpFragment : BaseFragment() {
             }
 
             is AuthState.SingupSuccess -> {
-                model.onEvent(
-                    AuthUiAction
-                    .LoginAction(
-                        password = signup_password.text.toString(),
-                        phone = model.phone))
-            }
-
-            is AuthState.LoginSuccess -> {
-                loading_bar.visibility = View.INVISIBLE
-                session.saveUser(state.user)
-                DialogBoxManager.createDialog(activity, MessageType.SUCCESS, "user logged in!").show()
                 loadFragment(verifyFragment)
             }
 

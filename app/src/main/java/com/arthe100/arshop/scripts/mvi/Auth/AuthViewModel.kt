@@ -28,6 +28,12 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
         set(value){
             _phone = value
         }
+    private var _password: String = ""
+    var password: String
+        get() = _password
+        set(value){
+            _password = value
+        }
 
 
     fun onEvent(action: Action){
@@ -35,6 +41,8 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
         when(action)
         {
             is AuthUiAction.SignupAction -> {
+                _phone = action.phone
+                _password = action.password
                 handleSignUp(action)
             }
             is AuthUiAction.LoginAction -> {

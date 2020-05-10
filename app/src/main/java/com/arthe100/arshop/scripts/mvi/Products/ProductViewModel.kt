@@ -15,8 +15,11 @@ class ProductViewModel @Inject constructor(private val productRepo: ProductRepos
         get() = _currentViewState
 
     private lateinit var _product: Product
-    val product: Product
+    var product: Product
         get() = _product
+        set(value){
+            _product = value
+        }
 
     fun onEvent(state: ProductUiAction){
         when(state)

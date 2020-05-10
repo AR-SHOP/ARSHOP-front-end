@@ -1,18 +1,9 @@
 package com.arthe100.arshop.scripts.di.modules
 
-import android.content.Context
-import android.util.Log
-import androidx.fragment.app.Fragment
-import androidx.preference.PreferenceManager
-import androidx.viewpager.widget.ViewPager
-import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.scopes.MainScope
-import com.arthe100.arshop.views.Adapters.ViewPagerAdapter
 import com.arthe100.arshop.views.fragments.*
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
-import javax.inject.Inject
 
 @Module
 object MainModule{

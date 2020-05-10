@@ -10,16 +10,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
-import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductState
 import com.arthe100.arshop.scripts.mvi.Products.ProductUiAction
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
+import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
+import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
-import com.arthe100.arshop.views.Adapters.OnItemClickListener
+import com.arthe100.arshop.views.adapters.OnItemClickListener
 import com.arthe100.arshop.views.adapters.DiscountAdapter
 import com.arthe100.arshop.views.adapters.HomeGridViewAdapter
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
@@ -36,6 +37,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
     private lateinit var discountAdapter: DiscountAdapter
     private lateinit var model: ProductViewModel
+    private lateinit var cartViewModel: CartViewModel
     private lateinit var messageManager: MessageManager
     private lateinit var gridViewAdapter: HomeGridViewAdapter
 
@@ -43,6 +45,8 @@ class HomeFragment: BaseFragment(), ILoadFragment {
         super.onCreate(savedInstanceState)
         messageManager = MessageManager()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
+        cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
+
         model.currentViewState.observe(this , Observer(::render))
     }
 
@@ -87,16 +91,8 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
     override fun onStart() {
 
-        when(session.user){
-            is User.GuestUser ->{
-                messageManager.toast(requireContext(), "Not logged in")
-//                DialogBoxManager.createDialog(activity, MessageType.ERROR, "not logged in!").show()
-            }
-            is User.User ->{
-                model.onEvent(ProductUiAction.GetHomePageProducts)
-            }
-        }
-
+        model.onEvent(ProductUiAction.GetHomePageProducts)
+        cartViewModel.onEvent(CartUiAction.GetCartOnStart)
         super.onStart()
     }
 
@@ -104,9 +100,9 @@ class HomeFragment: BaseFragment(), ILoadFragment {
         gridViewAdapter.submitList(data)
     }
 
-    private fun addDiscounts(discounts: List<String>) {
-        discountAdapter.submitList(discounts)
-    }
+//    private fun addDiscounts(discounts: List<String>) {
+//        discountAdapter.submitList(discounts)
+//    }
 
     private fun setRecyclerView() {
         discountAdapter = DiscountAdapter()

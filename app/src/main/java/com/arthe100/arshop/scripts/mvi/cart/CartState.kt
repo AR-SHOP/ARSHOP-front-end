@@ -8,6 +8,7 @@ sealed class CartState{
     data class GetCartState(val cart: Cart) : CartState()
     data class AddToCartState(val cart: Cart) : CartState()
     data class RemoveFromCartState(val cart: Cart) : CartState()
+    data class ClearCart(val cart: Cart) : CartState()
     data class Failure(val err: Throwable) : CartState()
 //    object PlaceOrderState : CartState()
 }

@@ -13,6 +13,7 @@ import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Products.ProductState
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
+import com.arthe100.arshop.scripts.mvi.cart.CartState
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
@@ -44,6 +45,7 @@ class ProductFragment : BaseFragment() {
         cartViewModel = ViewModelProvider(requireActivity() , viewModelFactory).get(CartViewModel::class.java)
 
         model.currentViewState.observe(requireActivity() , Observer(::render))
+        cartViewModel.currentViewState.observe(requireActivity() , Observer(::render))
         return inflater.inflate(R.layout.product_fragment_layout, container, false)
     }
 
@@ -65,18 +67,20 @@ class ProductFragment : BaseFragment() {
         }
     }
 
+    private fun render(state: CartState){
+        when(state){
+            is CartState.AddToCartState -> {
+                checkCartStatus()
+            }
+        }
+    }
+
     override fun onStart() {
         product_details_name.text = model.product.name
         product_details_brand.text = model.product.manufacturer
         product_details_price.text = model.product.price.toString()
         product_details_description.text = model.product.description
-
-
-//        add_to_cart_btn.text =
-//            if(cartViewModel.isInCart(model.product.id) ) "نمایش در سبد‌خرید"
-//            else "اقزود به سبدخرید"
-
-
+        checkCartStatus()
 
         val requestOptions = RequestOptions()
             .placeholder(R.drawable.ic_launcher_background)
@@ -92,14 +96,29 @@ class ProductFragment : BaseFragment() {
             loadFragment(customArFragment)
         }
         add_to_cart_btn.setOnClickListener {
-//            if(cartViewModel.isInCart(model.product.id)){
-//                loadFragment(fragmentFactory.create<CartFragment>())
-//                return@setOnClickListener
-//            }
-
             cartViewModel.onEvent(CartUiAction.AddToCart(model.product.id , 1))
         }
         super.onStart()
+    }
+
+
+
+    fun checkCartStatus(){
+        if(cartViewModel.isInCart(model.product.id) )
+        {
+            add_to_cart_btn?.visibility = View.INVISIBLE
+            plus_btn?.visibility = View.VISIBLE
+            cart_count_text?.visibility = View.VISIBLE
+            minus_btn?.visibility = View.VISIBLE
+            delete_btn?.visibility = View.VISIBLE
+        }
+        else{
+            add_to_cart_btn?.visibility = View.VISIBLE
+            plus_btn?.visibility = View.INVISIBLE
+            cart_count_text?.visibility = View.INVISIBLE
+            minus_btn?.visibility = View.INVISIBLE
+            delete_btn?.visibility = View.INVISIBLE
+        }
     }
 
     override fun toString(): String {

@@ -8,8 +8,7 @@ import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
-import com.arthe100.arshop.scripts.mvi.cart.CartState
-import com.arthe100.arshop.views.Adapters.ViewPagerAdapter
+import com.arthe100.arshop.views.adapters.ViewPagerAdapter
 import com.arthe100.arshop.views.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main_layout.*

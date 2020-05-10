@@ -6,15 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.Cart
+import com.arthe100.arshop.models.CartItem
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
-import com.arthe100.arshop.views.Adapters.OnItemClickListener
+import com.arthe100.arshop.views.adapters.OnItemClickListener
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.CartItemAdapter
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.cart_item.*
 import kotlinx.android.synthetic.main.orders_fragment.*
 import kotlinx.android.synthetic.main.orders_fragment.login_btn
 import javax.inject.Inject
@@ -63,12 +64,12 @@ class OrdersFragment : BaseFragment() {
         }
     }
 
-    private fun addProducts(products: List<Product>) {
-        cartItemAdapter.submitList(products)
-    }
+//    private fun addProducts(products: List<CartItem>) {
+//        cartItemAdapter.submitList(products)
+//    }
 
-    private fun setRecyclerView() {
-        cartItemAdapter = CartItemAdapter()
+    private fun setRecyclerView(items: List<CartItem>) {
+        cartItemAdapter = CartItemAdapter(items)
         cartItemAdapter.setOnItemClickListener(object :
             OnItemClickListener {
             override fun onItemClick(position: Int) {

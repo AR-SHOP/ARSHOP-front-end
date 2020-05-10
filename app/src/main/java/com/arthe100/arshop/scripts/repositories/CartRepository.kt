@@ -29,7 +29,37 @@ class CartRepository @Inject constructor(private val cartService: CartService) {
     suspend fun remove(item: RemoveCart) : CartState{
         return try {
             val cart = cartService.remove(item)
+            CartState.RemoveFromCartState(cart)
+        }catch (err: Throwable)
+        {
+            CartState.Failure(err)
+        }
+    }
+
+    suspend fun decrease(item: AddCart): CartState {
+        return try {
+            val cart = cartService.decrease(item)
             CartState.AddToCartState(cart)
+        }catch (err: Throwable)
+        {
+            CartState.Failure(err)
+        }
+    }
+
+    suspend fun increase(item: AddCart): CartState {
+        return try {
+            val cart = cartService.increase(item)
+            CartState.AddToCartState(cart)
+        }catch (err: Throwable)
+        {
+            CartState.Failure(err)
+        }
+    }
+
+    suspend fun clear(): CartState {
+        return try {
+            val cart = cartService.clear()
+            CartState.ClearCart(cart)
         }catch (err: Throwable)
         {
             CartState.Failure(err)

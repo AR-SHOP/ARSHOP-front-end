@@ -20,7 +20,7 @@ data class CartDetails(
 
 data class CartItem(
     val product: Product,
-    val quantity: Int,
+    var quantity: Int,
     val subtotal: Long
 )
 

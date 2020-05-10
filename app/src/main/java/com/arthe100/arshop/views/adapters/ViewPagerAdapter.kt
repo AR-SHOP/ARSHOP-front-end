@@ -1,18 +1,9 @@
-package com.arthe100.arshop.views.Adapters
+package com.arthe100.arshop.views.adapters
 
-import android.app.Application
-import android.util.Log
-import android.view.View
-import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.adapter.FragmentViewHolder
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.views.fragments.CartFragment
 import com.arthe100.arshop.views.fragments.CustomerCartFragment
 import com.arthe100.arshop.views.fragments.FragmentFactory
 import com.arthe100.arshop.views.fragments.OrdersFragment

@@ -8,22 +8,30 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
+import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.BaseFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
+import kotlinx.android.synthetic.main.sign_up_fragment.*
 import kotlinx.android.synthetic.main.verify_fragment_layout.*
 import kotlinx.android.synthetic.main.verify_fragment_layout.loading_bar
 import javax.inject.Inject
 
 class VerifyFragment : BaseFragment(){
+
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var fragmentFactory: FragmentFactory
+    @Inject lateinit var session: UserSession
+    @Inject lateinit var messageManager: MessageManager
+
     private lateinit var profileFragment: ProfileFragment
     private lateinit var model: AuthViewModel
+
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent(requireActivity())
@@ -63,10 +71,15 @@ class VerifyFragment : BaseFragment(){
             }
 
             is AuthState.CodeSuccess -> {
-                loading_bar.visibility = View.INVISIBLE
-                loadFragment(profileFragment)
-            }
+                model.onEvent(AuthUiAction.LoginAction(model.password , model.phone))
 
+            }
+            is AuthState.LoginSuccess -> {
+                loading_bar.visibility = View.INVISIBLE
+                session.saveUser(state.user)
+                loadFragment(profileFragment)
+
+            }
             is AuthState.LoadingState ->{
                 loading_bar.visibility = View.VISIBLE
             }
