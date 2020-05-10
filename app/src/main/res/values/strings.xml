@@ -44,6 +44,7 @@
     <string name="success_message">عملیات با موفقیت انجام شد.</string>
     <string name="error_title">خطا!!!</string>
     <string name="error_message">عملیات دچار مشکل شده‌است.</string>
+    <string name="caution_message">hello</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -86,7 +86,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
         when(session.user){
             is User.GuestUser ->{
                 messageManager.toast(requireContext(), "Not logged in")
-//                DialogBoxManager.createDialog(activity, MessageType.ERROR, "not logged in!").show()
+                DialogBoxManager.createDialog(activity, MessageType.ERROR, "not logged in!").show()
             }
             is User.User ->{
                 model.onEvent(ProductUiAction.GetHomePageProducts)

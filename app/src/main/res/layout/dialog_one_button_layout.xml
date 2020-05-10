@@ -20,7 +20,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:textColor="@color/colorBtnText"
-                android:text="@string/loading_message"/>
+                android:text="@string/success_message"/>
     </LinearLayout>
 
     <LinearLayout

@@ -14,16 +14,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17053b2a-4f8d-46cd-a78b-dfbf8af29ccc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/dialog_button_shape.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/dialogBox/DialogBoxManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/dialogBox/DialogBoxManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/HomeFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProfileFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProfileFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/dialog_caution_shape.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/dialog_shape.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/dialog_error_shape.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_one_button_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_one_button_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_simple_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_simple_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_two_button_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_two_button_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,9 +57,9 @@
         <option value="Kotlin File" />
         <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
-        <option value="Class" />
         <option value="layoutResourceFile" />
         <option value="resourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -297,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589104572231</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="added loading to dialog.&#10;edited colors and shapes.">
+      <created>1589109374966</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1589109374966</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -331,6 +335,7 @@
     <MESSAGE value="edited today's code." />
     <MESSAGE value="added dialogs' shapes." />
     <MESSAGE value="added dialogs' shapes.&#10;edited messageManager." />
-    <option name="LAST_COMMIT_MESSAGE" value="added dialogs' shapes.&#10;edited messageManager." />
+    <MESSAGE value="added loading to dialog.&#10;edited colors and shapes." />
+    <option name="LAST_COMMIT_MESSAGE" value="added loading to dialog.&#10;edited colors and shapes." />
   </component>
 </project>
