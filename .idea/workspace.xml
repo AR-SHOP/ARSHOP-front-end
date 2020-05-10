@@ -13,16 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ade1662a-34a4-4ede-ab6b-2e94b10496ca" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/BaseFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/BaseFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/CustomerCartFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/CustomerCartFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/LoginFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/LoginFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/OrdersFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/OrdersFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProfileFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProfileFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/cart_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/cart_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/customer_cart_fragment_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/customer_cart_fragment_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/orders_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/orders_fragment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/product_fragment_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/product_fragment_layout.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

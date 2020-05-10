@@ -32,7 +32,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
     lateinit var loginFragment: LoginFragment
     lateinit var profileFragment: ProfileFragment
 
-    var selectedItemIdStack: Stack<Int> = Stack()
     private var backPressedTime: Long = 0
     private var selectedFragment: BaseFragment? = null
     private val TAG : String? = MainActivity::class.simpleName
