@@ -55,7 +55,7 @@ class ProfileFragment : BaseFragment() {
 
             is ProfileState.GetProfileSuccess -> {
                 loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
+                DialogBoxManager.createDialog(activity, MessageType.SUCCESS)
 
                 val user = state.userInfo
 
@@ -77,8 +77,6 @@ class ProfileFragment : BaseFragment() {
 
             is ProfileState.LoadingState -> {
                 loading_bar.visibility = View.VISIBLE
-
-                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
             }
         }
     }
