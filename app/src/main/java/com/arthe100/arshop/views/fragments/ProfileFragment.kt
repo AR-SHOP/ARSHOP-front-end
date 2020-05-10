@@ -17,12 +17,12 @@ import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.views.BaseFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.profile_fragment_layout.*
-import kotlinx.android.synthetic.main.sign_up_password_fragment.loading_bar
 import javax.inject.Inject
 
 class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
+
     private lateinit var model: ProfileViewModel
     private val TAG = ProfileFragment::class.simpleName
 
@@ -35,8 +35,6 @@ class ProfileFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
-
-
         model.currentViewState.observe(this , Observer(::render))
     }
 

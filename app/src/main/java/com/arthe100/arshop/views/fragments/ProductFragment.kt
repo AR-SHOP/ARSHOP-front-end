@@ -32,10 +32,6 @@ class ProductFragment : BaseFragment() {
 
     override fun onStart() {
 
-        ar_btn.setOnClickListener {
-
-        }
-
         add_to_cart_btn.setOnClickListener {
 
         }

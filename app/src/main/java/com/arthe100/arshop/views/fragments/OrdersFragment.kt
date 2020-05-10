@@ -44,16 +44,18 @@ class OrdersFragment : BaseFragment() {
 
         when (session.user) {
             is User.GuestUser -> {
+                bottom_buttons.visibility = View.INVISIBLE
                 login_btn.visibility = View.VISIBLE
                 empty_orders_layout.visibility = View.INVISIBLE
                 ordered_items_list.visibility = View.INVISIBLE
                 login_btn.setOnClickListener {
                     requireActivity().bottom_navbar.visibility = View.INVISIBLE
-                    loginFragment.inCartFragment = true
+                    loginFragment.inMainPage = false
                     loadFragment(loginFragment)
                 }
             }
             is User.User -> {
+                bottom_buttons.visibility = View.VISIBLE
                 login_btn.visibility = View.INVISIBLE
                 empty_orders_layout.visibility = View.VISIBLE
                 ordered_items_list.visibility = View.VISIBLE

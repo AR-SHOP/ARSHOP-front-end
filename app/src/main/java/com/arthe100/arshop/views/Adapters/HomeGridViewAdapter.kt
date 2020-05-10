@@ -23,9 +23,9 @@ class HomeGridViewAdapter(val context: Context) : BaseAdapter() {
 
     override fun getView(position: Int, view: View?, viewGroup: ViewGroup?): View {
 
-        inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        inflater = LayoutInflater.from(context)
 
-        var cardView = inflater.inflate(R.layout.product_grid_item, null)
+        var cardView = inflater.inflate(R.layout.product_grid_item, viewGroup, false)
         var imageView = cardView.product_image
         var name = cardView.product_name
         var price = cardView.product_price
@@ -39,6 +39,7 @@ class HomeGridViewAdapter(val context: Context) : BaseAdapter() {
             .applyDefaultRequestOptions(requestOptions)
             .load(dataList[position].thumbnail)
             .into(imageView)
+
         name.text = dataList[position].name
         price.text = dataList[position].price.toString()
 

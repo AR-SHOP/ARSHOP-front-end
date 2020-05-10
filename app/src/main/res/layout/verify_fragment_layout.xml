@@ -1,74 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".views.fragments.VerifyFragment">
+        android:background="@color/colorBackground"
+        tools:context=".views.fragments.VerifyFragment"
+        android:layoutDirection="rtl"
+        android:textDirection="rtl">
 
-    <include layout="@layout/loading_fragment"
-             android:id="@+id/loading_bar"
-             android:visibility="invisible"/>
-
-    <TextView
-            android:id="@+id/enter_code"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_below="@id/verify_continue_btn"
-            android:layout_margin="10dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/enter_verify_code"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintBottom_toTopOf="@id/code_input"
+    <include
+            android:id="@+id/loading_bar"
+            layout="@layout/loading_fragment"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.511"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+            android:id="@+id/logo"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.877" />
+            app:layout_constraintVertical_bias="0.05" />
 
-    <EditText
-            android:id="@+id/code_input"
-            android:layout_width="330dp"
-            android:layout_height="45dp"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_corners"
-            android:backgroundTint="@color/colorEditText"
-            android:inputType="number"
-            android:padding="8dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textColorHint="@color/colorHint"
-            android:textCursorDrawable="@drawable/cursor"
-            android:textDirection="rtl"
-            android:elevation="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/enter_code"
-            app:layout_constraintHorizontal_bias="0.47"
-            app:layout_constraintStart_toStartOf="@id/enter_code"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.14" />
+    <TextView
+            android:id="@+id/verify_code_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="لطفا کد تایید ارسال‌شده را وارد کنید"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/logo"
+            app:layout_constraintRight_toRightOf="@id/logo"
+            app:layout_constraintLeft_toLeftOf="@id/logo" />
 
-    <Button
-            android:id="@+id/verify_continue_btn"
-            android:layout_width="330dp"
-            android:layout_height="45dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_corners"
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="340dp"
             android:backgroundTint="@color/colorPrimary"
-            android:elevation="10dp"
-            android:text="@string/continue_btn"
-            android:textColor="@color/colorBackground"
-            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/code_input"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@id/code_input"
-            app:layout_constraintTop_toBottomOf="@id/code_input"
-            app:layout_constraintVertical_bias="0.938" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"/>
+
+
+
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/verify_info_card"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/verify_code_text"
+            app:layout_constraintVertical_bias="0.3">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:elevation="10dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/code_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/colorPrimary"
+                    app:errorTextColor="@color/colorError"
+                    app:errorIconTint="@color/colorError"
+                    app:errorIconDrawable="@drawable/ic_suggestion"
+                    app:boxStrokeErrorColor="@color/colorError">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/code_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorPrimary"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:textCursorDrawable="@drawable/cursor"
+                        android:cursorVisible="true"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                    android:id="@+id/send_again_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/send_code_again"
+                    android:textAlignment="center"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/verify_info_card"
+            app:layout_constraintVertical_bias="0.1">
+
+        <Button
+                android:id="@+id/verify_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="@color/colorBackground"
+                android:elevation="8dp"
+                android:text="@string/confirm"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,8 @@ import com.arthe100.arshop.scripts.di.BaseApplication
 
 abstract class BaseFragment : Fragment(), ILoadFragment {
 
+    var inMainPage: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }

@@ -12,6 +12,7 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="17053b2a-4f8d-46cd-a78b-dfbf8af29ccc" name="Default Changelist" comment="">
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
@@ -130,6 +131,11 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/product_fragment_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/product_fragment_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
 >>>>>>> ui
+=======
+    <list default="true" id="ade1662a-34a4-4ede-ab6b-2e94b10496ca" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/MainActivity.kt" afterDir="false" />
+>>>>>>> ui
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -173,10 +179,10 @@
         <option value="Interface" />
         <option value="Kotlin File" />
         <option value="Kotlin Interface" />
-        <option value="resourceFile" />
         <option value="Class" />
         <option value="layoutResourceFile" />
         <option value="Kotlin Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -300,7 +306,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4362cbae-0ba3-4c89-9af4-7bee223027c4" name="Default Changelist" comment="" />
+      <changelist id="ade1662a-34a4-4ede-ab6b-2e94b10496ca" name="Default Changelist" comment="" />
       <created>1587021271206</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -476,5 +482,12 @@
     <MESSAGE value="added DialogBox again." />
     <option name="LAST_COMMIT_MESSAGE" value="added DialogBox again." />
 >>>>>>> ui
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="app">
+        <watch expression="selectedFragment" language="kotlin" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

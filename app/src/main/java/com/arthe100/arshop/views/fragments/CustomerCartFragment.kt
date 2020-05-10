@@ -39,8 +39,8 @@ class CustomerCartFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        loginFragment = fragmentFactory.create()
-        productFragment = fragmentFactory.create()
+        loginFragment = fragmentFactory.create<LoginFragment>()
+        productFragment = fragmentFactory.create<ProductFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
         model.currentViewState.observe(requireActivity() , Observer(::render))
         return inflater.inflate(R.layout.customer_cart_fragment_layout, container, false)
@@ -48,19 +48,20 @@ class CustomerCartFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-
         when(session.user){
             is User.GuestUser -> {
                 login_btn.visibility = View.VISIBLE
                 empty_cart_layout.visibility = View.INVISIBLE
                 cart_items_list.visibility = View.INVISIBLE
+                bottom_buttons.visibility = View.INVISIBLE
                 login_btn.setOnClickListener {
                     requireActivity().bottom_navbar.visibility = View.INVISIBLE
-                    loginFragment.inCartFragment = true
+                    loginFragment.inMainPage = false
                     loadFragment(loginFragment)
                 }
             }
             is User.User -> {
+                bottom_buttons.visibility = View.VISIBLE
                 login_btn.visibility = View.INVISIBLE
                 empty_cart_layout.visibility = View.VISIBLE
                 cart_items_list.visibility = View.VISIBLE

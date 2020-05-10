@@ -26,18 +26,23 @@ object MainModule{
         cartFragment: CartFragment,
         profileFragment: ProfileFragment,
         loginFragment: LoginFragment,
-        phoneNumberFragment: PhoneNumberFragment,
         productFragment: ProductFragment,
-        signUpPasswordFragment: SignUpPasswordFragment,
         verifyFragment: VerifyFragment,
         ordersFragment: OrdersFragment,
-        customerCartFragment: CustomerCartFragment) : FragmentFactory {
+        customerCartFragment: CustomerCartFragment,
+        signUpFragment: SignUpFragment) : FragmentFactory {
 
         return FragmentFactory(homeFragment, categoriesFragment, cartFragment, profileFragment,
-                                loginFragment, phoneNumberFragment, productFragment,
-                                signUpPasswordFragment, verifyFragment, ordersFragment, customerCartFragment)
+                                loginFragment, productFragment, verifyFragment, ordersFragment,
+                                customerCartFragment, signUpFragment)
     }
 
+    @JvmStatic
+    @MainScope
+    @Provides
+    fun createSignUpFragment() : SignUpFragment {
+        return SignUpFragment()
+    }
 
     @JvmStatic
     @MainScope
@@ -84,22 +89,8 @@ object MainModule{
     @JvmStatic
     @MainScope
     @Provides
-    fun providePhoneNumberFragment() : PhoneNumberFragment {
-        return PhoneNumberFragment()
-    }
-
-    @JvmStatic
-    @MainScope
-    @Provides
     fun provideVerifyFragment() : VerifyFragment {
         return VerifyFragment()
-    }
-
-    @JvmStatic
-    @MainScope
-    @Provides
-    fun provideSignUpPasswordFragment() : SignUpPasswordFragment {
-        return SignUpPasswordFragment()
     }
 
     @JvmStatic
