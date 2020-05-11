@@ -50,9 +50,8 @@ class OrdersFragment : BaseFragment() {
                 empty_orders_layout.visibility = View.INVISIBLE
                 ordered_items_list.visibility = View.INVISIBLE
                 login_btn.setOnClickListener {
-                    requireActivity().bottom_navbar.visibility = View.INVISIBLE
-                    loginFragment.inMainPage = false
                     loadFragment(loginFragment)
+                    requireActivity().bottom_navbar.selectedItemId = R.id.btm_navbar_profile
                 }
             }
             is User.User -> {

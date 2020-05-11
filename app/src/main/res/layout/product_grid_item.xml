@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="محصول"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:paddingRight="10dp"
                 android:textSize="12sp"/>

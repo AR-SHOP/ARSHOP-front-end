@@ -13,6 +13,8 @@ import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.scripts.mvi.Auth.AuthState
+import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.scripts.mvi.cart.CartState
@@ -31,7 +33,7 @@ class CustomerCartFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var messageManager: MessageManager
 
-
+    lateinit var authViewModel: AuthViewModel
     lateinit var loginFragment: LoginFragment
     lateinit var productFragment: ProductFragment
     lateinit var cartItemAdapter: CartItemAdapter
@@ -46,6 +48,7 @@ class CustomerCartFragment : BaseFragment() {
         savedInstanceState: Bundle?): View? {
         loginFragment = fragmentFactory.create<LoginFragment>()
         productFragment = fragmentFactory.create<ProductFragment>()
+        authViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
         productViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
         model.currentViewState.observe(requireActivity() , Observer(::render))
@@ -55,19 +58,13 @@ class CustomerCartFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        when(session.user){
-            is User.GuestUser -> {
-                login_btn?.visibility = View.VISIBLE
-                empty_cart_layout?.visibility = View.INVISIBLE
-                cart_items_list?.visibility = View.INVISIBLE
-                bottom_buttons?.visibility = View.INVISIBLE
-                login_btn?.setOnClickListener {
-                    requireActivity().bottom_navbar.visibility = View.INVISIBLE
-                    loginFragment.inMainPage = false
-                    loadFragment(loginFragment)
-                }
-            }
-            is User.User -> {
+
+    }
+
+    private fun authRender(state: AuthState) {
+
+        when (state) {
+            is AuthState.LoginSuccess -> {
                 bottom_buttons?.visibility = View.VISIBLE
                 login_btn?.visibility = View.INVISIBLE
                 cart_items_list?.visibility = View.VISIBLE
@@ -80,7 +77,6 @@ class CustomerCartFragment : BaseFragment() {
         }
 
     }
-
 
 
     private fun render(state: CartState){
