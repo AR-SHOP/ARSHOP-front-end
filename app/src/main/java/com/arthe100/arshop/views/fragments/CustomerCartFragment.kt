@@ -50,7 +50,6 @@ class CustomerCartFragment : BaseFragment() {
         productViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
         model.currentViewState.observe(requireActivity() , Observer(::render))
         //model.currentCart.observe(requireActivity() , Observer{addProducts(it.cartItems)})
-
         return inflater.inflate(R.layout.customer_cart_fragment_layout, container, false)
     }
 
@@ -162,8 +161,6 @@ class CustomerCartFragment : BaseFragment() {
                 model.onEvent(CartUiAction.RemoveFromCart(cartItem.product.id))
             }
         }
-
-
 
         cart_items_list.apply {
             layoutManager = LinearLayoutManager(requireContext())

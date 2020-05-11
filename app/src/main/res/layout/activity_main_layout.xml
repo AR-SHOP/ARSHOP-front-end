@@ -24,7 +24,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navbar"
             android:layout_width="0dp"
-            android:layout_height="65dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
             android:layout_marginStart="2dp"
@@ -33,6 +33,7 @@
             app:backgroundTint="@color/colorBackground"
             style="@style/bottomNavBarStyle"
             app:elevation="8dp"
+            app:itemIconSize="20dp"
             app:itemIconTint="@drawable/selector_bottom_navbar"
             app:itemTextColor="@drawable/selector_bottom_navbar"
             app:labelVisibilityMode="selected"
@@ -41,7 +42,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            app:menu="@menu/bottom_navbar_menu_layout" />
+            app:menu="@menu/bottom_navbar_menu_layout"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,14 +13,14 @@ class DiscountViewHolder(itemView: View)
     var discountImageUrl = itemView.discount_card_image
 
 
-    override fun bind(imageUrl: String, listener: OnItemClickListener) {
+    override fun bind(data: String, listener: OnItemClickListener) {
         val requestOptions = RequestOptions()
             .placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_launcher_background)
 
         Glide.with(itemView.context)
             .applyDefaultRequestOptions(requestOptions)
-            .load(imageUrl)
+            .load(data)
             .into(discountImageUrl)
 
 

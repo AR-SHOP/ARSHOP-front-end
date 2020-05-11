@@ -107,17 +107,12 @@ class ProductFragment : BaseFragment() {
         if(cartViewModel.isInCart(model.product.id) )
         {
             add_to_cart_btn?.visibility = View.INVISIBLE
-            plus_btn?.visibility = View.VISIBLE
-            cart_count_text?.visibility = View.VISIBLE
-            minus_btn?.visibility = View.VISIBLE
-            delete_btn?.visibility = View.VISIBLE
+            inc_dec_cart_count?.visibility = View.VISIBLE
         }
         else{
             add_to_cart_btn?.visibility = View.VISIBLE
-            plus_btn?.visibility = View.INVISIBLE
-            cart_count_text?.visibility = View.INVISIBLE
-            minus_btn?.visibility = View.INVISIBLE
-            delete_btn?.visibility = View.INVISIBLE
+            inc_dec_cart_count?.visibility = View.INVISIBLE
+
         }
     }
 

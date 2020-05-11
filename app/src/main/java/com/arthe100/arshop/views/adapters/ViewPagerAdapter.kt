@@ -15,6 +15,7 @@ class ViewPagerAdapter (fragmentActivity: FragmentActivity)
     @Inject lateinit var fragmentFactory : FragmentFactory
     lateinit var customerCartFragment: CustomerCartFragment
     lateinit var ordersFragment: OrdersFragment
+    lateinit var fragments: ArrayList<Fragment>
 
     init {
         (fragmentActivity.application as BaseApplication).mainComponent().inject(this)
