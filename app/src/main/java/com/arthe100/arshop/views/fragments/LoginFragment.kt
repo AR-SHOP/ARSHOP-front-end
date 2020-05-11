@@ -26,10 +26,8 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
     @Inject lateinit var fragmentFactory: FragmentFactory
-    lateinit var signUpFragment: SignUpFragment
-    lateinit var profileFragment: ProfileFragment
-    var inCartFragment: Boolean = false
-
+    private lateinit var signUpFragment: SignUpFragment
+    private lateinit var profileFragment: ProfileFragment
     private val TAG = LoginFragment::class.simpleName
 
     private lateinit var model: AuthViewModel
@@ -54,6 +52,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
                 loading_bar.visibility = View.INVISIBLE
                 DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
                 session.saveUser(state.user)
+                profileFragment.inMainPage = true
                 loadFragment(profileFragment)
             }
             is AuthState.Failure -> {

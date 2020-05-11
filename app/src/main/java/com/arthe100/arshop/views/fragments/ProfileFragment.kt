@@ -22,6 +22,7 @@ import javax.inject.Inject
 class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
+
     private lateinit var model: ProfileViewModel
     private val TAG = ProfileFragment::class.simpleName
 
@@ -34,8 +35,6 @@ class ProfileFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
-
-
         model.currentViewState.observe(this , Observer(::render))
     }
 
