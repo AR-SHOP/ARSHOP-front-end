@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arthe100.arshop.models.AddCart
 import com.arthe100.arshop.models.Cart
+import com.arthe100.arshop.models.CartItem
 import com.arthe100.arshop.models.RemoveCart
 import com.arthe100.arshop.scripts.repositories.CartRepository
 import kotlinx.coroutines.Job
@@ -32,6 +33,19 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
             .contains(id)
     }
 
+    fun getCartItemById(id: Long) : CartItem?{
+        val cart = currentCart.value!!
+        return cart.cartItems.singleOrNull { it.product.id == id }
+    }
+
+    fun updateCart(){
+        _currentCart.value = _currentCart.value
+    }
+    fun updateCart(updateAdapterFun: (cartItems: List<CartItem>) -> Unit){
+        _currentCart.value = _currentCart.value
+        updateAdapterFun(_currentCart.value!!.cartItems)
+    }
+
     private var currentQuantity: Int = -1
     private val delayDuration: Long = 500
     private var currentJob: Job? = null
@@ -39,7 +53,7 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
     fun onEvent(action: CartUiAction)
     {
         when(action){
-            CartUiAction.ClearCart -> TODO()
+            CartUiAction.ClearCart -> clearCart()
             CartUiAction.GetCart -> getCart()
             CartUiAction.GetCartOnStart -> getCartOnStart()
             is CartUiAction.AddToCart -> add(action.id , action.quantity)
@@ -49,11 +63,19 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
         }
     }
 
+    private fun clearCart() {
+        currentJob?.cancel()
+        currentJob = viewModelScope.launch {
+            _currentViewState.value = cartRepo.clear()
+        }
+    }
 
 
     private fun getCart(){
-        viewModelScope.launch {
 
+        _currentViewState.value = CartState.LoadingState
+
+        viewModelScope.launch {
             val state = cartRepo.get()
             when(state){
                 is CartState.GetCartState -> {

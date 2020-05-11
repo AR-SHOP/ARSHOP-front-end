@@ -1,12 +1,9 @@
 package com.arthe100.arshop.scripts.mvi.Auth
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.arthe100.arshop.models.User
-import com.arthe100.arshop.models.UserToken
 import com.arthe100.arshop.scripts.mvi.mviBase.Action
 import com.arthe100.arshop.scripts.repositories.UserRepository
 import kotlinx.coroutines.launch

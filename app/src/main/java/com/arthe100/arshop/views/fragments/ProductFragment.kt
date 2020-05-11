@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
@@ -86,24 +87,56 @@ class ProductFragment : BaseFragment() {
             .placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_launcher_background)
 
+        val cartItem = cartViewModel.getCartItemById(model.product.id)
+        cart_count_text?.text = cartItem?.quantity.toString()
+
         Glide.with(requireContext())
             .applyDefaultRequestOptions(requestOptions)
             .load(model.product.thumbnail)
             .into(product_details_image)
 
-        ar_btn.setOnClickListener {
+        ar_btn?.setOnClickListener {
             customArFragment.setUri(model.product.arModel)
             loadFragment(customArFragment)
         }
-        add_to_cart_btn.setOnClickListener {
+        add_to_cart_btn?.setOnClickListener {
             cartViewModel.onEvent(CartUiAction.AddToCart(model.product.id , 1))
+            cart_count_text?.text = 1.toString()
+            add_to_cart_btn?.visibility = View.INVISIBLE
+            inc_dec_cart_count?.visibility = View.VISIBLE
         }
         super.onStart()
     }
 
 
 
-    fun checkCartStatus(){
+    private fun checkCartStatus(){
+
+        plus_btn?.setOnClickListener{
+            val cartItem = cartViewModel.getCartItemById(model.product.id)!!
+            val newQuantity = (cart_count_text?.text.toString().toInt() + 1).coerceIn(0..Int.MAX_VALUE)
+            cartItem.quantity = newQuantity
+            cart_count_text?.text = newQuantity.toString()
+            cartViewModel.onEvent(CartUiAction.IncreaseQuantity(cartItem.product.id, cartItem.quantity))
+            cartViewModel.updateCart()
+        }
+        minus_btn?.setOnClickListener{
+            val cartItem = cartViewModel.getCartItemById(model.product.id)!!
+            val newQuantity = (cart_count_text?.text.toString().toInt() - 1).coerceIn(0..Int.MAX_VALUE)
+            cartItem.quantity = newQuantity
+            cart_count_text?.text = newQuantity.toString()
+            cartViewModel.onEvent(CartUiAction.DecreaseQuantity(cartItem.product.id , cartItem.quantity))
+            cartViewModel.updateCart()
+        }
+        delete_btn?.setOnClickListener{
+            val cartItem = cartViewModel.getCartItemById(model.product.id)!!
+            cartItem.quantity = 0
+            cartViewModel.onEvent(CartUiAction.RemoveFromCart(cartItem.product.id))
+            add_to_cart_btn?.visibility = View.VISIBLE
+            inc_dec_cart_count?.visibility = View.INVISIBLE
+            cartViewModel.updateCart()
+        }
+
         if(cartViewModel.isInCart(model.product.id) )
         {
             add_to_cart_btn?.visibility = View.INVISIBLE

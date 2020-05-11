@@ -55,7 +55,6 @@ class CartItemViewHolder(itemView: View) : BaseItemViewHolder<CartItem>(itemView
         btnPlus.setOnClickListener{
             val position: Int = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-
                 val newQuantity = (txtQuantity.text.toString().toInt() + 1).coerceIn(0..Int.MAX_VALUE)
                 data.quantity = newQuantity
                 txtQuantity.text = newQuantity.toString()
