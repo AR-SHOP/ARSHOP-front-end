@@ -5,6 +5,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layoutDirection="rtl"
         android:clickable="false"
         android:background="@drawable/dialog_shape">
 
@@ -16,6 +17,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
+                android:textDirection="rtl"
                 android:textColor="@color/colorBtnText"
                 android:text="@string/loading_message"/>
 

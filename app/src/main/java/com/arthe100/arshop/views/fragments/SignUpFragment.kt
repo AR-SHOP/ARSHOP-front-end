@@ -47,7 +47,6 @@ class SignUpFragment : BaseFragment() {
         return inflater.inflate(R.layout.sign_up_fragment, container, false)
     }
 
-
     override fun onStart() {
         super.onStart()
 
@@ -58,9 +57,7 @@ class SignUpFragment : BaseFragment() {
                     password = signup_password.text.toString(),
                     phone = model.phone))
         }
-
     }
-
 
     override fun toString(): String {
         return "SignUp Fragment"
@@ -83,12 +80,12 @@ class SignUpFragment : BaseFragment() {
 
             is AuthState.LoginSuccess -> {
                 session.saveUser(state.user)
-//                DialogBoxManager.create(activity, MessageType.SUCCESS)
+//                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
                 loadFragment(verifyFragment)
             }
 
             is AuthState.LoadingState -> {
-//                DialogBoxManager.create(activity, MessageType.LOAD)
+//                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
             }
         }
     }

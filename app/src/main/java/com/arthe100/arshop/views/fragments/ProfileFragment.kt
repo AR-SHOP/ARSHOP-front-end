@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileUiAction
@@ -23,7 +24,7 @@ class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
 
-    private lateinit var dialogBoxManager: DialogBoxManager
+    private lateinit var messageManager: MessageManager
     private lateinit var model: ProfileViewModel
     private val TAG = ProfileFragment::class.simpleName
 
@@ -34,7 +35,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dialogBoxManager = DialogBoxManager()
+        messageManager = MessageManager()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
         model.currentViewState.observe(this , Observer(::render))
     }
@@ -49,14 +50,16 @@ class ProfileFragment : BaseFragment() {
     private fun render(state: ProfileState){
         when(state) {
             is ProfileState.Idle -> {
+                messageManager.toast(requireContext(), "hello")
             }
 
             is ProfileState.GetProfileFailure -> {
-//                DialogBoxManager.createDialog(activity, MessageType.ERROR, "$state: ${state.throwable}")
+                messageManager.toast(requireContext(), state.throwable.toString())
+//                DialogBoxManager.createDialog(requireActivity(), MessageType.ERROR).show()
             }
 
             is ProfileState.GetProfileSuccess -> {
-                dialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
+                DialogBoxManager.createDialog(requireActivity(), MessageType.SUCCESS).show()
 
                 val user = state.userInfo
 
@@ -77,7 +80,7 @@ class ProfileFragment : BaseFragment() {
             }
 
             is ProfileState.LoadingState -> {
-                dialogBoxManager.createDialog(activity, MessageType.LOAD).show()
+                DialogBoxManager.createDialog(requireActivity(), MessageType.LOAD).show()
             }
         }
     }

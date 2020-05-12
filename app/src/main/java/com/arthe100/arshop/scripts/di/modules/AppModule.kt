@@ -27,13 +27,6 @@ object AppModule {
         return MessageManager()
     }
 
-    @JvmStatic
-    @AppScope
-    @Provides
-    fun dialogBoxManager() : DialogBoxManager{
-        return DialogBoxManager()
-    }
-
 
     @JvmStatic
     @AppScope

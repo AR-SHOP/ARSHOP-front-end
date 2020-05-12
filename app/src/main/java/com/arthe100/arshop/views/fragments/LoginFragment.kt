@@ -10,6 +10,7 @@ import androidx.preference.PreferenceManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
@@ -26,6 +27,8 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
     @Inject lateinit var fragmentFactory: FragmentFactory
+
+    private lateinit var messageManager: MessageManager
     private lateinit var signUpFragment: SignUpFragment
     private lateinit var profileFragment: ProfileFragment
     private val TAG = LoginFragment::class.simpleName
@@ -34,6 +37,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        messageManager = MessageManager()
         profileFragment = fragmentFactory.create<ProfileFragment>()
         signUpFragment = fragmentFactory.create<SignUpFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
@@ -43,23 +47,22 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     private fun render(state: AuthState){
         when(state){
             is AuthState.Idle -> {
-//                DialogBoxManager.dismiss()
+                messageManager.toast(requireActivity(), "login")
             }
 
-
             is AuthState.LoadingState -> {
-//                DialogBoxManager.create(activity, MessageType.LOAD)
+                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
             }
 
             is AuthState.LoginSuccess -> {
-//                DialogBoxManager.create(activity, MessageType.SUCCESS)
+                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
                 session.saveUser(state.user)
                 profileFragment.inMainPage = true
                 loadFragment(profileFragment)
             }
 
             is AuthState.Failure -> {
-//                DialogBoxManager.create(activity, MessageType.ERROR)
+                DialogBoxManager.createDialog(activity, MessageType.ERROR).show()
             }
         }
     }

@@ -59,7 +59,6 @@ class HomeFragment: BaseFragment(), ILoadFragment {
             }
 
             is ProductState.GetProductsFaliure -> {
-                loading_bar.visibility = View.INVISIBLE
 //                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.throwable.toString()).show()
             }
         }
