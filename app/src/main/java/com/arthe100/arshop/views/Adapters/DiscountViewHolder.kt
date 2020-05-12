@@ -1,10 +1,8 @@
-package com.arthe100.arshop.views.adapters
+package com.arthe100.arshop.views.Adapters
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
-import com.arthe100.arshop.models.Product
-import com.arthe100.arshop.views.Adapters.OnItemClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.discount_card_view.view.*

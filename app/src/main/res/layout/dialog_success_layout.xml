@@ -8,13 +8,12 @@
         android:background="@drawable/dialog_shape">
 
     <TextView
-            android:id="@+id/dialog_one_button_layout_textView"
+            android:id="@+id/dialog_success_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:textAlignment="center"
             android:textColor="@color/colorBtnText"
             android:text="@string/success_message"/>
 
@@ -26,7 +25,7 @@
 
 
         <Button
-                android:id="@+id/dialog_one_button_layout_posBtn"
+                android:id="@+id/dialog_success_posBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

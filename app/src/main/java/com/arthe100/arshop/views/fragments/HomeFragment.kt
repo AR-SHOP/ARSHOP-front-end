@@ -20,10 +20,8 @@ import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
 import com.arthe100.arshop.views.Adapters.OnItemClickListener
-import com.arthe100.arshop.views.adapters.DiscountAdapter
-import com.arthe100.arshop.views.adapters.HomeGridViewAdapter
-import com.arthe100.arshop.views.dialogBox.DialogBoxManager
-import com.arthe100.arshop.views.dialogBox.MessageType
+import com.arthe100.arshop.views.Adapters.DiscountAdapter
+import com.arthe100.arshop.views.Adapters.HomeGridViewAdapter
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject

@@ -10,9 +10,8 @@ import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.views.Adapters.OnItemClickListener
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.adapters.CartItemAdapter
+import com.arthe100.arshop.views.Adapters.CartItemAdapter
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.cart_item.*
 import kotlinx.android.synthetic.main.customer_cart_fragment_layout.*
 import javax.inject.Inject
 

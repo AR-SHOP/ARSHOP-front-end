@@ -1,11 +1,10 @@
-package com.arthe100.arshop.views.adapters
+package com.arthe100.arshop.views.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
-import com.arthe100.arshop.views.Adapters.OnItemClickListener
 
 class CartItemAdapter : BaseItemAdapter<Product>() {
 

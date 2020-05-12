@@ -1,12 +1,9 @@
-package com.arthe100.arshop.views.adapters
+package com.arthe100.arshop.views.Adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
-import com.arthe100.arshop.views.Adapters.OnItemClickListener
 
 class DiscountAdapter : BaseItemAdapter<String>() {
     private lateinit var mListener: OnItemClickListener

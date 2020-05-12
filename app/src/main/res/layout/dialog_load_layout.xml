@@ -5,17 +5,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:clickable="false"
         android:background="@drawable/dialog_shape">
 
         <TextView
-                android:id="@+id/dialog_simple_layout_textView"
+                android:id="@+id/dialog_load_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
-                android:textAlignment="center"
                 android:textColor="@color/colorBtnText"
                 android:text="@string/loading_message"/>
 

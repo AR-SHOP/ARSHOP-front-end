@@ -1,6 +1,5 @@
 package com.arthe100.arshop.views.fragments
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +8,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.views.dialogBox.DialogBoxManager
-import com.arthe100.arshop.views.dialogBox.MessageType
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.profile_fragment_layout.*
 import javax.inject.Inject
@@ -24,7 +23,7 @@ class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
 
-    private lateinit var dialog: Dialog
+    private lateinit var dialogBoxManager: DialogBoxManager
     private lateinit var model: ProfileViewModel
     private val TAG = ProfileFragment::class.simpleName
 
@@ -35,9 +34,8 @@ class ProfileFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        dialogBoxManager = DialogBoxManager()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
-
         model.currentViewState.observe(this , Observer(::render))
     }
 
@@ -51,15 +49,14 @@ class ProfileFragment : BaseFragment() {
     private fun render(state: ProfileState){
         when(state) {
             is ProfileState.Idle -> {
-                DialogBoxManager.dismiss()
             }
 
             is ProfileState.GetProfileFailure -> {
-                DialogBoxManager.create(activity, MessageType.ERROR, "$state: ${state.throwable}")
+//                DialogBoxManager.createDialog(activity, MessageType.ERROR, "$state: ${state.throwable}")
             }
 
             is ProfileState.GetProfileSuccess -> {
-                DialogBoxManager.create(activity, MessageType.SUCCESS)
+                dialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
 
                 val user = state.userInfo
 
@@ -80,7 +77,7 @@ class ProfileFragment : BaseFragment() {
             }
 
             is ProfileState.LoadingState -> {
-                DialogBoxManager.create(activity, MessageType.LOAD)
+                dialogBoxManager.createDialog(activity, MessageType.LOAD).show()
             }
         }
     }
