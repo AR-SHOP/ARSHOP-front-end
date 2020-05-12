@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layoutDirection="rtl"
         android:textDirection="rtl"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="15dp"
         android:layout_centerInParent="true">
 
     <LinearLayout
