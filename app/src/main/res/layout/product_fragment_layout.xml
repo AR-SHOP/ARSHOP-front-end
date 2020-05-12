@@ -12,7 +12,6 @@
             android:id="@+id/loading_bar"
             android:visibility="invisible"/>
 
-
     <ImageView
             android:id="@+id/product_details_image"
             android:layout_width="match_parent"

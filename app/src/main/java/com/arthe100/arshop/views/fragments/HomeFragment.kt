@@ -91,8 +91,16 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
     override fun onStart() {
 
+
         model.onEvent(ProductUiAction.GetHomePageProducts)
         cartViewModel.onEvent(CartUiAction.GetCartOnStart)
+
+        swipe_refresh_layout.setOnRefreshListener {
+            model.onEvent(ProductUiAction.GetHomePageProducts)
+            cartViewModel.onEvent(CartUiAction.GetCartOnStart)
+            swipe_refresh_layout.isRefreshing = false
+        }
+
         super.onStart()
     }
 
