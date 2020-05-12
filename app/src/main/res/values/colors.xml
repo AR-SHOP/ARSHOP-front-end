@@ -9,4 +9,5 @@
     <color name="colorHint">#6a6767</color>
     <color name="colorEditText">#efefef</color>
     <color name="colorError">#ff0000</color>
+    <color name="colorCaution">#ffd11a</color>
 </resources>

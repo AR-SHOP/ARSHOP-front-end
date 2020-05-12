@@ -8,13 +8,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.views.dialogBox.DialogBoxManager
-import com.arthe100.arshop.views.dialogBox.MessageType
+import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.profile_fragment_layout.*
 import javax.inject.Inject
@@ -23,6 +24,7 @@ class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
 
+    private lateinit var messageManager: MessageManager
     private lateinit var model: ProfileViewModel
     private val TAG = ProfileFragment::class.simpleName
 
@@ -33,7 +35,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        messageManager = MessageManager()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
         model.currentViewState.observe(this , Observer(::render))
     }
@@ -46,15 +48,18 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun render(state: ProfileState){
-        when(state){
+        when(state) {
+            is ProfileState.Idle -> {
+                messageManager.toast(requireContext(), "hello")
+            }
+
             is ProfileState.GetProfileFailure -> {
-                loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, "$state: ${state.throwable}").show()
+                messageManager.toast(requireContext(), state.throwable.toString())
+//                DialogBoxManager.createDialog(requireActivity(), MessageType.ERROR).show()
             }
 
             is ProfileState.GetProfileSuccess -> {
-                loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
+                DialogBoxManager.createDialog(requireActivity(), MessageType.SUCCESS).show()
 
                 val user = state.userInfo
 
@@ -75,9 +80,7 @@ class ProfileFragment : BaseFragment() {
             }
 
             is ProfileState.LoadingState -> {
-                loading_bar.visibility = View.VISIBLE
-
-                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
+                DialogBoxManager.createDialog(requireActivity(), MessageType.LOAD).show()
             }
         }
     }

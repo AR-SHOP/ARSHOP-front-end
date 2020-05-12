@@ -127,7 +127,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
         else {
             supportFragmentManager.popBackStack()
         }
-//        super.onBackPressed()
     }
 
     private fun getTheLastFragment() : Fragment? {

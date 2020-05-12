@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.CartItem
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.views.adapters.BaseItemAdapter
 
 class CartItemAdapter(dataList: List<CartItem>) : BaseItemAdapter<CartItem>() {
 
@@ -49,7 +50,6 @@ class CartItemAdapter(dataList: List<CartItem>) : BaseItemAdapter<CartItem>() {
 //                delete_btn.visibility = View.VISIBLE
             }
         }
-
     }
 
     override fun getItemCount(): Int = dataList.size

@@ -1,6 +1,8 @@
 package com.arthe100.arshop.scripts.di.modules
 
+import androidx.fragment.app.FragmentActivity
 import com.arthe100.arshop.scripts.di.scopes.MainScope
+import com.arthe100.arshop.views.adapters.ViewPagerAdapter
 import com.arthe100.arshop.views.fragments.*
 import dagger.Module
 import dagger.Provides
@@ -103,5 +105,9 @@ object MainModule{
     @Provides
     fun createCustomerCartFragment() : CustomerCartFragment {
         return CustomerCartFragment()
+    }
+
+    fun createViewPagerAdapter(fragmentActivity: FragmentActivity) : ViewPagerAdapter {
+        return ViewPagerAdapter(fragmentActivity)
     }
 }

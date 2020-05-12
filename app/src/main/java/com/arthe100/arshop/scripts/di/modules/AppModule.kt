@@ -10,6 +10,7 @@ import com.arthe100.arshop.scripts.di.scopes.AppScope
 import com.arthe100.arshop.scripts.di.scopes.MainScope
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.google.ar.sceneform.Scene
 import com.google.gson.Gson
 import dagger.Module

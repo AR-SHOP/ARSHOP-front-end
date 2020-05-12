@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.CartItem
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.views.adapters.BaseItemViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.cart_item.view.*

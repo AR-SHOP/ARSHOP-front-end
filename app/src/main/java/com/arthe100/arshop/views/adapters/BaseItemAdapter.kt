@@ -2,6 +2,7 @@ package com.arthe100.arshop.views.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.arthe100.arshop.views.adapters.OnItemClickListener
 
 abstract class BaseItemAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

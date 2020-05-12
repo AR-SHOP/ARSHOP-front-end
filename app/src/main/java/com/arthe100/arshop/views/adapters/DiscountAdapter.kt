@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
+import com.arthe100.arshop.views.adapters.OnItemClickListener
 
 class DiscountAdapter : BaseItemAdapter<String>() {
     private lateinit var mListener: OnItemClickListener
