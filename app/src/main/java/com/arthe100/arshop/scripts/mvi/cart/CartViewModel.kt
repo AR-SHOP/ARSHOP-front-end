@@ -27,15 +27,16 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
 
 
     fun isInCart(id: Long) : Boolean{
-        val cart = _currentCart.value!!
-        return cart.cartItems
-            .map { it.product.id }
-            .contains(id)
+        val cart = _currentCart.value
+
+        return cart?.cartItems
+            ?.map { it.product.id }
+            ?.contains(id) ?: false
     }
 
     fun getCartItemById(id: Long) : CartItem?{
-        val cart = currentCart.value!!
-        return cart.cartItems.singleOrNull { it.product.id == id }
+        val cart = currentCart.value
+        return cart?.cartItems?.singleOrNull { it.product.id == id }
     }
 
     fun updateCart(){
