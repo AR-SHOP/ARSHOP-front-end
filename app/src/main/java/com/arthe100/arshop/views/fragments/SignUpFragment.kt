@@ -22,10 +22,10 @@ import kotlinx.android.synthetic.main.sign_up_fragment.*
 import javax.inject.Inject
 
 class SignUpFragment : BaseFragment() {
-
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var fragmentFactory: FragmentFactory
     @Inject lateinit var session: UserSession
+
     private lateinit var verifyFragment: VerifyFragment
     private lateinit var model: AuthViewModel
 
@@ -70,8 +70,7 @@ class SignUpFragment : BaseFragment() {
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-                loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.err.toString()).show()
+//                DialogBoxManager.create(activity, MessageType.ERROR, state.err.toString())
             }
 
             is AuthState.SingupSuccess -> {
@@ -83,14 +82,13 @@ class SignUpFragment : BaseFragment() {
             }
 
             is AuthState.LoginSuccess -> {
-                loading_bar.visibility = View.INVISIBLE
                 session.saveUser(state.user)
-                DialogBoxManager.createDialog(activity, MessageType.SUCCESS, "user logged in!").show()
+//                DialogBoxManager.create(activity, MessageType.SUCCESS)
                 loadFragment(verifyFragment)
             }
 
             is AuthState.LoadingState -> {
-                loading_bar.visibility = View.VISIBLE
+//                DialogBoxManager.create(activity, MessageType.LOAD)
             }
         }
     }

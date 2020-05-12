@@ -1,5 +1,6 @@
 package com.arthe100.arshop.views.fragments
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
 
+    private lateinit var dialog: Dialog
     private lateinit var model: ProfileViewModel
     private val TAG = ProfileFragment::class.simpleName
 
@@ -35,6 +37,7 @@ class ProfileFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
+
         model.currentViewState.observe(this , Observer(::render))
     }
 
@@ -46,14 +49,17 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun render(state: ProfileState){
-        when(state){
+        when(state) {
+            is ProfileState.Idle -> {
+                DialogBoxManager.dismiss()
+            }
+
             is ProfileState.GetProfileFailure -> {
-                loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, "$state: ${state.throwable}").show()
+                DialogBoxManager.create(activity, MessageType.ERROR, "$state: ${state.throwable}")
             }
 
             is ProfileState.GetProfileSuccess -> {
-                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
+                DialogBoxManager.create(activity, MessageType.SUCCESS)
 
                 val user = state.userInfo
 
@@ -74,7 +80,7 @@ class ProfileFragment : BaseFragment() {
             }
 
             is ProfileState.LoadingState -> {
-                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
+                DialogBoxManager.create(activity, MessageType.LOAD)
             }
         }
     }

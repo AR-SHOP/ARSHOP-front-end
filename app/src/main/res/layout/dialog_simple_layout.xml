@@ -5,43 +5,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/dialog_shape"
-        android:clickable="false">
+        android:background="@drawable/dialog_shape">
 
-        <LinearLayout
+        <TextView
+                android:id="@+id/dialog_simple_layout_textView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBtnText"
+                android:text="@string/loading_message"/>
 
-                <TextView
-                        android:id="@+id/dialog_simple_layout_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:textColor="@color/colorBtnText"
-                        android:text="@string/loading_message"/>
-        </LinearLayout>
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                <com.github.ybq.android.spinkit.SpinKitView
+                        android:layout_width="0dp"
+                        android:layout_height="75dp"
+                        style="@style/SpinKitView.Wave"
+                        app:SpinKit_Color="@color/colorBackground"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <com.github.ybq.android.spinkit.SpinKitView
-                                android:layout_width="0dp"
-                                android:layout_height="75dp"
-                                style="@style/SpinKitView.Wave"
-                                app:SpinKit_Color="@color/colorBackground"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
 </LinearLayout>

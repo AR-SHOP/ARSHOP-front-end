@@ -22,6 +22,7 @@ import javax.inject.Inject
 class VerifyFragment : BaseFragment(){
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var fragmentFactory: FragmentFactory
+
     private lateinit var profileFragment: ProfileFragment
     private lateinit var model: AuthViewModel
 
@@ -58,17 +59,16 @@ class VerifyFragment : BaseFragment(){
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-                loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.err.toString()).show()
+//                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.err.toString()).show()
             }
 
             is AuthState.CodeSuccess -> {
-                loading_bar.visibility = View.INVISIBLE
+//                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
                 loadFragment(profileFragment)
             }
 
             is AuthState.LoadingState ->{
-                loading_bar.visibility = View.VISIBLE
+//                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
             }
         }
     }

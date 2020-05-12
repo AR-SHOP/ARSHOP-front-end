@@ -43,21 +43,23 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     private fun render(state: AuthState){
         when(state){
             is AuthState.Idle -> {
-                loading_bar.visibility = View.INVISIBLE
+//                DialogBoxManager.dismiss()
             }
+
+
             is AuthState.LoadingState -> {
-                loading_bar.visibility = View.VISIBLE
+//                DialogBoxManager.create(activity, MessageType.LOAD)
             }
+
             is AuthState.LoginSuccess -> {
-                loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
+//                DialogBoxManager.create(activity, MessageType.SUCCESS)
                 session.saveUser(state.user)
                 profileFragment.inMainPage = true
                 loadFragment(profileFragment)
             }
+
             is AuthState.Failure -> {
-                loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR).show()
+//                DialogBoxManager.create(activity, MessageType.ERROR)
             }
         }
     }
@@ -83,9 +85,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             if(user == null)
                 loadFragment(signUpFragment)
             else {
-                DialogBoxManager.createDialog(activity, MessageType.ERROR,
-                    "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
-                    .show()
+//error
             }
         }
 

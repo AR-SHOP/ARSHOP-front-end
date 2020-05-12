@@ -49,22 +49,20 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     private fun render(state: ProductState){
         when(state){
             is ProductState.Idle -> {
-                loading_bar.visibility = View.INVISIBLE
             }
 
             is ProductState.LoadingState -> {
-                loading_bar.visibility = View.VISIBLE
+//                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
             }
 
             is ProductState.GetProductsSuccess -> {
-                loading_bar.visibility = View.INVISIBLE
                 setGridView()
                 addProducts(state.products)
             }
 
             is ProductState.GetProductsFaliure -> {
                 loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.throwable.toString()).show()
+//                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.throwable.toString()).show()
             }
         }
 
@@ -86,7 +84,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
         when(session.user){
             is User.GuestUser ->{
                 messageManager.toast(requireContext(), "Not logged in")
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, "not logged in!").show()
+//                DialogBoxManager.createDialog(activity, MessageType.ERROR, "not logged in!").show()
             }
             is User.User ->{
                 model.onEvent(ProductUiAction.GetHomePageProducts)
