@@ -42,8 +42,8 @@ class HomeGridViewAdapter(val context: Context) : BaseAdapter() {
         return cardView
     }
 
-    override fun getItem(position: Int): Any {
-        return 0
+    override fun getItem(position: Int): Product {
+        return dataList[position]
     }
 
     override fun getItemId(position: Int): Long {

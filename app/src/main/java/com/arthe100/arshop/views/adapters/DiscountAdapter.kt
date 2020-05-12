@@ -4,38 +4,37 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
-import com.arthe100.arshop.models.Product
 
-class CartItemAdapter : BaseItemAdapter<Product>() {
-
+class DiscountAdapter : BaseItemAdapter<String>() {
     private lateinit var mListener: OnItemClickListener
-    lateinit var dataList: List<Product>
+    private var imageList: List<String> = arrayListOf()
         private set
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return CartItemViewHolder(
+
+        return DiscountViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.cart_item, parent, false)
+                .inflate(R.layout.discount_card_view, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder) {
-            is CartItemViewHolder -> {
-                holder.bind(dataList[position], mListener)
+            is DiscountViewHolder -> {
+                holder.bind(imageList[position], mListener)
             }
         }
 
     }
-
-    override fun getItemCount(): Int = dataList.size
+    override fun getItemCount(): Int = imageList.size
 
     override fun setOnItemClickListener(listener: OnItemClickListener) {
         mListener = listener
     }
 
-    override fun submitList(data: List<Product>) {
-        dataList = data
+    override fun submitList(data: MutableList<String>){
+        imageList = data
     }
+
 }

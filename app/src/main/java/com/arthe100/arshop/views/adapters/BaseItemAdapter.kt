@@ -16,5 +16,5 @@ abstract class BaseItemAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder
     override fun getItemCount(): Int = 0
 
     abstract fun setOnItemClickListener(listener: OnItemClickListener)
-    abstract fun submitList(data: List<T>)
+    abstract fun submitList(data: MutableList<T>)
 }

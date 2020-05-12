@@ -73,7 +73,7 @@ class ProfileFragment : BaseFragment() {
                 else
                     state.userInfo.email
 
-                phone_number.text = if(user.phone.isEmpty())
+                phone_number.text = if(user.phone.isNullOrEmpty())
                     "شماره موبایل"
                 else
                     state.userInfo.phone

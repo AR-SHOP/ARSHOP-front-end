@@ -33,7 +33,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
     lateinit var profileFragment: ProfileFragment
 
     private var backPressedTime: Long = 0
-    private var selectedFragment: BaseFragment? = null
+    private var selectedFragment: Fragment? = null
     private val TAG : String? = MainActivity::class.simpleName
 
 
@@ -97,7 +97,16 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     override fun onBackPressed() {
 
-        if (selectedFragment!!.inMainPage) {
+        selectedFragment = getTheLastFragment()
+
+        val isMain =
+            selectedFragment!! is HomeFragment ||
+            selectedFragment!! is CartFragment ||
+            selectedFragment!! is CategoriesFragment ||
+            selectedFragment!! is LoginFragment ||
+            selectedFragment!! is ProfileFragment
+
+        if (isMain) {
 
             if (selectedFragment is HomeFragment) {
                 if (backPressedTime + 2000 > System.currentTimeMillis()) {
@@ -118,13 +127,13 @@ class MainActivity : BaseActivity(), ILoadFragment {
         else {
             supportFragmentManager.popBackStack()
         }
-        super.onBackPressed()
+//        super.onBackPressed()
     }
 
-    private fun getTheLastFragment() : BaseFragment? {
+    private fun getTheLastFragment() : Fragment? {
         var backStackSize = supportFragmentManager.backStackEntryCount
         val fragmentTag: String? =
             supportFragmentManager.getBackStackEntryAt(backStackSize - 1).name
-        return supportFragmentManager.findFragmentByTag(fragmentTag) as BaseFragment
+        return supportFragmentManager.findFragmentByTag(fragmentTag)
     }
 }

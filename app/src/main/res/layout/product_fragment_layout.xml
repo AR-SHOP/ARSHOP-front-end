@@ -4,18 +4,27 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.fragments.ProductFragment">
+        tools:context=".views.fragments.ProductFragment"
+        android:layoutDirection="rtl"
+        android:textDirection="rtl">
+
+    <include layout="@layout/loading_fragment"
+            android:id="@+id/loading_bar"
+            android:visibility="invisible"/>
+
 
     <ImageView
             android:id="@+id/product_details_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/details"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    
-    
+
+
     <LinearLayout
             android:id="@+id/details"
             android:layout_width="0dp"
@@ -65,7 +74,7 @@
 
 
     </LinearLayout>
-    
+
     <TextView
             android:id="@+id/product_details_description"
             android:layout_width="0dp"
@@ -73,6 +82,7 @@
             android:text="توضیحات"
             android:textSize="15sp"
             android:padding="20dp"
+            android:textAlignment="viewStart"
             android:textColor="@color/colorSecondary"
             app:layout_constraintTop_toBottomOf="@id/details"
             app:layout_constraintRight_toRightOf="parent"
@@ -81,7 +91,7 @@
     <LinearLayout
             android:id="@+id/buttons"
             android:layout_width="0dp"
-            android:layout_height="65dp"
+            android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:orientation="horizontal"
             android:layoutDirection="rtl"
@@ -101,9 +111,9 @@
                 android:elevation="10dp"
                 android:layout_weight="1"
                 android:layout_margin="10dp"
+                android:layout_gravity="center"
                 android:text="@string/ar_view_btn"
                 android:textSize="12dp"
-                android:padding="5dp"
                 android:textColor="@color/colorPrimary" />
 
         <Button
@@ -114,39 +124,41 @@
                 android:backgroundTint="@color/colorBackground"
                 android:layout_weight="1"
                 android:elevation="10dp"
+                android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:padding="5dp"
                 android:text="@string/add_to_cart"
-                android:textSize="15dp"
+                android:textSize="12dp"
                 android:textColor="@color/colorPrimary"
                 android:visibility="invisible"/>
+
+
 
 
     </LinearLayout>
 
     <LinearLayout
             android:id="@+id/inc_dec_cart_count"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layoutDirection="rtl"
             android:orientation="horizontal"
             android:textDirection="rtl"
             android:visibility="visible"
-            android:layout_marginRight="250dp"
-            app:layout_constraintBottom_toBottomOf="@id/buttons"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="@id/buttons"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toTopOf="@id/buttons"
             app:layout_constraintRight_toRightOf="@id/buttons"
-            app:layout_constraintTop_toTopOf="@id/buttons">
+            app:layout_constraintLeft_toLeftOf="@id/buttons"
+            app:layout_constraintBottom_toBottomOf="@id/buttons"
+            app:layout_constraintHorizontal_bias="0.1">
 
         <ImageButton
                 android:id="@+id/plus_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
-                android:padding="10dp"
                 android:src="@drawable/ic_plus"
-                android:tint="@color/colorBackground" />
+                android:tint="@color/colorBackground"
+                android:padding="5dp"/>
 
         <TextView
                 android:id="@+id/cart_count_text"
@@ -162,8 +174,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
-                android:padding="10dp"
                 android:src="@drawable/ic_minus"
+                android:padding="5dp"
                 android:tint="@color/colorBackground" />
 
         <ImageButton
@@ -171,11 +183,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
-                android:padding="10dp"
                 android:src="@drawable/ic_delete"
+                android:padding="5dp"
                 android:tint="@color/colorBackground" />
 
     </LinearLayout>
+
+
 
 
 

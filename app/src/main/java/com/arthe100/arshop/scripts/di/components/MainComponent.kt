@@ -4,7 +4,7 @@ import android.content.Context
 import com.arthe100.arshop.scripts.di.modules.MainModule
 import com.arthe100.arshop.scripts.di.modules.SubComponentModules.MainSubComponentModule
 import com.arthe100.arshop.scripts.di.scopes.MainScope
-import com.arthe100.arshop.views.Adapters.ViewPagerAdapter
+import com.arthe100.arshop.views.adapters.ViewPagerAdapter
 import com.arthe100.arshop.views.MainActivity
 import com.arthe100.arshop.views.fragments.*
 import dagger.BindsInstance

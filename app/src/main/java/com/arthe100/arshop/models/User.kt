@@ -24,9 +24,10 @@ data class AuthUser(
 )
 
 data class UserProfile(
+    val id: Long,
     @SerializedName("first_name") val fName : String,
     @SerializedName("last_name") val lName : String,
-    @SerializedName("phone_number") val phone : String,
+    @SerializedName("phone") val phone : String,
     val email : String,
     @SerializedName("social_security_number") val ssId : String
 )

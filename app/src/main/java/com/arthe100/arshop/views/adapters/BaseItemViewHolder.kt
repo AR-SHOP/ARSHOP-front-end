@@ -5,4 +5,5 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseItemViewHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemView)  {
     abstract fun bind(data: T, listener: OnItemClickListener)
+    open fun bind (data: T , listeners: Map<String , OnItemClickListener>){}
 }

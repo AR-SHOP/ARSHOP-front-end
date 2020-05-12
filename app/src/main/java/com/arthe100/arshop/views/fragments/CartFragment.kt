@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.views.Adapters.ViewPagerAdapter
+import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.views.adapters.ViewPagerAdapter
 import com.arthe100.arshop.views.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main_layout.*
@@ -16,8 +17,10 @@ import javax.inject.Inject
 
 class CartFragment : BaseFragment() {
     @Inject lateinit var fragmentFactory: FragmentFactory
+    @Inject lateinit var messageManager: MessageManager
     lateinit var customerCartFragment: CustomerCartFragment
     lateinit var ordersFragment: OrdersFragment
+
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent().inject(this)
@@ -51,6 +54,7 @@ class CartFragment : BaseFragment() {
                 })
         tabLayoutMediator.attach()
     }
+
 
     override fun toString(): String {
         return "Cart Fragment"

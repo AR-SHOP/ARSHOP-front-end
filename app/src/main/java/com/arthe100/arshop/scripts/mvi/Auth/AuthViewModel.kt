@@ -1,12 +1,9 @@
 package com.arthe100.arshop.scripts.mvi.Auth
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.arthe100.arshop.models.User
-import com.arthe100.arshop.models.UserToken
 import com.arthe100.arshop.scripts.mvi.mviBase.Action
 import com.arthe100.arshop.scripts.repositories.UserRepository
 import kotlinx.coroutines.launch
@@ -28,6 +25,12 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
         set(value){
             _phone = value
         }
+    private var _password: String = ""
+    var password: String
+        get() = _password
+        set(value){
+            _password = value
+        }
 
 
     fun onEvent(action: Action){
@@ -35,6 +38,8 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
         when(action)
         {
             is AuthUiAction.SignupAction -> {
+                _phone = action.phone
+                _password = action.password
                 handleSignUp(action)
             }
             is AuthUiAction.LoginAction -> {
