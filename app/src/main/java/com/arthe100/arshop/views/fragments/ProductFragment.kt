@@ -55,7 +55,7 @@ class ProductFragment : BaseFragment() {
     private fun render(state: ProductState){
         when(state){
             ProductState.Idle -> {
-//                DialogBoxManager.cancel()
+                DialogBoxManager.cancel()
             }
 
             ProductState.LoadingState -> {
@@ -67,7 +67,7 @@ class ProductFragment : BaseFragment() {
             }
 
             is ProductState.GetProductsFailure -> {
-//                DialogBoxManager.cancel()
+                DialogBoxManager.cancel()
                 messageManager.toast(requireContext() , state.throwable.toString())
             }
         }

@@ -12,11 +12,12 @@ object DialogBoxManager {
     private lateinit var dialog: Dialog
 
     fun showDialog(activity: Activity?, messageType: MessageType) {
-        dialog = createDialog(activity, messageType)
-
-        if (dialog.isShowing) {
+        if (this::dialog.isInitialized && dialog.isShowing) {
             dialog.dismiss()
+            dialog = createDialog(activity, messageType)
+            dialog.show()
         } else {
+            dialog = createDialog(activity, messageType)
             dialog.show()
         }
     }
@@ -28,28 +29,26 @@ object DialogBoxManager {
         when (messageType.name) {
             MessageType.LOAD.name -> {
                 builder.setView(R.layout.dialog_load_layout)
+                    .setCancelable(false)
             }
 
             MessageType.SUCCESS.name -> {
                 builder.setView(R.layout.dialog_success_layout)
-
-                builder.setPositiveButton(R.string.dialog_positive_button) { dialogInterface: DialogInterface, i: Int ->
+                    .setPositiveButton(R.string.dialog_positive_button) { dialogInterface: DialogInterface, i: Int ->
 
                     }
             }
 
             MessageType.ERROR.name -> {
                 builder.setView(R.layout.dialog_error_layout)
-
-                builder.setPositiveButton(R.string.dialog_positive_button) { dialogInterface: DialogInterface, i: Int ->
+                    .setPositiveButton(R.string.dialog_positive_button) { dialogInterface: DialogInterface, i: Int ->
 
                     }
             }
 
             MessageType.CAUTION.name -> {
                 builder.setView(R.layout.dialog_caution_layout)
-
-                builder.setPositiveButton(R.string.dialog_positive_button) { dialogInterface: DialogInterface, i: Int ->
+                    .setPositiveButton(R.string.dialog_positive_button) { dialogInterface: DialogInterface, i: Int ->
 
                     }
             }
@@ -59,6 +58,6 @@ object DialogBoxManager {
     }
 
     fun cancel() {
-        if (dialog.isShowing) dialog.dismiss()
+        if (this::dialog.isInitialized && dialog.isShowing) dialog.dismiss()
     }
 }

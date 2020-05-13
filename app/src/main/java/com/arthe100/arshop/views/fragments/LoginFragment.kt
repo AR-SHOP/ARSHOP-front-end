@@ -48,7 +48,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     private fun render(state: AuthState){
         when(state){
             is AuthState.Idle -> {
-//                DialogBoxManager.cancel()
+                DialogBoxManager.cancel()
             }
             is AuthState.LoadingState -> {
                 DialogBoxManager.showDialog(requireActivity(), MessageType.LOAD)

@@ -50,7 +50,7 @@ class ProfileFragment : BaseFragment() {
     private fun render(state: ProfileState){
         when(state) {
             is ProfileState.Idle -> {
-//                DialogBoxManager.cancel()
+                DialogBoxManager.cancel()
             }
 
             is ProfileState.GetProfileFailure -> {

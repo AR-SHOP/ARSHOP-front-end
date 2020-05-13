@@ -53,7 +53,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     private fun render(state: ProductState){
         when(state){
             is ProductState.Idle -> {
-//                DialogBoxManager.cancel()
+                DialogBoxManager.cancel()
             }
 
             is ProductState.LoadingState -> {

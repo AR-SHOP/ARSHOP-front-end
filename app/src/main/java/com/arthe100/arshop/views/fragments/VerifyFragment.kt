@@ -74,7 +74,7 @@ class VerifyFragment : BaseFragment(){
             }
 
             is AuthState.LoginSuccess -> {
-//                DialogBoxManager.cancel()
+                DialogBoxManager.cancel()
                 session.saveUser(state.user)
                 loadFragment(profileFragment)
             }
