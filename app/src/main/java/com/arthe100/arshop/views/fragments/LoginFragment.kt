@@ -1,6 +1,7 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
+import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.preference.PreferenceManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
@@ -26,6 +28,8 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
     @Inject lateinit var fragmentFactory: FragmentFactory
+
+    private lateinit var messageManager: MessageManager
     private lateinit var signUpFragment: SignUpFragment
     private lateinit var profileFragment: ProfileFragment
     private val TAG = LoginFragment::class.simpleName
@@ -34,6 +38,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        messageManager = MessageManager()
         profileFragment = fragmentFactory.create<ProfileFragment>()
         signUpFragment = fragmentFactory.create<SignUpFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
@@ -43,21 +48,19 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     private fun render(state: AuthState){
         when(state){
             is AuthState.Idle -> {
-                loading_bar.visibility = View.INVISIBLE
+//                DialogBoxManager.cancel()
             }
             is AuthState.LoadingState -> {
-                loading_bar.visibility = View.VISIBLE
+                DialogBoxManager.showDialog(requireActivity(), MessageType.LOAD)
             }
             is AuthState.LoginSuccess -> {
-                loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
+                DialogBoxManager.showDialog(activity, MessageType.SUCCESS)
                 session.saveUser(state.user)
                 profileFragment.inMainPage = true
                 loadFragment(profileFragment)
             }
             is AuthState.Failure -> {
-                loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR).show()
+                DialogBoxManager.showDialog(activity, MessageType.ERROR)
             }
         }
     }
@@ -83,9 +86,8 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             if(user == null)
                 loadFragment(signUpFragment)
             else {
-                DialogBoxManager.createDialog(activity, MessageType.ERROR,
+                messageManager.toast(requireContext(),
                     "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
-                    .show()
             }
         }
 

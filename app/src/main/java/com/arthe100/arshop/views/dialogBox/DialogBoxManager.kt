@@ -3,67 +3,62 @@ package com.arthe100.arshop.views.dialogBox
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.DialogInterface
 import com.arthe100.arshop.R
 
-enum class MessageType { LOAD, SUCCESS, ERROR }
+enum class MessageType { LOAD, SUCCESS, ERROR, CAUTION }
 
 object DialogBoxManager {
+    private lateinit var dialog: Dialog
 
-    fun createDialog(activity: Activity?, messageType: MessageType): Dialog {
-        val alert = AlertDialog.Builder(activity)
+    fun showDialog(activity: Activity?, messageType: MessageType) {
+        dialog = createDialog(activity, messageType)
 
-        when (messageType.name) {
-            MessageType.LOAD.name -> {
-                alert.setTitle(R.string.loading_title)
-                    .setMessage(R.string.loading_message)
-            }
-
-            MessageType.SUCCESS.name -> {
-                alert.setTitle(R.string.success_title)
-                    .setMessage(R.string.success_message)
-                    .setPositiveButton(R.string.dialog_positive_button) { DialogInterface,
-                            i -> //btn activity here
-                    }
-            }
-
-            MessageType.ERROR.name -> {
-                alert.setTitle(R.string.error_title)
-                    .setMessage(R.string.error_message)
-                    .setPositiveButton(R.string.dialog_positive_button) { DialogInterface,
-                            i -> //btn activity here
-                    }
-            }
+        if (dialog.isShowing) {
+            dialog.dismiss()
+        } else {
+            dialog.show()
         }
-
-        return alert.create()
     }
 
-    fun createDialog(activity: Activity?, messageType: MessageType, message: String?): Dialog {
-        val alert = AlertDialog.Builder(activity)
+    private fun createDialog(activity: Activity?, messageType: MessageType): Dialog {
+        val builder = AlertDialog.Builder(activity, R.style.DialogStyle)
+        dialog = builder.create()
 
         when (messageType.name) {
             MessageType.LOAD.name -> {
-                alert.setTitle(R.string.loading_title)
-                    .setMessage(message)
+                builder.setView(R.layout.dialog_load_layout)
             }
 
             MessageType.SUCCESS.name -> {
-                alert.setTitle(R.string.success_title)
-                    .setMessage(message)
-                    .setPositiveButton(R.string.dialog_positive_button) { DialogInterface,
-                            i -> //btn activity here
+                builder.setView(R.layout.dialog_success_layout)
+
+                builder.setPositiveButton(R.string.dialog_positive_button) { dialogInterface: DialogInterface, i: Int ->
+
                     }
             }
 
             MessageType.ERROR.name -> {
-                alert.setTitle(R.string.error_title)
-                    .setMessage(message)
-                    .setPositiveButton(R.string.dialog_positive_button) { DialogInterface,
-                            i -> //btn activity here
+                builder.setView(R.layout.dialog_error_layout)
+
+                builder.setPositiveButton(R.string.dialog_positive_button) { dialogInterface: DialogInterface, i: Int ->
+
+                    }
+            }
+
+            MessageType.CAUTION.name -> {
+                builder.setView(R.layout.dialog_caution_layout)
+
+                builder.setPositiveButton(R.string.dialog_positive_button) { dialogInterface: DialogInterface, i: Int ->
+
                     }
             }
         }
 
-        return alert.create()
+        return builder.create()
+    }
+
+    fun cancel() {
+        if (dialog.isShowing) dialog.dismiss()
     }
 }

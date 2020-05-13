@@ -66,22 +66,21 @@ class VerifyFragment : BaseFragment(){
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-                loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.err.toString()).show()
+                DialogBoxManager.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is AuthState.CodeSuccess -> {
                 model.onEvent(AuthUiAction.LoginAction(model.password , model.phone))
-
             }
+
             is AuthState.LoginSuccess -> {
-                loading_bar.visibility = View.INVISIBLE
+//                DialogBoxManager.cancel()
                 session.saveUser(state.user)
                 loadFragment(profileFragment)
-
             }
+
             is AuthState.LoadingState ->{
-                loading_bar.visibility = View.VISIBLE
+                DialogBoxManager.showDialog(requireActivity(), MessageType.LOAD)
             }
         }
     }

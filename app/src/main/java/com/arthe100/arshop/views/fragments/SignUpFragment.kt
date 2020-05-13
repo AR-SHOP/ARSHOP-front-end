@@ -69,19 +69,17 @@ class SignUpFragment : BaseFragment() {
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-                loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.err.toString()).show()
+                DialogBoxManager.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is AuthState.SingupSuccess -> {
+                DialogBoxManager.showDialog(requireActivity(), MessageType.SUCCESS)
                 loadFragment(verifyFragment)
             }
 
             is AuthState.LoadingState -> {
-                loading_bar.visibility = View.VISIBLE
+                DialogBoxManager.showDialog(requireActivity(), MessageType.LOAD)
             }
         }
     }
-
-
 }

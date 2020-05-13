@@ -53,15 +53,14 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     private fun render(state: ProductState){
         when(state){
             is ProductState.Idle -> {
-                loading_bar.visibility = View.INVISIBLE
+//                DialogBoxManager.cancel()
             }
 
             is ProductState.LoadingState -> {
-                loading_bar.visibility = View.VISIBLE
+                DialogBoxManager.showDialog(requireActivity(), MessageType.LOAD)
             }
 
             is ProductState.GetProductsSuccess -> {
-                loading_bar.visibility = View.INVISIBLE
                 setRecyclerView()
                 setGridView()
                 addProducts(state.products)
@@ -71,8 +70,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
             }
 
             is ProductState.GetProductsFailure -> {
-                loading_bar.visibility = View.INVISIBLE
-                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.throwable.toString()).show()
+                DialogBoxManager.showDialog(activity, MessageType.ERROR)
             }
         }
 

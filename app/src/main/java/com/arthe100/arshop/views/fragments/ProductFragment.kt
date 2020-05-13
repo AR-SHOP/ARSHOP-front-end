@@ -18,6 +18,8 @@ import com.arthe100.arshop.scripts.mvi.cart.CartState
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_main_layout.*
@@ -53,16 +55,19 @@ class ProductFragment : BaseFragment() {
     private fun render(state: ProductState){
         when(state){
             ProductState.Idle -> {
-                loading_bar.visibility = View.INVISIBLE
+//                DialogBoxManager.cancel()
             }
+
             ProductState.LoadingState -> {
-                loading_bar.visibility = View.VISIBLE
+                DialogBoxManager.showDialog(requireActivity(), MessageType.LOAD)
             }
+
             is ProductState.ProductDetailSuccess -> {
 
             }
+
             is ProductState.GetProductsFailure -> {
-                loading_bar.visibility = View.INVISIBLE
+//                DialogBoxManager.cancel()
                 messageManager.toast(requireContext() , state.throwable.toString())
             }
         }
