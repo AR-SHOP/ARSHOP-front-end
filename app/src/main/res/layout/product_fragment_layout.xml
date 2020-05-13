@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/product_fragment_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -7,10 +9,6 @@
         tools:context=".views.fragments.ProductFragment"
         android:layoutDirection="rtl"
         android:textDirection="rtl">
-
-    <include layout="@layout/loading_fragment"
-            android:id="@+id/loading_bar"
-            android:visibility="invisible"/>
 
     <ImageView
             android:id="@+id/product_details_image"
@@ -105,7 +103,7 @@
                 android:id="@+id/ar_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@drawable/rounded_corners"
+                android:background="@drawable/small_rounded_corners"
                 android:backgroundTint="@color/colorBackground"
                 android:elevation="10dp"
                 android:layout_weight="1"
@@ -119,7 +117,7 @@
                 android:id="@+id/add_to_cart_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@drawable/rounded_corners"
+                android:background="@drawable/small_rounded_corners"
                 android:backgroundTint="@color/colorBackground"
                 android:layout_weight="1"
                 android:elevation="10dp"

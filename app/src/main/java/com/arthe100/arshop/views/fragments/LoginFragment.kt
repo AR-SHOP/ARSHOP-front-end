@@ -1,6 +1,7 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
+import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,13 +28,18 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
     @Inject lateinit var fragmentFactory: FragmentFactory
+    @Inject lateinit var dialogBox: DialogBoxManager
 
     private lateinit var messageManager: MessageManager
     private lateinit var signUpFragment: SignUpFragment
     private lateinit var profileFragment: ProfileFragment
     private val TAG = LoginFragment::class.simpleName
-
     private lateinit var model: AuthViewModel
+
+    override fun inject() {
+        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
+            .inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,35 +48,6 @@ class LoginFragment : BaseFragment(), ILoadFragment {
         signUpFragment = fragmentFactory.create<SignUpFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         model.currentViewState.observe(this , Observer(::render))
-    }
-
-    private fun render(state: AuthState){
-        when(state){
-            is AuthState.Idle -> {
-                messageManager.toast(requireActivity(), "login")
-            }
-
-            is AuthState.LoadingState -> {
-                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
-            }
-
-            is AuthState.LoginSuccess -> {
-                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
-                session.saveUser(state.user)
-                profileFragment.inMainPage = true
-                loadFragment(profileFragment)
-            }
-
-            is AuthState.Failure -> {
-                DialogBoxManager.createDialog(activity, MessageType.ERROR).show()
-            }
-        }
-    }
-
-
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-            .inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -88,7 +65,8 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             if(user == null)
                 loadFragment(signUpFragment)
             else {
-//error
+                messageManager.toast(requireContext(),
+                    "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
             }
         }
 
@@ -108,5 +86,29 @@ class LoginFragment : BaseFragment(), ILoadFragment {
 
     override fun toString(): String {
         return "Login"
+    }
+
+    private fun render(state: AuthState){
+        when(state){
+            is AuthState.Idle -> {
+                dialogBox.cancel()
+                login_fragment_layout.visibility = View.VISIBLE
+            }
+            is AuthState.LoadingState -> {
+                login_fragment_layout.visibility = View.INVISIBLE
+                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
+            }
+            is AuthState.LoginSuccess -> {
+                dialogBox.cancel()
+                login_fragment_layout.visibility = View.VISIBLE
+                session.saveUser(state.user)
+                profileFragment.inMainPage = true
+                loadFragment(profileFragment)
+            }
+            is AuthState.Failure -> {
+                login_fragment_layout.visibility = View.VISIBLE
+                dialogBox.showDialog(requireContext(), MessageType.ERROR)
+            }
+        }
     }
 }

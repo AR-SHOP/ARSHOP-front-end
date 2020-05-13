@@ -16,7 +16,7 @@ class CartItemAdapter(dataList: List<CartItem>) : BaseItemAdapter<CartItem>() {
     lateinit var plusListener: OnItemClickListener
     lateinit var minusListener: OnItemClickListener
     lateinit var deleteListener: OnItemClickListener
-    private val dataList: MutableList<CartItem> = mutableListOf()
+    val dataList: MutableList<CartItem> = mutableListOf()
     val items: List<CartItem>
         get() = dataList
 

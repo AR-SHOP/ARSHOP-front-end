@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/login_fragment_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -8,15 +10,6 @@
         tools:context=".views.fragments.LoginFragment"
         android:layoutDirection="rtl"
         android:textDirection="rtl">
-
-    <include
-            android:id="@+id/loading_bar"
-            layout="@layout/loading_fragment"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageButton
@@ -199,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:background="@drawable/rounded_corners"
+                android:background="@drawable/small_rounded_corners"
                 android:backgroundTint="@color/colorBackground"
                 android:elevation="8dp"
                 android:text="@string/login_btn_text"

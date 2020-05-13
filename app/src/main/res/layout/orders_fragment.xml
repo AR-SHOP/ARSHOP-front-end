@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/orders_fragment_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,7 +16,7 @@
             android:layout_marginTop="60dp"
             android:layout_marginEnd="20dp"
             android:layoutDirection="rtl"
-            android:background="@drawable/rounded_corners"
+            android:background="@drawable/small_rounded_corners"
             android:backgroundTint="@color/colorPrimary"
             android:gravity="start"
             android:text="ورود یا ثبت نام"
@@ -100,7 +102,7 @@
                 android:layout_margin="5dp"
                 android:text="حذف همه‌ی سفارش‌ها"
                 android:textColor="@color/colorPrimary"
-                android:background="@drawable/rounded_corners"
+                android:background="@drawable/small_rounded_corners"
                 android:backgroundTint="@color/colorBackground"
                 android:drawableEnd="@drawable/ic_delete"
                 android:paddingLeft="20dp"/>

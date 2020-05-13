@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Cart
 import com.arthe100.arshop.models.CartItem
-import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
@@ -26,6 +25,8 @@ import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.adapters.OnItemClickListener
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.CartItemAdapter
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.customer_cart_fragment_layout.*
 import kotlinx.coroutines.delay
@@ -37,6 +38,7 @@ class CustomerCartFragment : BaseFragment() {
     @Inject lateinit var session: UserSession
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var messageManager: MessageManager
+    @Inject lateinit var dialogBox: DialogBoxManager
 
     lateinit var authViewModel: AuthViewModel
     lateinit var loginFragment: LoginFragment
@@ -44,6 +46,8 @@ class CustomerCartFragment : BaseFragment() {
     lateinit var cartItemAdapter: CartItemAdapter
     lateinit var model: CartViewModel
     lateinit var productViewModel: ProductViewModel
+    lateinit var customerCartFragmentLayout: ViewGroup
+
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent().inject(this)
@@ -51,15 +55,19 @@ class CustomerCartFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        loginFragment = fragmentFactory.create<LoginFragment>()
-        productFragment = fragmentFactory.create<ProductFragment>()
+        loginFragment = fragmentFactory.create()
+        productFragment = fragmentFactory.create()
+        return inflater.inflate(R.layout.customer_cart_fragment_layout, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         authViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
         productViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
         model.currentViewState.observe(requireActivity() , Observer(::render))
         //model.currentCart.observe(requireActivity() , Observer{addProducts(it.cartItems)})
         authViewModel.currentViewState.observe(requireActivity() , Observer(::authRender))
-        return inflater.inflate(R.layout.customer_cart_fragment_layout, container, false)
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onStart() {
@@ -84,6 +92,10 @@ class CustomerCartFragment : BaseFragment() {
             }
         }
         super.onStart()
+    }
+
+    override fun toString(): String {
+        return "Customer Cart"
     }
 
     private fun delayEnabled(btn: Button){
@@ -111,14 +123,17 @@ class CustomerCartFragment : BaseFragment() {
 
     private fun render(state: CartState){
         when(state) {
-            CartState.IdleState -> {
-                loading_bar?.visibility = View.INVISIBLE
+            is CartState.IdleState -> {
+                dialogBox.cancel()
+                customer_cart_fragment_layout.visibility = View.VISIBLE
             }
-            CartState.LoadingState -> {
-                loading_bar?.visibility = View.VISIBLE
+            is CartState.LoadingState -> {
+                customer_cart_fragment_layout.visibility = View.INVISIBLE
+                dialogBox.showDialog(requireActivity(),MessageType.LOAD)
             }
             is CartState.GetCartState -> {
-                loading_bar?.visibility = View.INVISIBLE
+                dialogBox.cancel()
+                customer_cart_fragment_layout.visibility = View.VISIBLE
                 cart_items_list?.visibility = View.VISIBLE
                 empty_cart_layout?.visibility = View.VISIBLE
                 val products = state.cart.cartItems
@@ -126,21 +141,27 @@ class CustomerCartFragment : BaseFragment() {
                 setRecyclerView(products)
             }
             is CartState.AddToCartState -> {
+                dialogBox.cancel()
+                customer_cart_fragment_layout.visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
                 addProducts(products)
             }
             is CartState.RemoveFromCartState -> {
+                dialogBox.cancel()
+                customer_cart_fragment_layout.visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
                 addProducts(products)
             }
             is CartState.Failure -> {
-                loading_bar?.visibility = View.INVISIBLE
-                messageManager.toast(requireContext() , state.err.toString())
+                customer_cart_fragment_layout.visibility = View.VISIBLE
+                dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
                 model.updateCart(::addProducts)
             }
             is CartState.ClearCart -> {
+                dialogBox.cancel()
+                customer_cart_fragment_layout.visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
                 addProducts(products)
@@ -155,9 +176,6 @@ class CustomerCartFragment : BaseFragment() {
     }
 
 
-    override fun toString(): String {
-        return "Customer Cart Fragment"
-    }
 
     private fun addProducts(cartItems: List<CartItem>) {
         if(!this::cartItemAdapter.isInitialized)return

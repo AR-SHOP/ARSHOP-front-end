@@ -11,6 +11,7 @@ import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.afollestad.materialdialogs.DialogBehavior
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.ar.InfoManager.IInfoManager
 import com.arthe100.arshop.scripts.di.BaseApplication
@@ -18,6 +19,8 @@ import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.ar.ArState
 import com.arthe100.arshop.scripts.mvi.ar.ArViewModel
 import com.arthe100.arshop.views.CustomBaseArFragment
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import com.google.ar.core.Anchor
 import com.google.ar.core.Config
 import com.google.ar.core.Plane
@@ -39,23 +42,23 @@ class CustomArFragment : CustomBaseArFragment() {
 //    public val tableUrl = "https://poly.googleapis.com/downloads/fp/1586167353776716/8cnrwlAWqx7/cfVCFxWqtbc/Table_Large_Rectangular_01.gltf"
 //    public val duckUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
 //    public val bedUrl = "https://poly.googleapis.com/downloads/fp/1586167422468753/8mkAgVYGbL4/5oNDqZI-I0J/Bed_01.gltf"
-    private val TAG = CustomArFragment::class.simpleName
-    private lateinit var model: ArViewModel
-    private lateinit var currentUri: String
 
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var arInfoCardManager : IInfoManager
     @Inject lateinit var messageManager : MessageManager
+    @Inject lateinit var dialogBox: DialogBoxManager
 
-
+    private val TAG = CustomArFragment::class.simpleName
+    private lateinit var model: ArViewModel
+    private lateinit var currentUri: String
 
     override fun inject() {
         (activity?.application as BaseApplication)
                 .mainComponent(requireActivity())
                 .arComponent().create().inject(this)
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.ar_fragment_layout , container , false)
         val arFrame = view.findViewById<FrameLayout>(R.id.ar_container)
         val v = super.onCreateView(inflater, arFrame, savedInstanceState)
@@ -63,6 +66,7 @@ class CustomArFragment : CustomBaseArFragment() {
         (view as ViewGroup).addView(v)
         return view
     }
+
     override fun onDetach() {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         super.onDetach()
@@ -131,6 +135,7 @@ class CustomArFragment : CustomBaseArFragment() {
     fun setUri(uri: String) {
         currentUri = uri
     }
+
     private fun setModel(uri: String , anchor: Anchor){
 
         if(model.currentViewState.value != ArState.IdleState){
@@ -169,17 +174,21 @@ class CustomArFragment : CustomBaseArFragment() {
         when(state)
         {
             is ArState.IdleState -> {
-                view?.findViewById<ConstraintLayout>(R.id.loading_bar)?.visibility = View.INVISIBLE
+//                view?.findViewById<ConstraintLayout>(R.id.loading_bar)?.visibility = View.INVISIBLE
+                dialogBox.showDialog(requireContext(),MessageType.LOAD)
             }
             is ArState.ModelSuccess ->{
+                dialogBox.cancel()
                 model.currentViewState.value = ArState.IdleState
                 model.addModel(state.uri , state.model)
                 placeModel(state.model , state.anchor)
             }
             is ArState.LoadingState -> {
-                view?.findViewById<ConstraintLayout>(R.id.loading_bar)?.visibility = View.VISIBLE
+//                view?.findViewById<ConstraintLayout>(R.id.loading_bar)?.visibility = View.VISIBLE
+                dialogBox.showDialog(requireContext(),MessageType.LOAD)
             }
             is ArState.ModelFailure -> {
+                dialogBox.cancel()
                 model.currentViewState.value = ArState.IdleState
                 messageManager.toast(requireContext() , state.err.toString())
             }

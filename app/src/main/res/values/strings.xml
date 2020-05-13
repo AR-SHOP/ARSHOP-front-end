@@ -36,17 +36,17 @@
     <string name="send_code_again">ارسال مجدد کد</string>
 
     <!-- DialogBoxManager's strings -->
-    <string name="dialog_positive_button">قبول</string>
+    <string name="dialog_positive_button">باشه</string>
     <string name="dialog_negative_button">رد‌کردن</string>
     <string name="loading_title">بارگذاری‌کردن…</string>
     <string name="loading_message">لطفاً صبر کنید. اطلاعات در حال بارگذاری می‌باشد!!!</string>
     <string name="success_title">موفقیت!!!</string>
-    <string name="success_message">عملیات با موفقیت انجام شد.</string>
-    <string name="error_title">خطا!!!</string>
-    <string name="error_message">عملیات دچار مشکل شده‌است.</string>
-    <string name="caution_message">ممکن است در عملیات مشکلی ایجاد شود!!!</string>
+    <string name="success_message">عملیات با موفقیت انجام شد</string>
+    <string name="error_title">خطا!</string>
+    <string name="error_message">عملیات دچار مشکل شده است</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="caution_message">هشدار</string>
 
 </resources>

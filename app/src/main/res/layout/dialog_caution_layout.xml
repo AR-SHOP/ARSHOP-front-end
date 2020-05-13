@@ -1,42 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layoutDirection="rtl"
-        android:background="@drawable/dialog_shape">
+        android:textDirection="rtl"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:elevation="10dp"
+        android:gravity="center">
 
-    <TextView
-            android:id="@+id/dialog_caution_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:textDirection="rtl"
-            android:textColor="@color/colorBtnText"
-            android:text="@string/caution_message"/>
-
-
-    <LinearLayout
+    <androidx.cardview.widget.CardView
+            android:id="@+id/caution_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:cardCornerRadius="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true">
 
-
-        <Button
-                android:id="@+id/dialog_caution_posBtn"
-                android:layout_width="wrap_content"
+        <LinearLayout
+                android:id="@+id/warning_info"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="5dp"
-                android:backgroundTint="@color/colorBackground"
-                android:textColor="@color/colorPrimary"
-                android:background="@drawable/dialog_button_shape"
-                android:text="@string/dialog_positive_button" />
-    </LinearLayout>
+                android:orientation="vertical"
+                android:background="@color/colorBackground">
 
-</LinearLayout>
+
+            <ImageView
+                    android:id="@+id/caution_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_warning"
+                    app:tint="@color/colorWarningDark"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"/>
+
+            <TextView
+                    android:id="@+id/caution_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="rtl"
+                    android:textAlignment="center"
+                    android:padding="10dp"
+                    android:textColor="@color/colorWarningDark"
+                    android:text="@string/caution_message"
+                    android:textSize="12sp"/>
+
+            <Button
+                    android:id="@+id/caution_positive_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/large_rounded_corners"
+                    android:backgroundTint="@color/colorWarningDark"
+                    android:textColor="@color/colorBackground"
+                    android:text="@string/dialog_positive_button"
+                    android:textSize="10sp"/>
+
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
+

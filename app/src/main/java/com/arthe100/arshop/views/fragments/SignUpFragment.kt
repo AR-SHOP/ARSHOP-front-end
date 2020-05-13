@@ -17,7 +17,6 @@ import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.phone_number_fragment_layout.*
 import kotlinx.android.synthetic.main.sign_up_fragment.*
 import javax.inject.Inject
 
@@ -25,6 +24,7 @@ class SignUpFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var fragmentFactory: FragmentFactory
     @Inject lateinit var session: UserSession
+    @Inject lateinit var dialogBox: DialogBoxManager
 
     private lateinit var verifyFragment: VerifyFragment
     private lateinit var model: AuthViewModel
@@ -60,35 +60,27 @@ class SignUpFragment : BaseFragment() {
     }
 
     override fun toString(): String {
-        return "SignUp Fragment"
+        return "SignUp"
     }
 
 
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-//                DialogBoxManager.create(activity, MessageType.ERROR, state.err.toString())
+                signup_fragment_layout.visibility = View.VISIBLE
+                dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is AuthState.SingupSuccess -> {
-                model.onEvent(
-                    AuthUiAction
-                    .LoginAction(
-                        password = signup_password.text.toString(),
-                        phone = model.phone))
-            }
-
-            is AuthState.LoginSuccess -> {
-                session.saveUser(state.user)
-//                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
+                dialogBox.cancel()
+                signup_fragment_layout.visibility = View.VISIBLE
                 loadFragment(verifyFragment)
             }
 
             is AuthState.LoadingState -> {
-//                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
+                signup_fragment_layout.visibility = View.INVISIBLE
+                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
         }
     }
-
-
 }

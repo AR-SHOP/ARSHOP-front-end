@@ -24,7 +24,7 @@ class CategoriesFragment : BaseFragment() {
     }
 
     override fun toString(): String {
-        return "Categories Fragment"
+        return "Categories"
     }
 
 }

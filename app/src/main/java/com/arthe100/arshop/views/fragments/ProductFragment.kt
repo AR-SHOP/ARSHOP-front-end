@@ -1,6 +1,7 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,8 @@ import com.arthe100.arshop.scripts.mvi.cart.CartState
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_main_layout.*
@@ -29,6 +32,7 @@ class ProductFragment : BaseFragment() {
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var fragmentFactory: FragmentFactory
+    @Inject lateinit var dialogBox: DialogBoxManager
 
     private lateinit var cartViewModel: CartViewModel
     private lateinit var model: ProductViewModel
@@ -42,38 +46,15 @@ class ProductFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
-        model = ViewModelProvider(requireActivity() , viewModelFactory).get(ProductViewModel::class.java)
-        cartViewModel = ViewModelProvider(requireActivity() , viewModelFactory).get(CartViewModel::class.java)
-
-        model.currentViewState.observe(requireActivity() , Observer(::render))
-        cartViewModel.currentViewState.observe(requireActivity() , Observer(::render))
         return inflater.inflate(R.layout.product_fragment_layout, container, false)
     }
 
-    private fun render(state: ProductState){
-        when(state){
-            ProductState.Idle -> {
-                loading_bar.visibility = View.INVISIBLE
-            }
-            ProductState.LoadingState -> {
-                loading_bar.visibility = View.VISIBLE
-            }
-            is ProductState.ProductDetailSuccess -> {
-
-            }
-            is ProductState.GetProductsFailure -> {
-                loading_bar.visibility = View.INVISIBLE
-                messageManager.toast(requireContext() , state.throwable.toString())
-            }
-        }
-    }
-
-    private fun render(state: CartState){
-        when(state){
-            is CartState.AddToCartState -> {
-                checkCartStatus()
-            }
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        model = ViewModelProvider(requireActivity() , viewModelFactory).get(ProductViewModel::class.java)
+        cartViewModel = ViewModelProvider(requireActivity() , viewModelFactory).get(CartViewModel::class.java)
+        model.currentViewState.observe(requireActivity() , Observer(::render))
+        cartViewModel.currentViewState.observe(requireActivity() , Observer(::render))
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onStart() {
@@ -84,8 +65,8 @@ class ProductFragment : BaseFragment() {
         checkCartStatus()
 
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_background)
+            .placeholder(R.drawable.ic_empty_background)
+            .error(R.drawable.ic_empty_background)
 
         val cartItem = cartViewModel.getCartItemById(model.product.id)
         cart_count_text?.text = cartItem?.quantity.toString()
@@ -106,6 +87,44 @@ class ProductFragment : BaseFragment() {
             inc_dec_cart_count?.visibility = View.VISIBLE
         }
         super.onStart()
+    }
+
+    override fun toString(): String {
+        return "Product"
+    }
+
+    private fun render(state: ProductState){
+        when(state){
+            ProductState.Idle -> {
+                dialogBox.cancel()
+                product_fragment_layout.visibility = View.VISIBLE
+            }
+
+            ProductState.LoadingState -> {
+                product_fragment_layout.visibility = View.INVISIBLE
+                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
+            }
+
+            is ProductState.ProductDetailSuccess -> {
+                dialogBox.cancel()
+                product_fragment_layout.visibility = View.VISIBLE
+            }
+
+            is ProductState.GetProductsFailure -> {
+                dialogBox.cancel()
+                product_fragment_layout.visibility = View.VISIBLE
+                dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
+                Log.v("TAG", state.throwable.toString())
+            }
+        }
+    }
+
+    private fun render(state: CartState){
+        when(state){
+            is CartState.AddToCartState -> {
+                checkCartStatus()
+            }
+        }
     }
 
 
@@ -147,10 +166,6 @@ class ProductFragment : BaseFragment() {
             inc_dec_cart_count?.visibility = View.INVISIBLE
 
         }
-    }
-
-    override fun toString(): String {
-        return "Product Fragment"
     }
 
 }

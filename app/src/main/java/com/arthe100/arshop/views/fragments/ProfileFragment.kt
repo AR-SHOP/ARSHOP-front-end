@@ -1,6 +1,7 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ import javax.inject.Inject
 class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
+    @Inject lateinit var dialogBox: DialogBoxManager
 
     private lateinit var messageManager: MessageManager
     private lateinit var model: ProfileViewModel
@@ -47,20 +49,33 @@ class ProfileFragment : BaseFragment() {
         return inflater.inflate(R.layout.profile_fragment_layout, container, false)
     }
 
+    override fun onStart() {
+        //do what you want with 'name', 'email', 'phone_number' text views here
+        super.onStart()
+
+        model.onEvent(ProfileUiAction.GetHomePageProfileAction)
+    }
+
+    override fun toString(): String {
+        return "Profile"
+    }
+
     private fun render(state: ProfileState){
         when(state) {
             is ProfileState.Idle -> {
-                messageManager.toast(requireContext(), "hello")
+                dialogBox.cancel()
+                profile_fragment_layout.visibility = View.VISIBLE
             }
 
             is ProfileState.GetProfileFailure -> {
-                messageManager.toast(requireContext(), state.throwable.toString())
-//                DialogBoxManager.createDialog(requireActivity(), MessageType.ERROR).show()
+                profile_fragment_layout.visibility = View.VISIBLE
+                dialogBox.showDialog(requireActivity(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
+                Log.v("TAG", state.throwable.toString())
             }
 
             is ProfileState.GetProfileSuccess -> {
-                DialogBoxManager.createDialog(requireActivity(), MessageType.SUCCESS).show()
-
+                dialogBox.cancel()
+                profile_fragment_layout.visibility = View.VISIBLE
                 val user = state.userInfo
 
                 name.text = if(user.fName.isEmpty())
@@ -80,19 +95,10 @@ class ProfileFragment : BaseFragment() {
             }
 
             is ProfileState.LoadingState -> {
-                DialogBoxManager.createDialog(requireActivity(), MessageType.LOAD).show()
+                profile_fragment_layout.visibility = View.INVISIBLE
+                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
         }
     }
 
-    override fun onStart() {
-        //do what you want with 'name', 'email', 'phone_number' text views here
-        super.onStart()
-
-        model.onEvent(ProfileUiAction.GetHomePageProfileAction)
-    }
-
-    override fun toString(): String {
-        return "Profile"
-    }
 }

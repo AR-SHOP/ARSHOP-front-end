@@ -24,7 +24,9 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
-    <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:windowBackground">@drawable/dialog_shape</item>
+    <style name="DialogAnimation" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowEnterAnimation">@anim/from_small</item>
+        <item name="android:windowExitAnimation">@anim/from_large</item>
     </style>
+
 </resources>

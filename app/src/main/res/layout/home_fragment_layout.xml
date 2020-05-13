@@ -1,36 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_fragment_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.fragments.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            tools:context=".views.fragments.HomeFragment">
-
-        <include layout="@layout/loading_fragment"
-                android:id="@+id/loading_bar"
-                android:visibility="invisible"/>
-
-        <androidx.appcompat.widget.SearchView
-                android:id="@+id/home_search_view"
-                style="@style/AppTheme"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/rounded_corners"
-                android:backgroundTint="@color/colorEditText"
-                android:layoutDirection="rtl"
-                android:textDirection="rtl"
-                app:defaultQueryHint="@string/search_hint"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                android:elevation="10dp"/>
+    <androidx.appcompat.widget.SearchView
+            android:id="@+id/home_search_view"
+            style="@style/AppTheme"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/small_rounded_corners"
+            android:backgroundTint="@color/colorEditText"
+            android:layoutDirection="rtl"
+            android:textDirection="rtl"
+            app:defaultQueryHint="@string/search_hint"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:elevation="10dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/discount_recycler_view"
@@ -53,26 +49,27 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="60dp"
+            app:swipeRefreshLayoutProgressSpinnerBackgroundColor="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/discount_recycler_view"
             app:layout_constraintStart_toStartOf="@id/discount_recycler_view"
             app:layout_constraintTop_toBottomOf="@id/discount_recycler_view"
             app:layout_constraintVertical_bias="0.0">
 
-            <GridView
-                    android:id="@+id/home_grid_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:numColumns="2"
-                    android:horizontalSpacing="4dp"
-                    android:verticalSpacing="4dp"
-                    android:textDirection="rtl"
-                    android:gravity="center"
-                    android:stretchMode="columnWidth"
-                    android:layoutDirection="rtl"/>
+        <GridView
+                android:id="@+id/home_grid_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numColumns="2"
+                android:horizontalSpacing="4dp"
+                android:verticalSpacing="4dp"
+                android:textDirection="rtl"
+                android:gravity="center"
+                android:stretchMode="columnWidth"
+                android:layoutDirection="rtl"
+                />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-

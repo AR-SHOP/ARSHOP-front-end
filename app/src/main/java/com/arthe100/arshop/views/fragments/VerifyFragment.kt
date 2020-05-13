@@ -8,20 +8,24 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
+import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.BaseFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.verify_fragment_layout.*
-import kotlinx.android.synthetic.main.verify_fragment_layout.loading_bar
 import javax.inject.Inject
 
 class VerifyFragment : BaseFragment(){
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var fragmentFactory: FragmentFactory
+    @Inject lateinit var session: UserSession
+    @Inject lateinit var messageManager: MessageManager
+    @Inject lateinit var dialogBox: DialogBoxManager
 
     private lateinit var profileFragment: ProfileFragment
     private lateinit var model: AuthViewModel
@@ -59,16 +63,26 @@ class VerifyFragment : BaseFragment(){
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-//                DialogBoxManager.createDialog(activity, MessageType.ERROR, state.err.toString()).show()
+                verify_fragment_layout.visibility = View.VISIBLE
+                dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is AuthState.CodeSuccess -> {
-//                DialogBoxManager.createDialog(activity, MessageType.SUCCESS).show()
+                dialogBox.cancel()
+                verify_fragment_layout.visibility = View.VISIBLE
+                model.onEvent(AuthUiAction.LoginAction(model.password , model.phone))
+            }
+
+            is AuthState.LoginSuccess -> {
+                dialogBox.cancel()
+                verify_fragment_layout.visibility = View.VISIBLE
+                session.saveUser(state.user)
                 loadFragment(profileFragment)
             }
 
             is AuthState.LoadingState ->{
-//                DialogBoxManager.createDialog(activity, MessageType.LOAD).show()
+                verify_fragment_layout.visibility = View.INVISIBLE
+                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
         }
     }
