@@ -14,7 +14,7 @@
             android:layout_marginTop="60dp"
             android:layout_marginEnd="20dp"
             android:layoutDirection="rtl"
-            android:background="@drawable/rounded_corners"
+            android:background="@drawable/small_rounded_corners"
             android:backgroundTint="@color/colorPrimary"
             android:gravity="start"
             android:text="ورود یا ثبت نام"
@@ -100,7 +100,7 @@
                 android:layout_margin="5dp"
                 android:text="حذف همه‌ی سفارش‌ها"
                 android:textColor="@color/colorPrimary"
-                android:background="@drawable/rounded_corners"
+                android:background="@drawable/small_rounded_corners"
                 android:backgroundTint="@color/colorBackground"
                 android:drawableEnd="@drawable/ic_delete"
                 android:paddingLeft="20dp"/>

@@ -26,6 +26,8 @@ class SignUpFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var fragmentFactory: FragmentFactory
     @Inject lateinit var session: UserSession
+    @Inject lateinit var dialogBox: DialogBoxManager
+
     private lateinit var verifyFragment: VerifyFragment
     private lateinit var model: AuthViewModel
 
@@ -60,25 +62,24 @@ class SignUpFragment : BaseFragment() {
 
     }
 
-
     override fun toString(): String {
-        return "SignUp Fragment"
+        return "SignUp"
     }
 
 
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-                DialogBoxManager.showDialog(requireActivity(), MessageType.ERROR)
+                dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is AuthState.SingupSuccess -> {
-                DialogBoxManager.showDialog(requireActivity(), MessageType.SUCCESS)
+                dialogBox.cancel()
                 loadFragment(verifyFragment)
             }
 
             is AuthState.LoadingState -> {
-                DialogBoxManager.showDialog(requireActivity(), MessageType.LOAD)
+                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
         }
     }

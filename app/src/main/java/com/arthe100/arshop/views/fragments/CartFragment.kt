@@ -18,8 +18,9 @@ import javax.inject.Inject
 class CartFragment : BaseFragment() {
     @Inject lateinit var fragmentFactory: FragmentFactory
     @Inject lateinit var messageManager: MessageManager
-    lateinit var customerCartFragment: CustomerCartFragment
-    lateinit var ordersFragment: OrdersFragment
+
+    private lateinit var customerCartFragment: CustomerCartFragment
+    private lateinit var ordersFragment: OrdersFragment
 
 
     override fun inject() {
@@ -29,8 +30,8 @@ class CartFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
-        customerCartFragment = fragmentFactory.create<CustomerCartFragment>()
-        ordersFragment = fragmentFactory.create<OrdersFragment>()
+        customerCartFragment = fragmentFactory.create()
+        ordersFragment = fragmentFactory.create()
         return inflater.inflate(R.layout.cart_fragment_layout, container, false)
     }
 
@@ -57,13 +58,7 @@ class CartFragment : BaseFragment() {
 
 
     override fun toString(): String {
-        return "Cart Fragment"
+        return "Cart"
     }
 
-    private fun getTheLastFragment() : Fragment? {
-        var backStackSize = requireActivity().supportFragmentManager.backStackEntryCount
-        val fragmentTag: String? =
-            requireActivity().supportFragmentManager.getBackStackEntryAt(backStackSize - 1).name
-        return requireActivity().supportFragmentManager.findFragmentByTag(fragmentTag)
-    }
 }

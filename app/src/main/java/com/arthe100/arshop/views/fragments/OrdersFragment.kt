@@ -52,20 +52,6 @@ class OrdersFragment : BaseFragment() {
         return inflater.inflate(R.layout.orders_fragment, container, false)
     }
 
-
-    private fun authRender(state: AuthState) {
-        when (state) {
-            is AuthState.LoginSuccess -> {
-                bottom_buttons.visibility = View.VISIBLE
-                login_btn.visibility = View.INVISIBLE
-                empty_orders_layout.visibility = View.VISIBLE
-                ordered_items_list.visibility = View.INVISIBLE
-            }
-        }
-    }
-
-
-
     override fun onStart() {
         super.onStart()
 
@@ -89,6 +75,23 @@ class OrdersFragment : BaseFragment() {
         }
     }
 
+    override fun toString(): String {
+        return "Orders"
+    }
+
+    private fun authRender(state: AuthState) {
+        when (state) {
+            is AuthState.LoginSuccess -> {
+                bottom_buttons.visibility = View.VISIBLE
+                login_btn.visibility = View.INVISIBLE
+                empty_orders_layout.visibility = View.VISIBLE
+                ordered_items_list.visibility = View.INVISIBLE
+            }
+        }
+    }
+
+
+
 //    private fun addProducts(products: List<CartItem>) {
 //        cartItemAdapter.submitList(products)
 //    }
@@ -109,7 +112,4 @@ class OrdersFragment : BaseFragment() {
     }
 
 
-    override fun toString(): String {
-        return "Orders Fragment"
-    }
 }

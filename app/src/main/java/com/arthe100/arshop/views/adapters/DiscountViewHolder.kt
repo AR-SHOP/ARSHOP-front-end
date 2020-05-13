@@ -15,8 +15,8 @@ class DiscountViewHolder(itemView: View)
 
     override fun bind(data: String, listener: OnItemClickListener) {
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_background)
+            .placeholder(R.drawable.ic_empty_background)
+            .error(R.drawable.ic_empty_background)
 
         Glide.with(itemView.context)
             .applyDefaultRequestOptions(requestOptions)

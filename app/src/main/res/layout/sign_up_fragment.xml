@@ -177,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:background="@drawable/rounded_corners"
+                android:background="@drawable/small_rounded_corners"
                 android:backgroundTint="@color/colorBackground"
                 android:elevation="8dp"
                 android:text="@string/receive_verify_code"

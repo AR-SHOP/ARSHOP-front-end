@@ -40,45 +40,20 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     private lateinit var cartViewModel: CartViewModel
     private lateinit var messageManager: MessageManager
     private lateinit var gridViewAdapter: HomeGridViewAdapter
+    private lateinit var dialogBox: DialogBoxManager
+
+    override fun inject() {
+        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
+                .inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         messageManager = MessageManager()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
         cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
-
+        dialogBox = DialogBoxManager()
         model.currentViewState.observe(this , Observer(::render))
-    }
-
-    private fun render(state: ProductState){
-        when(state){
-            is ProductState.Idle -> {
-                DialogBoxManager.cancel()
-            }
-
-            is ProductState.LoadingState -> {
-                DialogBoxManager.showDialog(requireActivity(), MessageType.LOAD)
-            }
-
-            is ProductState.GetProductsSuccess -> {
-                setRecyclerView()
-                setGridView()
-                addProducts(state.products)
-            }
-            is ProductState.ProductDetailSuccess -> {
-                loadFragment(productFragment)
-            }
-
-            is ProductState.GetProductsFailure -> {
-                DialogBoxManager.showDialog(activity, MessageType.ERROR)
-            }
-        }
-
-    }
-
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-                .inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -89,9 +64,50 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
     override fun onStart() {
 
+        swipe_refresh_layout.setOnRefreshListener {
+            model.onEvent(ProductUiAction.GetHomePageProducts)
+            cartViewModel.onEvent(CartUiAction.GetCartOnStart)
+            swipe_refresh_layout.isRefreshing = false
+        }
+
         model.onEvent(ProductUiAction.GetHomePageProducts)
         cartViewModel.onEvent(CartUiAction.GetCartOnStart)
+        dialogBox.cancel()
+        swipe_refresh_layout.isRefreshing = false
+
         super.onStart()
+    }
+
+    override fun toString(): String {
+        return "Home"
+    }
+
+    private fun render(state: ProductState){
+        when(state){
+            is ProductState.Idle -> {
+                dialogBox.cancel()
+            }
+
+            is ProductState.LoadingState -> {
+                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
+            }
+
+            is ProductState.GetProductsSuccess -> {
+                dialogBox.cancel()
+                setRecyclerView()
+                setGridView()
+                addProducts(state.products)
+            }
+            is ProductState.ProductDetailSuccess -> {
+                dialogBox.cancel()
+                loadFragment(productFragment)
+            }
+
+            is ProductState.GetProductsFailure -> {
+                dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
+            }
+        }
+
     }
 
     private fun addProducts(data: List<Product>) {
@@ -131,7 +147,4 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     }
 
 
-    override fun toString(): String {
-        return "Home"
-    }
 }
