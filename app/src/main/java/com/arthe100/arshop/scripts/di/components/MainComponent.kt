@@ -34,4 +34,5 @@ interface MainComponent  {
     fun inject(fragment: OrdersFragment)
     fun inject(fragment: CustomerCartFragment)
     fun inject(viewPagerAdapter: ViewPagerAdapter)
+    fun inject(categoryFragment: CategoryFragment)
 }

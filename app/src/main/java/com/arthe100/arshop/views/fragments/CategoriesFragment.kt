@@ -15,16 +15,11 @@ import com.arthe100.arshop.views.adapters.CategoryItemAdapter
 import com.arthe100.arshop.views.adapters.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.categories_fragment_layout.*
+import javax.inject.Inject
 
 class CategoriesFragment : BaseFragment() {
 
-
-//    private var list: MutableList<Category> = arrayListOf(
-//        Category("دسته بندی ۱",
-//            "https://image.shutterstock.com/image-vector/discount-banner-shape-sale-50-600w-1542205283.jpg"),
-//        Category("دسته بندی ۲",
-//        "https://image.shutterstock.com/image-vector/special-offer-final-sale-banner-600w-1387497926.jpg")
-//    )
+    @Inject lateinit var categoryFragment: CategoryFragment
 
     private lateinit var categoryItemAdapter: CategoryItemAdapter
 
@@ -40,7 +35,6 @@ class CategoriesFragment : BaseFragment() {
 
     override fun onStart() {
         setSearchView()
-
         super.onStart()
     }
 
@@ -70,7 +64,7 @@ class CategoriesFragment : BaseFragment() {
         categoryItemAdapter = CategoryItemAdapter()
         categoryItemAdapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
-                TODO("Not yet implemented")
+                loadFragment(categoryFragment)
             }
         })
 

@@ -14,7 +14,8 @@ class FragmentFactory
         val verifyFragment: VerifyFragment,
         val ordersFragment: OrdersFragment,
         val customerCartFragment: CustomerCartFragment,
-        val signUpFragment: SignUpFragment) {
+        val signUpFragment: SignUpFragment,
+        val categoryFragment: CategoryFragment) {
 
     inline fun <reified T> create() : T {
         return when(T::class) {
@@ -28,6 +29,7 @@ class FragmentFactory
             OrdersFragment::class -> ordersFragment as T
             CustomerCartFragment::class -> customerCartFragment as T
             SignUpFragment::class -> signUpFragment as T
+            CategoryFragment::class -> categoryFragment as T
             else -> throw Exception("the fragment of type: ${T::class} doesn't exists!" )
         }
     }

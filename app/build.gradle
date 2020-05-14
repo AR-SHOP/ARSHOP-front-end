@@ -150,7 +150,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$architecturecomponentsVer"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$architecturecomponentsVer"
 
-    
+
     //pull to refresh
     implementation "com.baoyz.pullrefreshlayout:library:1.2.0"
 

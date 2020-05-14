@@ -20,7 +20,7 @@
                 android:layout_weight="14"
                 android:elevation="5dp"
                 android:src="@drawable/ic_empty_background"
-                android:scaleType="centerInside"
+                android:scaleType="fitXY"
                 android:adjustViewBounds="true" />
 
 

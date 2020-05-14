@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.product_grid_item.view.*
 class HomeGridViewAdapter(val context: Context) : BaseAdapter() {
 
     var dataList: List<Product> = arrayListOf()
-
     lateinit var inflater: LayoutInflater
 
     override fun getView(position: Int, view: View?, viewGroup: ViewGroup?): View {

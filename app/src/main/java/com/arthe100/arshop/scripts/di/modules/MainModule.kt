@@ -23,12 +23,21 @@ object MainModule{
         verifyFragment: VerifyFragment,
         ordersFragment: OrdersFragment,
         customerCartFragment: CustomerCartFragment,
-        signUpFragment: SignUpFragment) : FragmentFactory {
+        signUpFragment: SignUpFragment,
+        categoryFragment: CategoryFragment) : FragmentFactory {
 
         return FragmentFactory(homeFragment, categoriesFragment, cartFragment, profileFragment,
                                 loginFragment, productFragment, verifyFragment, ordersFragment,
-                                customerCartFragment, signUpFragment)
+                                customerCartFragment, signUpFragment, categoryFragment)
     }
+
+    @JvmStatic
+    @MainScope
+    @Provides
+    fun createCategoryFragment() : CategoryFragment {
+        return CategoryFragment()
+    }
+
 
     @JvmStatic
     @MainScope

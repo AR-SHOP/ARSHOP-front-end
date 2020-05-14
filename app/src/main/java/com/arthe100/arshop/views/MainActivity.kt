@@ -94,7 +94,8 @@ class MainActivity : BaseActivity(), ILoadFragment {
             selectedFragment!! is CartFragment ||
             selectedFragment!! is CategoriesFragment ||
             selectedFragment!! is LoginFragment ||
-            selectedFragment!! is ProfileFragment
+            selectedFragment!! is ProfileFragment ||
+            selectedFragment!! is CategoryFragment
 
         if (isMain) {
 
