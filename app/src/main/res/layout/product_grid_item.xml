@@ -19,7 +19,8 @@
                 android:layout_height="160dp"
                 android:layout_weight="14"
                 android:elevation="5dp"
-                android:scaleType="fitXY"
+                android:src="@drawable/ic_empty_background"
+                android:scaleType="centerInside"
                 android:adjustViewBounds="true" />
 
 

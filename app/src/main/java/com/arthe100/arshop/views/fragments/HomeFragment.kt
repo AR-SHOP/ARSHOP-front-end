@@ -86,7 +86,6 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     }
 
     private fun setSearchView() {
-
         home_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
