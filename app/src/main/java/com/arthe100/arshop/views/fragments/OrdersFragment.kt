@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.CartItem
-import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.views.BaseFragment
@@ -32,8 +31,9 @@ class OrdersFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        loginFragment = fragmentFactory.create<LoginFragment>()
-        productFragment = fragmentFactory.create<ProductFragment>()
+        loginFragment = fragmentFactory.create()
+        productFragment = fragmentFactory.create()
+        requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.orders_fragment, container, false)
     }
 
@@ -51,7 +51,6 @@ class OrdersFragment : BaseFragment() {
             ordered_items_list.visibility = View.INVISIBLE
             login_btn.setOnClickListener {
                 requireActivity().bottom_navbar.visibility = View.INVISIBLE
-                loginFragment.inMainPage = false
                 loadFragment(loginFragment)
             }
         }

@@ -1,6 +1,5 @@
 package com.arthe100.arshop.views.fragments
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -8,10 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.afollestad.materialdialogs.DialogBehavior
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.ar.InfoManager.IInfoManager
 import com.arthe100.arshop.scripts.di.BaseApplication
@@ -34,7 +31,6 @@ import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.PlaneRenderer
 import com.google.ar.sceneform.ux.TransformableNode
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.ar_fragment_layout.*
 import javax.inject.Inject
 
 
@@ -67,13 +63,8 @@ class CustomArFragment : CustomBaseArFragment() {
         return view
     }
 
-    override fun onDetach() {
-        requireActivity().bottom_navbar.visibility = View.VISIBLE
-        super.onDetach()
-    }
-
     override fun onStart() {
-        requireActivity().bottom_navbar.visibility = View.INVISIBLE
+        requireActivity().bottom_navbar.visibility = View.GONE
         super.onStart()
     }
 

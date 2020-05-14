@@ -1,11 +1,7 @@
 package com.arthe100.arshop.views
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
@@ -13,9 +9,8 @@ import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.fragments.*
+import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.coroutines.selects.select
-import java.util.*
 import javax.inject.Inject
 import kotlin.system.exitProcess
 
@@ -40,17 +35,17 @@ class MainActivity : BaseActivity(), ILoadFragment {
     override fun inject() {
         (application as BaseApplication)
                 .mainComponent(this)
-                .inject(this) // i want to get injected
+                .inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_layout)
-        homeFragment = fragmentFactory.create<HomeFragment>()
-        categoriesFragment = fragmentFactory.create<CategoriesFragment>()
-        cartFragment = fragmentFactory.create<CartFragment>()
-        loginFragment = fragmentFactory.create<LoginFragment>()
-        profileFragment = fragmentFactory.create<ProfileFragment>()
+        homeFragment = fragmentFactory.create()
+        categoriesFragment = fragmentFactory.create()
+        cartFragment = fragmentFactory.create()
+        loginFragment = fragmentFactory.create()
+        profileFragment = fragmentFactory.create()
         setBottomNavigationView(savedInstanceState)
     }
 
@@ -58,7 +53,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
         if (savedInstanceState == null) {
             bottom_navbar.selectedItemId = R.id.btm_navbar_home
-            homeFragment.inMainPage = true
             selectedFragment = homeFragment
             loadFragment(selectedFragment)
         }
@@ -69,22 +63,18 @@ class MainActivity : BaseActivity(), ILoadFragment {
                     selectedFragment = homeFragment
                 }
                 R.id.btm_navbar_categories -> {
-                    categoriesFragment.inMainPage = true
                     selectedFragment = categoriesFragment
                 }
                 R.id.btm_navbar_cart -> {
-                    cartFragment.inMainPage = true
                     selectedFragment = cartFragment
                 }
                 R.id.btm_navbar_profile -> {
                     when (session.user){
                         is User.User ->{
-                            profileFragment.inMainPage = true
                             selectedFragment = profileFragment
                         }
 
                         is User.GuestUser ->{
-                            loginFragment.inMainPage = true
                             selectedFragment = loginFragment
                         }
                     }

@@ -8,26 +8,35 @@
         android:layout_height="match_parent"
         tools:context=".views.fragments.CategoriesFragment">
 
-    <androidx.appcompat.widget.SearchView
-            android:id="@+id/category_search_view"
-            style="@style/AppTheme"
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/categories_app_bar_layout"
             android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/small_rounded_corners"
-            android:backgroundTint="@color/colorEditText"
-            android:layoutDirection="rtl"
-            android:textDirection="rtl"
-            app:defaultQueryHint="@string/search_hint"
-            android:elevation="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/category_text"
+            android:layout_height="?attr/actionBarSize"
+            style="@style/AppTheme"
+            android:background="@color/colorBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.004" />
+            app:layout_constraintVertical_bias="0.0">
 
+        <androidx.appcompat.widget.SearchView
+                android:id="@+id/categories_search_view"
+                style="@style/AppTheme"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@drawable/small_rounded_corners"
+                android:backgroundTint="@color/colorEditText"
+                app:searchIcon="@drawable/ic_action_search"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl"
+                app:searchHintIcon="@drawable/ic_action_search"
+                app:closeIcon="@drawable/ic_action_close"
+                app:defaultQueryHint="@string/search_hint"
+                android:elevation="10dp"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
             android:id="@+id/category_text"

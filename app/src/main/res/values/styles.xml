@@ -1,12 +1,13 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="fontFamily">@font/iran_sans</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
     </style>
 
@@ -27,6 +28,11 @@
     <style name="DialogAnimation" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowEnterAnimation">@anim/from_small</item>
         <item name="android:windowExitAnimation">@anim/from_large</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="hintTextColor">@color/colorHint</item>
     </style>
 
 </resources>

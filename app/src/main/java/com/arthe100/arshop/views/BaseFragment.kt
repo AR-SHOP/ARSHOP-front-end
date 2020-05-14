@@ -8,13 +8,11 @@ import com.arthe100.arshop.scripts.di.BaseApplication
 
 abstract class BaseFragment : Fragment(), ILoadFragment {
 
-    var inMainPage: Boolean = true
+    abstract fun inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
-    abstract fun inject()
 
     override fun onAttach(context: Context) {
         inject()

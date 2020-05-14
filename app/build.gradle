@@ -69,6 +69,9 @@ dependencies {
     implementation "com.afollestad.material-dialogs:bottomsheets:$dialogVer"
     implementation "com.afollestad.material-dialogs:lifecycle:$dialogVer"
 
+    //Search View
+    implementation 'com.miguelcatalan:materialsearchview:1.4.0'
+
     //Loading Progress Bar
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation 'com.google.android.material:material:1.2.0-alpha06'

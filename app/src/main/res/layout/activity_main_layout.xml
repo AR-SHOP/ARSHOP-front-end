@@ -43,7 +43,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            app:menu="@menu/bottom_navbar_menu_layout"
+            app:menu="@menu/bottom_navbar_menu"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"/>
 
