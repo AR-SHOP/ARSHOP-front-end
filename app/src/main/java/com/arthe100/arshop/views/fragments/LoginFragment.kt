@@ -102,7 +102,6 @@ class LoginFragment : BaseFragment(), ILoadFragment {
                 dialogBox.cancel()
                 login_fragment_layout.visibility = View.VISIBLE
                 session.saveUser(state.user)
-                profileFragment.inMainPage = true
                 loadFragment(profileFragment)
             }
             is AuthState.Failure -> {
