@@ -111,7 +111,6 @@ class ProductFragment : BaseFragment() {
             }
 
             is ProductState.GetProductsFailure -> {
-                dialogBox.cancel()
                 product_fragment_layout.visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
                 Log.v("TAG", state.throwable.toString())

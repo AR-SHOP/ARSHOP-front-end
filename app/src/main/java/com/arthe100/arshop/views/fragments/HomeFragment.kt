@@ -72,7 +72,6 @@ class HomeFragment: BaseFragment(), ILoadFragment {
 
         model.onEvent(ProductUiAction.GetHomePageProducts)
         cartViewModel.onEvent(CartUiAction.GetCartOnStart)
-        dialogBox.cancel()
         super.onStart()
     }
 

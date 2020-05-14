@@ -188,9 +188,9 @@ class CustomArFragment : CustomBaseArFragment() {
                 dialogBox.showDialog(requireContext(),MessageType.LOAD)
             }
             is ArState.ModelFailure -> {
-                dialogBox.cancel()
                 model.currentViewState.value = ArState.IdleState
-                messageManager.toast(requireContext() , state.err.toString())
+                dialogBox.showDialog(requireContext(), MessageType.ERROR)
+                Log.v("TAG", state.err.toString())
             }
         }
     }

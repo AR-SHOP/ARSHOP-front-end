@@ -13,7 +13,6 @@ class DiscountAdapter : BaseItemAdapter<String>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-
         return DiscountViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.discount_card_view, parent, false)
