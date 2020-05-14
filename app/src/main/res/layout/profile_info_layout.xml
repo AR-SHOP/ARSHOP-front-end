@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_bar">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layoutDirection="rtl"
+            tools:ignore="MissingConstraints">
+
+        <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="نام کامل"
+                android:textColor="@color/colorPrimary"
+                android:textDirection="rtl"
+                android:textSize="20sp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginRight="25dp"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_corners"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_marginBottom="1dp">
+
+                <Button
+                        android:id="@+id/textView_profile_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="حساب کاربری من"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorEditText"
+                        android:textDirection="rtl"
+                        android:textSize="20sp"
+                        android:backgroundTint="@color/colorPrimary"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_corners"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_marginBottom="1dp">
+
+                <Button
+                        android:id="@+id/textView_favorite_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="لیست مورد علاقه‌ها"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorEditText"
+                        android:textDirection="rtl"
+                        android:textSize="20sp"
+                        android:backgroundTint="@color/colorPrimary"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_corners"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_marginBottom="1dp">
+
+                <Button
+                        android:id="@+id/textView_critique_suggestion"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="نقد و نظرات"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorEditText"
+                        android:textDirection="rtl"
+                        android:textSize="20sp"
+                        android:backgroundTint="@color/colorPrimary"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_corners"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_marginBottom="1dp">
+
+                <Button
+                        android:id="@+id/textView_discount"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="تخفیفات ویژه"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorEditText"
+                        android:textDirection="rtl"
+                        android:textSize="20sp"
+                        android:backgroundTint="@color/colorPrimary"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

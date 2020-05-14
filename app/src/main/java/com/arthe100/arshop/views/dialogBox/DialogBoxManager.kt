@@ -9,16 +9,18 @@ import com.arthe100.arshop.R
 enum class MessageType { LOAD, SUCCESS, ERROR, CAUTION }
 
 object DialogBoxManager {
-    private lateinit var dialog: Dialog
+    lateinit var dialog: Dialog
 
     fun showDialog(activity: Activity?, messageType: MessageType) {
         if (this::dialog.isInitialized && dialog.isShowing) {
             dialog.dismiss()
             dialog = createDialog(activity, messageType)
             dialog.show()
+            DialogSetter.set(activity,  messageType)
         } else {
             dialog = createDialog(activity, messageType)
             dialog.show()
+            DialogSetter.set(activity, messageType)
         }
     }
 

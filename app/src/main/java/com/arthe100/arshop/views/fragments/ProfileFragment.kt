@@ -59,7 +59,7 @@ class ProfileFragment : BaseFragment() {
             }
 
             is ProfileState.GetProfileSuccess -> {
-                DialogBoxManager.showDialog(requireActivity(), MessageType.SUCCESS)
+                DialogBoxManager.cancel()
 
                 val user = state.userInfo
 
@@ -69,12 +69,12 @@ class ProfileFragment : BaseFragment() {
                     "${state.userInfo.fName} ${state.userInfo.lName}"
 
                 email.text = if(user.email.isEmpty())
-                    "ایمیل"
+                    "ItsMe@Gmail.com"
                 else
                     state.userInfo.email
 
                 phone_number.text = if(user.phone.isNullOrEmpty())
-                    "شماره موبایل"
+                    "09112223344"
                 else
                     state.userInfo.phone
             }
