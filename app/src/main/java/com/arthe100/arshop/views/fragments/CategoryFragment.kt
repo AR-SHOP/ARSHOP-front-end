@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
@@ -57,6 +58,19 @@ class CategoryFragment : BaseFragment() {
         category_grid_view.apply {
             adapter = gridViewAdapter
         }
+    }
+
+    private fun setSearchView() {
+        category_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
+
     }
 
 }
