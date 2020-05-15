@@ -51,20 +51,19 @@ class HomeFragment: BaseFragment(), ILoadFragment {
             .inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-        messageManager = MessageManager()
-        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
-        cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
-        dialogBox = DialogBoxManager()
-        model.currentViewState.observe(this , Observer(::render))
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
+        messageManager = MessageManager()
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
+        cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
         return inflater.inflate(R.layout.home_fragment_layout, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dialogBox = DialogBoxManager()
+        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
     }
 
     override fun onStart() {
@@ -102,29 +101,25 @@ class HomeFragment: BaseFragment(), ILoadFragment {
         when(state){
             is ProductState.Idle -> {
                 dialogBox.cancel()
-                home_layout.visibility = View.VISIBLE
             }
 
             is ProductState.LoadingState -> {
-                home_layout.visibility = View.INVISIBLE
+                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
 
             is ProductState.GetProductsSuccess -> {
                 dialogBox.cancel()
-                home_layout.visibility = View.VISIBLE
                 setRecyclerView()
                 setGridView()
                 addProducts(state.products)
             }
             is ProductState.ProductDetailSuccess -> {
                 dialogBox.cancel()
-                home_layout.visibility = View.VISIBLE
                 loadFragment(productFragment)
             }
 
             is ProductState.GetProductsFailure -> {
-                home_layout.visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
             }
         }

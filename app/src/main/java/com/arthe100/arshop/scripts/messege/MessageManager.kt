@@ -10,7 +10,7 @@ class MessageManager () {
 
     fun toast(context: Context, msg : String) {
         val toast = Toast.makeText(context, msg , Toast.LENGTH_LONG)
-        toast.setGravity(Gravity.BOTTOM, 0, 0)
+        toast.setGravity(Gravity.BOTTOM, 0, 10)
         toast.show()
     }
 }

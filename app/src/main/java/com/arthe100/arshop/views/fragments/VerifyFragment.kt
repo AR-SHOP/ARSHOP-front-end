@@ -35,17 +35,17 @@ class VerifyFragment : BaseFragment(){
             .inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        profileFragment = fragmentFactory.create<ProfileFragment>()
-        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
-        model.currentViewState.observe(this , Observer(::render))
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
+        profileFragment = fragmentFactory.create<ProfileFragment>()
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         return inflater.inflate(R.layout.verify_fragment_layout, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
     }
 
     override fun onStart() {
@@ -63,25 +63,22 @@ class VerifyFragment : BaseFragment(){
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-                verify_fragment_layout.visibility = View.VISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is AuthState.CodeSuccess -> {
                 dialogBox.cancel()
-                verify_fragment_layout.visibility = View.VISIBLE
                 model.onEvent(AuthUiAction.LoginAction(model.password , model.phone))
             }
 
             is AuthState.LoginSuccess -> {
                 dialogBox.cancel()
-                verify_fragment_layout.visibility = View.VISIBLE
                 session.saveUser(state.user)
                 loadFragment(profileFragment)
             }
 
             is AuthState.LoadingState ->{
-                verify_fragment_layout.visibility = View.INVISIBLE
+                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
         }

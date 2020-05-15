@@ -1,5 +1,7 @@
 package com.arthe100.arshop.views.fragments
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -44,22 +46,24 @@ class ProductFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
+        model = ViewModelProvider(requireActivity() , viewModelFactory).get(ProductViewModel::class.java)
+        cartViewModel = ViewModelProvider(requireActivity() , viewModelFactory).get(CartViewModel::class.java)
         return inflater.inflate(R.layout.product_fragment_layout, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        model = ViewModelProvider(requireActivity() , viewModelFactory).get(ProductViewModel::class.java)
-        cartViewModel = ViewModelProvider(requireActivity() , viewModelFactory).get(CartViewModel::class.java)
+        super.onViewCreated(view, savedInstanceState)
         model.currentViewState.observe(requireActivity() , Observer(::render))
         cartViewModel.currentViewState.observe(requireActivity() , Observer(::render))
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onStart() {
-        product_details_name.text = model.product.name
-        product_details_brand.text = model.product.manufacturer
-        product_details_price.text = model.product.price.toString()
-        product_details_description.text = model.product.description
+
+        product_details_name?.text = model.product.name
+        product_details_brand?.text = model.product.manufacturer
+        product_details_price?.text = model.product.price.toString()
+        product_details_description?.text = model.product.description
         checkCartStatus()
 
         val requestOptions = RequestOptions()
@@ -95,21 +99,18 @@ class ProductFragment : BaseFragment() {
         when(state){
             ProductState.Idle -> {
                 dialogBox.cancel()
-                product_fragment_layout.visibility = View.VISIBLE
             }
 
             ProductState.LoadingState -> {
-                product_fragment_layout.visibility = View.INVISIBLE
+                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
 
             is ProductState.ProductDetailSuccess -> {
                 dialogBox.cancel()
-                product_fragment_layout.visibility = View.VISIBLE
             }
 
             is ProductState.GetProductsFailure -> {
-                product_fragment_layout.visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
                 Log.v("TAG", state.throwable.toString())
             }

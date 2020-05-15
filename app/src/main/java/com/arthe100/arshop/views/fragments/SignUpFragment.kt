@@ -33,17 +33,17 @@ class SignUpFragment : BaseFragment() {
             .inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        verifyFragment = fragmentFactory.create<VerifyFragment>()
-        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
-        model.currentViewState.observe(this , Observer(::render))
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
+        verifyFragment = fragmentFactory.create()
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         return inflater.inflate(R.layout.sign_up_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
     }
 
     override fun onStart() {
@@ -66,18 +66,16 @@ class SignUpFragment : BaseFragment() {
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-                signup_fragment_layout.visibility = View.VISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is AuthState.SingupSuccess -> {
                 dialogBox.cancel()
-                signup_fragment_layout.visibility = View.VISIBLE
                 loadFragment(verifyFragment)
             }
 
             is AuthState.LoadingState -> {
-                signup_fragment_layout.visibility = View.INVISIBLE
+                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
         }

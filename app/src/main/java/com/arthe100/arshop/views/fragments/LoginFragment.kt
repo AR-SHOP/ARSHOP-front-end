@@ -41,19 +41,19 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             .inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        requireActivity().bottom_navbar.visibility = View.VISIBLE
         messageManager = MessageManager()
         profileFragment = fragmentFactory.create<ProfileFragment>()
         signUpFragment = fragmentFactory.create<SignUpFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
-        model.currentViewState.observe(this , Observer(::render))
+        return inflater.inflate(R.layout.login_fragment_layout, container, false)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        requireActivity().bottom_navbar.visibility = View.VISIBLE
-        return inflater.inflate(R.layout.login_fragment_layout, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
     }
 
     override fun onStart() {
@@ -93,20 +93,17 @@ class LoginFragment : BaseFragment(), ILoadFragment {
         when(state){
             is AuthState.Idle -> {
                 dialogBox.cancel()
-                login_fragment_layout.visibility = View.VISIBLE
             }
             is AuthState.LoadingState -> {
-                login_fragment_layout.visibility = View.INVISIBLE
+                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
             is AuthState.LoginSuccess -> {
                 dialogBox.cancel()
-                login_fragment_layout.visibility = View.VISIBLE
                 session.saveUser(state.user)
                 loadFragment(profileFragment)
             }
             is AuthState.Failure -> {
-                login_fragment_layout.visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR)
             }
         }

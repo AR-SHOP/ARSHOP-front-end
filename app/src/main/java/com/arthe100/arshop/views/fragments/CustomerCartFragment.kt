@@ -1,5 +1,7 @@
 package com.arthe100.arshop.views.fragments
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -57,17 +59,17 @@ class CustomerCartFragment : BaseFragment() {
         savedInstanceState: Bundle?): View? {
         loginFragment = fragmentFactory.create()
         productFragment = fragmentFactory.create()
+        authViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
+        productViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
         return inflater.inflate(R.layout.customer_cart_fragment_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        authViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
-        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
-        productViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
+        super.onViewCreated(view, savedInstanceState)
         model.currentViewState.observe(requireActivity() , Observer(::render))
         //model.currentCart.observe(requireActivity() , Observer{addProducts(it.cartItems)})
         authViewModel.currentViewState.observe(requireActivity() , Observer(::authRender))
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onStart() {
@@ -125,15 +127,13 @@ class CustomerCartFragment : BaseFragment() {
         when(state) {
             is CartState.IdleState -> {
                 dialogBox.cancel()
-                customer_cart_fragment_layout.visibility = View.VISIBLE
             }
             is CartState.LoadingState -> {
-                customer_cart_fragment_layout.visibility = View.INVISIBLE
+                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(),MessageType.LOAD)
             }
             is CartState.GetCartState -> {
                 dialogBox.cancel()
-                customer_cart_fragment_layout.visibility = View.VISIBLE
                 cart_items_list?.visibility = View.VISIBLE
                 empty_cart_layout?.visibility = View.VISIBLE
                 val products = state.cart.cartItems
@@ -142,26 +142,22 @@ class CustomerCartFragment : BaseFragment() {
             }
             is CartState.AddToCartState -> {
                 dialogBox.cancel()
-                customer_cart_fragment_layout.visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
                 addProducts(products)
             }
             is CartState.RemoveFromCartState -> {
                 dialogBox.cancel()
-                customer_cart_fragment_layout.visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
                 addProducts(products)
             }
             is CartState.Failure -> {
-                customer_cart_fragment_layout.visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
                 model.updateCart(::addProducts)
             }
             is CartState.ClearCart -> {
                 dialogBox.cancel()
-                customer_cart_fragment_layout.visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
                 addProducts(products)

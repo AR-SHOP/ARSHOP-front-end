@@ -35,24 +35,21 @@ class ProfileFragment : BaseFragment() {
             .inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        messageManager = MessageManager()
-        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
-        model.currentViewState.observe(this , Observer(::render))
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         requireActivity().bottom_navbar.visibility = View.VISIBLE
+        messageManager = MessageManager()
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
         return inflater.inflate(R.layout.profile_fragment_layout, container, false)
     }
 
-    override fun onStart() {
-        //do what you want with 'name', 'email', 'phone_number' text views here
-        super.onStart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
+    }
 
+    override fun onStart() {
+        super.onStart()
         model.onEvent(ProfileUiAction.GetHomePageProfileAction)
     }
 
@@ -64,18 +61,15 @@ class ProfileFragment : BaseFragment() {
         when(state) {
             is ProfileState.Idle -> {
                 dialogBox.cancel()
-                profile_fragment_layout.visibility = View.VISIBLE
             }
 
             is ProfileState.GetProfileFailure -> {
-                profile_fragment_layout.visibility = View.VISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
                 Log.v("TAG", state.throwable.toString())
             }
 
             is ProfileState.GetProfileSuccess -> {
                 dialogBox.cancel()
-                profile_fragment_layout.visibility = View.VISIBLE
                 val user = state.userInfo
 
                 name.text = if(user.fName.isEmpty())
@@ -95,7 +89,7 @@ class ProfileFragment : BaseFragment() {
             }
 
             is ProfileState.LoadingState -> {
-                profile_fragment_layout.visibility = View.INVISIBLE
+                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
         }
