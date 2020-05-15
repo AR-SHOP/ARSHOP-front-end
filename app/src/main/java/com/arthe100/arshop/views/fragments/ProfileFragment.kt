@@ -50,17 +50,13 @@ class ProfileFragment : BaseFragment() {
     private fun render(state: ProfileState){
         when(state) {
             is ProfileState.Idle -> {
-                DialogBoxManager.cancel()
             }
 
             is ProfileState.GetProfileFailure -> {
                 messageManager.toast(requireContext(), state.throwable.toString())
-                DialogBoxManager.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is ProfileState.GetProfileSuccess -> {
-                DialogBoxManager.cancel()
-
                 val user = state.userInfo
 
                 name.text = if(user.fName.isEmpty())
@@ -80,7 +76,6 @@ class ProfileFragment : BaseFragment() {
             }
 
             is ProfileState.LoadingState -> {
-                DialogBoxManager.showDialog(requireActivity(), MessageType.LOAD)
             }
         }
     }
