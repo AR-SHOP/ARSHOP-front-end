@@ -66,11 +66,13 @@ class SignUpFragment : BaseFragment() {
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
+                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is AuthState.SingupSuccess -> {
                 dialogBox.cancel()
+                requireView().visibility = View.VISIBLE
                 loadFragment(verifyFragment)
             }
 

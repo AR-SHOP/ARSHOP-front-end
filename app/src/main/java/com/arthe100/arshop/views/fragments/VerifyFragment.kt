@@ -38,7 +38,7 @@ class VerifyFragment : BaseFragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
-        profileFragment = fragmentFactory.create<ProfileFragment>()
+        profileFragment = fragmentFactory.create()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         return inflater.inflate(R.layout.verify_fragment_layout, container, false)
     }
@@ -63,16 +63,19 @@ class VerifyFragment : BaseFragment(){
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
+                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is AuthState.CodeSuccess -> {
                 dialogBox.cancel()
+                requireView().visibility = View.VISIBLE
                 model.onEvent(AuthUiAction.LoginAction(model.password , model.phone))
             }
 
             is AuthState.LoginSuccess -> {
                 dialogBox.cancel()
+                requireView().visibility = View.VISIBLE
                 session.saveUser(state.user)
                 loadFragment(profileFragment)
             }

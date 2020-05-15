@@ -7,12 +7,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductState
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.scripts.mvi.cart.CartState
@@ -33,6 +36,7 @@ class ProductFragment : BaseFragment() {
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var fragmentFactory: FragmentFactory
     @Inject lateinit var dialogBox: DialogBoxManager
+    @Inject lateinit var session: UserSession
 
     private lateinit var cartViewModel: CartViewModel
     private lateinit var model: ProductViewModel
@@ -48,18 +52,13 @@ class ProductFragment : BaseFragment() {
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
         model = ViewModelProvider(requireActivity() , viewModelFactory).get(ProductViewModel::class.java)
         cartViewModel = ViewModelProvider(requireActivity() , viewModelFactory).get(CartViewModel::class.java)
+        model.currentViewState.observe(requireActivity() , Observer(::render))
+        cartViewModel.currentViewState.observe(requireActivity() , Observer(::render))
         return inflater.inflate(R.layout.product_fragment_layout, container, false)
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        model.currentViewState.observe(requireActivity() , Observer(::render))
-        cartViewModel.currentViewState.observe(requireActivity() , Observer(::render))
-    }
-
     override fun onStart() {
-
+        super.onStart()
         product_details_name?.text = model.product.name
         product_details_brand?.text = model.product.manufacturer
         product_details_price?.text = model.product.price.toString()
@@ -80,7 +79,7 @@ class ProductFragment : BaseFragment() {
 
         ar_btn?.setOnClickListener {
             customArFragment.setUri(model.product.arModel)
-            loadFragment(customArFragment)
+            loadFragment(customArFragment as Fragment?)
         }
         add_to_cart_btn?.setOnClickListener {
             cartViewModel.onEvent(CartUiAction.AddToCart(model.product.id , 1))
@@ -88,7 +87,12 @@ class ProductFragment : BaseFragment() {
             add_to_cart_btn?.visibility = View.INVISIBLE
             inc_dec_cart_count?.visibility = View.VISIBLE
         }
-        super.onStart()
+
+        when(session.user){
+            is User.GuestUser ->
+                add_to_cart_btn?.visibility = View.INVISIBLE
+        }
+
     }
 
     override fun toString(): String {
@@ -102,7 +106,6 @@ class ProductFragment : BaseFragment() {
             }
 
             ProductState.LoadingState -> {
-                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
 
@@ -120,6 +123,7 @@ class ProductFragment : BaseFragment() {
     private fun render(state: CartState){
         when(state){
             is CartState.AddToCartState -> {
+                dialogBox.cancel()
                 checkCartStatus()
             }
         }
@@ -154,7 +158,7 @@ class ProductFragment : BaseFragment() {
             cartViewModel.updateCart()
         }
 
-        if(cartViewModel.isInCart(model.product.id) )
+        if(cartViewModel.isInCart(model.product.id))
         {
             add_to_cart_btn?.visibility = View.INVISIBLE
             inc_dec_cart_count?.visibility = View.VISIBLE

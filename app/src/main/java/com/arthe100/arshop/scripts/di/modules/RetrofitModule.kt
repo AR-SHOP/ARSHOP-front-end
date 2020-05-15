@@ -5,6 +5,7 @@ import com.arthe100.arshop.scripts.di.scopes.AppScope
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.network.interceptors.TokenInterceptor
 import com.arthe100.arshop.scripts.network.services.CartService
+import com.arthe100.arshop.scripts.network.services.CategoryService
 import com.arthe100.arshop.scripts.network.services.ProductService
 import com.arthe100.arshop.scripts.network.services.UserService
 import com.google.gson.Gson
@@ -80,5 +81,11 @@ object RetrofitModule {
     @Provides
     fun provideCartService(retrofit: Retrofit) : CartService{
         return retrofit.create(CartService::class.java)
+    }
+    @JvmStatic
+    @AppScope
+    @Provides
+    fun provideCategoryService(retrofit: Retrofit) : CategoryService{
+        return retrofit.create(CategoryService::class.java)
     }
 }

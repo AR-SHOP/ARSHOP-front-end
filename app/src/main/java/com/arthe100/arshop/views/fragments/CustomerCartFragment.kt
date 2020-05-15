@@ -127,6 +127,7 @@ class CustomerCartFragment : BaseFragment() {
         when(state) {
             is CartState.IdleState -> {
                 dialogBox.cancel()
+                requireView().visibility = View.VISIBLE
             }
             is CartState.LoadingState -> {
                 requireView().visibility = View.INVISIBLE
@@ -134,6 +135,7 @@ class CustomerCartFragment : BaseFragment() {
             }
             is CartState.GetCartState -> {
                 dialogBox.cancel()
+                requireView().visibility = View.VISIBLE
                 cart_items_list?.visibility = View.VISIBLE
                 empty_cart_layout?.visibility = View.VISIBLE
                 val products = state.cart.cartItems
@@ -142,22 +144,26 @@ class CustomerCartFragment : BaseFragment() {
             }
             is CartState.AddToCartState -> {
                 dialogBox.cancel()
+                requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
                 addProducts(products)
             }
             is CartState.RemoveFromCartState -> {
                 dialogBox.cancel()
+                requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
                 addProducts(products)
             }
             is CartState.Failure -> {
+                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
                 model.updateCart(::addProducts)
             }
             is CartState.ClearCart -> {
                 dialogBox.cancel()
+                requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
                 addProducts(products)

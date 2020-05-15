@@ -43,6 +43,12 @@ class ProductViewModel @Inject constructor(private val productRepo: ProductRepos
 //                    }
 //                    _currentViewState.value = productState
 //                }
+
+            }
+            is ProductUiAction.GetHomePageSales -> {
+                viewModelScope.launch {
+                    _currentViewState.value = productRepo.getHomeSales()
+                }
             }
         }
     }

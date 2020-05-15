@@ -61,15 +61,18 @@ class ProfileFragment : BaseFragment() {
         when(state) {
             is ProfileState.Idle -> {
                 dialogBox.cancel()
+                requireView().visibility = View.VISIBLE
             }
 
             is ProfileState.GetProfileFailure -> {
+                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
                 Log.v("TAG", state.throwable.toString())
             }
 
             is ProfileState.GetProfileSuccess -> {
                 dialogBox.cancel()
+                requireView().visibility = View.VISIBLE
                 val user = state.userInfo
 
                 name.text = if(user.fName.isEmpty())

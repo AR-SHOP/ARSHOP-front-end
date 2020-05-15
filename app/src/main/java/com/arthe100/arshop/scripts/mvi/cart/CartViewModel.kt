@@ -43,6 +43,8 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
         _currentCart.value = _currentCart.value
     }
     fun updateCart(updateAdapterFun: (cartItems: List<CartItem>) -> Unit){
+        if(_currentCart.value == null)
+            return
         _currentCart.value = _currentCart.value
         updateAdapterFun(_currentCart.value!!.cartItems)
     }

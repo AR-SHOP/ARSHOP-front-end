@@ -45,8 +45,8 @@ class LoginFragment : BaseFragment(), ILoadFragment {
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         messageManager = MessageManager()
-        profileFragment = fragmentFactory.create<ProfileFragment>()
-        signUpFragment = fragmentFactory.create<SignUpFragment>()
+        profileFragment = fragmentFactory.create()
+        signUpFragment = fragmentFactory.create()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         return inflater.inflate(R.layout.login_fragment_layout, container, false)
     }
@@ -93,6 +93,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
         when(state){
             is AuthState.Idle -> {
                 dialogBox.cancel()
+                requireView().visibility = View.VISIBLE
             }
             is AuthState.LoadingState -> {
                 requireView().visibility = View.INVISIBLE
@@ -100,10 +101,12 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             }
             is AuthState.LoginSuccess -> {
                 dialogBox.cancel()
+                requireView().visibility = View.VISIBLE
                 session.saveUser(state.user)
                 loadFragment(profileFragment)
             }
             is AuthState.Failure -> {
+                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR)
             }
         }

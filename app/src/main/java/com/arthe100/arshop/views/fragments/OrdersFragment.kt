@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.CartItem
+import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
+import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.CartItemAdapter
 import com.arthe100.arshop.views.adapters.OnItemClickListener
@@ -19,10 +21,11 @@ import javax.inject.Inject
 
 class OrdersFragment : BaseFragment() {
     @Inject lateinit var fragmentFactory: FragmentFactory
+    @Inject lateinit var session: UserSession
+
     lateinit var loginFragment: LoginFragment
     lateinit var productFragment: ProductFragment
     lateinit var cartItemAdapter: CartItemAdapter
-    var loggedIn: Boolean = false
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent(requireActivity())
@@ -40,18 +43,20 @@ class OrdersFragment : BaseFragment() {
     override fun onStart() {
         super.onStart()
 
-        if (loggedIn) {
-            login_btn.visibility = View.INVISIBLE
-            empty_orders_layout.visibility = View.VISIBLE
-            ordered_items_list.visibility = View.VISIBLE
-        }
-        else {
-            login_btn.visibility = View.VISIBLE
-            empty_orders_layout.visibility = View.INVISIBLE
-            ordered_items_list.visibility = View.INVISIBLE
-            login_btn.setOnClickListener {
-                requireActivity().bottom_navbar.visibility = View.INVISIBLE
-                loadFragment(loginFragment)
+        when(session.user){
+            is User.User -> {
+                login_btn.visibility = View.INVISIBLE
+                empty_orders_layout.visibility = View.VISIBLE
+                ordered_items_list.visibility = View.VISIBLE
+            }
+            else -> {
+                login_btn.visibility = View.VISIBLE
+                empty_orders_layout.visibility = View.INVISIBLE
+                ordered_items_list.visibility = View.INVISIBLE
+                login_btn.setOnClickListener {
+                    requireActivity().bottom_navbar.visibility = View.INVISIBLE
+                    loadFragment(loginFragment)
+                }
             }
         }
     }
