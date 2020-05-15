@@ -25,4 +25,13 @@ class ProductRepository @Inject constructor (private val service : ProductServic
             ProductState.GetProductsFailure(throwable)
         }
     }
+
+    suspend fun getHomeSales() : ProductState{
+        return try {
+            val homeSales = service.getHomeSales()
+            ProductState.HomePageSalesSuccess(homeSales)
+        }catch (throwable: Throwable){
+            ProductState.HomePageSalesFailure(throwable)
+        }
+    }
 }

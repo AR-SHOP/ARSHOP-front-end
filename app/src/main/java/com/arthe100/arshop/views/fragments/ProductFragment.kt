@@ -9,8 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductState
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.scripts.mvi.cart.CartState
@@ -31,6 +33,7 @@ class ProductFragment : BaseFragment() {
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var fragmentFactory: FragmentFactory
     @Inject lateinit var dialogBox: DialogBoxManager
+    @Inject lateinit var session: UserSession
 
     private lateinit var cartViewModel: CartViewModel
     private lateinit var model: ProductViewModel
@@ -56,10 +59,10 @@ class ProductFragment : BaseFragment() {
     }
 
     override fun onStart() {
-        product_details_name.text = model.product.name
-        product_details_brand.text = model.product.manufacturer
-        product_details_price.text = model.product.price.toString()
-        product_details_description.text = model.product.description
+        product_details_name?.text = model.product.name
+        product_details_brand?.text = model.product.manufacturer
+        product_details_price?.text = model.product.price.toString()
+        product_details_description?.text = model.product.description
         checkCartStatus()
 
         val requestOptions = RequestOptions()
@@ -84,6 +87,12 @@ class ProductFragment : BaseFragment() {
             add_to_cart_btn?.visibility = View.INVISIBLE
             inc_dec_cart_count?.visibility = View.VISIBLE
         }
+
+        when(session.user){
+            is User.GuestUser ->
+                add_to_cart_btn?.visibility = View.INVISIBLE
+        }
+
         super.onStart()
     }
 
@@ -95,21 +104,21 @@ class ProductFragment : BaseFragment() {
         when(state){
             ProductState.Idle -> {
                 dialogBox.cancel()
-                product_fragment_layout.visibility = View.VISIBLE
+                product_fragment_layout?.visibility = View.VISIBLE
             }
 
             ProductState.LoadingState -> {
-                product_fragment_layout.visibility = View.INVISIBLE
+                product_fragment_layout?.visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
 
             is ProductState.ProductDetailSuccess -> {
                 dialogBox.cancel()
-                product_fragment_layout.visibility = View.VISIBLE
+                product_fragment_layout?.visibility = View.VISIBLE
             }
 
             is ProductState.GetProductsFailure -> {
-                product_fragment_layout.visibility = View.VISIBLE
+                product_fragment_layout?.visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
                 Log.v("TAG", state.throwable.toString())
             }

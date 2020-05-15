@@ -8,6 +8,7 @@ import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.scripts.mvi.ar.ArViewModel
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
+import com.arthe100.arshop.scripts.mvi.categories.CategoryViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -56,4 +57,8 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CartViewModel::class)
     internal abstract fun cartViewModel(viewModel: CartViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(CategoryViewModel::class)
+    internal abstract fun categoryViewModel(viewModel: CategoryViewModel): ViewModel
 }

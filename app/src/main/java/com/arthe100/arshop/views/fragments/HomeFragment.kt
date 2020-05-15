@@ -1,14 +1,19 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.HomeSales
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
@@ -23,10 +28,9 @@ import com.arthe100.arshop.views.ILoadFragment
 import com.arthe100.arshop.views.adapters.DiscountAdapter
 import com.arthe100.arshop.views.adapters.HomeGridViewAdapter
 import com.arthe100.arshop.views.adapters.OnItemClickListener
+import com.arthe100.arshop.views.decorators.CircleIndicator
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
-import com.miguelcatalan.materialsearchview.MaterialSearchView
-import com.miguelcatalan.materialsearchview.MaterialSearchView.SearchViewListener
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
@@ -74,8 +78,8 @@ class HomeFragment: BaseFragment(), ILoadFragment {
             cartViewModel.onEvent(CartUiAction.GetCartOnStart)
             swipe_refresh_layout.isRefreshing = false
         }
-
         model.onEvent(ProductUiAction.GetHomePageProducts)
+        model.onEvent(ProductUiAction.GetHomePageSales)
         cartViewModel.onEvent(CartUiAction.GetCartOnStart)
         super.onStart()
     }
@@ -113,7 +117,6 @@ class HomeFragment: BaseFragment(), ILoadFragment {
             is ProductState.GetProductsSuccess -> {
                 dialogBox.cancel()
                 home_layout.visibility = View.VISIBLE
-                setRecyclerView()
                 setGridView()
                 addProducts(state.products)
             }
@@ -127,6 +130,13 @@ class HomeFragment: BaseFragment(), ILoadFragment {
                 home_layout.visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
             }
+            is ProductState.HomePageSalesSuccess ->{
+                setRecyclerView()
+                addDiscounts(state.sales)
+            }
+            is ProductState.HomePageSalesFailure -> {
+                dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
+            }
         }
 
     }
@@ -135,9 +145,12 @@ class HomeFragment: BaseFragment(), ILoadFragment {
         gridViewAdapter.submitList(data)
     }
 
-//    private fun addDiscounts(discounts: List<String>) {
-//        discountAdapter.submitList(discounts)
-//    }
+    private fun addDiscounts(discounts: List<HomeSales>) {
+        if(!this::discountAdapter.isInitialized) setRecyclerView()
+        val newList = mutableListOf<HomeSales>()
+        newList.addAll(discounts.filter { it.id > 4 })
+        discountAdapter.submitList(newList)
+    }
 
     private fun setRecyclerView() {
         discountAdapter = DiscountAdapter()
@@ -147,7 +160,11 @@ class HomeFragment: BaseFragment(), ILoadFragment {
             }
         })
 
-        discount_recycler_view.apply {
+
+        discount_recycler_view?.apply {
+            val helper: SnapHelper = PagerSnapHelper()
+            helper.attachToRecyclerView(this)
+            this.addItemDecoration(CircleIndicator())
             layoutManager = LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false)
             adapter = discountAdapter

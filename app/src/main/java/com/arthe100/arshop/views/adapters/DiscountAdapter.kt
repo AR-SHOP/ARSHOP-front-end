@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.HomeSales
 import com.arthe100.arshop.views.adapters.OnItemClickListener
 
-class DiscountAdapter : BaseItemAdapter<String>() {
+class DiscountAdapter : BaseItemAdapter<HomeSales>() {
     private lateinit var mListener: OnItemClickListener
-    private var imageList: List<String> = arrayListOf()
+    private var imageList: List<HomeSales> = arrayListOf()
         private set
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -33,7 +34,7 @@ class DiscountAdapter : BaseItemAdapter<String>() {
         mListener = listener
     }
 
-    override fun submitList(data: MutableList<String>){
+    override fun submitList(data: MutableList<HomeSales>){
         imageList = data
     }
 
