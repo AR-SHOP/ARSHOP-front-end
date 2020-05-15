@@ -16,11 +16,9 @@ object DialogBoxManager {
             dialog.dismiss()
             dialog = createDialog(activity, messageType)
             dialog.show()
-            DialogSetter.set(activity,  messageType)
         } else {
             dialog = createDialog(activity, messageType)
             dialog.show()
-            DialogSetter.set(activity, messageType)
         }
     }
 
