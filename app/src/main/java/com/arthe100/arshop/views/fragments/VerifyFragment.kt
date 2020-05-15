@@ -15,6 +15,8 @@ import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
+import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
+import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.verify_fragment_layout.*
@@ -29,6 +31,7 @@ class VerifyFragment : BaseFragment(){
 
     private lateinit var profileFragment: ProfileFragment
     private lateinit var model: AuthViewModel
+    private lateinit var cartViewModel: CartViewModel
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent(requireActivity())
@@ -40,6 +43,7 @@ class VerifyFragment : BaseFragment(){
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
         profileFragment = fragmentFactory.create()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
+        cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
         return inflater.inflate(R.layout.verify_fragment_layout, container, false)
     }
 
@@ -77,6 +81,7 @@ class VerifyFragment : BaseFragment(){
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
                 session.saveUser(state.user)
+                cartViewModel.onEvent(CartUiAction.GetCart)
                 loadFragment(profileFragment)
             }
 

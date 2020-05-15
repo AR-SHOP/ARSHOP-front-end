@@ -19,13 +19,13 @@ class UserSession{
 
     fun saveUser(user: User)
     {
+        this.user =user
         val pref = PreferenceManager.getDefaultSharedPreferences(application)
         with(pref.edit()){
             putString("userData" , Gson().toJson(user))
             commit()
         }
 
-        this.user =user
     }
 
 }

@@ -17,6 +17,8 @@ import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
+import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
+import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
 import com.google.gson.Gson
@@ -35,6 +37,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     private lateinit var profileFragment: ProfileFragment
     private val TAG = LoginFragment::class.simpleName
     private lateinit var model: AuthViewModel
+    private lateinit var cartViewModel: CartViewModel
 
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent(requireActivity())
@@ -48,6 +51,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
         profileFragment = fragmentFactory.create()
         signUpFragment = fragmentFactory.create()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
+        cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
         return inflater.inflate(R.layout.login_fragment_layout, container, false)
     }
 
@@ -103,6 +107,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
                 session.saveUser(state.user)
+                cartViewModel.onEvent(CartUiAction.GetCart)
                 loadFragment(profileFragment)
             }
             is AuthState.Failure -> {
