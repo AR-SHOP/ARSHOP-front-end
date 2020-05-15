@@ -10,8 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:background="@drawable/small_rounded_corners"
-            android:backgroundTint="@color/colorPrimary">
+            android:background="@drawable/small_rounded_corners">
 
         <ImageView
                 android:id="@+id/discount_card_image"

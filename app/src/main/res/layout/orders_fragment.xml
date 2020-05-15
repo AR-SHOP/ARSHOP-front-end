@@ -12,13 +12,13 @@
             android:id="@+id/login_btn"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginTop="55dp"
             android:layoutDirection="rtl"
             android:background="@drawable/small_rounded_corners"
             android:backgroundTint="@color/colorPrimary"
-            android:gravity="start"
+            android:gravity="center"
             android:text="ورود یا ثبت نام"
             android:padding="30dp"
             android:textColor="@color/colorBackground"
@@ -62,7 +62,8 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:textSize="16sp"
+                android:gravity="center"/>
 
     </LinearLayout>
 
@@ -101,6 +102,7 @@
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:text="حذف همه‌ی سفارش‌ها"
+                android:layout_gravity="center"
                 android:textColor="@color/colorPrimary"
                 android:background="@drawable/small_rounded_corners"
                 android:backgroundTint="@color/colorBackground"
