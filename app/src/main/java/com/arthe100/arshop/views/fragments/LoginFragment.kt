@@ -28,13 +28,18 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
     @Inject lateinit var fragmentFactory: FragmentFactory
+    @Inject lateinit var dialogBox: DialogBoxManager
 
     private lateinit var messageManager: MessageManager
     private lateinit var signUpFragment: SignUpFragment
     private lateinit var profileFragment: ProfileFragment
     private val TAG = LoginFragment::class.simpleName
-
     private lateinit var model: AuthViewModel
+
+    override fun inject() {
+        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
+            .inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,32 +48,6 @@ class LoginFragment : BaseFragment(), ILoadFragment {
         signUpFragment = fragmentFactory.create<SignUpFragment>()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         model.currentViewState.observe(this , Observer(::render))
-    }
-
-    private fun render(state: AuthState){
-        when(state){
-            is AuthState.Idle -> {
-                DialogBoxManager.cancel()
-            }
-            is AuthState.LoadingState -> {
-                DialogBoxManager.showDialog(requireActivity(), MessageType.LOAD)
-            }
-            is AuthState.LoginSuccess -> {
-                DialogBoxManager.showDialog(activity, MessageType.SUCCESS)
-                session.saveUser(state.user)
-                profileFragment.inMainPage = true
-                loadFragment(profileFragment)
-            }
-            is AuthState.Failure -> {
-                DialogBoxManager.showDialog(activity, MessageType.ERROR)
-            }
-        }
-    }
-
-
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-            .inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -107,5 +86,24 @@ class LoginFragment : BaseFragment(), ILoadFragment {
 
     override fun toString(): String {
         return "Login"
+    }
+
+    private fun render(state: AuthState){
+        when(state){
+            is AuthState.Idle -> {
+                dialogBox.cancel()
+            }
+            is AuthState.LoadingState -> {
+                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
+            }
+            is AuthState.LoginSuccess -> {
+                session.saveUser(state.user)
+                profileFragment.inMainPage = true
+                loadFragment(profileFragment)
+            }
+            is AuthState.Failure -> {
+                dialogBox.showDialog(requireContext(), MessageType.ERROR)
+            }
+        }
     }
 }

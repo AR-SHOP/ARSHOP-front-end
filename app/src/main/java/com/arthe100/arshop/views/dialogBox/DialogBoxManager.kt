@@ -1,60 +1,81 @@
 package com.arthe100.arshop.views.dialogBox
 
-import android.app.Activity
-import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import com.arthe100.arshop.R
+import kotlinx.android.synthetic.main.dialog_caution_layout.*
+import kotlinx.android.synthetic.main.dialog_error_layout.*
+import kotlinx.android.synthetic.main.dialog_error_layout.error_card_view
+import kotlinx.android.synthetic.main.dialog_load_layout.*
+import kotlinx.android.synthetic.main.dialog_success_layout.*
 
 enum class MessageType { LOAD, SUCCESS, ERROR, CAUTION }
 
-object DialogBoxManager {
-    lateinit var dialog: Dialog
+class DialogBoxManager {
+    private lateinit var dialog: Dialog
+    private lateinit var animation: Animation
 
-    fun showDialog(activity: Activity?, messageType: MessageType) {
+    fun showDialog(context: Context, messageType: MessageType, message: String = "") {
         if (this::dialog.isInitialized && dialog.isShowing) {
             dialog.dismiss()
-            dialog = createDialog(activity, messageType)
+            dialog = createDialog(context, messageType)
             dialog.show()
         } else {
-            dialog = createDialog(activity, messageType)
+            dialog = createDialog(context, messageType)
             dialog.show()
         }
     }
 
-    private fun createDialog(activity: Activity?, messageType: MessageType): Dialog {
-        val builder = AlertDialog.Builder(activity, R.style.DialogStyle)
-        dialog = builder.create()
+    private fun createDialog(context: Context, messageType: MessageType,
+                             message: String = ""): Dialog {
+
+        animation = AnimationUtils.loadAnimation(context, R.anim.from_small)
+        val resultDialog = Dialog(context)
 
         when (messageType.name) {
             MessageType.LOAD.name -> {
-                builder.setView(R.layout.dialog_load_layout)
-                    .setCancelable(false)
-            }
-
-            MessageType.SUCCESS.name -> {
-                builder.setView(R.layout.dialog_success_layout)
-                    .setPositiveButton(R.string.dialog_positive_button) { dialogInterface: DialogInterface, i: Int ->
-
-                    }
+                resultDialog.setContentView(R.layout.dialog_load_layout)
+                resultDialog.load_card_view.startAnimation(animation)
             }
 
             MessageType.ERROR.name -> {
-                builder.setView(R.layout.dialog_error_layout)
-                    .setPositiveButton(R.string.dialog_positive_button) { dialogInterface: DialogInterface, i: Int ->
+                resultDialog.setContentView(R.layout.dialog_error_layout)
+                resultDialog.error_positive_btn.setOnClickListener {
+                    resultDialog.cancel()
+                }
+                if (message != "")
+                    resultDialog.error_text.text = message
+                resultDialog.error_card_view.startAnimation(animation)
+            }
 
-                    }
+            MessageType.SUCCESS.name -> {
+                resultDialog.setContentView(R.layout.dialog_success_layout)
+                resultDialog.success_positive_btn.setOnClickListener {
+                    resultDialog.cancel()
+                }
+                if (message != "")
+                    resultDialog.success_text.text = message
+                resultDialog.success_card_view.startAnimation(animation)
             }
 
             MessageType.CAUTION.name -> {
-                builder.setView(R.layout.dialog_caution_layout)
-                    .setPositiveButton(R.string.dialog_positive_button) { dialogInterface: DialogInterface, i: Int ->
-
-                    }
+                resultDialog.setContentView(R.layout.dialog_caution_layout)
+                resultDialog.caution_positive_btn.setOnClickListener {
+                    resultDialog.cancel()
+                }
+                if (message != "")
+                    resultDialog.caution_text.text = message
+                resultDialog.caution_card_view.startAnimation(animation)
             }
         }
 
-        return builder.create()
+        resultDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        return resultDialog
     }
 
     fun cancel() {

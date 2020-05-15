@@ -1,6 +1,7 @@
 package com.arthe100.arshop.scripts.di.modules
 
 import com.arthe100.arshop.scripts.di.scopes.MainScope
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.fragments.*
 import dagger.Module
 import dagger.Provides
@@ -103,5 +104,12 @@ object MainModule{
     @Provides
     fun createCustomerCartFragment() : CustomerCartFragment {
         return CustomerCartFragment()
+    }
+
+    @JvmStatic
+    @MainScope
+    @Provides
+    fun provideDialogBox() : DialogBoxManager {
+        return DialogBoxManager()
     }
 }

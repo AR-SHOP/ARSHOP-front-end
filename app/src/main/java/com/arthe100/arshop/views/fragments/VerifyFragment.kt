@@ -17,9 +17,7 @@ import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.BaseFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.sign_up_fragment.*
 import kotlinx.android.synthetic.main.verify_fragment_layout.*
-import kotlinx.android.synthetic.main.verify_fragment_layout.loading_bar
 import javax.inject.Inject
 
 class VerifyFragment : BaseFragment(){
@@ -28,6 +26,7 @@ class VerifyFragment : BaseFragment(){
     @Inject lateinit var fragmentFactory: FragmentFactory
     @Inject lateinit var session: UserSession
     @Inject lateinit var messageManager: MessageManager
+    @Inject lateinit var dialogBox: DialogBoxManager
 
     private lateinit var profileFragment: ProfileFragment
     private lateinit var model: AuthViewModel
@@ -66,21 +65,22 @@ class VerifyFragment : BaseFragment(){
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-                DialogBoxManager.showDialog(requireActivity(), MessageType.ERROR)
+                dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is AuthState.CodeSuccess -> {
+                dialogBox.cancel()
                 model.onEvent(AuthUiAction.LoginAction(model.password , model.phone))
             }
 
             is AuthState.LoginSuccess -> {
-                DialogBoxManager.cancel()
+                dialogBox.cancel()
                 session.saveUser(state.user)
                 loadFragment(profileFragment)
             }
 
             is AuthState.LoadingState ->{
-                DialogBoxManager.showDialog(requireActivity(), MessageType.LOAD)
+                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
         }
     }

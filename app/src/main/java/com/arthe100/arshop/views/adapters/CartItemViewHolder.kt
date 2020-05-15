@@ -32,7 +32,7 @@ class CartItemViewHolder(itemView: View) : BaseItemViewHolder<CartItem>(itemView
         txtQuantity.text = data.quantity.toString()
         val requestOptions = RequestOptions()
             .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_background)
+            .error(R.drawable.ic_empty_background)
 
         Glide.with(itemView.context)
             .applyDefaultRequestOptions(requestOptions)
