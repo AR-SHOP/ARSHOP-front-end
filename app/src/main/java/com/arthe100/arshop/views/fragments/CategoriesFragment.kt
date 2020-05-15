@@ -63,6 +63,7 @@ class CategoriesFragment : BaseFragment() {
             }
             is CategoryState.GetCategorySuccess -> {
                 dialogBoxManager.cancel()
+                setRecyclerView()
                 addCategories(state.categories)
             }
             is CategoryState.Failure -> {
