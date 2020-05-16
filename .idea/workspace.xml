@@ -14,6 +14,7 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="17053b2a-4f8d-46cd-a78b-dfbf8af29ccc" name="Default Changelist" comment="Merge branch 'ui' of https://gitlab.com/arthe100/arteamthe100/arshop into ui&#10;&#10;# Conflicts:&#10;#&#9;app/src/main/java/com/arthe100/arshop/views/fragments/HomeFragment.kt">
       <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/dialog_button_shape.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/dialog_shape.xml" afterDir="false" />
@@ -25,15 +26,12 @@
 =======
     <list default="true" id="17053b2a-4f8d-46cd-a78b-dfbf8af29ccc" name="Default Changelist" comment="">
 >>>>>>> new_ui
+=======
+    <list default="true" id="88792e33-6867-4903-b87c-8c672be25749" name="Default Changelist" comment="">
+>>>>>>> new_ui
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_core_1_15_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_core_1_15_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_filament_android_1_15_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_filament_android_1_15_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_rendering_1_15_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_rendering_1_15_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_sceneform_base_1_15_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_sceneform_base_1_15_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_ux_sceneform_ux_1_15_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_ux_sceneform_ux_1_15_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_miguelcatalan_materialsearchview_1_4_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_miguelcatalan_materialsearchview_1_4_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/app/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/.idea/codeStyles/Project.xml" afterDir="false" />
@@ -103,6 +101,8 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
 >>>>>>> new_ui
+=======
+>>>>>>> new_ui
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -111,9 +111,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_27" />
 =======
   <component name="ExecutionTargetManager" SELECTED_TARGET="5200463bbce95569" />
+>>>>>>> new_ui
+=======
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_26" />
 >>>>>>> new_ui
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -141,11 +145,17 @@
 <<<<<<< HEAD
 =======
         <option value="Kotlin Object" />
+<<<<<<< HEAD
         <option value="layoutResourceFile" />
 >>>>>>> new_ui
         <option value="Kotlin Class" />
         <option value="Kotlin Object" />
         <option value="layoutResourceFile" />
+=======
+        <option value="Kotlin Class" />
+        <option value="layoutResourceFile" />
+        <option value="resourceFile" />
+>>>>>>> new_ui
       </list>
     </option>
   </component>
@@ -159,11 +169,15 @@
   </component>
   <component name="ProjectId" id="1bTvZsfzI81BnR6UsQu9rzVolvd" />
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
 =======
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
+>>>>>>> new_ui
+=======
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
 >>>>>>> new_ui
   <component name="PropertiesComponent">
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_26" />
@@ -431,7 +445,32 @@
       <option name="project" value="LOCAL" />
       <updated>1589374020574</updated>
     </task>
+<<<<<<< HEAD
     <option name="localTasksCounter" value="23" />
+>>>>>>> new_ui
+=======
+    <task id="LOCAL-00023" summary="added close onFinish.">
+      <created>1589374936261</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1589374936261</updated>
+    </task>
+    <task id="LOCAL-00024" summary="profile layout.">
+      <created>1589475893782</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1589475893782</updated>
+    </task>
+    <task id="LOCAL-00025" summary="profile pic">
+      <created>1589475925329</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1589475925329</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
 >>>>>>> new_ui
     <servers />
   </component>
@@ -449,7 +488,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added kotlinx-coroutines-android.&#10;get sure to sync first." />
     <MESSAGE value="edit .idea" />
     <MESSAGE value="added ProductService, model.Product, ProductRep" />
     <MESSAGE value="deleted useless files.&#10;edited Product model.&#10;edited APIs.&#10;change java files to .kt.&#10;remove not completed files.&#10;modified APIs and adapt them with new models." />
@@ -475,7 +513,14 @@
 =======
     <MESSAGE value="dialog base's completed." />
     <MESSAGE value="added actions again." />
+<<<<<<< HEAD
     <option name="LAST_COMMIT_MESSAGE" value="added actions again." />
+>>>>>>> new_ui
+=======
+    <MESSAGE value="added close onFinish." />
+    <MESSAGE value="profile layout." />
+    <MESSAGE value="profile pic" />
+    <option name="LAST_COMMIT_MESSAGE" value="profile pic" />
 >>>>>>> new_ui
   </component>
 </project>

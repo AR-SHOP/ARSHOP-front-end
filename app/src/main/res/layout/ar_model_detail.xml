@@ -1,103 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout"
-    android:layout_width="375dp"
-    android:layout_height="576dp"
-    android:background="@color/colorBackground">
-
-    <TextView
-        android:id="@+id/txtName"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="4dp"
-        android:background="#FFFFFF"
-        android:padding="10dp"
-        android:text="@string/modelName"
-        android:textAlignment="textStart"
-        android:textSize="24sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtDetails"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:background="#FFFFFF"
-        android:paddingLeft="10dp"
-        android:text="@string/modelDetail"
-        android:textAlignment="textStart"
-        android:textSize="14sp"
-        app:autoSizeTextType="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtName" />
-
-    <TextView
-        android:id="@+id/txtPrice"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="8dp"
-        android:background="#FFFFFF"
-        android:padding="10dp"
-        android:text="@string/modelPrice"
-        android:textAlignment="textStart"
-        android:textSize="24sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@id/btnPurchace"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/txtDescription"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#FFFFFF"
-        android:padding="10dp"
-        android:text="@string/modelDescription"
-        android:textAlignment="textStart"
-        android:textSize="24sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/txtPrice"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtDetails" />
-
-    <Button
-        android:id="@+id/btnPurchace"
-        android:layout_width="0dp"
+<androidx.cardview.widget.CardView
+        android:id="@+id/layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#3CE4D6"
-        android:text="@string/purchaseText"
-        app:layout_constraintBottom_toTopOf="@id/btnDelete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:background="@color/colorBackground">
 
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorAccent"
-        android:text="@string/deleteText"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+                android:id="@+id/ar_model_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorPrimary"
+                android:background="@color/colorBackground"
+                android:text="@string/model_name"
+                android:textAlignment="textStart"
+                android:textSize="20sp" />
+
+        <TextView
+                android:id="@+id/ar_model_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/colorPrimary"
+                android:background="@color/colorBackground"
+                android:text="@string/sample_price"
+                android:textAlignment="textStart"
+                android:textSize="15sp" />
+
+
+        <TextView
+                android:id="@+id/ar_model_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/colorSecondary"
+                android:background="@color/colorBackground"
+                android:text="@string/model_details"
+                android:textAlignment="textStart"
+                android:textSize="18sp" />
+
+
+        <TextView
+                android:id="@+id/ar_model_description_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/colorSecondary"
+                android:background="@color/colorBackground"
+                android:text="@string/description"
+                android:textAlignment="textStart"
+                android:textSize="15sp"/>
+
+        <Button
+                android:id="@+id/purchase_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:textColor="@color/colorBackground"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/large_rounded_corners"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/purchase"/>
+
+
+        <Button
+                android:id="@+id/delete_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/colorBackground"
+                android:background="@drawable/large_rounded_corners"
+                android:backgroundTint="@color/colorError"
+                android:text="@string/delete_model" />
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>
+

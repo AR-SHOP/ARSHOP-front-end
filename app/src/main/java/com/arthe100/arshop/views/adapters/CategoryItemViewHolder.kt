@@ -18,13 +18,13 @@ class CategoryItemViewHolder(itemView: View) : BaseItemViewHolder<Category>(item
 
         categoryName.text = data.title
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_background)
+            .placeholder(R.drawable.ic_white_background)
+            .error(R.drawable.ic_white_background)
 
 
         Glide.with(itemView.context)
             .applyDefaultRequestOptions(requestOptions)
-            .load(data.imageUrl)
+            .load(data.image)
             .into(categoryImage)
 
 

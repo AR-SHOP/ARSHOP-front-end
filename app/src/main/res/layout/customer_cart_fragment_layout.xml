@@ -19,7 +19,7 @@
             android:background="@drawable/small_rounded_corners"
             android:backgroundTint="@color/colorPrimary"
             android:gravity="center"
-            android:text="ورود یا ثبت نام"
+            android:text="@string/login_or_signup"
             android:padding="30dp"
             android:textColor="@color/colorBackground"
             android:drawableTint="@color/colorBackground"
@@ -57,7 +57,7 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="سبد خرید شما خالی است."
+                android:text="@string/empty_cart"
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
@@ -99,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="ادامه فرایند خرید"
+                android:text="@string/continue_payment"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginStart="15dp"
@@ -123,14 +123,14 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="مجموع"
+                    android:text="@string/total"
                     android:textColor="@color/colorBackground"
                     android:gravity="center"/>
             <TextView
                     android:id="@+id/cart_total_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="88888"
+                    android:text="@string/sample_price"
                     android:textColor="@color/colorBackground"
                     android:gravity="center"/>
         </LinearLayout>
@@ -145,7 +145,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="15dp"
                 android:layout_gravity="center"
-                android:text="حذف کل سبد خرید"
+                android:text="@string/clear_cart"
                 android:padding="5dp"
                 android:textSize="12sp"
                 android:textColor="@color/colorPrimary"

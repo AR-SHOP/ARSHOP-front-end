@@ -29,10 +29,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="محصول"
+                android:text="@string/product"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:paddingRight="10dp"
+                android:paddingEnd="10dp"
                 android:textSize="12sp"/>
 
         <TextView
@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="قیمت"
+                android:text="@string/price"
                 android:textColor="@color/colorSecondary"
                 android:padding="10dp"
                 android:textSize="8sp"/>

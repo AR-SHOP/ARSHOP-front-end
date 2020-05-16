@@ -27,7 +27,7 @@
 
             <TextView
                     android:id="@+id/cart_item_name"
-                    android:text="محصول"
+                    android:text="@string/product"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="25sp"
                     android:gravity="center"
@@ -38,7 +38,7 @@
 
             <TextView
                     android:id="@+id/cart_item_price"
-                    android:text="قیمت"
+                    android:text="@string/price"
                     android:textSize="15sp"
                     android:gravity="center"
                     android:textAlignment="center"

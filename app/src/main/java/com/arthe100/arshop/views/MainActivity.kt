@@ -111,7 +111,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
             supportFragmentManager.popBackStack(homeFragment.tag,0)
             bottom_navbar.selectedItemId = R.id.btm_navbar_home
-
             backPressedTime = System.currentTimeMillis()
         }
         else {

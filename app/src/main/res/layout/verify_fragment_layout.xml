@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="لطفا کد تایید ارسال‌شده را وارد کنید"
+            android:text="@string/enter_verify_code"
             android:textColor="@color/colorPrimary"
             android:layout_marginTop="5dp"
             android:textSize="20sp"

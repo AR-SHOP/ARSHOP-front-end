@@ -28,8 +28,8 @@ class HomeGridViewAdapter(val context: Context) : BaseAdapter() {
 
 
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_empty_background)
-            .error(R.drawable.ic_empty_background)
+            .placeholder(R.drawable.ic_white_background)
+            .error(R.drawable.ic_white_background)
 
 
         Glide.with(context)

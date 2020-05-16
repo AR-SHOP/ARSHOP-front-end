@@ -19,7 +19,7 @@
             android:background="@drawable/small_rounded_corners"
             android:backgroundTint="@color/colorPrimary"
             android:gravity="center"
-            android:text="ورود یا ثبت نام"
+            android:text="@string/login_or_signup"
             android:padding="30dp"
             android:textColor="@color/colorBackground"
             android:drawableTint="@color/colorBackground"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="شما تاکنون سفارشی ثبت نکرده‌اید!"
+                android:text="@string/empty_orders"
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
-                android:text="حذف همه‌ی سفارش‌ها"
+                android:text="@string/clear_orders"
                 android:layout_gravity="center"
                 android:textColor="@color/colorPrimary"
                 android:background="@drawable/small_rounded_corners"
@@ -120,14 +120,14 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="مجموع"
+                    android:text="@string/total"
                     android:textColor="@color/colorBackground"
                     android:gravity="center"/>
             <TextView
                     android:id="@+id/orders_total_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="88888"
+                    android:text="@string/sample_price"
                     android:textColor="@color/colorBackground"
                     android:gravity="center"/>
         </LinearLayout>

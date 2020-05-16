@@ -1,16 +1,13 @@
 package com.arthe100.arshop.scripts.ar.InfoManager
 
 import android.content.Context
-import android.util.Log
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import com.arthe100.arshop.R
 import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.Scene
 import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ViewRenderable
-import com.google.ar.sceneform.ux.ArFragment
 
 
 class BasicArInfoCardManager (private val context: Context) : IInfoManager {
@@ -35,7 +32,7 @@ class BasicArInfoCardManager (private val context: Context) : IInfoManager {
                     infoCard = it
                     it.isShadowCaster = false
                     it.isShadowReceiver = false
-                    val btn = it.view.findViewById<Button>(R.id.btnDelete)
+                    val btn = it.view.findViewById<Button>(R.id.delete_btn)
                     btn.setOnClickListener{
                         onDelete?.invoke()
                     }

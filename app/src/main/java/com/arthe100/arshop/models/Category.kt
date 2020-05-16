@@ -4,5 +4,5 @@ data class Category(
     val id: Long,
     val title: String,
     val description: String,
-    val imageUrl: String
+    val image: String
 )

@@ -39,8 +39,6 @@ class DialogBoxManager {
         when (messageType.name) {
             MessageType.LOAD.name -> {
                 resultDialog.setContentView(R.layout.dialog_load_layout)
-//                resultDialog.load_card_view.startAnimation(startAnimation)
-//                resultDialog.load_card_view.
             }
 
             MessageType.ERROR.name -> {
@@ -50,8 +48,6 @@ class DialogBoxManager {
                 }
                 if (message != "")
                     resultDialog.error_text.text = message
-//                resultDialog.error_card_view.startAnimation(startAnimation)
-//                resultDialog.error_card_view.clearAnimation()
             }
 
             MessageType.SUCCESS.name -> {
@@ -61,7 +57,6 @@ class DialogBoxManager {
                 }
                 if (message != "")
                     resultDialog.success_text.text = message
-//                resultDialog.success_card_view.startAnimation(startAnimation)
             }
 
             MessageType.CAUTION.name -> {
@@ -71,7 +66,6 @@ class DialogBoxManager {
                 }
                 if (message != "")
                     resultDialog.caution_text.text = message
-//                resultDialog.caution_card_view.startAnimation(startAnimation)
             }
         }
 

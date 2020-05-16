@@ -24,10 +24,10 @@ import javax.inject.Inject
 class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
     @Inject lateinit var session: UserSession
-    @Inject lateinit var dialogBox: DialogBoxManager
 
     private lateinit var messageManager: MessageManager
     private lateinit var model: ProfileViewModel
+    private lateinit var dialogBox: DialogBoxManager
     private val TAG = ProfileFragment::class.simpleName
 
     override fun inject() {
@@ -39,6 +39,7 @@ class ProfileFragment : BaseFragment() {
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         messageManager = MessageManager()
+        dialogBox = DialogBoxManager()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
         return inflater.inflate(R.layout.profile_fragment_layout, container, false)
     }
@@ -66,8 +67,8 @@ class ProfileFragment : BaseFragment() {
 
             is ProfileState.GetProfileFailure -> {
                 requireView().visibility = View.VISIBLE
-                dialogBox.showDialog(requireActivity(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
-                Log.v("TAG", state.throwable.toString())
+                dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
+                messageManager.toast(requireContext(), state.throwable.toString())
             }
 
             is ProfileState.GetProfileSuccess -> {
@@ -81,12 +82,11 @@ class ProfileFragment : BaseFragment() {
                     "${state.userInfo.fName} ${state.userInfo.lName}"
 
                 email.text = if(user.email.isEmpty())
-                    "ایمیل"
+                    "ItsMe@Gmail.com"
                 else
                     state.userInfo.email
-
                 phone_number.text = if(user.phone.isNullOrEmpty())
-                    "شماره موبایل"
+                    "09112223344"
                 else
                     state.userInfo.phone
             }
@@ -97,5 +97,4 @@ class ProfileFragment : BaseFragment() {
             }
         }
     }
-
 }
