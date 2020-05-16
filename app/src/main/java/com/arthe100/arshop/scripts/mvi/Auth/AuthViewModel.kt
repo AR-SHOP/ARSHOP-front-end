@@ -49,6 +49,11 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
                 checkCode(action)
             }
 
+            is AuthUiAction.LogoutAction -> {
+                _currentViewState.value = AuthState.Idle
+            }
+
+
         }
     }
 

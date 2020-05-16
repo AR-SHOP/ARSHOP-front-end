@@ -53,6 +53,11 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
     private val delayDuration: Long = 500
     private var currentJob: Job? = null
 
+    fun logout(){
+        _currentCart.value = null
+        _currentViewState.value = CartState.LogoutState
+    }
+
     fun onEvent(action: CartUiAction)
     {
         when(action){

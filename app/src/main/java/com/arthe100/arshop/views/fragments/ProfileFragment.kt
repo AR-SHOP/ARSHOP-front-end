@@ -1,7 +1,6 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
+import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
+import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
@@ -23,10 +25,13 @@ import javax.inject.Inject
 
 class ProfileFragment : BaseFragment() {
     @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
+    @Inject lateinit var fragmentFactory: FragmentFactory
     @Inject lateinit var session: UserSession
 
     private lateinit var messageManager: MessageManager
     private lateinit var model: ProfileViewModel
+    private lateinit var cartViewModel: CartViewModel
+    private lateinit var autViewModel: AuthViewModel
     private lateinit var dialogBox: DialogBoxManager
     private val TAG = ProfileFragment::class.simpleName
 
@@ -41,6 +46,8 @@ class ProfileFragment : BaseFragment() {
         messageManager = MessageManager()
         dialogBox = DialogBoxManager()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
+        cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
+        autViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         return inflater.inflate(R.layout.profile_fragment_layout, container, false)
     }
 
@@ -51,6 +58,12 @@ class ProfileFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
+        logout_button?.setOnClickListener{
+            session.logout()
+            autViewModel.onEvent(AuthUiAction.LogoutAction)
+            model.onEvent(ProfileUiAction.LogoutAction)
+            cartViewModel.logout()
+        }
         model.onEvent(ProfileUiAction.GetHomePageProfileAction)
     }
 
@@ -94,6 +107,9 @@ class ProfileFragment : BaseFragment() {
             is ProfileState.LoadingState -> {
                 requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
+            }
+            is ProfileState.LogoutState -> {
+                loadFragment(fragmentFactory.create<LoginFragment>())
             }
         }
     }

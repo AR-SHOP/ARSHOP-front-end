@@ -18,6 +18,8 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
         _currentViewState.value = ProfileState.Idle
     }
 
+
+
     fun onEvent(action: ProfileUiAction){
         when(action){
             is ProfileUiAction.GetHomePageProfileAction -> {
@@ -26,6 +28,9 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
                 viewModelScope.launch {
                     _currentViewState.value = userRepository.getInfo()
                 }
+            }
+            is ProfileUiAction.LogoutAction -> {
+                _currentViewState.value = ProfileState.LogoutState
             }
         }
     }

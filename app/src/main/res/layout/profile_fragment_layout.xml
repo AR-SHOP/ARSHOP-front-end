@@ -321,16 +321,16 @@
                             android:id="@+id/logout_button"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="@string/logout"
-                            android:textAlignment="viewStart"
-                            android:textSize="12sp"
-                            android:padding="5dp"
-                            android:textColor="@color/colorError"
-                            android:paddingStart="20dp"
+                            android:backgroundTint="@color/colorBackground"
                             android:drawableStart="@drawable/ic_logout"
                             android:drawablePadding="10dp"
                             android:drawableTint="@color/colorError"
-                            android:backgroundTint="@color/colorBackground"/>
+                            android:padding="5dp"
+                            android:paddingStart="20dp"
+                            android:text="@string/logout"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/colorError"
+                            android:textSize="12sp" />
 
                 </LinearLayout>
 

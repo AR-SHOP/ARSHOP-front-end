@@ -21,6 +21,7 @@ import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
+import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.mvi.cart.CartState
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
@@ -73,6 +74,11 @@ class CustomerCartFragment : BaseFragment() {
     }
 
     override fun onStart() {
+        checkUserLogin()
+        super.onStart()
+    }
+
+    private fun checkUserLogin() {
         when(session.user) {
             is User.GuestUser -> {
                 login_btn?.visibility = View.VISIBLE
@@ -93,7 +99,6 @@ class CustomerCartFragment : BaseFragment() {
                 model.onEvent(CartUiAction.GetCart)
             }
         }
-        super.onStart()
     }
 
     override fun toString(): String {
@@ -167,6 +172,9 @@ class CustomerCartFragment : BaseFragment() {
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
                 addProducts(products)
+            }
+            is CartState.LogoutState -> {
+                checkUserLogin()
             }
         }
     }

@@ -25,7 +25,15 @@ class UserSession{
             putString("userData" , Gson().toJson(user))
             commit()
         }
+    }
 
+    fun logout(){
+        this.user = User.GuestUser
+        val pref = PreferenceManager.getDefaultSharedPreferences(application)
+        with(pref.edit()){
+            clear()
+            commit()
+        }
     }
 
 }
