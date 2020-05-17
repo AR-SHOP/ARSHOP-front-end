@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import androidx.recyclerview.widget.DiffUtil
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
 import com.bumptech.glide.Glide
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.product_grid_item.view.*
 
 class HomeGridViewAdapter(val context: Context) : BaseAdapter() {
 
-    var dataList: List<Product> = arrayListOf()
+    var dataList: MutableList<Product> = mutableListOf()
     lateinit var inflater: LayoutInflater
 
     override fun getView(position: Int, view: View?, viewGroup: ViewGroup?): View {
@@ -53,7 +54,32 @@ class HomeGridViewAdapter(val context: Context) : BaseAdapter() {
 
     override fun getCount(): Int = dataList.size
 
-    fun submitList(data: List<Product>) {
-        dataList = data
+    fun submitList(data: MutableList<Product>) {
+
+//        val result = DiffUtil.calculateDiff(object: DiffUtil.Callback() {
+//            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+//                return dataList[oldItemPosition].id ==
+//                        data[newItemPosition].id
+//            }
+//
+//            override fun getOldListSize(): Int {
+//                return dataList.size
+//            }
+//
+//            override fun getNewListSize(): Int {
+//                return data.size
+//            }
+//
+//            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+//                val old = dataList[oldItemPosition]
+//                val new = data[newItemPosition]
+//                return old == new
+//            }
+//
+//        })
+        dataList.clear()
+        dataList.addAll(data)
+//        result.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
     }
 }

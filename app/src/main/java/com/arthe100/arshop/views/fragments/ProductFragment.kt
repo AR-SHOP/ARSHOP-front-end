@@ -143,7 +143,7 @@ class ProductFragment : BaseFragment() {
             cartViewModel.updateCart()
         }
         minus_btn?.setOnClickListener{
-            val cartItem = cartViewModel.getCartItemById(model.product.id)!!
+            val cartItem = cartViewModel.getCartItemById(model.product.id) ?: return@setOnClickListener
             val newQuantity = (cart_count_text?.text.toString().toInt() - 1).coerceIn(0..Int.MAX_VALUE)
             cartItem.quantity = newQuantity
             cart_count_text?.text = newQuantity.toString()
@@ -151,7 +151,7 @@ class ProductFragment : BaseFragment() {
             cartViewModel.updateCart()
         }
         delete_btn?.setOnClickListener{
-            val cartItem = cartViewModel.getCartItemById(model.product.id)!!
+            val cartItem = cartViewModel.getCartItemById(model.product.id) ?: return@setOnClickListener
             cartItem.quantity = 0
             cartViewModel.onEvent(CartUiAction.RemoveFromCart(cartItem.product.id))
             add_to_cart_btn?.visibility = View.VISIBLE

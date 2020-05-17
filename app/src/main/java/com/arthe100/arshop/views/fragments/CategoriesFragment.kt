@@ -21,6 +21,7 @@ import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.categories_fragment_layout.*
+import kotlinx.android.synthetic.main.category_fragment_layout.*
 import javax.inject.Inject
 
 class CategoriesFragment : BaseFragment() {
@@ -40,40 +41,51 @@ class CategoriesFragment : BaseFragment() {
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CategoryViewModel::class.java)
-        model.currentViewState.observe(requireActivity() ,currentObserver)
         return inflater.inflate(R.layout.categories_fragment_layout, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        model.currentViewState.observe(requireActivity() ,currentObserver)
+    }
+
     override fun onStart() {
-        super.onStart()
         setSearchView()
+        categories_swipe_refresh.isRefreshing = true
+        categories_swipe_refresh.setOnRefreshListener {
+            model.onEvent(CategoryUiAction.GetCategories)
+            categories_swipe_refresh.isRefreshing = false
+        }
         model.onEvent(CategoryUiAction.GetCategories)
+        categories_swipe_refresh.isRefreshing = false
+        super.onStart()
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
 
     private fun render(state: CategoryState){
         when(state){
             is CategoryState.IdleState -> {
                 dialogBoxManager.cancel()
+                categories_swipe_refresh.isRefreshing = false
             }
             is CategoryState.LoadingState -> {
-                dialogBoxManager.showDialog(requireContext() , MessageType.LOAD)
+                categories_swipe_refresh.isRefreshing = true
             }
             is CategoryState.GetCategorySuccess -> {
                 dialogBoxManager.cancel()
+                categories_swipe_refresh.isRefreshing = false
                 setRecyclerView()
                 addCategories(state.categories)
             }
             is CategoryState.GetProductSuccess -> {
+                dialogBoxManager.cancel()
+                categories_swipe_refresh.isRefreshing = false
                 model.products = state.products
                 loadFragment(categoryFragment)
             }
             is CategoryState.Failure -> {
                 dialogBoxManager.cancel()
+                categories_swipe_refresh.isRefreshing = false
             }
         }
     }

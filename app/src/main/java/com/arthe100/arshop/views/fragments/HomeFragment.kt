@@ -144,7 +144,9 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     }
 
     private fun addProducts(data: List<Product>) {
-        gridViewAdapter.submitList(data)
+        val list = mutableListOf<Product>()
+        list.addAll(data)
+        gridViewAdapter.submitList(list)
     }
 
     private fun addDiscounts(discounts: List<HomeSales>) {

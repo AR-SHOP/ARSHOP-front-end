@@ -36,6 +36,18 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
+    <TextView
+            android:id="@+id/category_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/category"
+            android:textColor="@color/colorSecondary"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:background="@color/colorBackground"
+            app:layout_constraintTop_toBottomOf="@id/category_app_bar_layout"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -47,9 +59,9 @@
             android:paddingEnd="10dp"
             android:layout_marginBottom="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/category_app_bar_layout"
-            app:layout_constraintStart_toStartOf="@id/category_app_bar_layout"
-            app:layout_constraintTop_toBottomOf="@id/category_app_bar_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/category_name"
             app:layout_constraintVertical_bias="0.0">
 
         <GridView

@@ -37,19 +37,27 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categories_recyclerView"
-            android:layout_width="0dp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/categories_swipe_refresh"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="5dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="60dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/categories_app_bar_layout"
             app:layout_constraintStart_toStartOf="@id/categories_app_bar_layout"
             app:layout_constraintTop_toBottomOf="@id/categories_app_bar_layout"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintVertical_bias="0.0">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categories_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="5dp" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
