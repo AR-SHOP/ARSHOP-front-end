@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.arthe100.arshop.models.Category
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.scripts.repositories.CategoryRepository
 import kotlinx.coroutines.launch
@@ -15,6 +16,7 @@ class CategoryViewModel @Inject constructor(private val catRepo: CategoryReposit
         get() = _currentViewState
 
     var products = listOf<Product>()
+    lateinit var currentCategory: Category
 
     fun onEvent(action: CategoryUiAction){
         when(action){
@@ -28,7 +30,8 @@ class CategoryViewModel @Inject constructor(private val catRepo: CategoryReposit
 
             is CategoryUiAction.GetCategoryProduct -> {
                 viewModelScope.launch {
-                    _currentViewState.value = catRepo.getProducts(action.id)
+                    currentCategory = action.category
+                    _currentViewState.value = catRepo.getProducts(action.category.id)
                     _currentViewState.value = CategoryState.IdleState
                 }
             }

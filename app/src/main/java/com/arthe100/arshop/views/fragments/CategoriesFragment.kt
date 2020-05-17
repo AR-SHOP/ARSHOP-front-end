@@ -107,7 +107,7 @@ class CategoriesFragment : BaseFragment() {
         categoryItemAdapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val cat = categoryItemAdapter.items[position]
-                model.onEvent(CategoryUiAction.GetCategoryProduct(cat.id))
+                model.onEvent(CategoryUiAction.GetCategoryProduct(cat))
             }
         })
 
