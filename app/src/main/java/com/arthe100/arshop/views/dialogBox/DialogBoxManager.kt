@@ -21,6 +21,7 @@ class DialogBoxManager {
     private lateinit var clearAnimation: Animation
 
     fun showDialog(context: Context, messageType: MessageType, message: String = "") {
+
         if (this::dialog.isInitialized && dialog.isShowing) {
             dialog.dismiss()
             dialog = createDialog(context, messageType)

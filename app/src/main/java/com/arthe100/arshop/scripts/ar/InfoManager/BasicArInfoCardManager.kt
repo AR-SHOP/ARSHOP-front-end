@@ -69,7 +69,7 @@ class BasicArInfoCardManager (private val context: Context) : IInfoManager {
         this.parent = parent
         current?.renderable = infoCard
         parent.addChild(current)
-        current?.localPosition = Vector3(0f,1f,0f)
+        current?.localPosition = Vector3(0f,2f,0f)
         scene.addOnUpdateListener{
             onUpdate()
         }

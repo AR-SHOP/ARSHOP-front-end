@@ -135,7 +135,7 @@ class ProductFragment : BaseFragment() {
     private fun checkCartStatus(){
 
         plus_btn?.setOnClickListener{
-            val cartItem = cartViewModel.getCartItemById(model.product.id)!!
+            val cartItem = cartViewModel.getCartItemById(model.product.id) ?: return@setOnClickListener
             val newQuantity = (cart_count_text?.text.toString().toInt() + 1).coerceIn(0..Int.MAX_VALUE)
             cartItem.quantity = newQuantity
             cart_count_text?.text = newQuantity.toString()
