@@ -51,13 +51,13 @@ class CategoriesFragment : BaseFragment() {
 
     override fun onStart() {
         setSearchView()
-        categories_swipe_refresh.isRefreshing = true
-        categories_swipe_refresh.setOnRefreshListener {
+        categories_swipe_refresh?.isRefreshing = true
+        categories_swipe_refresh?.setOnRefreshListener {
             model.onEvent(CategoryUiAction.GetCategories)
-            categories_swipe_refresh.isRefreshing = false
+            categories_swipe_refresh?.isRefreshing = false
         }
         model.onEvent(CategoryUiAction.GetCategories)
-        categories_swipe_refresh.isRefreshing = false
+        categories_swipe_refresh?.isRefreshing = false
         super.onStart()
     }
 
@@ -66,26 +66,26 @@ class CategoriesFragment : BaseFragment() {
         when(state){
             is CategoryState.IdleState -> {
                 dialogBoxManager.cancel()
-                categories_swipe_refresh.isRefreshing = false
+                categories_swipe_refresh?.isRefreshing = false
             }
             is CategoryState.LoadingState -> {
-                categories_swipe_refresh.isRefreshing = true
+                categories_swipe_refresh?.isRefreshing = true
             }
             is CategoryState.GetCategorySuccess -> {
                 dialogBoxManager.cancel()
-                categories_swipe_refresh.isRefreshing = false
+                categories_swipe_refresh?.isRefreshing = false
                 setRecyclerView()
                 addCategories(state.categories)
             }
             is CategoryState.GetProductSuccess -> {
                 dialogBoxManager.cancel()
-                categories_swipe_refresh.isRefreshing = false
+                categories_swipe_refresh?.isRefreshing = false
                 model.products = state.products
                 loadFragment(categoryFragment)
             }
             is CategoryState.Failure -> {
                 dialogBoxManager.cancel()
-                categories_swipe_refresh.isRefreshing = false
+                categories_swipe_refresh?.isRefreshing = false
             }
         }
     }

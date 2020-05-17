@@ -79,20 +79,18 @@ class CategoryFragment : BaseFragment() {
         when(state){
             is CategoryState.IdleState -> {
                 dialogBoxManager.cancel()
-                category_swipe_refresh_layout.isRefreshing = false
+                category_swipe_refresh_layout?.isRefreshing = false
             }
             is CategoryState.LoadingState -> {
-                category_swipe_refresh_layout.isRefreshing = true
+                category_swipe_refresh_layout?.isRefreshing = true
             }
             is CategoryState.GetProductSuccess -> {
                 dialogBoxManager.cancel()
-                category_swipe_refresh_layout.isRefreshing = false
                 model.products = state.products
                 addProducts(state.products)
             }
             is CategoryState.Failure -> {
                 dialogBoxManager.cancel()
-                category_swipe_refresh_layout.isRefreshing = false
                 if (context == null) return
                 dialogBoxManager.showDialog(requireContext(),MessageType.ERROR)
             }
