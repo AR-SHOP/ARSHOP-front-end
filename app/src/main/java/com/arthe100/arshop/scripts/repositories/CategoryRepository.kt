@@ -16,4 +16,12 @@ class CategoryRepository @Inject constructor(private val service: CategoryServic
 
     }
 
+    suspend fun getProducts(id: Long): CategoryState {
+        return try {
+            CategoryState.GetProductSuccess(service.getProducts(id))
+        }catch (throwable: Throwable){
+            CategoryState.Failure(throwable)
+        }
+    }
+
 }

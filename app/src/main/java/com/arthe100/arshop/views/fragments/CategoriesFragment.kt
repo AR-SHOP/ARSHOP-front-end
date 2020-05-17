@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.SearchView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
@@ -33,7 +31,7 @@ class CategoriesFragment : BaseFragment() {
 
     private lateinit var model: CategoryViewModel
     private lateinit var categoryItemAdapter: CategoryItemAdapter
-
+    private val currentObserver = Observer(::render)
     override fun inject() {
         (requireActivity().application as BaseApplication).mainComponent().inject(this)
     }
@@ -42,7 +40,7 @@ class CategoriesFragment : BaseFragment() {
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CategoryViewModel::class.java)
-        model.currentViewState.observe(requireActivity() , Observer(::render))
+        model.currentViewState.observe(requireActivity() ,currentObserver)
         return inflater.inflate(R.layout.categories_fragment_layout, container, false)
     }
 
@@ -52,6 +50,10 @@ class CategoriesFragment : BaseFragment() {
         model.onEvent(CategoryUiAction.GetCategories)
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 
     private fun render(state: CategoryState){
         when(state){
@@ -65,6 +67,10 @@ class CategoriesFragment : BaseFragment() {
                 dialogBoxManager.cancel()
                 setRecyclerView()
                 addCategories(state.categories)
+            }
+            is CategoryState.GetProductSuccess -> {
+                model.products = state.products
+                loadFragment(categoryFragment)
             }
             is CategoryState.Failure -> {
                 dialogBoxManager.cancel()
@@ -100,7 +106,8 @@ class CategoriesFragment : BaseFragment() {
         categoryItemAdapter = CategoryItemAdapter()
         categoryItemAdapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
-                loadFragment(categoryFragment)
+                val cat = categoryItemAdapter.items[position]
+                model.onEvent(CategoryUiAction.GetCategoryProduct(cat.id))
             }
         })
 

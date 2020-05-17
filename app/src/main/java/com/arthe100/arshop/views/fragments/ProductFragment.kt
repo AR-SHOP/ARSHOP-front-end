@@ -76,7 +76,8 @@ class ProductFragment : BaseFragment() {
             .applyDefaultRequestOptions(requestOptions)
             .load(model.product.thumbnail)
             .into(product_details_image)
-
+        if(model.product.arModel.isEmpty() || model.product.arModel.isBlank())
+            ar_btn?.visibility = View.INVISIBLE
         ar_btn?.setOnClickListener {
             customArFragment.setUri(model.product.arModel)
             loadFragment(customArFragment as Fragment?)

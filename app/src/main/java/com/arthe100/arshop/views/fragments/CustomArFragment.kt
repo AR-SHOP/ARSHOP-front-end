@@ -47,6 +47,7 @@ class CustomArFragment : CustomBaseArFragment() {
     private val TAG = CustomArFragment::class.simpleName
     private lateinit var model: ArViewModel
     private lateinit var currentUri: String
+    private val observer = Observer(::render)
 
     override fun inject() {
         (activity?.application as BaseApplication)
@@ -112,7 +113,7 @@ class CustomArFragment : CustomBaseArFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ArViewModel::class.java)
-        model.currentViewState.observe(requireActivity(), Observer(::render))
+        model.currentViewState.observe(requireActivity(), observer)
     }
 
     private fun showInfo(parent : Node , root : Node){
@@ -166,7 +167,7 @@ class CustomArFragment : CustomBaseArFragment() {
         {
             is ArState.IdleState -> {
 //                view?.findViewById<ConstraintLayout>(R.id.loading_bar)?.visibility = View.INVISIBLE
-                dialogBox.showDialog(requireContext(),MessageType.LOAD)
+                dialogBox.cancel()
             }
             is ArState.ModelSuccess ->{
                 dialogBox.cancel()

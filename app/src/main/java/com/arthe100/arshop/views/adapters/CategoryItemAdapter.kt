@@ -11,7 +11,9 @@ class CategoryItemAdapter : BaseItemAdapter<Category>() {
 
     private lateinit var mListener: OnItemClickListener
     private var dataList: MutableList<Category> = arrayListOf()
-        private set
+    val items: List<Category>
+        get() = dataList
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CategoryItemViewHolder(

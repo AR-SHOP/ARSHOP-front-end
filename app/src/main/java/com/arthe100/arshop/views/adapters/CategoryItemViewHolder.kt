@@ -37,8 +37,4 @@ class CategoryItemViewHolder(itemView: View) : BaseItemViewHolder<Category>(item
 
 
     }
-
-    override fun bind(data: Category, listeners: Map<String, OnItemClickListener>) {
-        super.bind(data, listeners)
-    }
 }

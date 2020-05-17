@@ -27,13 +27,14 @@ class ProductViewModel @Inject constructor(private val productRepo: ProductRepos
             is ProductUiAction.GetHomePageProducts -> {
                 viewModelScope.launch {
                     _currentViewState.value = productRepo.getProducts()
+                    _currentViewState.value = ProductState.Idle
                 }
             }
             is ProductUiAction.GetProductDetails -> {
 
                 _product = state.product
                 _currentViewState.value = ProductState.ProductDetailSuccess(state.product)
-
+                _currentViewState.value = ProductState.Idle
 //                viewModelScope.launch {
 //                    val productState = productRepo.getProduct(state.id)
 //                    when(productState){
@@ -48,6 +49,7 @@ class ProductViewModel @Inject constructor(private val productRepo: ProductRepos
             is ProductUiAction.GetHomePageSales -> {
                 viewModelScope.launch {
                     _currentViewState.value = productRepo.getHomeSales()
+                    _currentViewState.value = ProductState.Idle
                 }
             }
         }
