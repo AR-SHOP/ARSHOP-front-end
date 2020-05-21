@@ -3,14 +3,17 @@ package com.arthe100.arshop.scripts.ar.InfoManager
 import android.content.Context
 import android.widget.Button
 import com.arthe100.arshop.R
+import com.arthe100.arshop.scripts.di.scopes.FragmentScope
+import com.arthe100.arshop.scripts.di.scopes.MainScope
 import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.Scene
 import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ViewRenderable
+import javax.inject.Inject
 
-
-class BasicArInfoCardManager (private val context: Context) : IInfoManager {
+@MainScope
+class BasicArInfoCardManager @Inject constructor(private val context: Context) : IInfoManager {
 
     private val TAG = BasicArInfoCardManager::class.simpleName
     

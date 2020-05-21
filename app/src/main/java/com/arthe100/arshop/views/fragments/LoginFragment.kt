@@ -26,11 +26,12 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.login_fragment_layout.*
 import javax.inject.Inject
 
-class LoginFragment : BaseFragment(), ILoadFragment {
-    @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var session: UserSession
-    @Inject lateinit var fragmentFactory: FragmentFactory
-    @Inject lateinit var dialogBox: DialogBoxManager
+class LoginFragment @Inject constructor(
+    private val viewModelProviderFactory: ViewModelProvider.Factory,
+    private val session: UserSession,
+    private val dialogBox: DialogBoxManager
+) : BaseFragment(), ILoadFragment {
+
 
     private lateinit var messageManager: MessageManager
     private lateinit var signUpFragment: SignUpFragment
@@ -39,17 +40,11 @@ class LoginFragment : BaseFragment(), ILoadFragment {
     private lateinit var model: AuthViewModel
     private lateinit var cartViewModel: CartViewModel
 
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-            .inject(this)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         messageManager = MessageManager()
-        profileFragment = fragmentFactory.create()
-        signUpFragment = fragmentFactory.create()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
         return inflater.inflate(R.layout.login_fragment_layout, container, false)
@@ -68,7 +63,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
             val user = pref.getString("userData" , null)
 
             if(user == null)
-                loadFragment(signUpFragment)
+                loadFragment(SignUpFragment::class.java)
             else {
                 messageManager.toast(requireContext(),
                     "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
@@ -108,7 +103,7 @@ class LoginFragment : BaseFragment(), ILoadFragment {
                 requireView().visibility = View.VISIBLE
                 session.saveUser(state.user)
                 cartViewModel.onEvent(CartUiAction.GetCart)
-                loadFragment(profileFragment)
+                loadFragment(ProfileFragment::class.java)
             }
             is AuthState.Failure -> {
                 requireView().visibility = View.VISIBLE

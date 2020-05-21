@@ -25,21 +25,18 @@ import kotlinx.android.synthetic.main.category_fragment_layout.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
 
-class CategoryFragment : BaseFragment() {
+class CategoryFragment @Inject constructor(
+    private val viewModelProviderFactory: ViewModelProvider.Factory,
+    private val dialogBoxManager: DialogBoxManager
 
-    @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var fragmentFactory: FragmentFactory
-    @Inject lateinit var dialogBoxManager: DialogBoxManager
+) : BaseFragment() {
+
+
 
     private lateinit var gridViewAdapter: HomeGridViewAdapter
     private lateinit var model: CategoryViewModel
     private lateinit var productViewModel: ProductViewModel
     private val currentObserver = Observer(::render)
-
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-            .inject(this)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -109,7 +106,7 @@ class CategoryFragment : BaseFragment() {
 
         category_grid_view.setOnItemClickListener { _, _, pos, _ ->
             productViewModel.product = gridViewAdapter.dataList[pos]
-            loadFragment(fragmentFactory.create<ProductFragment>())
+            
         }
 
         category_grid_view.apply {

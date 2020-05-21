@@ -33,26 +33,26 @@ import com.google.ar.sceneform.ux.TransformableNode
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import javax.inject.Inject
 
-
-class CustomArFragment : CustomBaseArFragment() {
+class CustomArFragment @Inject constructor(
+    private val viewModelProviderFactory: ViewModelProvider.Factory,
+    private val arInfoCardManager : IInfoManager,
+    private val messageManager : MessageManager,
+    private val dialogBox: DialogBoxManager
+) : CustomBaseArFragment() {
 //    public val tableUrl = "https://poly.googleapis.com/downloads/fp/1586167353776716/8cnrwlAWqx7/cfVCFxWqtbc/Table_Large_Rectangular_01.gltf"
 //    public val duckUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
 //    public val bedUrl = "https://poly.googleapis.com/downloads/fp/1586167422468753/8mkAgVYGbL4/5oNDqZI-I0J/Bed_01.gltf"
 
-    @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var arInfoCardManager : IInfoManager
-    @Inject lateinit var messageManager : MessageManager
-    @Inject lateinit var dialogBox: DialogBoxManager
+
 
     private val TAG = CustomArFragment::class.simpleName
     private lateinit var model: ArViewModel
-    private lateinit var currentUri: String
     private val observer = Observer(::render)
 
     override fun inject() {
         (activity?.application as BaseApplication)
                 .mainComponent(requireActivity())
-                .arComponent().create().inject(this)
+                .arComponent().create()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -98,7 +98,7 @@ class CustomArFragment : CustomBaseArFragment() {
 
         this.setOnTapArPlaneListener { hitResult, plane, _ ->
             if(plane.isPoseInExtents(hitResult.hitPose) && plane.type == Plane.Type.HORIZONTAL_UPWARD_FACING)
-                setModel(currentUri , hitResult.createAnchor())
+                setModel(model.currentUri , hitResult.createAnchor())
         }
 
         arInfoCardManager.init(sceneView.scene)
@@ -124,9 +124,6 @@ class CustomArFragment : CustomBaseArFragment() {
         messageManager.toast(requireContext() , "model hit!")
     }
 
-    fun setUri(uri: String) {
-        currentUri = uri
-    }
 
     private fun setModel(uri: String , anchor: Anchor){
 

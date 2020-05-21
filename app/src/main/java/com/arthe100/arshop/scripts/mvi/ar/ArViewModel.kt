@@ -11,7 +11,7 @@ import javax.inject.Inject
 class ArViewModel @Inject constructor(productRepository: ProductRepository) : ViewModel(){
     private val models : MutableMap<String , ModelRenderable> = mutableMapOf()
     var currentViewState =  MutableLiveData<ArState>(ArState.IdleState)
-
+    var currentUri: String = ""
 
     fun addModel(key: String, model: ModelRenderable){
         if(models.containsKey(key)) return

@@ -8,24 +8,24 @@ import com.arthe100.arshop.scripts.di.BaseApplication
 
 abstract class BaseFragment : Fragment(), ILoadFragment {
 
-    abstract fun inject()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onAttach(context: Context) {
-        inject()
-        super.onAttach(context)
-    }
 
     override fun toString(): String {
         return super.toString()
     }
 
-    override fun loadFragment(fragment: Fragment?) {
+    override fun loadFragment(klass: Class<out Fragment>) {
+
+        val fragment = requireActivity()
+            .supportFragmentManager
+            .fragmentFactory
+            .instantiate(requireActivity().classLoader , klass.name)
+
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment!!, fragment.toString())
+            .replace(R.id.fragment_container, fragment, fragment.toString())
             .addToBackStack(fragment.tag)
             .commit()
     }

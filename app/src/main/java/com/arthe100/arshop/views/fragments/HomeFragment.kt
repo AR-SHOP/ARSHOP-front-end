@@ -33,11 +33,10 @@ import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
 
 
-class HomeFragment: BaseFragment(), ILoadFragment {
-    @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var customArFragment: CustomArFragment
-    @Inject lateinit var session: UserSession
-    @Inject lateinit var productFragment: ProductFragment
+class HomeFragment @Inject constructor(
+    private val viewModelProviderFactory: ViewModelProvider.Factory,
+    private val session: UserSession
+): BaseFragment(), ILoadFragment {
 
     private lateinit var discountAdapter: DiscountAdapter
     private lateinit var model: ProductViewModel
@@ -49,10 +48,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
     private lateinit var circleIndicator: CircleIndicator
     private lateinit var suggestions: ArrayList<String>
 
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-            .inject(this)
-    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -123,7 +119,7 @@ class HomeFragment: BaseFragment(), ILoadFragment {
             is ProductState.ProductDetailSuccess -> {
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
-                loadFragment(productFragment)
+                loadFragment(ProfileFragment::class.java)
             }
 
             is ProductState.GetProductsFailure -> {

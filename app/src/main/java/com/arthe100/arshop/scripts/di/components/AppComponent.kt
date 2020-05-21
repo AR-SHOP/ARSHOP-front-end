@@ -1,6 +1,7 @@
 package com.arthe100.arshop.scripts.di.components
 
 import android.app.Application
+import com.arthe100.arshop.scripts.di.FragmentModule
 import com.arthe100.arshop.scripts.di.ViewModelModule
 import com.arthe100.arshop.scripts.di.modules.AppModule
 import com.arthe100.arshop.scripts.di.modules.RepoModule
@@ -16,7 +17,8 @@ import dagger.Component
             , AppSubComponentModule::class
             , RetrofitModule::class
             , RepoModule::class
-            , ViewModelModule::class  ]
+            , ViewModelModule::class
+            , FragmentModule::class]
 )
 interface AppComponent {
 

@@ -24,18 +24,14 @@ import kotlinx.android.synthetic.main.categories_fragment_layout.*
 import kotlinx.android.synthetic.main.category_fragment_layout.*
 import javax.inject.Inject
 
-class CategoriesFragment : BaseFragment() {
-
-    @Inject lateinit var categoryFragment: CategoryFragment
-    @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var dialogBoxManager: DialogBoxManager
+class CategoriesFragment @Inject constructor(
+    private val viewModelProviderFactory: ViewModelProvider.Factory,
+    private val dialogBoxManager: DialogBoxManager
+) : BaseFragment() {
 
     private lateinit var model: CategoryViewModel
     private lateinit var categoryItemAdapter: CategoryItemAdapter
     private val currentObserver = Observer(::render)
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent().inject(this)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -81,7 +77,7 @@ class CategoriesFragment : BaseFragment() {
                 dialogBoxManager.cancel()
                 categories_swipe_refresh?.isRefreshing = false
                 model.products = state.products
-                loadFragment(categoryFragment)
+                loadFragment(CategoriesFragment::class.java)
             }
             is CategoryState.Failure -> {
                 dialogBoxManager.cancel()

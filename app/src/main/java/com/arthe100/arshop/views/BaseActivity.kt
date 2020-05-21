@@ -13,10 +13,14 @@ abstract class BaseActivity : AppCompatActivity(), ILoadFragment {
         inject()
         super.onCreate(savedInstanceState)
     }
+    override fun loadFragment(klass: Class<out Fragment>) {
 
-    override fun loadFragment(fragment: Fragment?) {
+        val fragment = supportFragmentManager
+            .fragmentFactory
+            .instantiate(classLoader , klass.name)
+
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment!!, fragment.toString())
+            .replace(R.id.fragment_container, fragment, fragment.toString())
             .addToBackStack(fragment.tag)
             .commit()
     }

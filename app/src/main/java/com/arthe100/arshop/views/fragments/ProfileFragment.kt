@@ -23,10 +23,12 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.profile_fragment_layout.*
 import javax.inject.Inject
 
-class ProfileFragment : BaseFragment() {
-    @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var fragmentFactory: FragmentFactory
-    @Inject lateinit var session: UserSession
+
+class ProfileFragment @Inject constructor(
+    private val viewModelProviderFactory: ViewModelProvider.Factory,
+    private val session: UserSession
+): BaseFragment() {
+
 
     private lateinit var messageManager: MessageManager
     private lateinit var model: ProfileViewModel
@@ -35,10 +37,7 @@ class ProfileFragment : BaseFragment() {
     private lateinit var dialogBox: DialogBoxManager
     private val TAG = ProfileFragment::class.simpleName
 
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-            .inject(this)
-    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -109,7 +108,7 @@ class ProfileFragment : BaseFragment() {
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
             is ProfileState.LogoutState -> {
-                loadFragment(fragmentFactory.create<LoginFragment>())
+                loadFragment(LoginFragment::class.java)
             }
         }
     }

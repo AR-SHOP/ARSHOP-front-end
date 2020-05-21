@@ -12,10 +12,4 @@ import javax.inject.Singleton
 @Module
 object ArModule{
 
-    @JvmStatic
-    @Provides
-    @FragmentScope
-    fun createInfoCard(context: Context) : IInfoManager {
-        return BasicArInfoCardManager(context)
-    }
 }

@@ -19,23 +19,15 @@ import kotlinx.android.synthetic.main.orders_fragment.*
 import kotlinx.android.synthetic.main.orders_fragment.login_btn
 import javax.inject.Inject
 
-class OrdersFragment : BaseFragment() {
-    @Inject lateinit var fragmentFactory: FragmentFactory
-    @Inject lateinit var session: UserSession
+class OrdersFragment @Inject constructor(
+    private val session: UserSession
+) : BaseFragment() {
 
-    lateinit var loginFragment: LoginFragment
-    lateinit var productFragment: ProductFragment
     lateinit var cartItemAdapter: CartItemAdapter
 
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-            .inject(this)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        loginFragment = fragmentFactory.create()
-        productFragment = fragmentFactory.create()
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.orders_fragment, container, false)
     }
@@ -55,7 +47,7 @@ class OrdersFragment : BaseFragment() {
                 ordered_items_list.visibility = View.INVISIBLE
                 login_btn.setOnClickListener {
                     requireActivity().bottom_navbar.visibility = View.INVISIBLE
-                    loadFragment(loginFragment)
+                    loadFragment(LoginFragment::class.java)
                 }
             }
         }

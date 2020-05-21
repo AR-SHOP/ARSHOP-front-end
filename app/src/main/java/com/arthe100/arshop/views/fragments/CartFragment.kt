@@ -14,33 +14,27 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.cart_fragment_layout.*
 import javax.inject.Inject
 
-class CartFragment : BaseFragment() {
-    @Inject lateinit var fragmentFactory: FragmentFactory
-    @Inject lateinit var messageManager: MessageManager
 
-    private lateinit var customerCartFragment: CustomerCartFragment
-    private lateinit var ordersFragment: OrdersFragment
+class CartFragment @Inject constructor(
+    private val messageManager: MessageManager
+) : BaseFragment() {
 
-
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent().inject(this)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
-        customerCartFragment = fragmentFactory.create()
-        ordersFragment = fragmentFactory.create()
         return inflater.inflate(R.layout.cart_fragment_layout, container, false)
     }
 
     override fun onStart() {
         super.onStart()
 
-        var viewPagerAdapter: ViewPagerAdapter = ViewPagerAdapter(requireActivity())
+        val viewPagerAdapter = ViewPagerAdapter(activity?.supportFragmentManager?.fragmentFactory!! ,
+            activity?.classLoader!!,
+            requireActivity())
         view_pager.adapter = viewPagerAdapter
 
-        var tabLayoutMediator: TabLayoutMediator =
+        val tabLayoutMediator =
             TabLayoutMediator(tab_layout, view_pager,
                 TabLayoutMediator.TabConfigurationStrategy { tab, position ->
                     when (position) {

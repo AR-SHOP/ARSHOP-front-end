@@ -19,24 +19,21 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.sign_up_fragment.*
 import javax.inject.Inject
 
-class SignUpFragment : BaseFragment() {
-    @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var fragmentFactory: FragmentFactory
-    @Inject lateinit var session: UserSession
-    @Inject lateinit var dialogBox: DialogBoxManager
 
-    private lateinit var verifyFragment: VerifyFragment
+class SignUpFragment @Inject constructor(
+    private val viewModelProviderFactory: ViewModelProvider.Factory,
+    private val session: UserSession,
+    private val dialogBox: DialogBoxManager
+) : BaseFragment() {
+
+
     private lateinit var model: AuthViewModel
 
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-            .inject(this)
-    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
-        verifyFragment = fragmentFactory.create()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         return inflater.inflate(R.layout.sign_up_fragment, container, false)
     }
@@ -73,7 +70,7 @@ class SignUpFragment : BaseFragment() {
             is AuthState.SingupSuccess -> {
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
-                loadFragment(verifyFragment)
+                loadFragment(VerifyFragment::class.java)
             }
 
             is AuthState.LoadingState -> {

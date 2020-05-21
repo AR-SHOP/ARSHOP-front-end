@@ -4,13 +4,22 @@ import android.app.Application
 import androidx.preference.PreferenceManager
 import com.arthe100.arshop.models.User
 import com.google.gson.Gson
+import javax.inject.Inject
 
 class UserSession{
 
+    @Inject constructor(application: Application ){
+        this.application = application
+        val pref = PreferenceManager.getDefaultSharedPreferences(application)
+        val userStr = pref.getString("userData" , null)
+        if(userStr == null)
+            this.user = User.GuestUser
+        else
+            this.user = Gson().fromJson(userStr , User.User::class.java)
+    }
+
     var user: User
     val application: Application
-
-    constructor(application: Application ) : this(application , User.GuestUser)
 
     constructor(application: Application , user: User){
         this.user = user

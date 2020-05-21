@@ -22,26 +22,20 @@ import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.verify_fragment_layout.*
 import javax.inject.Inject
 
-class VerifyFragment : BaseFragment(){
-    @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var fragmentFactory: FragmentFactory
-    @Inject lateinit var session: UserSession
-    @Inject lateinit var messageManager: MessageManager
-    @Inject lateinit var dialogBox: DialogBoxManager
+class VerifyFragment @Inject constructor(
+    private val viewModelProviderFactory: ViewModelProvider.Factory,
+    private val session: UserSession,
+    private val messageManager: MessageManager,
+    private val dialogBox: DialogBoxManager
+) : BaseFragment(){
 
-    private lateinit var profileFragment: ProfileFragment
     private lateinit var model: AuthViewModel
     private lateinit var cartViewModel: CartViewModel
 
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-            .inject(this)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
-        profileFragment = fragmentFactory.create()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
         return inflater.inflate(R.layout.verify_fragment_layout, container, false)
@@ -82,7 +76,7 @@ class VerifyFragment : BaseFragment(){
                 requireView().visibility = View.VISIBLE
                 session.saveUser(state.user)
                 cartViewModel.onEvent(CartUiAction.GetCart)
-                loadFragment(profileFragment)
+                loadFragment(ProfileFragment::class.java)
             }
 
             is AuthState.LoadingState ->{

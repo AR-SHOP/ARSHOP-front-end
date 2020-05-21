@@ -1,23 +1,19 @@
 package com.arthe100.arshop.views.fragments
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
-import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductState
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
+import com.arthe100.arshop.scripts.mvi.ar.ArViewModel
 import com.arthe100.arshop.scripts.mvi.cart.CartState
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
@@ -26,31 +22,30 @@ import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.ar.sceneform.ux.ArFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.product_fragment_layout.*
 import javax.inject.Inject
 
-class ProductFragment : BaseFragment() {
-    @Inject lateinit var customArFragment: CustomArFragment
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-    @Inject lateinit var messageManager: MessageManager
-    @Inject lateinit var fragmentFactory: FragmentFactory
-    @Inject lateinit var dialogBox: DialogBoxManager
-    @Inject lateinit var session: UserSession
+
+class ProductFragment @Inject constructor(
+    private val viewModelFactory: ViewModelProvider.Factory,
+    private val messageManager: MessageManager,
+    private val dialogBox: DialogBoxManager,
+    private val session: UserSession
+): BaseFragment() {
 
     private lateinit var cartViewModel: CartViewModel
     private lateinit var model: ProductViewModel
+    private lateinit var arModel: ArViewModel
 
 
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent(requireActivity())
-            .inject(this)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
         model = ViewModelProvider(requireActivity() , viewModelFactory).get(ProductViewModel::class.java)
+        arModel = ViewModelProvider(requireActivity() , viewModelFactory).get(ArViewModel::class.java)
         cartViewModel = ViewModelProvider(requireActivity() , viewModelFactory).get(CartViewModel::class.java)
         model.currentViewState.observe(requireActivity() , Observer(::render))
         cartViewModel.currentViewState.observe(requireActivity() , Observer(::render))
@@ -79,8 +74,8 @@ class ProductFragment : BaseFragment() {
         if(model.product.arModel.isEmpty() || model.product.arModel.isBlank())
             ar_btn?.visibility = View.INVISIBLE
         ar_btn?.setOnClickListener {
-            customArFragment.setUri(model.product.arModel)
-            loadFragment(customArFragment as Fragment?)
+            arModel.currentUri = model.product.arModel
+            loadFragment(ArFragment::class.java)
         }
         add_to_cart_btn?.setOnClickListener {
             cartViewModel.onEvent(CartUiAction.AddToCart(model.product.id , 1))

@@ -18,5 +18,5 @@ interface ArComponent{
         fun create() : ArComponent
     }
 
-    fun inject(customArFragment: CustomArFragment)
+
 }

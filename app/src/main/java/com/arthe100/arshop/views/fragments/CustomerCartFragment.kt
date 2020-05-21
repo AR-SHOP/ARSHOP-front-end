@@ -1,7 +1,5 @@
 package com.arthe100.arshop.views.fragments
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +19,6 @@ import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
-import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
 import com.arthe100.arshop.scripts.mvi.cart.CartState
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
@@ -36,30 +33,22 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CustomerCartFragment : BaseFragment() {
-    @Inject lateinit var fragmentFactory: FragmentFactory
-    @Inject lateinit var session: UserSession
-    @Inject lateinit var viewModelProviderFactory: ViewModelProvider.Factory
-    @Inject lateinit var messageManager: MessageManager
-    @Inject lateinit var dialogBox: DialogBoxManager
+class CustomerCartFragment @Inject constructor(
+    private val session: UserSession,
+    private val viewModelProviderFactory: ViewModelProvider.Factory,
+    private val messageManager: MessageManager,
+    private val dialogBox: DialogBoxManager
+): BaseFragment() {
 
     lateinit var authViewModel: AuthViewModel
-    lateinit var loginFragment: LoginFragment
-    lateinit var productFragment: ProductFragment
     lateinit var cartItemAdapter: CartItemAdapter
     lateinit var model: CartViewModel
     lateinit var productViewModel: ProductViewModel
     lateinit var customerCartFragmentLayout: ViewGroup
 
 
-    override fun inject() {
-        (requireActivity().application as BaseApplication).mainComponent().inject(this)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        loginFragment = fragmentFactory.create()
-        productFragment = fragmentFactory.create()
         authViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
         productViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
@@ -86,7 +75,7 @@ class CustomerCartFragment : BaseFragment() {
                 cart_items_list?.visibility = View.INVISIBLE
                 bottom_buttons?.visibility = View.INVISIBLE
                 login_btn?.setOnClickListener {
-                    loadFragment(loginFragment)
+                    loadFragment(LoginFragment::class.java)
                     requireActivity().bottom_navbar.selectedItemId = R.id.btm_navbar_profile
                 }
             }
@@ -200,7 +189,7 @@ class CustomerCartFragment : BaseFragment() {
             OnItemClickListener {
             override fun onItemClick(position: Int) {
                 productViewModel.product = cartItemAdapter.items[position].product
-                loadFragment(productFragment)
+                loadFragment(ProductFragment::class.java)
             }
         })
         cartItemAdapter.plusListener = object : OnItemClickListener{

@@ -7,15 +7,17 @@ import android.graphics.drawable.ColorDrawable
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.arthe100.arshop.R
+import com.arthe100.arshop.scripts.di.scopes.AppScope
 import kotlinx.android.synthetic.main.dialog_caution_layout.*
 import kotlinx.android.synthetic.main.dialog_error_layout.*
 import kotlinx.android.synthetic.main.dialog_error_layout.error_card_view
 import kotlinx.android.synthetic.main.dialog_load_layout.*
 import kotlinx.android.synthetic.main.dialog_success_layout.*
+import javax.inject.Inject
 
 enum class MessageType { LOAD, SUCCESS, ERROR, CAUTION }
-
-class DialogBoxManager {
+@AppScope
+class DialogBoxManager @Inject constructor() {
     private lateinit var dialog: Dialog
     private lateinit var startAnimation: Animation
     private lateinit var clearAnimation: Animation
