@@ -85,12 +85,13 @@ class MainActivity : BaseActivity(), ILoadFragment {
                 }
                 else {
                     messageManager.toast(this,"برای خروج مجددا دکمه بازگشت را بزنید")
+                    backPressedTime = System.currentTimeMillis()
+                    return
                 }
             }
 
             supportFragmentManager.popBackStack()
             bottom_navbar.selectedItemId = R.id.btm_navbar_home
-            backPressedTime = System.currentTimeMillis()
         }
         else {
             supportFragmentManager.popBackStack()
