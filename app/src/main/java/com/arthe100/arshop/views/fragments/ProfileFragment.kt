@@ -74,21 +74,21 @@ class ProfileFragment @Inject constructor(
         when(state) {
             is ProfileState.Idle -> {
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
             }
 
             is ProfileState.GetProfileFailure -> {
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
                 messageManager.toast(requireContext(), state.throwable.toString())
             }
 
             is ProfileState.GetProfileSuccess -> {
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 val user = state.userInfo
 
-                name.text = if(user.fName.isEmpty())
+                name.text = if(!user.fName.isNullOrEmpty())
                     "نام و نام‌خانوادگی"
                 else
                     "${state.userInfo.fName} ${state.userInfo.lName}"
@@ -104,7 +104,7 @@ class ProfileFragment @Inject constructor(
             }
 
             is ProfileState.LoadingState -> {
-                requireView().visibility = View.INVISIBLE
+//                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
             is ProfileState.LogoutState -> {

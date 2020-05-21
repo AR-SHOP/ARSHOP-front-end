@@ -63,18 +63,18 @@ class SignUpFragment @Inject constructor(
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is AuthState.SingupSuccess -> {
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 loadFragment(VerifyFragment::class.java)
             }
 
             is AuthState.LoadingState -> {
-                requireView().visibility = View.INVISIBLE
+//                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
         }

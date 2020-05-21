@@ -61,26 +61,26 @@ class VerifyFragment @Inject constructor(
     private fun render(state: AuthState){
         when(state){
             is AuthState.Failure -> {
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
 
             is AuthState.CodeSuccess -> {
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 model.onEvent(AuthUiAction.LoginAction(model.password , model.phone))
             }
 
             is AuthState.LoginSuccess -> {
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 session.saveUser(state.user)
                 cartViewModel.onEvent(CartUiAction.GetCart)
                 loadFragment(ProfileFragment::class.java)
             }
 
             is AuthState.LoadingState ->{
-                requireView().visibility = View.INVISIBLE
+//                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
         }

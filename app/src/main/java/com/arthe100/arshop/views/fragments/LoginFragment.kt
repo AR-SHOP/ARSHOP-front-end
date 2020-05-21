@@ -92,21 +92,21 @@ class LoginFragment @Inject constructor(
         when(state){
             is AuthState.Idle -> {
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
             }
             is AuthState.LoadingState -> {
-                requireView().visibility = View.INVISIBLE
+//                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
             is AuthState.LoginSuccess -> {
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 session.saveUser(state.user)
                 cartViewModel.onEvent(CartUiAction.GetCart)
                 loadFragment(ProfileFragment::class.java)
             }
             is AuthState.Failure -> {
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR)
             }
         }

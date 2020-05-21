@@ -102,37 +102,37 @@ class HomeFragment @Inject constructor(
         when(state){
             is ProductState.Idle -> {
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
             }
 
             is ProductState.LoadingState -> {
-                requireView().visibility = View.INVISIBLE
+//                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
 
             is ProductState.GetProductsSuccess -> {
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 setGridView()
                 addProducts(state.products)
             }
             is ProductState.ProductDetailSuccess -> {
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 loadFragment(ProfileFragment::class.java)
             }
 
             is ProductState.GetProductsFailure -> {
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
             }
             is ProductState.HomePageSalesSuccess ->{
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 setRecyclerView()
                 addDiscounts(state.sales)
             }
             is ProductState.HomePageSalesFailure -> {
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
             }
         }
