@@ -86,6 +86,5 @@ class CartItemAdapter(dataList: List<CartItem>) : BaseItemAdapter<CartItem>() {
         dataList.clear()
         dataList.addAll(data)
         result.dispatchUpdatesTo(this)
-        notifyDataSetChanged()
     }
 }

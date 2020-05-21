@@ -119,7 +119,7 @@ class HomeFragment @Inject constructor(
             is ProductState.ProductDetailSuccess -> {
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
-                loadFragment(ProfileFragment::class.java)
+                loadFragment(ProductFragment::class.java)
             }
 
             is ProductState.GetProductsFailure -> {

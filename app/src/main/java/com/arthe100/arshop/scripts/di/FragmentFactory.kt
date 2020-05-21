@@ -2,7 +2,6 @@ package com.arthe100.arshop.scripts.di
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import com.arthe100.arshop.scripts.di.scopes.AppScope
 import com.arthe100.arshop.scripts.di.scopes.MainScope
 import com.arthe100.arshop.views.fragments.*
 import dagger.Binds

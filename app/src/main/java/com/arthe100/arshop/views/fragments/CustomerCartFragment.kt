@@ -85,7 +85,11 @@ class CustomerCartFragment @Inject constructor(
                     model.onEvent(CartUiAction.ClearCart)
                     delayEnabled(delete_all_cart_btn!!)
                 }
-                model.onEvent(CartUiAction.GetCart)
+
+                model.onEvent(
+                    if(model.currentCart.value == null) CartUiAction.GetCart
+                    else CartUiAction.GetCartInBackground
+                )
             }
         }
     }
@@ -134,7 +138,7 @@ class CustomerCartFragment @Inject constructor(
                 empty_cart_layout?.visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
-                setRecyclerView(products)
+                if(!this::cartItemAdapter.isInitialized) setRecyclerView(products)
             }
             is CartState.AddToCartState -> {
                 dialogBox.cancel()

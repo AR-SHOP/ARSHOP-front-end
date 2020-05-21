@@ -106,7 +106,7 @@ class CategoryFragment @Inject constructor(
 
         category_grid_view.setOnItemClickListener { _, _, pos, _ ->
             productViewModel.product = gridViewAdapter.dataList[pos]
-            
+            loadFragment(ProductFragment::class.java)
         }
 
         category_grid_view.apply {
