@@ -66,17 +66,9 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     override fun onBackPressed() {
 
-        val fragment = getTheLastFragment()
+        val fragment = getTheLastFragment() as? BaseFragment
 
-        val isMain =
-            fragment is HomeFragment ||
-            fragment is CartFragment ||
-            fragment is CategoriesFragment ||
-            fragment is LoginFragment ||
-            fragment is ProfileFragment
-
-
-        if (isMain) {
+        if (fragment?.isMain() == true) {
 
             if (fragment is HomeFragment) {
                 if (backPressedTime + 2000 > System.currentTimeMillis()) {
