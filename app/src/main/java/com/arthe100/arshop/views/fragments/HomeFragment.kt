@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.*
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.Category
 import com.arthe100.arshop.models.HomeSales
 import com.arthe100.arshop.models.Product
-import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductState
@@ -23,6 +23,7 @@ import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
 import com.arthe100.arshop.views.adapters.DiscountAdapter
+import com.arthe100.arshop.views.adapters.GroupRecyclerViewAdapter
 import com.arthe100.arshop.views.adapters.HomeGridViewAdapter
 import com.arthe100.arshop.views.adapters.OnItemClickListener
 import com.arthe100.arshop.views.decorators.CircleIndicator
@@ -47,8 +48,22 @@ class HomeFragment @Inject constructor(
     private lateinit var snapHelper: PagerSnapHelper
     private lateinit var circleIndicator: CircleIndicator
     private lateinit var suggestions: ArrayList<String>
+    private lateinit var groupAdapter: GroupRecyclerViewAdapter
 
 
+
+    private var categoryList =
+        arrayListOf<Category>(
+            Category(1,"name1","a", ""),
+            Category(2,"name2","a", ""),
+            Category(3,"name3","a", "")
+        )
+
+    private var products = arrayListOf<Product>(
+        Product(1,"p1","a","b",123,"https://elcopcbonline.com/photos/product/4/176/4.jpg",""),
+        Product(1,"p2","a","b",123,"https://elcopcbonline.com/photos/product/4/176/4.jpg",""),
+        Product(1,"p3","a","b",123,"https://elcopcbonline.com/photos/product/4/176/4.jpg","")
+    )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -71,11 +86,6 @@ class HomeFragment @Inject constructor(
 
     override fun onStart() {
         setSearchView()
-        swipe_refresh_layout.setOnRefreshListener {
-            model.onEvent(ProductUiAction.GetHomePageProducts)
-            cartViewModel.onEvent(CartUiAction.GetCartOnStart)
-            swipe_refresh_layout.isRefreshing = false
-        }
         model.onEvent(ProductUiAction.GetHomePageProducts)
         model.onEvent(ProductUiAction.GetHomePageSales)
         cartViewModel.onEvent(CartUiAction.GetCartOnStart)
@@ -116,8 +126,10 @@ class HomeFragment @Inject constructor(
                 model.currentProducts = state.products
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
-                setGridView()
-                addProducts(state.products)
+//                setGridView()
+
+//                addProducts(state.products)
+                setGroupRecyclerView()
             }
             is ProductState.ProductDetailSuccess -> {
                 dialogBox.cancel()
@@ -132,7 +144,7 @@ class HomeFragment @Inject constructor(
             is ProductState.HomePageSalesSuccess ->{
                 model.currentSales = state.sales
                 requireView().visibility = View.VISIBLE
-                setRecyclerView()
+                setDiscountRecyclerView()
                 addDiscounts(state.sales)
             }
             is ProductState.HomePageSalesFailure -> {
@@ -150,13 +162,13 @@ class HomeFragment @Inject constructor(
     }
 
     private fun addDiscounts(discounts: List<HomeSales>) {
-        if(!this::discountAdapter.isInitialized) setRecyclerView()
+        if(!this::discountAdapter.isInitialized) setDiscountRecyclerView()
         val newList = mutableListOf<HomeSales>()
         newList.addAll(discounts.filter { it.id > 4 })
         discountAdapter.submitList(newList)
     }
 
-    private fun setRecyclerView() {
+    private fun setDiscountRecyclerView() {
         discountAdapter = DiscountAdapter()
         discountAdapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
@@ -172,19 +184,42 @@ class HomeFragment @Inject constructor(
                 LinearLayoutManager.HORIZONTAL, true)
             adapter = discountAdapter
         }
+
     }
 
-    private fun setGridView() {
-        gridViewAdapter = HomeGridViewAdapter(requireContext())
+    private fun setGroupRecyclerView() {
 
-        home_grid_view?.setOnItemClickListener { _, _, pos, _ ->
-            model.onEvent(ProductUiAction.GetProductDetails(gridViewAdapter.getItem(pos)))
+
+        groupAdapter = GroupRecyclerViewAdapter()
+
+        groupAdapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                TODO("Not yet implemented")
+            }
+        })
+
+        group_recycler_view?.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = groupAdapter
         }
 
-        home_grid_view?.apply {
-            adapter = gridViewAdapter
-        }
+        groupAdapter.products = products
+        groupAdapter.submitList(categoryList)
     }
+    
+    
+
+//    private fun setGridView() {
+//        gridViewAdapter = HomeGridViewAdapter(requireContext())
+//
+//        home_grid_view?.setOnItemClickListener { _, _, pos, _ ->
+//            model.onEvent(ProductUiAction.GetProductDetails(gridViewAdapter.getItem(pos)))
+//        }
+//
+//        home_grid_view?.apply {
+//            adapter = gridViewAdapter
+//        }
+//    }
 
 
 }

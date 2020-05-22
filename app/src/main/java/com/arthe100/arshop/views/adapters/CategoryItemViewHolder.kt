@@ -18,8 +18,8 @@ class CategoryItemViewHolder(itemView: View) : BaseItemViewHolder<Category>(item
 
         categoryName.text = data.title
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_white_background)
-            .error(R.drawable.ic_white_background)
+            .placeholder(R.drawable.white_background)
+            .error(R.drawable.white_background)
 
 
         Glide.with(itemView.context)

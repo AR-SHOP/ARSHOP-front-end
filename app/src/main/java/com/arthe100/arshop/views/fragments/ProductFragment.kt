@@ -61,8 +61,8 @@ class ProductFragment @Inject constructor(
         checkCartStatus()
 
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_empty_background)
-            .error(R.drawable.ic_empty_background)
+            .placeholder(R.drawable.empty_background)
+            .error(R.drawable.empty_background)
 
         val cartItem = cartViewModel.getCartItemById(model.product.id)
         cart_count_text?.text = cartItem?.quantity.toString()

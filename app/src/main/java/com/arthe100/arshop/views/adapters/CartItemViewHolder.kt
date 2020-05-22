@@ -4,14 +4,9 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.CartItem
-import com.arthe100.arshop.models.Product
-import com.arthe100.arshop.views.adapters.BaseItemViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.cart_item.view.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
-import java.util.*
 
 class CartItemViewHolder(itemView: View) : BaseItemViewHolder<CartItem>(itemView) {
 
@@ -32,8 +27,8 @@ class CartItemViewHolder(itemView: View) : BaseItemViewHolder<CartItem>(itemView
         dataPrice.text = product.price.toString()
         txtQuantity.text = data.quantity.toString()
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_white_background)
-            .error(R.drawable.ic_white_background)
+            .placeholder(R.drawable.white_background)
+            .error(R.drawable.white_background)
 
         Glide.with(itemView.context)
             .applyDefaultRequestOptions(requestOptions)
