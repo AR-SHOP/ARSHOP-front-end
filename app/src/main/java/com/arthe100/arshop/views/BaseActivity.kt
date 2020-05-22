@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.views.fragments.*
 import java.lang.NullPointerException
@@ -18,18 +19,21 @@ abstract class BaseActivity : AppCompatActivity(), ILoadFragment {
     }
     override fun loadFragment(klass: Class<out Fragment>) {
 
-        val fragment = supportFragmentManager
+        val manager = supportFragmentManager
+
+        val fragment = manager
             .fragmentFactory
             .instantiate(classLoader , klass.name) as? BaseFragment
-            ?: throw ClassCastException("${klass.simpleName} is a subclass of BaseFragment!")
+            ?: throw ClassCastException("${klass.simpleName} is not a subclass of BaseFragment!")
 
         if(fragment.isMain())
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
-        supportFragmentManager.beginTransaction()
+        manager.beginTransaction()
             .replace(R.id.fragment_container, fragment, fragment.toString())
             .addToBackStack(fragment.tag)
             .commit()
+
     }
 
     override fun toString(): String {

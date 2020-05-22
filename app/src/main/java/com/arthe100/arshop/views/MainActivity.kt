@@ -1,5 +1,6 @@
 package com.arthe100.arshop.views
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
@@ -32,7 +33,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         supportFragmentManager.fragmentFactory = fragmentFactory
         setContentView(R.layout.activity_main_layout)
@@ -69,7 +69,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
         val fragment = getTheLastFragment() as? BaseFragment
 
         if (fragment?.isMain() == true) {
-
             if (fragment is HomeFragment) {
                 if (backPressedTime + 2000 > System.currentTimeMillis()) {
                     this.finish()
@@ -82,16 +81,17 @@ class MainActivity : BaseActivity(), ILoadFragment {
                 }
             }
 
-            supportFragmentManager.popBackStack()
+            supportFragmentManager.popBackStackImmediate()
             bottom_navbar.selectedItemId = R.id.btm_navbar_home
         }
         else {
-            supportFragmentManager.popBackStack()
+            supportFragmentManager.popBackStackImmediate()
         }
     }
 
     private fun getTheLastFragment() : Fragment? {
         val backStackSize = supportFragmentManager.backStackEntryCount
+        if(backStackSize <= 0) return null
         val fragmentTag: String? =
             supportFragmentManager.getBackStackEntryAt(backStackSize - 1).name
         return supportFragmentManager.findFragmentByTag(fragmentTag)

@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.arthe100.arshop.models.HomeSales
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.scripts.mvi.categories.CategoryState
 import com.arthe100.arshop.scripts.repositories.ProductRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -13,6 +15,10 @@ class ProductViewModel @Inject constructor(private val productRepo: ProductRepos
     private val _currentViewState = MutableLiveData<ProductState>(ProductState.Idle)
     val currentViewState : LiveData<ProductState>
         get() = _currentViewState
+
+    var currentProducts: List<Product>? = null
+    var currentSales: List<HomeSales>? = null
+
 
     private lateinit var _product: Product
     var product: Product
@@ -53,5 +59,14 @@ class ProductViewModel @Inject constructor(private val productRepo: ProductRepos
                 }
             }
         }
+    }
+
+    fun loadCache() {
+        if(currentProducts != null)
+            _currentViewState.value = ProductState.GetProductsSuccess(currentProducts!!)
+        if(currentSales != null)
+            _currentViewState.value = ProductState.HomePageSalesSuccess(currentSales!!)
+        _currentViewState.value = ProductState.Idle
+
     }
 }

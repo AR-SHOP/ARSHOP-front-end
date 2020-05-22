@@ -54,6 +54,7 @@ class HomeGridViewAdapter(val context: Context) : BaseAdapter() {
 
     override fun getCount(): Int = dataList.size
 
+
     fun submitList(data: MutableList<Product>) {
 
 //        val result = DiffUtil.calculateDiff(object: DiffUtil.Callback() {

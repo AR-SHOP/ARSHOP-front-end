@@ -1,9 +1,13 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
@@ -69,6 +73,29 @@ class LoginFragment @Inject constructor(
                     "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
             }
         }
+
+        login_username.setText(model.phone)
+        login_password.setText(model.password)
+
+        login_username.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                model.phone = p0.toString()
+            }
+        })
+        login_password.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                model.password = p0.toString()
+            }
+        })
+
 
         login_btn.setOnClickListener {
             model.onEvent(AuthUiAction.LoginAction(login_password.text.toString() , login_username.text.toString()))

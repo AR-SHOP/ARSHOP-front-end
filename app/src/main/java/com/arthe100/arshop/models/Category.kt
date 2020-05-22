@@ -6,3 +6,9 @@ data class Category(
     val description: String,
     val image: String
 )
+
+
+data class CurrentCategory(
+    val products: List<Product>,
+    val info: Category
+)

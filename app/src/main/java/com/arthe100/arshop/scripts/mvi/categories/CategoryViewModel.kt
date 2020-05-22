@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arthe100.arshop.models.Category
+import com.arthe100.arshop.models.CurrentCategory
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.scripts.repositories.CategoryRepository
 import kotlinx.coroutines.launch
+import java.lang.NullPointerException
 import javax.inject.Inject
 
 class CategoryViewModel @Inject constructor(private val catRepo: CategoryRepository) : ViewModel(){
@@ -15,8 +17,8 @@ class CategoryViewModel @Inject constructor(private val catRepo: CategoryReposit
     val currentViewState : LiveData<CategoryState>
         get() = _currentViewState
 
-    var products = listOf<Product>()
-    lateinit var currentCategory: Category
+    lateinit var currentCategory: CurrentCategory
+    private lateinit var tempCategory: Category
 
     fun onEvent(action: CategoryUiAction){
         when(action){
@@ -30,12 +32,18 @@ class CategoryViewModel @Inject constructor(private val catRepo: CategoryReposit
 
             is CategoryUiAction.GetCategoryProduct -> {
                 viewModelScope.launch {
-                    currentCategory = action.category
+                    tempCategory = action.category
                     _currentViewState.value = catRepo.getProducts(action.category.id)
                     _currentViewState.value = CategoryState.IdleState
                 }
             }
         }
+    }
+
+    fun setProducts(products: List<Product>){
+        if(!this::tempCategory.isInitialized)
+            throw NullPointerException("tempCategory can't be null at this state!")
+        currentCategory = CurrentCategory(products,tempCategory)
     }
 
 }

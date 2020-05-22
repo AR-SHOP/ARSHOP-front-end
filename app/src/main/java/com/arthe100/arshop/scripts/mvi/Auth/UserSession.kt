@@ -3,27 +3,21 @@ package com.arthe100.arshop.scripts.mvi.Auth
 import android.app.Application
 import androidx.preference.PreferenceManager
 import com.arthe100.arshop.models.User
+import com.arthe100.arshop.scripts.di.scopes.AppScope
 import com.google.gson.Gson
 import javax.inject.Inject
+@AppScope
+class UserSession @Inject constructor(val application: Application) {
 
-class UserSession{
+    var user: User
 
-    @Inject constructor(application: Application ){
-        this.application = application
+    init {
         val pref = PreferenceManager.getDefaultSharedPreferences(application)
         val userStr = pref.getString("userData" , null)
         if(userStr == null)
             this.user = User.GuestUser
         else
             this.user = Gson().fromJson(userStr , User.User::class.java)
-    }
-
-    var user: User
-    val application: Application
-
-    constructor(application: Application , user: User){
-        this.user = user
-        this.application = application
     }
 
     fun saveUser(user: User)

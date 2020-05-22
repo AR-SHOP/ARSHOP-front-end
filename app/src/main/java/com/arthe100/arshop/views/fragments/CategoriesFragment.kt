@@ -76,7 +76,7 @@ class CategoriesFragment @Inject constructor(
             is CategoryState.GetProductSuccess -> {
                 dialogBoxManager.cancel()
                 categories_swipe_refresh?.isRefreshing = false
-                model.products = state.products
+                model.setProducts(state.products)
                 loadFragment(CategoryFragment::class.java)
             }
             is CategoryState.Failure -> {

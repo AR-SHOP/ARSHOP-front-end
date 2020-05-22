@@ -52,12 +52,14 @@ class HomeFragment @Inject constructor(
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        //Inflate the layout for this fragment or reuse the existing one
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         dialogBox = DialogBoxManager()
         messageManager = MessageManager()
         snapHelper = PagerSnapHelper()
         circleIndicator = CircleIndicator()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
+        model.loadCache()
         cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
         return inflater.inflate(R.layout.home_fragment_layout, container, false)
     }
@@ -111,6 +113,7 @@ class HomeFragment @Inject constructor(
             }
 
             is ProductState.GetProductsSuccess -> {
+                model.currentProducts = state.products
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
                 setGridView()
@@ -127,6 +130,7 @@ class HomeFragment @Inject constructor(
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
             }
             is ProductState.HomePageSalesSuccess ->{
+                model.currentSales = state.sales
                 requireView().visibility = View.VISIBLE
                 setRecyclerView()
                 addDiscounts(state.sales)

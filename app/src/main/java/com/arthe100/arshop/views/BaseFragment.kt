@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.views.fragments.*
+import java.lang.ClassCastException
 
 abstract class BaseFragment : Fragment(), ILoadFragment {
 
@@ -26,14 +27,17 @@ abstract class BaseFragment : Fragment(), ILoadFragment {
             val fragment = requireActivity()
                 .supportFragmentManager
                 .fragmentFactory
-                .instantiate(requireActivity().classLoader , klass.name)
+                .instantiate(requireActivity().classLoader , klass.name) as? BaseFragment
+                ?: throw ClassCastException("${klass.simpleName} is not a subclass of BaseFragment!")
 
-            if(isMain())
-                activity?.intent?.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            if(fragment.isMain()){
+////                activity?.intent?.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+////                startActivity(activity?.intent)
+//            }
 
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment, fragment.toString())
-                .addToBackStack(null)
+                .addToBackStack(fragment.tag)
                 .commit()
         }catch (throwable: Throwable){
             Log.d(klass.simpleName , throwable.toString())

@@ -20,6 +20,7 @@ import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.HomeGridViewAdapter
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
+import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.categories_fragment_layout.*
 import kotlinx.android.synthetic.main.category_fragment_layout.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
@@ -42,6 +43,7 @@ class CategoryFragment @Inject constructor(
                               savedInstanceState: Bundle?): View? {
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CategoryViewModel::class.java)
         productViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
+        requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.category_fragment_layout, container, false)
     }
 
@@ -52,14 +54,14 @@ class CategoryFragment @Inject constructor(
 
 
     override fun onStart() {
-        category_name.text = model.currentCategory.title
+        category_name.text = model.currentCategory.info.title
         setSearchView()
         setGridView()
-        addProducts(model.products)
+        addProducts(model.currentCategory.products)
 
         category_swipe_refresh_layout.isRefreshing = true
         category_swipe_refresh_layout.setOnRefreshListener {
-            model.onEvent(CategoryUiAction.GetCategoryProduct(model.currentCategory))
+            model.onEvent(CategoryUiAction.GetCategoryProduct(model.currentCategory.info))
         }
 //        setGridView()
 //        addProducts(model.products)
@@ -83,7 +85,7 @@ class CategoryFragment @Inject constructor(
             }
             is CategoryState.GetProductSuccess -> {
                 dialogBoxManager.cancel()
-                model.products = state.products
+                model.setProducts(state.products)
                 addProducts(state.products)
             }
             is CategoryState.Failure -> {

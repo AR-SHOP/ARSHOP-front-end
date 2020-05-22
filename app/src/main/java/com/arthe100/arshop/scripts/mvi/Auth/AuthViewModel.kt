@@ -32,6 +32,10 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
             _password = value
         }
 
+    fun logout(){
+        _phone = ""
+        _password = ""
+    }
 
     fun onEvent(action: Action){
 
@@ -50,6 +54,7 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
             }
 
             is AuthUiAction.LogoutAction -> {
+                logout()
                 _currentViewState.value = AuthState.Idle
             }
 
