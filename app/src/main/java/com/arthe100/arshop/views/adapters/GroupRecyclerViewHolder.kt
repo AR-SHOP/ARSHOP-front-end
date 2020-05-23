@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.horizontal_product_recycler_view.view.*
 class GroupRecyclerViewHolder(itemView: View) : BaseItemViewHolder<Category>(itemView) {
 
     lateinit var context: Context
-    lateinit var productList: ArrayList<Product>
+    lateinit var productList: MutableList<Product>
 
     private var categoryName = itemView.recycler_view_category_name
     private var productsRecyclerView = itemView.products_recycler_view

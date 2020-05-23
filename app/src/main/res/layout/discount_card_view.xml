@@ -2,15 +2,14 @@
 <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:background="@drawable/small_rounded_corners">
+            android:layout_height="match_parent">
 
         <ImageView
                 android:id="@+id/discount_card_image"
