@@ -84,12 +84,15 @@
     <string name="national_id">کد ملی</string>
     <string name="NID_sample">1092233886</string>
     <string name="birth_date">تاریخ تولد</string>
-    <string name="birth_date_sample">1/1/1301</string>
+    <string name="birth_date_sample">10/10/1301</string>
     <string name="card_number">شماره کارت</string>
     <string name="card_number_sample">1234-1234-1234-1234</string>
     <string name="default_acc_balance">0</string>
     <string name="change_pass">تغییر رمز عبور</string>
     <string name="increase_balance">افزایش موجودی</string>
+    <string name="save_changes">ذخیره تغییرات</string>
+    <string name="cancel_changes">انصراف</string>
+    <string name="edit_account_info_text">ویرایش اصلاعات حساب کاربری</string>
 
 
 </resources>
