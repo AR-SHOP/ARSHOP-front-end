@@ -1,5 +1,6 @@
 package com.arthe100.arshop.views.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,13 +23,13 @@ import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
-import com.arthe100.arshop.views.adapters.DiscountAdapter
-import com.arthe100.arshop.views.adapters.GroupRecyclerViewAdapter
-import com.arthe100.arshop.views.adapters.HomeGridViewAdapter
-import com.arthe100.arshop.views.adapters.OnItemClickListener
+import com.arthe100.arshop.views.adapters.*
 import com.arthe100.arshop.views.decorators.CircleIndicator
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
+import com.smarteist.autoimageslider.IndicatorAnimations
+import com.smarteist.autoimageslider.SliderAnimations
+import com.smarteist.autoimageslider.SliderView
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
@@ -39,7 +40,6 @@ class HomeFragment @Inject constructor(
     private val session: UserSession
 ): BaseFragment(), ILoadFragment {
 
-    private lateinit var discountAdapter: DiscountAdapter
     private lateinit var model: ProductViewModel
     private lateinit var cartViewModel: CartViewModel
     private lateinit var messageManager: MessageManager
@@ -49,6 +49,7 @@ class HomeFragment @Inject constructor(
     private lateinit var circleIndicator: CircleIndicator
     private lateinit var suggestions: ArrayList<String>
     private lateinit var groupAdapter: GroupRecyclerViewAdapter
+    private lateinit var sliderViewAdapter: SliderAdapter
 
 
 
@@ -56,10 +57,12 @@ class HomeFragment @Inject constructor(
         arrayListOf<Category>(
             Category(1,"name1","a", ""),
             Category(2,"name2","a", ""),
-            Category(3,"name3","a", "")
+            Category(3,"name3","a", ""),
+            Category(3,"name4","a", ""),
+            Category(3,"name5","a", "")
         )
 
-    private var products = arrayListOf<Product>(
+        private var products = arrayListOf<Product>(
         Product(1,"p1","a","b",123,"https://elcopcbonline.com/photos/product/4/176/4.jpg",""),
         Product(1,"p2","a","b",123,"https://elcopcbonline.com/photos/product/4/176/4.jpg",""),
         Product(1,"p3","a","b",123,"https://elcopcbonline.com/photos/product/4/176/4.jpg","")
@@ -67,7 +70,6 @@ class HomeFragment @Inject constructor(
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        //Inflate the layout for this fragment or reuse the existing one
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         dialogBox = DialogBoxManager()
         messageManager = MessageManager()
@@ -125,10 +127,8 @@ class HomeFragment @Inject constructor(
                 model.currentProducts = state.products
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
-//                setGridView()
-
-//                addProducts(state.products)
                 setGroupRecyclerView()
+                addProducts(products)
             }
             is ProductState.ProductDetailSuccess -> {
                 dialogBox.cancel()
@@ -143,7 +143,7 @@ class HomeFragment @Inject constructor(
             is ProductState.HomePageSalesSuccess ->{
                 model.currentSales = state.sales
                 requireView().visibility = View.VISIBLE
-                setDiscountRecyclerView()
+                setImageSlider()
                 addDiscounts(state.sales)
             }
             is ProductState.HomePageSalesFailure -> {
@@ -154,36 +154,32 @@ class HomeFragment @Inject constructor(
 
     }
 
-    private fun addProducts(data: List<Product>) {
-        val list = mutableListOf<Product>()
-        list.addAll(data)
-        gridViewAdapter.submitList(list)
+    private fun addProducts(products: List<Product>) {
+        groupAdapter.products.addAll(products)
+        groupAdapter.submitList(categoryList)
     }
 
     private fun addDiscounts(discounts: List<HomeSales>) {
-        if(!this::discountAdapter.isInitialized) setDiscountRecyclerView()
+        if(!this::sliderViewAdapter.isInitialized) setImageSlider()
         val newList = mutableListOf<HomeSales>()
         newList.addAll(discounts.filter { it.id > 4 })
-        discountAdapter.submitList(newList)
+        sliderViewAdapter.submitList(newList)
     }
 
-    private fun setDiscountRecyclerView() {
-        discountAdapter = DiscountAdapter()
-        discountAdapter.setOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                Toast.makeText(requireContext(),"Clicked", Toast.LENGTH_LONG).show()
-            }
+    private fun setImageSlider() {
+        sliderViewAdapter = SliderAdapter()
+        sliderViewAdapter.setOnItemClickListener(View.OnClickListener {
+            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
         })
 
-        snapHelper.attachToRecyclerView(discount_recycler_view)
-        discount_recycler_view?.addItemDecoration(circleIndicator)
-
-        discount_recycler_view?.apply {
-            layoutManager = LinearLayoutManager(requireContext(),
-                LinearLayoutManager.HORIZONTAL, true)
-            adapter = discountAdapter
+        image_slider?.apply {
+            setSliderAdapter(sliderViewAdapter)
+            isAutoCycle = true
+            setIndicatorAnimation(IndicatorAnimations.SCALE)
+            setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION)
+            autoCycleDirection = SliderView.AUTO_CYCLE_DIRECTION_RIGHT
+            startAutoCycle()
         }
-
     }
 
     private fun setGroupRecyclerView() {
@@ -200,25 +196,8 @@ class HomeFragment @Inject constructor(
         group_recycler_view?.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = groupAdapter
+            isNestedScrollingEnabled = false
         }
-
-        groupAdapter.products = products
-        groupAdapter.submitList(categoryList)
     }
-    
-    
-
-//    private fun setGridView() {
-//        gridViewAdapter = HomeGridViewAdapter(requireContext())
-//
-//        home_grid_view?.setOnItemClickListener { _, _, pos, _ ->
-//            model.onEvent(ProductUiAction.GetProductDetails(gridViewAdapter.getItem(pos)))
-//        }
-//
-//        home_grid_view?.apply {
-//            adapter = gridViewAdapter
-//        }
-//    }
-
 
 }

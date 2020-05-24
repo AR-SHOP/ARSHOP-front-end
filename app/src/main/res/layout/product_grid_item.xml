@@ -6,7 +6,7 @@
         android:layoutDirection="rtl"
         android:textDirection="rtl"
         app:cardCornerRadius="15dp"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:background="@color/colorBackground"
         android:layout_centerInParent="true">
 
@@ -34,6 +34,7 @@
                 android:text="@string/product"
                 android:gravity="center"
                 android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="5dp"
                 android:paddingStart="10dp"
                 android:textSize="12sp"/>
 

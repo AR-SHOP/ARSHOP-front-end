@@ -11,7 +11,7 @@ import com.arthe100.arshop.models.Product
 
 class GroupRecyclerViewAdapter : BaseItemAdapter<Category>() {
 
-    var products: ArrayList<Product> = arrayListOf()
+    var products: MutableList<Product> = arrayListOf()
 
     private lateinit var context: Context
     private var dataList : ArrayList<Category> = arrayListOf()
