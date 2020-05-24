@@ -93,6 +93,12 @@
     <string name="save_changes">ذخیره تغییرات</string>
     <string name="cancel_changes">انصراف</string>
     <string name="edit_account_info_text">ویرایش اصلاعات حساب کاربری</string>
-
+    <string name="previous_pass">رمز عبور قبلی</string>
+    <string name="repeat_new_pass">تکرار رمز عبور جدید</string>
+    <string name="new_pass">رمز عبور جدید</string>
+    <string name="edit_pass">ویرایش رمز عبور</string>
+    <string name="amount_rial">مبلغ (ریال)</string>
+    <string name="enter_bank_portal">ورود به درگاه بانک</string>
+    <string name="charge_account">شارژ حساب کاربری</string>
 
 </resources>

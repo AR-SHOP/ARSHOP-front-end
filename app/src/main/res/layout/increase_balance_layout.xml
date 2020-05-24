@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:layoutDirection="rtl"
+        android:textDirection="rtl">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="@string/charge_account"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/balance_display"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2"/>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="340dp"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" >
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="230dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp">
+
+            <Button
+                    android:id="@+id/enter_bank_portal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/small_rounded_corners"
+                    android:backgroundTint="@color/colorBackground"
+                    android:text="@string/enter_bank_portal"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    android:elevation="10dp"/>
+
+            <Button
+                    android:id="@+id/cancel_charge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/small_rounded_corners"
+                    android:backgroundTint="@color/colorBackground"
+                    android:text="@string/cancel_changes"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    android:elevation="10dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/balance_display"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginRight="23dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toTopOf="@id/amount_rial"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:paddingEnd="10dp">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="start"
+                    android:paddingStart="10dp"
+                    android:text="@string/account_balance"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="18sp" />
+
+            <TextView
+                    android:id="@+id/account_balance_charge_display"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:text="@string/default_acc_balance"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="15sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/amount_rial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorBackground"
+            app:cardCornerRadius="15dp"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:paddingTop="30dp"
+                    android:paddingBottom="30dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/previous_pass_editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorPrimary"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:textCursorDrawable="@drawable/cursor"
+                        android:cursorVisible="true"
+                        android:hint="@string/amount_rial" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

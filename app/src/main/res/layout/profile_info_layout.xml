@@ -13,12 +13,10 @@
             android:id="@+id/edit_profile_info"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/colorBackground"
-            android:backgroundTint="@color/colorBackground"
-            android:src="@drawable/ic_search"
             tools:layout_editor_absoluteX="60dp"
             tools:layout_editor_absoluteY="265dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:elevation="10dp" />
 
     <androidx.cardview.widget.CardView
             android:id="@+id/profile_image"
@@ -63,6 +61,7 @@
             android:layout_marginRight="10dp"
             app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="15dp"
+            app:cardElevation="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

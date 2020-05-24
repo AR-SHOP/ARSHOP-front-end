@@ -14,8 +14,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88792e33-6867-4903-b87c-8c672be25749" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/edit_profile_info_layout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/change_password_layout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/increase_balance_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/edit_profile_info_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/edit_profile_info_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/profile_info_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/profile_info_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
@@ -360,7 +362,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590157353949</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="added edit profile info layout.&#10;added profile info's ids.">
+      <created>1590244859084</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1590244859084</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -377,8 +386,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="deleted useless files.&#10;edited Product model.&#10;edited APIs.&#10;change java files to .kt.&#10;remove not completed files.&#10;modified APIs and adapt them with new models." />
-    <MESSAGE value="changed color.&#10;fixed problem." />
     <MESSAGE value="added DialogBoxModule and tested in profileFragment." />
     <MESSAGE value="added anim sources." />
     <MESSAGE value="changed DialogBox to manager and added it to DAGGER2." />
@@ -402,6 +409,8 @@
     <MESSAGE value="profile pic" />
     <MESSAGE value="profile deleted dialogs" />
     <MESSAGE value="added profile_info layout." />
-    <option name="LAST_COMMIT_MESSAGE" value="added profile_info layout." />
+    <MESSAGE value="added edit profile info layout." />
+    <MESSAGE value="added edit profile info layout.&#10;added profile info's ids." />
+    <option name="LAST_COMMIT_MESSAGE" value="added edit profile info layout.&#10;added profile info's ids." />
   </component>
 </project>
