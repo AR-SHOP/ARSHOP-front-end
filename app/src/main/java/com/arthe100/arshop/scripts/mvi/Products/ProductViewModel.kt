@@ -31,6 +31,11 @@ class ProductViewModel @Inject constructor(private val productRepo: ProductRepos
         when(state)
         {
             is ProductUiAction.GetHomePageProducts -> {
+
+                // load from cache first
+                if(currentProducts != null)
+                    _currentViewState.value = ProductState.GetProductsSuccess(currentProducts!!)
+
                 viewModelScope.launch {
                     _currentViewState.value = productRepo.getProducts()
                     _currentViewState.value = ProductState.Idle
@@ -53,6 +58,11 @@ class ProductViewModel @Inject constructor(private val productRepo: ProductRepos
 
             }
             is ProductUiAction.GetHomePageSales -> {
+
+                // load from cache first
+                if(currentSales != null)
+                    _currentViewState.value = ProductState.HomePageSalesSuccess(currentSales!!)
+
                 viewModelScope.launch {
                     _currentViewState.value = productRepo.getHomeSales()
                     _currentViewState.value = ProductState.Idle
@@ -61,12 +71,4 @@ class ProductViewModel @Inject constructor(private val productRepo: ProductRepos
         }
     }
 
-    fun loadCache() {
-        if(currentProducts != null)
-            _currentViewState.value = ProductState.GetProductsSuccess(currentProducts!!)
-        if(currentSales != null)
-            _currentViewState.value = ProductState.HomePageSalesSuccess(currentSales!!)
-        _currentViewState.value = ProductState.Idle
-
-    }
 }

@@ -74,7 +74,6 @@ class HomeFragment @Inject constructor(
         snapHelper = PagerSnapHelper()
         circleIndicator = CircleIndicator()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
-        model.loadCache()
         cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
         return inflater.inflate(R.layout.home_fragment_layout, container, false)
     }
