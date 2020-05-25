@@ -81,17 +81,18 @@ class HomeFragment @Inject constructor(
         circleIndicator = CircleIndicator()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
         cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
+        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
         return inflater.inflate(R.layout.home_fragment_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setRecyclerView()
         setSearchView()
+        setRecyclerView()
+        model.loadFromCache(::render)
         model.onEvent(ProductUiAction.GetHomePageProducts)
         model.onEvent(ProductUiAction.GetHomePageSales)
         cartViewModel.onEvent(CartUiAction.GetCartOnStart)
-        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
     }
 
 
@@ -144,7 +145,7 @@ class HomeFragment @Inject constructor(
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
             }
             is ProductState.HomePageSalesSuccess ->{
-                model.currentSales = state.sales
+                 model.currentSales = state.sales
                 requireView().visibility = View.VISIBLE
                 setImageSlider()
                 addDiscounts(state.sales)
@@ -212,10 +213,10 @@ class HomeFragment @Inject constructor(
             override fun getLayoutId(position: Int, obj: Product): Int = R.layout.product_grid_item
         }
         homePageGrid.apply {
-//            setDiffUtil(object: GenericItemDiff<Product>{
-//                override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem.id == newItem.id
-//                override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem == newItem
-//            })
+            setDiffUtil(object: GenericItemDiff<Product>{
+                override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem.id == newItem.id
+                override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem == newItem
+            })
             setItemListener(object: OnItemClickListener<Product>{
                 override fun onClickItem(data: Product) {
                     model.onEvent(ProductUiAction.GetProductDetails(data))

@@ -24,7 +24,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     private var backPressedTime: Long = 0
     private val TAG : String? = MainActivity::class.simpleName
-
+    private var prevNavBarId = -1
 
     override fun inject() {
         (application as BaseApplication)
@@ -46,6 +46,9 @@ class MainActivity : BaseActivity(), ILoadFragment {
             loadFragment(HomeFragment::class.java)
         }
         bottom_navbar.setOnNavigationItemSelectedListener {item ->
+            if(prevNavBarId == item.itemId)
+                return@setOnNavigationItemSelectedListener false
+            prevNavBarId = item.itemId
 
             val klass = when (item.itemId) {
                 R.id.btm_navbar_home -> HomeFragment::class.java

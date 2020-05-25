@@ -68,6 +68,7 @@ class CategoriesFragment @Inject constructor(
                 categories_swipe_refresh?.isRefreshing = true
             }
             is CategoryState.GetCategorySuccess -> {
+                model.categories = state.categories
                 dialogBoxManager.cancel()
                 categories_swipe_refresh?.isRefreshing = false
                 setRecyclerView()

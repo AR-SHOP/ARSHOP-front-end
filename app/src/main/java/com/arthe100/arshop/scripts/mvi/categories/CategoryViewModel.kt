@@ -20,10 +20,16 @@ class CategoryViewModel @Inject constructor(private val catRepo: CategoryReposit
     lateinit var currentCategory: CurrentCategory
     private lateinit var tempCategory: Category
 
+    var categories: List<Category>? = null
+
     fun onEvent(action: CategoryUiAction){
         when(action){
             is CategoryUiAction.GetCategories ->{
-                _currentViewState.value = CategoryState.LoadingState
+
+                if(categories != null)
+                    _currentViewState.value = CategoryState.GetCategorySuccess(categories!!)
+                else
+                    _currentViewState.value = CategoryState.LoadingState
                 viewModelScope.launch {
                     _currentViewState.value = catRepo.getCategories()
                     _currentViewState.value = CategoryState.IdleState
