@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
-import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
@@ -57,6 +56,11 @@ class ProfileFragment @Inject constructor(
 
     override fun onStart() {
         super.onStart()
+
+        user_account_button.setOnClickListener {
+            loadFragment(ProfileInfoFragment::class.java)
+        }
+
         logout_button?.setOnClickListener{
             session.logout()
             autViewModel.onEvent(AuthUiAction.LogoutAction)

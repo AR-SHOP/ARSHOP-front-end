@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName
 
 sealed class User{
     data class User(
-        val username : String,
-        val password : String,
-        val email : String,
-        val phone : String,
+        var username : String,
+        var password : String,
+        var email : String,
+        var phone : String,
         val token : UserToken
     ) : com.arthe100.arshop.models.User()
     object GuestUser : com.arthe100.arshop.models.User()
