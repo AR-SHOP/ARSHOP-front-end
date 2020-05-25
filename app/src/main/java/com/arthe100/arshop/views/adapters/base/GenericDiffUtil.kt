@@ -2,7 +2,7 @@ package com.arthe100.arshop.views.adapters.base
 
 import androidx.recyclerview.widget.DiffUtil
 
-abstract class GenericDiffUtil<T>(
+class GenericDiffUtil<T>(
     private val oldItems: List<T>,
     private val newItems: List<T>,
     private val itemDiff: GenericItemDiff<T>

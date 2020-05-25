@@ -8,7 +8,10 @@ import com.arthe100.arshop.models.HomeSales
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.scripts.mvi.categories.CategoryState
 import com.arthe100.arshop.scripts.repositories.ProductRepository
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
+import java.lang.reflect.Type
 import javax.inject.Inject
 
 class ProductViewModel @Inject constructor(private val productRepo: ProductRepository) : ViewModel(){

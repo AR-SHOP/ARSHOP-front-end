@@ -23,7 +23,11 @@ import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.ILoadFragment
-import com.arthe100.arshop.views.adapters.*
+import com.arthe100.arshop.views.adapters.GroupRecyclerViewAdapter
+import com.arthe100.arshop.views.adapters.SliderAdapter
+import com.arthe100.arshop.views.adapters.base.GenericAdapter
+import com.arthe100.arshop.views.adapters.base.GenericItemDiff
+import com.arthe100.arshop.views.adapters.base.OnItemClickListener
 import com.arthe100.arshop.views.decorators.CircleIndicator
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
@@ -43,7 +47,7 @@ class HomeFragment @Inject constructor(
     private lateinit var model: ProductViewModel
     private lateinit var cartViewModel: CartViewModel
     private lateinit var messageManager: MessageManager
-    private lateinit var gridViewAdapter: HomeGridViewAdapter
+    private lateinit var homePageGrid: GenericAdapter<Product>
     private lateinit var dialogBox: DialogBoxManager
     private lateinit var snapHelper: PagerSnapHelper
     private lateinit var circleIndicator: CircleIndicator
@@ -62,7 +66,7 @@ class HomeFragment @Inject constructor(
             Category(3,"name5","a", "")
         )
 
-        private var products = arrayListOf<Product>(
+        private var products = arrayListOf(
         Product(1,"p1","a","b",123,"https://elcopcbonline.com/photos/product/4/176/4.jpg",""),
         Product(1,"p2","a","b",123,"https://elcopcbonline.com/photos/product/4/176/4.jpg",""),
         Product(1,"p3","a","b",123,"https://elcopcbonline.com/photos/product/4/176/4.jpg","")
@@ -82,16 +86,14 @@ class HomeFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
-    }
-
-    override fun onStart() {
+        setRecyclerView()
         setSearchView()
         model.onEvent(ProductUiAction.GetHomePageProducts)
         model.onEvent(ProductUiAction.GetHomePageSales)
         cartViewModel.onEvent(CartUiAction.GetCartOnStart)
-        super.onStart()
+        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
     }
+
 
 
     override fun toString(): String {
@@ -127,8 +129,9 @@ class HomeFragment @Inject constructor(
                 model.currentProducts = state.products
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
-                setGroupRecyclerView()
-                addProducts(products)
+                homePageGrid.addItems(state.products)
+//                setGroupRecyclerView()
+//                addProducts(products)
             }
             is ProductState.ProductDetailSuccess -> {
                 dialogBox.cancel()
@@ -166,12 +169,15 @@ class HomeFragment @Inject constructor(
         sliderViewAdapter.submitList(newList)
     }
 
-    private fun setImageSlider() {
+    private fun setSliderAdapter(){
         sliderViewAdapter = SliderAdapter()
         sliderViewAdapter.setOnItemClickListener(View.OnClickListener {
             Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
         })
+    }
 
+    private fun setImageSlider() {
+        setSliderAdapter()
         image_slider?.apply {
             setSliderAdapter(sliderViewAdapter)
             isAutoCycle = true
@@ -185,17 +191,44 @@ class HomeFragment @Inject constructor(
     private fun setGroupRecyclerView() {
 
 
-        groupAdapter = GroupRecyclerViewAdapter()
+//        groupAdapter = GroupRecyclerViewAdapter()
+//
+//        groupAdapter.setOnItemClickListener(object : OnItemClickListener {
+//            override fun onItemClick(position: Int) {
+//                TODO("Not yet implemented")
+//            }
+//        })
+//
+//        group_recycler_view?.apply {
+//            layoutManager = LinearLayoutManager(requireContext())
+//            adapter = groupAdapter
+//            isNestedScrollingEnabled = false
+//        }
+    }
 
-        groupAdapter.setOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                TODO("Not yet implemented")
-            }
-        })
 
+    private fun setAdapter(){
+        homePageGrid = object: GenericAdapter<Product>(){
+            override fun getLayoutId(position: Int, obj: Product): Int = R.layout.product_grid_item
+        }
+        homePageGrid.apply {
+//            setDiffUtil(object: GenericItemDiff<Product>{
+//                override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem.id == newItem.id
+//                override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem == newItem
+//            })
+            setItemListener(object: OnItemClickListener<Product>{
+                override fun onClickItem(data: Product) {
+                    model.onEvent(ProductUiAction.GetProductDetails(data))
+                }
+            })
+        }
+    }
+
+    private fun setRecyclerView(){
+        if(!this::homePageGrid.isInitialized) setAdapter()
         group_recycler_view?.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = groupAdapter
+            layoutManager = GridLayoutManager(requireContext() , 2)
+            adapter = homePageGrid
             isNestedScrollingEnabled = false
         }
     }

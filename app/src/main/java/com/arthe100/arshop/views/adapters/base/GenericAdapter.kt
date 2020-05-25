@@ -10,7 +10,7 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private var dataList = mutableListOf<T>()
     private var itemClickListener: OnItemClickListener<T>? = null
-    private var diffUtil: GenericDiffUtil<T>? = null
+    private var diffUtil: GenericItemDiff<T>? = null
 
     protected abstract fun getLayoutId(position: Int, obj: T) : Int
 
@@ -20,6 +20,8 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
                 .inflate(viewType, parent, false)
             , viewType)
     }
+
+    override fun getItemViewType(position: Int): Int = getLayoutId(position , dataList[position])
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as? Binder<T>)?.bind(dataList[position] , itemClickListener)
@@ -35,7 +37,11 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
 
         if(diffUtil != null)
         {
-            val result = DiffUtil.calculateDiff(diffUtil!!)
+            val result = DiffUtil.calculateDiff(
+                GenericDiffUtil(
+                    oldItems = dataList ,
+                    newItems = data ,
+                    itemDiff = diffUtil!!))
             dataList.clear()
             dataList.addAll(data)
             result.dispatchUpdatesTo(this)
@@ -46,8 +52,11 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
         notifyDataSetChanged()
     }
 
-    fun setDiffUtil(diffUtil: GenericDiffUtil<T>){
+    fun setDiffUtil(diffUtil: GenericItemDiff<T>){
         this.diffUtil = diffUtil
+    }
+    fun setItemListener(itemClickListener: OnItemClickListener<T>) {
+        this.itemClickListener = itemClickListener
     }
 
     internal interface Binder<T> {

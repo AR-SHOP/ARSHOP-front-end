@@ -79,9 +79,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:background="@color/colorBackground"
                     android:layoutDirection="rtl"
-                    android:textDirection="rtl"
-                    android:background="@color/colorBackground"/>
+                    android:textDirection="rtl" />
 
         </LinearLayout>
 
