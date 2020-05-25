@@ -83,17 +83,17 @@ abstract class FragmentModule{
     @Binds
     @IntoMap
     @FragmentKey(ChangePasswordFragment::class)
-    internal abstract fun provideCustomerCartFragment(fragment: ChangePasswordFragment) : Fragment
+    internal abstract fun provideChangePasswordFragment(fragment: ChangePasswordFragment) : Fragment
     @Binds
     @IntoMap
     @FragmentKey(ProfileInfoFragment::class)
-    internal abstract fun provideCustomerCartFragment(fragment: ProfileInfoFragment) : Fragment
+    internal abstract fun provideProfileInfoFragment(fragment: ProfileInfoFragment) : Fragment
     @Binds
     @IntoMap
     @FragmentKey(ChargeAccountFragment::class)
-    internal abstract fun provideCustomerCartFragment(fragment: ChargeAccountFragment) : Fragment
+    internal abstract fun provideChargeAccountFragment(fragment: ChargeAccountFragment) : Fragment
     @Binds
     @IntoMap
     @FragmentKey(EditProfileInfoFragment::class)
-    internal abstract fun provideCustomerCartFragment(fragment: EditProfileInfoFragment) : Fragment
+    internal abstract fun provideEditProfileInfoFragment(fragment: EditProfileInfoFragment) : Fragment
 }
