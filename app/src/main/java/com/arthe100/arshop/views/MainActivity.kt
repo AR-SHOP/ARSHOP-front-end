@@ -1,6 +1,5 @@
 package com.arthe100.arshop.views
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
@@ -10,12 +9,14 @@ import com.arthe100.arshop.scripts.di.MyFragmentFactory
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.fragments.*
+import com.arthe100.arshop.views.interfaces.ILoadFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import javax.inject.Inject
 import kotlin.system.exitProcess
 
 
-class MainActivity : BaseActivity(), ILoadFragment {
+class MainActivity : BaseActivity(),
+    ILoadFragment {
 
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var fragmentFactory: MyFragmentFactory

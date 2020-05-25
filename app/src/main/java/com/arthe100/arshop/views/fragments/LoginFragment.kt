@@ -6,14 +6,11 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
-import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
@@ -24,7 +21,7 @@ import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.ILoadFragment
+import com.arthe100.arshop.views.interfaces.ILoadFragment
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.login_fragment_layout.*

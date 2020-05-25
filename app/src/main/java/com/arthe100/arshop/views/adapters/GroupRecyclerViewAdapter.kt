@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Category
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
 
 class GroupRecyclerViewAdapter : BaseItemAdapter<Category>() {
 
@@ -15,7 +16,7 @@ class GroupRecyclerViewAdapter : BaseItemAdapter<Category>() {
 
     private lateinit var context: Context
     private var dataList : ArrayList<Category> = arrayListOf()
-    private lateinit var mListener: OnItemClickListener
+    private lateinit var mListener: OnItemClickListener<Category>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
@@ -37,7 +38,7 @@ class GroupRecyclerViewAdapter : BaseItemAdapter<Category>() {
 
     override fun getItemCount(): Int = dataList.size
 
-    override fun setOnItemClickListener(listener: OnItemClickListener) {
+    override fun setOnItemClickListener(listener: OnItemClickListener<Category>) {
         mListener = listener
     }
 

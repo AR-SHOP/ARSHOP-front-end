@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Category
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.category_card_item.view.*
@@ -14,7 +15,7 @@ class CategoryItemViewHolder(itemView: View) : BaseItemViewHolder<Category>(item
     private var categoryName = itemView.category_name
     private var categoryImage = itemView.category_image
 
-    override fun bind(data: Category, listener: OnItemClickListener) {
+    override fun bind(data: Category, listener: OnItemClickListener<Category>) {
 
         categoryName.text = data.title
         val requestOptions = RequestOptions()

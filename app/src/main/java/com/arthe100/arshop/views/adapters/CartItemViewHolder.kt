@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.CartItem
-import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.cart_item.view.*
@@ -21,7 +21,7 @@ class CartItemViewHolder(itemView: View) : BaseItemViewHolder<CartItem>(itemView
     private val txtQuantity = itemView.cart_count_text!!
 
 
-    override fun bind(data: CartItem, listener: OnItemClickListener) {
+    override fun bind(data: CartItem, listener: OnItemClickListener<CartItem>) {
         val product = data.product
 
         dataName.text = product.name
@@ -44,7 +44,7 @@ class CartItemViewHolder(itemView: View) : BaseItemViewHolder<CartItem>(itemView
         }
     }
 
-    override fun bind(data: CartItem, listeners: Map<String, OnItemClickListener>) {
+    override fun bind(data: CartItem, listeners: Map<String, OnItemClickListener<CartItem>>) {
 
 
         listeners["main"]?.let { bind(data , it) }

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
 
 abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -64,7 +65,7 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 }
-
-interface OnItemClickListener<T> {
-    fun onClickItem(data: T)
-}
+//
+//interface OnItemClickListener<T> {
+//    fun onClickItem(data: T)
+//}

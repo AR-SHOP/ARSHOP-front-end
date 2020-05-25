@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.product_grid_item.view.*
@@ -14,7 +15,7 @@ class ProductViewHolder(itemView: View) : BaseItemViewHolder<Product>(itemView) 
     private var productName = itemView.product_name
     private var productPrice = itemView.product_price
 
-    override fun bind(data: Product, listener: OnItemClickListener) {
+    override fun bind(data: Product, listener: OnItemClickListener<Product>) {
 
         productName.text = data.name
         productPrice.text = data.price.toString()
@@ -37,7 +38,7 @@ class ProductViewHolder(itemView: View) : BaseItemViewHolder<Product>(itemView) 
 
     }
 
-    override fun bind(data: Product, listeners: Map<String, OnItemClickListener>) {
+    override fun bind(data: Product, listeners: Map<String, OnItemClickListener<Product>>) {
         super.bind(data, listeners)
     }
 }

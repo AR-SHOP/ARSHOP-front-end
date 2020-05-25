@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
 
 class ProductAdapter : BaseItemAdapter<Product>() {
 
     private var dataList: ArrayList<Product> = arrayListOf()
-    private lateinit var mListener: OnItemClickListener
+    private lateinit var mListener: OnItemClickListener<Product>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ProductViewHolder(
@@ -29,7 +30,7 @@ class ProductAdapter : BaseItemAdapter<Product>() {
 
     override fun getItemCount(): Int = dataList.size
 
-    override fun setOnItemClickListener(listener: OnItemClickListener) {
+    override fun setOnItemClickListener(listener: OnItemClickListener<Product>) {
         mListener = listener
     }
 

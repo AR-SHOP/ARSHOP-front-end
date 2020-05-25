@@ -1,21 +1,19 @@
 package com.arthe100.arshop.views.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.CartItem
-import com.arthe100.arshop.models.Product
-import com.arthe100.arshop.views.adapters.BaseItemAdapter
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
 
 class CartItemAdapter(dataList: List<CartItem>) : BaseItemAdapter<CartItem>() {
 
-    private lateinit var mListener: OnItemClickListener
-    lateinit var plusListener: OnItemClickListener
-    lateinit var minusListener: OnItemClickListener
-    lateinit var deleteListener: OnItemClickListener
+    private lateinit var mListener: OnItemClickListener<CartItem>
+    lateinit var plusListener: OnItemClickListener<CartItem>
+    lateinit var minusListener: OnItemClickListener<CartItem>
+    lateinit var deleteListener: OnItemClickListener<CartItem>
     val dataList: MutableList<CartItem> = mutableListOf()
     val items: List<CartItem>
         get() = dataList
@@ -54,7 +52,7 @@ class CartItemAdapter(dataList: List<CartItem>) : BaseItemAdapter<CartItem>() {
 
     override fun getItemCount(): Int = dataList.size
 
-    override fun setOnItemClickListener(listener: OnItemClickListener) {
+    override fun setOnItemClickListener(listener: OnItemClickListener<CartItem>) {
         mListener = listener
     }
 
