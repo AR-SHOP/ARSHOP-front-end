@@ -1,10 +1,10 @@
 package com.arthe100.arshop.views.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
@@ -39,25 +39,31 @@ class ProductFragment @Inject constructor(
     private lateinit var model: ProductViewModel
     private lateinit var arModel: ArViewModel
 
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
         model = ViewModelProvider(requireActivity() , viewModelFactory).get(ProductViewModel::class.java)
         arModel = ViewModelProvider(requireActivity() , viewModelFactory).get(ArViewModel::class.java)
         cartViewModel = ViewModelProvider(requireActivity() , viewModelFactory).get(CartViewModel::class.java)
+        return inflater.inflate(R.layout.product_fragment_layout, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         model.currentViewState.observe(requireActivity() , Observer(::render))
         cartViewModel.currentViewState.observe(requireActivity() , Observer(::render))
-        return inflater.inflate(R.layout.product_fragment_layout, container, false)
     }
 
     override fun onStart() {
         super.onStart()
+        (requireActivity() as AppCompatActivity).setSupportActionBar(product_toolbar)
+        product_toolbar?.title = model.product.name
         product_details_name?.text = model.product.name
         product_details_brand?.text = model.product.manufacturer
         product_details_price?.text = model.product.price.toString()
         product_details_description?.text = model.product.description
+        inc_dec_cart_count?.setBackgroundColor(Color.TRANSPARENT)
         checkCartStatus()
 
         val requestOptions = RequestOptions()
@@ -89,6 +95,20 @@ class ProductFragment @Inject constructor(
                 add_to_cart_btn?.visibility = View.INVISIBLE
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.product_toolbar_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.add_to_wish_list -> {
+                messageManager.toast(requireContext(), "Clicked")
+            }
+        }
+        return true
     }
 
     override fun toString(): String {

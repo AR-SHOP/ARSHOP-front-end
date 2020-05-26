@@ -19,6 +19,7 @@ object ViewHolderFactory {
             R.layout.product_grid_item -> ProductGridViewHolder(view)
             R.layout.category_card_item -> CategoryItemViewHolder(view)
             R.layout.horizontal_product_recycler_view -> NestedRecyclerViewHolder(view)
+//            R.layout.user_comment_card_item -> CommentRecyclerViewHolder(view)
             else -> throw IllegalArgumentException("Wrong view type")
         }
     }

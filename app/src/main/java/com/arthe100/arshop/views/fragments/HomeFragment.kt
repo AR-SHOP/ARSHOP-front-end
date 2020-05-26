@@ -51,7 +51,6 @@ class HomeFragment @Inject constructor(
     private lateinit var discountSliderViewAdapter: GenericSliderAdapter<HomeSales>
 
 
-
     private var categoryList =
         arrayListOf<Category>(
             Category(1,"name1","a", ""),
@@ -163,7 +162,7 @@ class HomeFragment @Inject constructor(
         discountSliderViewAdapter.addItems(newList)
     }
 
-    private fun setSliderAdapter(){
+    private fun setSliderAdapter() {
         discountSliderViewAdapter = object : GenericSliderAdapter<HomeSales>() {}
         discountSliderViewAdapter.setViewType(R.layout.discount_card_view)
 
@@ -211,16 +210,19 @@ class HomeFragment @Inject constructor(
     }
 
 
-    private fun setAdapter(){
+    private fun setAdapter() {
         homePageGrid = object: GenericAdapter<Product>() {
             override fun getLayoutId(position: Int, obj: Product): Int = R.layout.product_grid_item
         }
         homePageGrid.apply {
-            setDiffUtil(object: GenericItemDiff<Product>{
-                override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem.id == newItem.id
-                override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem == newItem
+            setDiffUtil(object : GenericItemDiff<Product> {
+                override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean =
+                    oldItem.id == newItem.id
+
+                override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean =
+                    oldItem == newItem
             })
-            setItemListener(object:
+            setItemListener(object :
                 OnItemClickListener<Product> {
                 override fun onItemClick(data: Product) {
                     model.onEvent(ProductUiAction.GetProductDetails(data))
@@ -233,7 +235,7 @@ class HomeFragment @Inject constructor(
         }
     }
 
-    private fun setRecyclerView(){
+    private fun setRecyclerView() {
         if(!this::homePageGrid.isInitialized) setAdapter()
         group_recycler_view?.apply {
             layoutManager = GridLayoutManager(requireContext() , 2)
@@ -241,5 +243,4 @@ class HomeFragment @Inject constructor(
             isNestedScrollingEnabled = false
         }
     }
-
 }
