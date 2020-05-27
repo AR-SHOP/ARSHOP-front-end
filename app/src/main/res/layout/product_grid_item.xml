@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"
+        android:background="@color/colorBackground"
         android:layoutDirection="rtl"
         android:textDirection="rtl"
-        app:cardCornerRadius="15dp"
-        android:layout_centerInParent="true">
+        app:cardCornerRadius="15dp">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -18,10 +20,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:layout_weight="14"
+                android:adjustViewBounds="true"
                 android:elevation="10dp"
-                android:src="@drawable/ic_empty_background"
                 android:scaleType="fitXY"
-                android:adjustViewBounds="true" />
+                android:src="@drawable/white_background" />
 
 
         <TextView
@@ -29,23 +31,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
                 android:text="@string/product"
                 android:textColor="@color/colorPrimaryDark"
-                android:paddingTop="10dp"
-                android:paddingStart="10dp"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
         <TextView
                 android:id="@+id/product_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/price"
-                android:textColor="@color/colorSecondary"
-                android:paddingTop="10dp"
+                android:gravity="center"
                 android:paddingStart="10dp"
                 android:paddingBottom="10dp"
-                android:textSize="8sp"/>
+                android:text="@string/price"
+                android:textColor="@color/colorSecondary"
+                android:textSize="10sp" />
 
     </LinearLayout>
 

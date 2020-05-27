@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.messege.MessageManager
@@ -31,6 +32,7 @@ class EditProfileInfoFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as AppCompatActivity).setSupportActionBar(edit_profile_toolbar)
     }
 
     override fun onStart() {

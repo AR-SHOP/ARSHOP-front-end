@@ -1,55 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_below="@+id/search_bar"
         android:background="@color/colorBackground"
         android:layoutDirection="rtl"
-        android:textDirection="rtl">
+        android:textDirection="rtl"
+        tools:context=".views.fragments.ProfileInfoFragment">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/edit_profile_info"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/profile_info_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="10dp"
+            android:translationZ="30dp"
+            app:title="@string/profile_info"
+            android:backgroundTint="@color/colorBackground"
+            android:background="@drawable/small_rounded_corners"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="320dp"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.345"
-            app:layout_constraintHorizontal_bias="0.2"
-            android:elevation="1dp" />
-
-    <androidx.cardview.widget.CardView
-            android:id="@+id/profile_image"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:cardCornerRadius="75dp"
-            app:cardPreventCornerOverlap="false">
+            app:layout_constraintVertical_bias="1.0"/>
 
-        <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"/>
 
-    </androidx.cardview.widget.CardView>
+    <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/profile_picture"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_info_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/edit_profile_info_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="normal"
+            app:backgroundTint="@color/colorBackground"
+            app:tint="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_pencil"
+            app:layout_constraintTop_toTopOf="@id/profile_image"
+            app:layout_constraintBottom_toBottomOf="@id/profile_image"
+            app:layout_constraintLeft_toLeftOf="@id/profile_image"
+            app:layout_constraintRight_toRightOf="@id/profile_image"
+            app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintVertical_bias="0.96"/>
 
     <TextView
-            android:id="@+id/name_last_name_textView"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
+            android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="@string/name_last_name"
-            android:textSize="18sp"
+            android:text="@string/name"
+            android:textSize="14sp"
+            android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_image" />
@@ -59,16 +81,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="150dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            app:cardBackgroundColor="@color/colorPrimary"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:cardBackgroundColor="@color/colorBackground"
             app:cardCornerRadius="15dp"
-            app:cardElevation="1dp"
+            app:cardElevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_last_name_textView">
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintVertical_bias="0">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -80,8 +102,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
-                    android:paddingTop="30dp"
+                    android:paddingTop="15dp"
                     android:paddingEnd="10dp">
+
 
                 <TextView
                         android:layout_width="0dp"
@@ -90,8 +113,8 @@
                         android:gravity="start"
                         android:paddingStart="10dp"
                         android:text="@string/account_balance"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="18sp" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                 <TextView
                         android:id="@+id/account_balance_info_display"
@@ -101,25 +124,17 @@
                         android:gravity="end"
                         android:paddingEnd="10dp"
                         android:text="@string/default_acc_balance"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="15sp" />
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="12sp" />
 
             </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/stroke_shape"
-                    android:backgroundTint="@color/colorBackground" />
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
-                    android:paddingTop="10dp"
+                    android:paddingTop="15dp"
                     android:paddingEnd="10dp">
 
                 <TextView
@@ -129,8 +144,8 @@
                         android:gravity="start"
                         android:paddingStart="10dp"
                         android:text="@string/phone_number"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="18sp" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                 <TextView
                         android:id="@+id/phone_number_info_display"
@@ -140,25 +155,17 @@
                         android:gravity="end"
                         android:paddingEnd="10dp"
                         android:text="@string/sample_phone_number"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="15sp" />
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="12sp"/>
 
             </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/stroke_shape"
-                    android:backgroundTint="@color/colorBackground" />
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
-                    android:paddingTop="10dp"
+                    android:paddingTop="15dp"
                     android:paddingEnd="10dp">
 
                 <TextView
@@ -168,8 +175,8 @@
                         android:gravity="start"
                         android:paddingStart="10dp"
                         android:text="@string/email"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="18sp" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                 <TextView
                         android:id="@+id/email_info_display"
@@ -179,25 +186,17 @@
                         android:gravity="end"
                         android:paddingEnd="10dp"
                         android:text="@string/sample_email"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="15sp" />
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="12sp"/>
 
             </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/stroke_shape"
-                    android:backgroundTint="@color/colorBackground" />
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
-                    android:paddingTop="10dp"
+                    android:paddingTop="15dp"
                     android:paddingEnd="10dp">
 
                 <TextView
@@ -207,8 +206,8 @@
                         android:gravity="start"
                         android:paddingStart="10dp"
                         android:text="@string/national_id"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="18sp" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                 <TextView
                         android:id="@+id/NID_info_display"
@@ -218,25 +217,17 @@
                         android:gravity="end"
                         android:paddingEnd="10dp"
                         android:text="@string/NID_sample"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="15sp" />
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="12sp" />
 
             </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/stroke_shape"
-                    android:backgroundTint="@color/colorBackground" />
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
-                    android:paddingTop="10dp"
+                    android:paddingTop="15dp"
                     android:paddingEnd="10dp">
 
                 <TextView
@@ -246,8 +237,8 @@
                         android:gravity="start"
                         android:paddingStart="10dp"
                         android:text="@string/birth_date"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="18sp" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                 <TextView
                         android:id="@+id/birth_date_info_display"
@@ -257,25 +248,17 @@
                         android:gravity="end"
                         android:paddingEnd="10dp"
                         android:text="@string/birth_date_sample"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="15sp" />
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="12sp" />
 
             </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/stroke_shape"
-                    android:backgroundTint="@color/colorBackground" />
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
-                    android:paddingTop="10dp"
+                    android:paddingTop="15dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="15dp">
 
@@ -286,8 +269,8 @@
                         android:gravity="start"
                         android:paddingStart="10dp"
                         android:text="@string/card_number"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="18sp" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                 <TextView
                         android:id="@+id/card_number_info_display"
@@ -297,17 +280,22 @@
                         android:gravity="end"
                         android:paddingEnd="10dp"
                         android:text="@string/card_number_sample"
-                        android:textColor="@color/colorBackground"
-                        android:textSize="15sp" />
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="12sp" />
 
             </LinearLayout>
+
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -323,10 +311,11 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="4"
                 android:layout_gravity="center"
-                android:background="@drawable/small_rounded_corners"
-                android:backgroundTint="@color/colorPrimary"
+                android:background="@drawable/medium_rounded_corners"
+                android:backgroundTint="@color/colorBackground"
                 android:text="@string/increase_balance"
-                android:textColor="@color/colorBackground" />
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimaryDark" />
 
         <Button
                 android:elevation="0dp"
@@ -337,11 +326,13 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="4"
                 android:layout_gravity="center"
-                android:background="@drawable/small_rounded_corners"
-                android:backgroundTint="@color/colorPrimary"
+                android:background="@drawable/medium_rounded_corners"
+                android:backgroundTint="@color/colorBackground"
                 android:text="@string/change_pass"
-                android:textColor="@color/colorBackground" />
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimaryDark" />
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

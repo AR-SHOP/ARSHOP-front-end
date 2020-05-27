@@ -8,12 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.CartItem
 import com.arthe100.arshop.models.User
-import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.CartItemAdapter
-import com.arthe100.arshop.views.adapters.OnItemClickListener
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.orders_fragment.*
 import kotlinx.android.synthetic.main.orders_fragment.login_btn
@@ -77,10 +76,14 @@ class OrdersFragment @Inject constructor(
     private fun setRecyclerView() {
 //        cartItemAdapter = CartItemAdapter()
         cartItemAdapter.setOnItemClickListener(object :
-            OnItemClickListener {
+            OnItemClickListener<CartItem> {
             override fun onItemClick(position: Int) {
 //                productFragment.setProduct(cartItemAdapter.dataList[position])
 //                loadFragment(productFragment)
+            }
+
+            override fun onItemClick(data: CartItem) {
+                TODO("Not yet implemented")
             }
         })
         ordered_items_list.apply {

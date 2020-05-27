@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">ARSHOP</string>
-<!--    <string name="btnTable">Table</string>-->
-<!--    <string name="btnBed">Bed</string>-->
-<!--    <string name="btnDuck">Duck</string>-->
     <string name="repeat_password">تکرار کلمه عبور</string>
     <string name="error">خطا</string>
     <string name="ok">باشه</string>
@@ -10,10 +7,12 @@
     <string name="enter_phone_number">لطفا شماره تلفن خود را وارد کنید</string>
     <string name="continue_btn">ادامه</string>
     <string name="enter_password">لطفا رمز ورود خود را وارد نمایید</string>
-
-
-
-    <string name="modelDescription">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="modelDescription">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages
+        , and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
 
 
     <!--buttons-->
@@ -39,7 +38,8 @@
     <string name="profile">صفحه شخصی</string>
     <string name="delete_model">حذف</string>
     <string name="purchase">خرید</string>
-
+    <string name="increase_balance">افزایش موجودی</string>
+    <string name="change_pass">تغییر رمز عبور</string>
 
 
 
@@ -58,6 +58,7 @@
     <string name="name">نام</string>
     <string name="brand">سازنده محصول</string>
     <string name="description">توضیحات</string>
+    <string name="product_attributes">ویژگی‌های محصول</string>
     <string name="search">جستجو</string>
     <string name="phone_number">شماره تلفن</string>
     <string name="password">کلمه عبور</string>
@@ -69,17 +70,13 @@
     <string name="send_code_again">ارسال مجدد کد</string>
     <string name="model_name">نام مدل</string>
     <string name="model_details">ویژگی‌های مدل</string>
-
-
-
-
-    <!-- DialogBoxManager's strings -->
-    <string name="dialog_positive_button">باشه</string>
-    <string name="success_message">عملیات با موفقیت انجام شد</string>
-    <string name="error_title">خطا!</string>
-    <string name="error_message">عملیات دچار مشکل شده است</string>
-    <string name="caution_message">هشدار</string>
-    <string name="name_last_name">نام و نام خانوادگی</string>
+    <string name="view_all">مشاهده همه</string>
+    <string name="user_comments">نظرات کاربران</string>
+    <string name="sample_comments_count">۳ نظر</string>
+    <string name="send_comment">ثبت دیدگاه</string>
+    <string name="add_to_wishlist">افزودن به موردعلاقه‌ها</string>
+    <string name="sample_count">1</string>
+    <string name="sample_comment">خیلی خوب راضیم ازتون آفرین</string>
     <string name="account_balance">موجودی حساب</string>
     <string name="national_id">کد ملی</string>
     <string name="NID_sample">1092233886</string>
@@ -88,8 +85,6 @@
     <string name="card_number">شماره کارت</string>
     <string name="card_number_sample">1234-1234-1234-1234</string>
     <string name="default_acc_balance">0</string>
-    <string name="change_pass">تغییر رمز عبور</string>
-    <string name="increase_balance">افزایش موجودی</string>
     <string name="save_changes">ذخیره تغییرات</string>
     <string name="cancel_changes">انصراف</string>
     <string name="edit_account_info_text">ویرایش اصلاعات حساب کاربری</string>
@@ -100,5 +95,16 @@
     <string name="amount_rial">مبلغ (ریال)</string>
     <string name="enter_bank_portal">ورود به درگاه بانک</string>
     <string name="charge_account">شارژ حساب کاربری</string>
+    <string name="profile_info">اطلاعات حساب کاربری</string>
+
+
+
+
+    <!-- DialogBoxManager's strings -->
+    <string name="dialog_positive_button">باشه</string>
+    <string name="success_message">عملیات با موفقیت انجام شد</string>
+    <string name="error_title">خطا!</string>
+    <string name="error_message">عملیات دچار مشکل شده است</string>
+    <string name="caution_message">هشدار</string>
 
 </resources>

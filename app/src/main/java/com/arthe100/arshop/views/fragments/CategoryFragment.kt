@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.scripts.di.BaseApplication
@@ -18,8 +19,12 @@ import com.arthe100.arshop.scripts.mvi.categories.CategoryUiAction
 import com.arthe100.arshop.scripts.mvi.categories.CategoryViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.HomeGridViewAdapter
+import com.arthe100.arshop.views.adapters.base.GenericAdapter
+import com.arthe100.arshop.views.adapters.base.GenericItemDiff
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
+import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.categories_fragment_layout.*
 import kotlinx.android.synthetic.main.category_fragment_layout.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
@@ -33,7 +38,7 @@ class CategoryFragment @Inject constructor(
 
 
 
-    private lateinit var gridViewAdapter: HomeGridViewAdapter
+    private lateinit var gridViewAdapter: GenericAdapter<Product>
     private lateinit var model: CategoryViewModel
     private lateinit var productViewModel: ProductViewModel
     private val currentObserver = Observer(::render)
@@ -42,6 +47,7 @@ class CategoryFragment @Inject constructor(
                               savedInstanceState: Bundle?): View? {
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CategoryViewModel::class.java)
         productViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
+        requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.category_fragment_layout, container, false)
     }
 
@@ -52,20 +58,12 @@ class CategoryFragment @Inject constructor(
 
 
     override fun onStart() {
-        category_name.text = model.currentCategory.title
+        super.onStart()
+        category_name.text = model.currentCategory.info.title
         setSearchView()
         setGridView()
-        addProducts(model.products)
-
-        category_swipe_refresh_layout.isRefreshing = true
-        category_swipe_refresh_layout.setOnRefreshListener {
-            model.onEvent(CategoryUiAction.GetCategoryProduct(model.currentCategory))
-        }
-//        setGridView()
-//        addProducts(model.products)
-//        model.onEvent(CategoryUiAction.GetCategoryProduct(model.currentCategory))
-        category_swipe_refresh_layout.isRefreshing = false
-        super.onStart()
+//        addProducts(model.currentCategory.products)
+        model.onEvent(CategoryUiAction.GetCategoryProduct(model.currentCategory.info))
     }
 
     override fun toString(): String {
@@ -76,15 +74,14 @@ class CategoryFragment @Inject constructor(
         when(state){
             is CategoryState.IdleState -> {
                 dialogBoxManager.cancel()
-                category_swipe_refresh_layout?.isRefreshing = false
             }
             is CategoryState.LoadingState -> {
-                category_swipe_refresh_layout?.isRefreshing = true
+                dialogBoxManager.cancel()
             }
             is CategoryState.GetProductSuccess -> {
                 dialogBoxManager.cancel()
-                model.products = state.products
-                addProducts(state.products)
+                model.setProducts(state.products)
+                gridViewAdapter.addItems(state.products)
             }
             is CategoryState.Failure -> {
                 dialogBoxManager.cancel()
@@ -98,19 +95,44 @@ class CategoryFragment @Inject constructor(
     private fun addProducts(data: List<Product>) {
         val list = mutableListOf<Product>()
         list.addAll(data)
-        gridViewAdapter.submitList(list)
+        gridViewAdapter.addItems(list)
+    }
+
+    private fun setAdapter() {
+        gridViewAdapter = object: GenericAdapter<Product>() {
+            override fun getLayoutId(position: Int, obj: Product): Int = R.layout.product_grid_item
+        }
+
+        gridViewAdapter.apply {
+            setDiffUtil(object : GenericItemDiff<Product> {
+                override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean =
+                    oldItem.id == newItem.id
+
+                override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean =
+                    oldItem == newItem
+            })
+            setItemListener(object :
+                OnItemClickListener<Product> {
+                override fun onItemClick(data: Product) {
+                    productViewModel.product = data
+                    loadFragment(ProductFragment::class.java)
+                }
+
+                override fun onItemClick(position: Int) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
+
     }
 
     private fun setGridView() {
-        gridViewAdapter = HomeGridViewAdapter(requireContext())
 
-        category_grid_view.setOnItemClickListener { _, _, pos, _ ->
-            productViewModel.product = gridViewAdapter.dataList[pos]
-            
-        }
-
-        category_grid_view.apply {
+        if(!this::gridViewAdapter.isInitialized) setAdapter()
+        category_group_recycler_view?.apply {
+            layoutManager = GridLayoutManager(requireContext() , 2)
             adapter = gridViewAdapter
+            isNestedScrollingEnabled = false
         }
     }
 

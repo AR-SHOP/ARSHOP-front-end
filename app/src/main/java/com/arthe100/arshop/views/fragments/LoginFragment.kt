@@ -1,6 +1,8 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
-import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
@@ -20,7 +21,7 @@ import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.ILoadFragment
+import com.arthe100.arshop.views.interfaces.ILoadFragment
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.login_fragment_layout.*
@@ -69,6 +70,29 @@ class LoginFragment @Inject constructor(
                     "already logged in! user: ${Gson().fromJson(user , User.User::class.java).username}")
             }
         }
+
+        login_username.setText(model.phone)
+        login_password.setText(model.password)
+
+        login_username.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                model.phone = p0.toString()
+            }
+        })
+        login_password.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                model.password = p0.toString()
+            }
+        })
+
 
         login_btn.setOnClickListener {
             model.onEvent(AuthUiAction.LoginAction(login_password.text.toString() , login_username.text.toString()))

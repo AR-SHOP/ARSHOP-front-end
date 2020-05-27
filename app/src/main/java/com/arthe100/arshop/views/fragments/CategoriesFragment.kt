@@ -10,18 +10,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Category
-import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.mvi.categories.CategoryState
 import com.arthe100.arshop.scripts.mvi.categories.CategoryUiAction
 import com.arthe100.arshop.scripts.mvi.categories.CategoryViewModel
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.adapters.CategoryItemAdapter
-import com.arthe100.arshop.views.adapters.OnItemClickListener
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
+import com.arthe100.arshop.views.adapters.base.GenericAdapter
+import com.arthe100.arshop.views.adapters.base.GenericItemDiff
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
-import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.categories_fragment_layout.*
-import kotlinx.android.synthetic.main.category_fragment_layout.*
 import javax.inject.Inject
 
 class CategoriesFragment @Inject constructor(
@@ -30,7 +28,7 @@ class CategoriesFragment @Inject constructor(
 ) : BaseFragment() {
 
     private lateinit var model: CategoryViewModel
-    private lateinit var categoryItemAdapter: CategoryItemAdapter
+    private lateinit var categoryItemAdapter: GenericAdapter<Category>
     private val currentObserver = Observer(::render)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -42,11 +40,12 @@ class CategoriesFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setSearchView()
+        setRecyclerView()
         model.currentViewState.observe(requireActivity() ,currentObserver)
     }
 
     override fun onStart() {
-        setSearchView()
         categories_swipe_refresh?.isRefreshing = true
         categories_swipe_refresh?.setOnRefreshListener {
             model.onEvent(CategoryUiAction.GetCategories)
@@ -68,16 +67,16 @@ class CategoriesFragment @Inject constructor(
                 categories_swipe_refresh?.isRefreshing = true
             }
             is CategoryState.GetCategorySuccess -> {
+                model.categories = state.categories
                 dialogBoxManager.cancel()
                 categories_swipe_refresh?.isRefreshing = false
-                setRecyclerView()
-                addCategories(state.categories)
+                categoryItemAdapter.addItems(state.categories)
             }
             is CategoryState.GetProductSuccess -> {
                 dialogBoxManager.cancel()
                 categories_swipe_refresh?.isRefreshing = false
-                model.products = state.products
-                loadFragment(CategoriesFragment::class.java)
+                model.setProducts(state.products)
+                loadFragment(CategoryFragment::class.java)
             }
             is CategoryState.Failure -> {
                 dialogBoxManager.cancel()
@@ -102,26 +101,43 @@ class CategoriesFragment @Inject constructor(
         })
     }
 
-    private fun addCategories(data: List<Category>) {
-        if(!this::categoryItemAdapter.isInitialized) setRecyclerView()
-        val list = mutableListOf<Category>()
-        list.addAll(data)
-        categoryItemAdapter.submitList(list)
-    }
+//    private fun addCategories(data: List<Category>) {
+//        if(!this::categoryItemAdapter.isInitialized) setRecyclerView()
+//        val list = mutableListOf<Category>()
+//        list.addAll(data)
+//        categoryItemAdapter.submitList(list)
+//    }
 
     private fun setRecyclerView() {
-
-        categoryItemAdapter = CategoryItemAdapter()
-        categoryItemAdapter.setOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                val cat = categoryItemAdapter.items[position]
-                model.onEvent(CategoryUiAction.GetCategoryProduct(cat))
-            }
-        })
-
+        if(!this::categoryItemAdapter.isInitialized) setAdapter()
         categories_recyclerView?.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = categoryItemAdapter
+        }
+    }
+
+
+    private fun setAdapter() {
+
+        categoryItemAdapter = object: GenericAdapter<Category>() {
+            override fun getLayoutId(position: Int, obj: Category): Int = R.layout.category_card_item
+        }
+
+        categoryItemAdapter.apply {
+            setDiffUtil(object: GenericItemDiff<Category> {
+                override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean = oldItem.id == newItem.id
+                override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean = oldItem == newItem
+            })
+            setItemListener(object:
+                OnItemClickListener<Category> {
+                override fun onItemClick(data: Category) {
+                    model.onEvent(CategoryUiAction.GetCategoryProduct(data))
+                }
+
+                override fun onItemClick(position: Int) {
+                    TODO("Not yet implemented")
+                }
+            })
         }
     }
 }

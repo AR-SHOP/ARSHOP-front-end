@@ -9,12 +9,14 @@ import com.arthe100.arshop.scripts.di.MyFragmentFactory
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.fragments.*
+import com.arthe100.arshop.views.interfaces.ILoadFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import javax.inject.Inject
 import kotlin.system.exitProcess
 
 
-class MainActivity : BaseActivity(), ILoadFragment {
+class MainActivity : BaseActivity(),
+    ILoadFragment {
 
     @Inject lateinit var messageManager: MessageManager
     @Inject lateinit var fragmentFactory: MyFragmentFactory
@@ -23,7 +25,7 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     private var backPressedTime: Long = 0
     private val TAG : String? = MainActivity::class.simpleName
-
+    private var prevNavBarId = -1
 
     override fun inject() {
         (application as BaseApplication)
@@ -32,7 +34,6 @@ class MainActivity : BaseActivity(), ILoadFragment {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         supportFragmentManager.fragmentFactory = fragmentFactory
         setContentView(R.layout.activity_main_layout)
@@ -46,6 +47,9 @@ class MainActivity : BaseActivity(), ILoadFragment {
             loadFragment(HomeFragment::class.java)
         }
         bottom_navbar.setOnNavigationItemSelectedListener {item ->
+            if(prevNavBarId == item.itemId)
+                return@setOnNavigationItemSelectedListener false
+            prevNavBarId = item.itemId
 
             val klass = when (item.itemId) {
                 R.id.btm_navbar_home -> HomeFragment::class.java
@@ -66,18 +70,9 @@ class MainActivity : BaseActivity(), ILoadFragment {
 
     override fun onBackPressed() {
 
-        val fragment = getTheLastFragment()
+        val fragment = getTheLastFragment() as? BaseFragment
 
-        val isMain =
-            fragment is HomeFragment ||
-            fragment is CartFragment ||
-            fragment is CategoriesFragment ||
-            fragment is LoginFragment ||
-            fragment is ProfileFragment
-
-
-        if (isMain) {
-
+        if (fragment?.isMain() == true) {
             if (fragment is HomeFragment) {
                 if (backPressedTime + 2000 > System.currentTimeMillis()) {
                     this.finish()
@@ -90,16 +85,17 @@ class MainActivity : BaseActivity(), ILoadFragment {
                 }
             }
 
-            supportFragmentManager.popBackStack()
+            supportFragmentManager.popBackStackImmediate()
             bottom_navbar.selectedItemId = R.id.btm_navbar_home
         }
         else {
-            supportFragmentManager.popBackStack()
+            supportFragmentManager.popBackStackImmediate()
         }
     }
 
     private fun getTheLastFragment() : Fragment? {
         val backStackSize = supportFragmentManager.backStackEntryCount
+        if(backStackSize <= 0) return null
         val fragmentTag: String? =
             supportFragmentManager.getBackStackEntryAt(backStackSize - 1).name
         return supportFragmentManager.findFragmentByTag(fragmentTag)

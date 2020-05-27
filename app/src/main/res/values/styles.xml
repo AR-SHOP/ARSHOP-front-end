@@ -1,9 +1,12 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:textDirection">rtl</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="backgroundColor">@color/colorBackground</item>
         <item name="fontFamily">@font/iran_sans</item>
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="android:textColor">@color/colorPrimary</item>
@@ -12,6 +15,8 @@
     </style>
 
     <style name="bottomNavBarStyle">
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:textDirection">rtl</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>

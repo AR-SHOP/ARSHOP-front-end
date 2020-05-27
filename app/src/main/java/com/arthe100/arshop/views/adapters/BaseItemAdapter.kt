@@ -2,7 +2,7 @@ package com.arthe100.arshop.views.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.arthe100.arshop.views.adapters.OnItemClickListener
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
 
 abstract class BaseItemAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -16,6 +16,6 @@ abstract class BaseItemAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder
 
     override fun getItemCount(): Int = 0
 
-    abstract fun setOnItemClickListener(listener: OnItemClickListener)
+    abstract fun setOnItemClickListener(listener: OnItemClickListener<T>)
     abstract fun submitList(data: MutableList<T>)
 }

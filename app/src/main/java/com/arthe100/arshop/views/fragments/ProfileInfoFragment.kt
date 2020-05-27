@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
+import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
@@ -16,9 +19,10 @@ import kotlinx.android.synthetic.main.profile_info_fragment_layout.*
 import javax.inject.Inject
 
 class ProfileInfoFragment @Inject constructor(
-    private val userSession: UserSession
-): BaseFragment(){
+    private val viewModelProviderFactory: ViewModelProvider.Factory,
+    private val userSession: UserSession): BaseFragment(){
 
+    private lateinit var profileViewModel: ProfileViewModel
     private lateinit var messageManager: MessageManager
     private lateinit var dialogBox: DialogBoxManager
     private val TAG = ProfileInfoFragment::class.simpleName
@@ -28,11 +32,13 @@ class ProfileInfoFragment @Inject constructor(
         messageManager = MessageManager()
         dialogBox = DialogBoxManager()
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
+        profileViewModel = ViewModelProvider(requireActivity(), viewModelProviderFactory).get(ProfileViewModel::class.java)
         return inflater.inflate(R.layout.profile_info_fragment_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as AppCompatActivity).setSupportActionBar(profile_info_toolbar)
     }
 
     override fun onStart() {
@@ -40,13 +46,7 @@ class ProfileInfoFragment @Inject constructor(
 
         when (userSession.user) {
             is User.User -> {
-                name_last_name_textView.text = (userSession.user as User.User).username
-                account_balance_info_display.text = "1000"
-                phone_number_info_display.text = (userSession.user as User.User).phone
-                email_info_display.text = (userSession.user as User.User).email
-                NID_info_display.text = "1090807255"
-                birth_date_info_display.text = "16/03/1374"
-                card_number_info_display.text = "6037-1255-7884-3321"
+
             }
 
             is User.GuestUser -> {
@@ -55,7 +55,7 @@ class ProfileInfoFragment @Inject constructor(
         }
 
 
-        edit_profile_info.setOnClickListener {
+        edit_profile_info_fab.setOnClickListener {
             loadFragment(EditProfileInfoFragment::class.java)
         }
 

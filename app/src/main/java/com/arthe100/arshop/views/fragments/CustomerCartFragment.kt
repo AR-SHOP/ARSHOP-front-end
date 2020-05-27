@@ -13,7 +13,6 @@ import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Cart
 import com.arthe100.arshop.models.CartItem
 import com.arthe100.arshop.models.User
-import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
@@ -22,7 +21,7 @@ import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.scripts.mvi.cart.CartState
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
-import com.arthe100.arshop.views.adapters.OnItemClickListener
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.CartItemAdapter
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
@@ -85,7 +84,11 @@ class CustomerCartFragment @Inject constructor(
                     model.onEvent(CartUiAction.ClearCart)
                     delayEnabled(delete_all_cart_btn!!)
                 }
-                model.onEvent(CartUiAction.GetCart)
+
+                model.onEvent(
+                    if(model.currentCart.value == null) CartUiAction.GetCart
+                    else CartUiAction.GetCartInBackground
+                )
             }
         }
     }
@@ -134,7 +137,7 @@ class CustomerCartFragment @Inject constructor(
                 empty_cart_layout?.visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
-                setRecyclerView(products)
+                if(!this::cartItemAdapter.isInitialized) setRecyclerView(products)
             }
             is CartState.AddToCartState -> {
                 dialogBox.cancel()
@@ -186,28 +189,47 @@ class CustomerCartFragment @Inject constructor(
     private fun setRecyclerView(cartItems: List<CartItem>) {
         cartItemAdapter = CartItemAdapter(cartItems)
         cartItemAdapter.setOnItemClickListener(object :
-            OnItemClickListener {
+            OnItemClickListener<CartItem> {
             override fun onItemClick(position: Int) {
                 productViewModel.product = cartItemAdapter.items[position].product
                 loadFragment(ProductFragment::class.java)
             }
+
+            override fun onItemClick(data: CartItem) {
+                TODO("Not yet implemented")
+            }
         })
-        cartItemAdapter.plusListener = object : OnItemClickListener{
+        cartItemAdapter.plusListener = object :
+            OnItemClickListener<CartItem> {
             override fun onItemClick(position: Int) {
                 val cartItem = cartItemAdapter.items[position]
                 model.onEvent(CartUiAction.IncreaseQuantity(cartItem.product.id, cartItem.quantity))
             }
+
+            override fun onItemClick(data: CartItem) {
+                TODO("Not yet implemented")
+            }
         }
-        cartItemAdapter.minusListener = object: OnItemClickListener{
+        cartItemAdapter.minusListener = object:
+            OnItemClickListener<CartItem> {
             override fun onItemClick(position: Int) {
                 val cartItem = cartItemAdapter.items[position]
                 model.onEvent(CartUiAction.DecreaseQuantity(cartItem.product.id , cartItem.quantity))
             }
+
+            override fun onItemClick(data: CartItem) {
+                TODO("Not yet implemented")
+            }
         }
-        cartItemAdapter.deleteListener = object: OnItemClickListener{
+        cartItemAdapter.deleteListener = object:
+            OnItemClickListener<CartItem> {
             override fun onItemClick(position: Int) {
                 val cartItem = cartItemAdapter.items[position]
                 model.onEvent(CartUiAction.RemoveFromCart(cartItem.product.id))
+            }
+
+            override fun onItemClick(data: CartItem) {
+                TODO("Not yet implemented")
             }
         }
 

@@ -63,6 +63,7 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
         when(action){
             CartUiAction.ClearCart -> clearCart()
             CartUiAction.GetCart -> getCart()
+            is CartUiAction.GetCartInBackground -> getCart(false)
             CartUiAction.GetCartOnStart -> getCartOnStart()
             is CartUiAction.AddToCart -> add(action.id , action.quantity)
             is CartUiAction.IncreaseQuantity -> increase(action.id , action.offset)
@@ -79,9 +80,9 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
     }
 
 
-    private fun getCart(){
+    private fun getCart(loading: Boolean = true){
 
-        _currentViewState.value = CartState.LoadingState
+        if(loading) _currentViewState.value = CartState.LoadingState
 
         viewModelScope.launch {
             val state = cartRepo.get()

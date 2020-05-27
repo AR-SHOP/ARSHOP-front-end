@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.ImageView
-import androidx.recyclerview.widget.DiffUtil
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
 import com.bumptech.glide.Glide
@@ -29,8 +27,8 @@ class HomeGridViewAdapter(val context: Context) : BaseAdapter() {
 
 
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_white_background)
-            .error(R.drawable.ic_white_background)
+            .placeholder(R.drawable.white_background)
+            .error(R.drawable.white_background)
 
 
         Glide.with(context)
@@ -53,6 +51,7 @@ class HomeGridViewAdapter(val context: Context) : BaseAdapter() {
     }
 
     override fun getCount(): Int = dataList.size
+
 
     fun submitList(data: MutableList<Product>) {
 

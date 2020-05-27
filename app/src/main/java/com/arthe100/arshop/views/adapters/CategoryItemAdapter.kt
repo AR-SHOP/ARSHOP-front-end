@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Category
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
 
 class CategoryItemAdapter : BaseItemAdapter<Category>() {
 
-    private lateinit var mListener: OnItemClickListener
+    private lateinit var mListener: OnItemClickListener<Category>
     private var dataList: MutableList<Category> = arrayListOf()
     val items: List<Category>
         get() = dataList
@@ -34,7 +35,7 @@ class CategoryItemAdapter : BaseItemAdapter<Category>() {
         return dataList.size
     }
 
-    override fun setOnItemClickListener(listener: OnItemClickListener) {
+    override fun setOnItemClickListener(listener: OnItemClickListener<Category>) {
         mListener = listener
     }
 
