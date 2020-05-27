@@ -27,7 +27,6 @@ class ChangePasswordFragment @Inject constructor(
                               savedInstanceState: Bundle?): View? {
         messageManager = MessageManager()
         dialogBox = DialogBoxManager()
-        requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.change_password_fragment_layout, container, false)
     }
 

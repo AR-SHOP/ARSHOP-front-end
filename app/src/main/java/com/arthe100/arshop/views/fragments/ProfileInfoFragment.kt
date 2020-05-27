@@ -21,13 +21,13 @@ class ProfileInfoFragment @Inject constructor(
 
     private lateinit var messageManager: MessageManager
     private lateinit var dialogBox: DialogBoxManager
-    private val TAG = ChangePasswordFragment::class.simpleName
+    private val TAG = ProfileInfoFragment::class.simpleName
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         messageManager = MessageManager()
         dialogBox = DialogBoxManager()
-        requireActivity().bottom_navbar.visibility = View.VISIBLE
+        requireActivity().bottom_navbar.visibility = View.INVISIBLE
         return inflater.inflate(R.layout.profile_info_fragment_layout, container, false)
     }
 

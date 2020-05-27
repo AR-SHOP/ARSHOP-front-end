@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="230dp"
+                android:layout_marginTop="250dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp">
 
@@ -48,7 +48,7 @@
                     android:text="@string/save_changes"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
-                    android:elevation="10dp"/>
+                    android:elevation="8dp"/>
 
             <Button
                     android:id="@+id/cancel_changes"
@@ -61,7 +61,7 @@
                     android:text="@string/cancel_changes"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
-                    android:elevation="10dp"/>
+                    android:elevation="8dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -72,7 +72,9 @@
             app:cardBackgroundColor="@color/colorBackground"
             app:cardCornerRadius="15dp"
             app:cardUseCompatPadding="true"
-            app:cardElevation="20dp"
+            app:cardElevation="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -20,13 +20,12 @@ class ChargeAccountFragment @Inject constructor(
 
     private lateinit var messageManager: MessageManager
     private lateinit var dialogBox: DialogBoxManager
-    private val TAG = ChangePasswordFragment::class.simpleName
+    private val TAG = ChargeAccountFragment::class.simpleName
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         messageManager = MessageManager()
         dialogBox = DialogBoxManager()
-        requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.charge_account_fragment_layout, container, false)
     }
 
