@@ -4,26 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
-import com.arthe100.arshop.models.CartItem
 import com.arthe100.arshop.models.User
-import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.adapters.CartItemAdapter
-import com.arthe100.arshop.views.adapters.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.orders_fragment.*
-import kotlinx.android.synthetic.main.orders_fragment.login_btn
 import javax.inject.Inject
 
 class OrdersFragment @Inject constructor(
     private val session: UserSession
 ) : BaseFragment() {
 
-    lateinit var cartItemAdapter: CartItemAdapter
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -53,9 +46,6 @@ class OrdersFragment @Inject constructor(
         }
     }
 
-    private fun addProducts(products: MutableList<CartItem>) {
-        cartItemAdapter.submitList(products)
-    }
 
     override fun toString(): String {
         return "Orders"
@@ -73,21 +63,21 @@ class OrdersFragment @Inject constructor(
     }
 
 
-
-    private fun setRecyclerView() {
-//        cartItemAdapter = CartItemAdapter()
-        cartItemAdapter.setOnItemClickListener(object :
-            OnItemClickListener {
-            override fun onItemClick(position: Int) {
-//                productFragment.setProduct(cartItemAdapter.dataList[position])
-//                loadFragment(productFragment)
-            }
-        })
-        ordered_items_list.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = cartItemAdapter
-        }
-    }
+//
+//    private fun setRecyclerView() {
+////        cartItemAdapter = CartItemAdapter()
+//        cartItemAdapter.setOnItemClickListener(object :
+//            OnItemClickListener {
+//            override fun onItemClick(position: Int) {
+////                productFragment.setProduct(cartItemAdapter.dataList[position])
+////                loadFragment(productFragment)
+//            }
+//        })
+//        ordered_items_list.apply {
+//            layoutManager = LinearLayoutManager(requireContext())
+//            adapter = cartItemAdapter
+//        }
+//    }
 
 
 }

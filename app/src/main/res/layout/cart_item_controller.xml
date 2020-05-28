@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/inc_dec_cart_count"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+    <ImageButton
+            android:id="@+id/plus_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_plus"
+            android:padding="10dp"
+            android:background="@color/colorBackground"
+            android:tint="@color/colorPrimary" />
+
+    <TextView
+            android:id="@+id/cart_count_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="1"
+            android:padding="5dp"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"/>
+
+    <ImageButton
+            android:id="@+id/minus_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_minus"
+            android:padding="10dp"
+            android:background="@color/colorBackground"
+            android:tint="@color/colorPrimary"/>
+
+    <ImageButton
+            android:id="@+id/delete_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_delete"
+            android:background="@color/colorBackground"
+            android:tint="@color/colorPrimary"
+            android:padding="5dp"
+            android:layout_marginRight="20dp"/>
+
+</LinearLayout>
