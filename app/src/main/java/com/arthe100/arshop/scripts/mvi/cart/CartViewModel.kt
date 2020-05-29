@@ -21,32 +21,19 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
     val currentViewState : LiveData<CartState>
         get() = _currentViewState
 
-    private val _currentCart = MutableLiveData<Cart>()
-    val currentCart: LiveData<Cart>
-        get() = _currentCart
 
+    var currentCart: Cart? = null
 
     fun isInCart(id: Long) : Boolean{
-        val cart = _currentCart.value
 
-        return cart?.cartItems
+        return currentCart?.cartItems
             ?.map { it.product.id }
             ?.contains(id) ?: false
     }
 
     fun getCartItemById(id: Long) : CartItem?{
-        val cart = currentCart.value
+        val cart = currentCart
         return cart?.cartItems?.singleOrNull { it.product.id == id }
-    }
-
-    fun updateCart(){
-        _currentCart.value = _currentCart.value
-    }
-    fun updateCart(updateAdapterFun: (cartItems: List<CartItem>) -> Unit){
-        if(_currentCart.value == null)
-            return
-        _currentCart.value = _currentCart.value
-        updateAdapterFun(_currentCart.value!!.cartItems)
     }
 
     private var currentQuantity: Int = -1
@@ -54,7 +41,7 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
     private var currentJob: Job? = null
 
     fun logout(){
-        _currentCart.value = null
+        currentCart = null
         _currentViewState.value = CartState.LogoutState
     }
 
@@ -63,7 +50,7 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
         when(action){
             CartUiAction.ClearCart -> clearCart()
             CartUiAction.GetCart -> getCart()
-            is CartUiAction.GetCartInBackground -> getCart(false)
+            is CartUiAction.GetCartInBackground -> getCart()
             CartUiAction.GetCartOnStart -> getCartOnStart()
             is CartUiAction.AddToCart -> add(action.id , action.quantity)
             is CartUiAction.IncreaseQuantity -> increase(action.id , action.offset)
@@ -80,29 +67,22 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
     }
 
 
-    private fun getCart(loading: Boolean = true){
+    private fun getCart(){
 
-        if(loading) _currentViewState.value = CartState.LoadingState
+        if(currentCart != null)
+            _currentViewState.value = CartState.GetCartState(currentCart!!)
+        else
+            _currentViewState.value = CartState.LoadingState
 
         viewModelScope.launch {
-            val state = cartRepo.get()
-            when(state){
-                is CartState.GetCartState -> {
-                    _currentCart.value = state.cart
-                }
-            }
-            _currentViewState.value = state
+            _currentViewState.value = cartRepo.get()
         }
     }
     private fun getCartOnStart(){
         viewModelScope.launch {
 
-            val state = cartRepo.get()
-            when(state){
-                is CartState.GetCartState -> {
-                    _currentCart.value = state.cart
-                }
-            }
+            _currentViewState.value = cartRepo.get()
+
         }
     }
 
@@ -156,33 +136,21 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
 
     private fun add(id : Long , quantity: Int){
         viewModelScope.launch {
-            val state = cartRepo.add(
+            _currentViewState.value = cartRepo.add(
                 AddCart(
                     id = id,
                     quantity = quantity
                 )
             )
-            when(state){
-                is CartState.AddToCartState -> {
-                    _currentCart.value = state.cart
-                }
-            }
-            _currentViewState.value = state
         }
     }
     private fun remove(id : Long ){
         viewModelScope.launch {
-            val state = cartRepo.remove(
+            _currentViewState.value = cartRepo.remove(
                 RemoveCart(
                     id = id
                 )
             )
-            when(state){
-                is CartState.RemoveFromCartState -> {
-                    _currentCart.value = state.cart
-                }
-            }
-            _currentViewState.value = state
         }
     }
 

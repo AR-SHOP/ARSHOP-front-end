@@ -155,7 +155,6 @@ class ProductFragment @Inject constructor(
             cartItem.quantity = newQuantity
             cart_count_text?.text = newQuantity.toString()
             cartViewModel.onEvent(CartUiAction.IncreaseQuantity(cartItem.product.id, cartItem.quantity))
-            cartViewModel.updateCart()
         }
         minus_btn?.setOnClickListener{
             val cartItem = cartViewModel.getCartItemById(model.product.id) ?: return@setOnClickListener
@@ -163,7 +162,6 @@ class ProductFragment @Inject constructor(
             cartItem.quantity = newQuantity
             cart_count_text?.text = newQuantity.toString()
             cartViewModel.onEvent(CartUiAction.DecreaseQuantity(cartItem.product.id , cartItem.quantity))
-            cartViewModel.updateCart()
         }
         delete_btn?.setOnClickListener{
             val cartItem = cartViewModel.getCartItemById(model.product.id) ?: return@setOnClickListener
@@ -171,7 +169,6 @@ class ProductFragment @Inject constructor(
             cartViewModel.onEvent(CartUiAction.RemoveFromCart(cartItem.product.id))
             add_to_cart_btn?.visibility = View.VISIBLE
             inc_dec_cart_count?.visibility = View.INVISIBLE
-            cartViewModel.updateCart()
         }
 
         if(cartViewModel.isInCart(model.product.id))

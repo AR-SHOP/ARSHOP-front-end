@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Cart
@@ -86,7 +87,7 @@ class CustomerCartFragment @Inject constructor(
                 }
 
                 model.onEvent(
-                    if(model.currentCart.value == null) CartUiAction.GetCart
+                    if(model.currentCart == null) CartUiAction.GetCart
                     else CartUiAction.GetCartInBackground
                 )
             }
@@ -131,6 +132,7 @@ class CustomerCartFragment @Inject constructor(
                 dialogBox.showDialog(requireActivity(),MessageType.LOAD)
             }
             is CartState.GetCartState -> {
+                model.currentCart = state.cart
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
                 cart_items_list?.visibility = View.VISIBLE
@@ -140,6 +142,7 @@ class CustomerCartFragment @Inject constructor(
                 if(!this::cartItemAdapter.isInitialized) setRecyclerView(products)
             }
             is CartState.AddToCartState -> {
+                model.currentCart = state.cart
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
@@ -147,6 +150,7 @@ class CustomerCartFragment @Inject constructor(
                 setRecyclerView(products)
             }
             is CartState.RemoveFromCartState -> {
+                model.currentCart = state.cart
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
@@ -156,9 +160,12 @@ class CustomerCartFragment @Inject constructor(
             is CartState.Failure -> {
                 requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
-                model.updateCart(::setRecyclerView)
+
+                if(model.currentCart != null)
+                    setRecyclerView(model.currentCart?.cartItems!!)
             }
             is CartState.ClearCart -> {
+                model.currentCart = state.cart
                 dialogBox.cancel()
                 requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
@@ -230,10 +237,15 @@ class CustomerCartFragment @Inject constructor(
             override fun areContentsTheSame(oldItem: CartItem, newItem: CartItem): Boolean =
                 oldItem.quantity == newItem.quantity
         })
+        val animator = DefaultItemAnimator()
+        animator.apply {
+            addDuration = 500
+        }
 
         cart_items_list.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = cartItemAdapter
+            itemAnimator =animator
         }
 
         cartItemAdapter.addItems(cartItems)
