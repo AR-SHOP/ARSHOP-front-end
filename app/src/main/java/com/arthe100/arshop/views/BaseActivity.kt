@@ -1,15 +1,14 @@
 package com.arthe100.arshop.views
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.arthe100.arshop.R
-import com.arthe100.arshop.views.fragments.*
-import java.lang.NullPointerException
+import com.arthe100.arshop.views.interfaces.ILoadFragment
 
-abstract class BaseActivity : AppCompatActivity(), ILoadFragment {
+abstract class BaseActivity : AppCompatActivity(),
+    ILoadFragment {
 
     abstract fun inject()
 

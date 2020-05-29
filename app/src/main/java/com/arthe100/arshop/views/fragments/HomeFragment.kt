@@ -1,11 +1,9 @@
 package com.arthe100.arshop.views.fragments
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -22,13 +20,11 @@ import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.ILoadFragment
-import com.arthe100.arshop.views.adapters.GroupRecyclerViewAdapter
-import com.arthe100.arshop.views.adapters.SliderAdapter
+import com.arthe100.arshop.views.interfaces.ILoadFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
+import com.arthe100.arshop.views.adapters.base.GenericSliderAdapter
 import com.arthe100.arshop.views.adapters.base.OnItemClickListener
-import com.arthe100.arshop.views.decorators.CircleIndicator
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import com.smarteist.autoimageslider.IndicatorAnimations
@@ -50,11 +46,9 @@ class HomeFragment @Inject constructor(
     private lateinit var homePageGrid: GenericAdapter<Product>
     private lateinit var dialogBox: DialogBoxManager
     private lateinit var snapHelper: PagerSnapHelper
-    private lateinit var circleIndicator: CircleIndicator
-    private lateinit var suggestions: ArrayList<String>
-    private lateinit var groupAdapter: GroupRecyclerViewAdapter
-    private lateinit var sliderViewAdapter: SliderAdapter
-
+//    private lateinit var suggestions: ArrayList<String>
+//    private lateinit var groupAdapter: GroupRecyclerViewAdapter
+    private lateinit var discountSliderViewAdapter: GenericSliderAdapter<HomeSales>
 
 
     private var categoryList =
@@ -78,7 +72,6 @@ class HomeFragment @Inject constructor(
         dialogBox = DialogBoxManager()
         messageManager = MessageManager()
         snapHelper = PagerSnapHelper()
-        circleIndicator = CircleIndicator()
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
         cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
         model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
@@ -89,6 +82,7 @@ class HomeFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
         setSearchView()
         setRecyclerView()
+        setImageSlider()
         model.loadFromCache(::render)
         model.onEvent(ProductUiAction.GetHomePageProducts)
         model.onEvent(ProductUiAction.GetHomePageSales)
@@ -147,7 +141,6 @@ class HomeFragment @Inject constructor(
             is ProductState.HomePageSalesSuccess ->{
                  model.currentSales = state.sales
                 requireView().visibility = View.VISIBLE
-                setImageSlider()
                 addDiscounts(state.sales)
             }
             is ProductState.HomePageSalesFailure -> {
@@ -158,30 +151,36 @@ class HomeFragment @Inject constructor(
 
     }
 
-    private fun addProducts(products: List<Product>) {
-        groupAdapter.products.addAll(products)
-        groupAdapter.submitList(categoryList)
-    }
+//    private fun addProducts(products: List<Product>) {
+//        groupAdapter.products.addAll(products)
+//        groupAdapter.submitList(categoryList)
+//    }
 
     private fun addDiscounts(discounts: List<HomeSales>) {
-        if(!this::sliderViewAdapter.isInitialized) setImageSlider()
         val newList = mutableListOf<HomeSales>()
         newList.addAll(discounts.filter { it.id > 4 })
-        sliderViewAdapter.submitList(newList)
+        discountSliderViewAdapter.addItems(newList)
     }
 
-    private fun setSliderAdapter(){
-        sliderViewAdapter = SliderAdapter()
-        sliderViewAdapter.setOnItemClickListener(View.OnClickListener {
-            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+    private fun setSliderAdapter() {
+        discountSliderViewAdapter = object : GenericSliderAdapter<HomeSales>() {}
+        discountSliderViewAdapter.setViewType(R.layout.discount_card_view)
+
+        discountSliderViewAdapter.setItemListener(object :
+            OnItemClickListener<HomeSales> {
+            override fun onClickItem(data: HomeSales) {
+                TODO("Not yet implemented")
+            }
+
         })
     }
 
     private fun setImageSlider() {
-        setSliderAdapter()
+        if(!this::discountSliderViewAdapter.isInitialized) setSliderAdapter()
         image_slider?.apply {
-            setSliderAdapter(sliderViewAdapter)
+            setSliderAdapter(discountSliderViewAdapter)
             isAutoCycle = true
+            setIndicatorVisibility(true)
             setIndicatorAnimation(IndicatorAnimations.SCALE)
             setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION)
             autoCycleDirection = SliderView.AUTO_CYCLE_DIRECTION_RIGHT
@@ -208,24 +207,29 @@ class HomeFragment @Inject constructor(
     }
 
 
-    private fun setAdapter(){
-        homePageGrid = object: GenericAdapter<Product>(){
+    private fun setAdapter() {
+        homePageGrid = object: GenericAdapter<Product>() {
             override fun getLayoutId(position: Int, obj: Product): Int = R.layout.product_grid_item
         }
         homePageGrid.apply {
-            setDiffUtil(object: GenericItemDiff<Product>{
-                override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem.id == newItem.id
-                override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem == newItem
+            setDiffUtil(object : GenericItemDiff<Product> {
+                override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean =
+                    oldItem.id == newItem.id
+
+                override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean =
+                    oldItem == newItem
             })
-            setItemListener(object: OnItemClickListener<Product>{
+            setItemListener(object :
+                OnItemClickListener<Product> {
                 override fun onClickItem(data: Product) {
                     model.onEvent(ProductUiAction.GetProductDetails(data))
                 }
+
             })
         }
     }
 
-    private fun setRecyclerView(){
+    private fun setRecyclerView() {
         if(!this::homePageGrid.isInitialized) setAdapter()
         group_recycler_view?.apply {
             layoutManager = GridLayoutManager(requireContext() , 2)
@@ -233,5 +237,4 @@ class HomeFragment @Inject constructor(
             isNestedScrollingEnabled = false
         }
     }
-
 }

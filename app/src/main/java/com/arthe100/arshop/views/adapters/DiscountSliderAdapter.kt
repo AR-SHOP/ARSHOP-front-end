@@ -10,7 +10,7 @@ import com.arthe100.arshop.models.HomeSales
 import com.smarteist.autoimageslider.SliderView
 import com.smarteist.autoimageslider.SliderViewAdapter
 
-class SliderAdapter : SliderViewAdapter<SliderViewAdapter.ViewHolder>(){
+class DiscountSliderAdapter : SliderViewAdapter<SliderViewAdapter.ViewHolder>(){
 
     private var dataList: ArrayList<HomeSales> = arrayListOf()
     private lateinit var mListener: View.OnClickListener
@@ -18,7 +18,7 @@ class SliderAdapter : SliderViewAdapter<SliderViewAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup?): ViewHolder {
         context = parent!!.context
-        return SliderViewHolder(
+        return DiscountSliderViewHolder(
             LayoutInflater.from(parent?.context)
                 .inflate(R.layout.discount_card_view, parent, false)
         )
@@ -26,7 +26,7 @@ class SliderAdapter : SliderViewAdapter<SliderViewAdapter.ViewHolder>(){
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         when(holder) {
-            is SliderViewHolder -> {
+            is DiscountSliderViewHolder -> {
                 holder.bind(dataList[position])
                 holder.itemView.setOnClickListener(mListener)
             }

@@ -8,7 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.smarteist.autoimageslider.SliderViewAdapter
 import kotlinx.android.synthetic.main.discount_card_view.view.*
 
-class SliderViewHolder(itemView: View) : SliderViewAdapter.ViewHolder(itemView) {
+class DiscountSliderViewHolder(itemView: View) : SliderViewAdapter.ViewHolder(itemView) {
 
 
     private var discountImage = itemView.discount_card_image

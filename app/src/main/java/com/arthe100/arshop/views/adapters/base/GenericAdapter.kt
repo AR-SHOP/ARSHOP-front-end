@@ -75,7 +75,6 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 }
-
 interface OnItemClickListener<T> {
     fun onClickItem(data: T)
 }

@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.CartItem
+import com.arthe100.arshop.views.adapters.base.OnItemClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.cart_item.view.*
@@ -20,59 +21,59 @@ class CartItemViewHolder(itemView: View) : BaseItemViewHolder<CartItem>(itemView
     private val txtQuantity = itemView.cart_count_text!!
 
 
-    override fun bind(data: CartItem, listener: OnItemClickListener) {
-        val product = data.product
-
-        dataName.text = product.name
-        dataPrice.text = product.price.toString()
-        txtQuantity.text = data.quantity.toString()
-        val requestOptions = RequestOptions()
-            .placeholder(R.drawable.white_background)
-            .error(R.drawable.white_background)
-
-        Glide.with(itemView.context)
-            .applyDefaultRequestOptions(requestOptions)
-            .load(product.thumbnail)
-            .into(dataImage)
-
-        itemView.setOnClickListener{
-            val position: Int = adapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
-            }
-        }
-    }
-
-    override fun bind(data: CartItem, listeners: Map<String, OnItemClickListener>) {
-
-
-        listeners["main"]?.let { bind(data , it) }
-
-        btnPlus.setOnClickListener{
-            val position: Int = adapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                val newQuantity = (txtQuantity.text.toString().toInt() + 1).coerceIn(0..Int.MAX_VALUE)
-                data.quantity = newQuantity
-                txtQuantity.text = newQuantity.toString()
-                listeners["add"]?.onItemClick(position)
-            }
-        }
-        btnMinus.setOnClickListener{
-            val position: Int = adapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                val newQuantity = (txtQuantity.text.toString().toInt() - 1).coerceIn(0..Int.MAX_VALUE)
-                data.quantity = newQuantity
-                txtQuantity.text = newQuantity.toString()
-                listeners["minus"]?.onItemClick(position)
-            }
-        }
-        btnDelete.setOnClickListener{
-            val position: Int = adapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                data.quantity = 0
-                listeners["delete"]?.onItemClick(position)
-            }
-        }
+    override fun bind(data: CartItem, listener: OnItemClickListener<CartItem>) {
+//        val product = data.product
+//
+//        dataName.text = product.name
+//        dataPrice.text = product.price.toString()
+//        txtQuantity.text = data.quantity.toString()
+//        val requestOptions = RequestOptions()
+//            .placeholder(R.drawable.white_background)
+//            .error(R.drawable.white_background)
+//
+//        Glide.with(itemView.context)
+//            .applyDefaultRequestOptions(requestOptions)
+//            .load(product.thumbnail)
+//            .into(dataImage)
+//
+//        itemView.setOnClickListener{
+//            val position: Int = adapterPosition
+//            if (position != RecyclerView.NO_POSITION) {
+//                listener.onClickItem(position)
+//            }
+//        }
+//    }
+//
+//    override fun bind(data: CartItem, listeners: Map<String, OnItemClickListener<CartItem>>) {
+//
+//
+//        listeners["main"]?.let { bind(data , it) }
+//
+//        btnPlus.setOnClickListener{
+//            val position: Int = adapterPosition
+//            if (position != RecyclerView.NO_POSITION) {
+//                val newQuantity = (txtQuantity.text.toString().toInt() + 1).coerceIn(0..Int.MAX_VALUE)
+//                data.quantity = newQuantity
+//                txtQuantity.text = newQuantity.toString()
+//                listeners["add"]?.onClickItem(position)
+//            }
+//        }
+//        btnMinus.setOnClickListener{
+//            val position: Int = adapterPosition
+//            if (position != RecyclerView.NO_POSITION) {
+//                val newQuantity = (txtQuantity.text.toString().toInt() - 1).coerceIn(0..Int.MAX_VALUE)
+//                data.quantity = newQuantity
+//                txtQuantity.text = newQuantity.toString()
+//                listeners["minus"]?.onClickItem(position)
+//            }
+//        }
+//        btnDelete.setOnClickListener{
+//            val position: Int = adapterPosition
+//            if (position != RecyclerView.NO_POSITION) {
+//                data.quantity = 0
+//                listeners["delete"]?.onClickItem(position)
+//            }
+//        }
 
     }
 }

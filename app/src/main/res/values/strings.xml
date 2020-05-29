@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">ARSHOP</string>
-<!--    <string name="btnTable">Table</string>-->
-<!--    <string name="btnBed">Bed</string>-->
-<!--    <string name="btnDuck">Duck</string>-->
     <string name="repeat_password">تکرار کلمه عبور</string>
     <string name="error">خطا</string>
     <string name="ok">باشه</string>
@@ -58,6 +55,7 @@
     <string name="name">نام</string>
     <string name="brand">سازنده محصول</string>
     <string name="description">توضیحات</string>
+    <string name="product_attributes">ویژگی‌های محصول</string>
     <string name="search">جستجو</string>
     <string name="phone_number">شماره تلفن</string>
     <string name="password">کلمه عبور</string>
@@ -70,6 +68,12 @@
     <string name="model_name">نام مدل</string>
     <string name="model_details">ویژگی‌های مدل</string>
     <string name="view_all">مشاهده همه</string>
+    <string name="user_comments">نظرات کاربران</string>
+    <string name="sample_comments_count">۳ نظر</string>
+    <string name="send_comment">ثبت دیدگاه</string>
+    <string name="add_to_wishlist">افزودن به موردعلاقه‌ها</string>
+    <string name="sample_count">1</string>
+    <string name="sample_comment">خیلی خوب راضیم ازتون آفرین</string>
 
 
 
@@ -80,7 +84,6 @@
     <string name="error_title">خطا!</string>
     <string name="error_message">عملیات دچار مشکل شده است</string>
     <string name="caution_message">هشدار</string>
-
 
 
 </resources>

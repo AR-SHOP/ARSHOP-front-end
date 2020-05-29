@@ -62,7 +62,6 @@ class OrdersFragment @Inject constructor(
         }
     }
 
-
 //
 //    private fun setRecyclerView() {
 ////        cartItemAdapter = CartItemAdapter()
@@ -78,6 +77,7 @@ class OrdersFragment @Inject constructor(
 //            adapter = cartItemAdapter
 //        }
 //    }
+
 
 
 }
