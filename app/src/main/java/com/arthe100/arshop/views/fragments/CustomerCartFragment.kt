@@ -1,6 +1,7 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -147,7 +148,7 @@ class CustomerCartFragment @Inject constructor(
                 requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
-                setRecyclerView(products)
+//                setRecyclerView(products)
             }
             is CartState.RemoveFromCartState -> {
                 model.currentCart = state.cart
@@ -155,7 +156,7 @@ class CustomerCartFragment @Inject constructor(
                 requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
-                setRecyclerView(products)
+//                setRecyclerView(products)
             }
             is CartState.Failure -> {
                 requireView().visibility = View.VISIBLE
@@ -214,19 +215,26 @@ class CustomerCartFragment @Inject constructor(
                 override fun onClickItem(data: CartItem, position: Int) {
                     val txtQuantity = cart_items_list.layoutManager?.findViewByPosition(position)?.findViewById<TextView>(R.id.cart_count_text)
                     val newQuantity = (txtQuantity?.text.toString().toInt() + 1).coerceIn(0..Int.MAX_VALUE)
-                    data.quantity = newQuantity
-                    txtQuantity?.text = newQuantity.toString()
-                    model.onEvent(CartUiAction.IncreaseQuantity(data.product.id, data.quantity))} }),
+                    data.quantity
+                    val newItem = data.copy(
+                        quantity = newQuantity
+                    )
+                    cartItemAdapter.changeItem(newItem, position)
+                    model.onEvent(CartUiAction.IncreaseQuantity(data.product.id, newQuantity))} }),
             ViewListeners(R.id.minus_btn , object: OnItemClickListenerForView<CartItem> {
                 override fun onClickItem(data: CartItem, position: Int) {
                     val txtQuantity = cart_items_list.layoutManager?.findViewByPosition(position)?.findViewById<TextView>(R.id.cart_count_text)
                     val newQuantity = (txtQuantity?.text.toString().toInt() - 1).coerceIn(0..Int.MAX_VALUE)
-                    data.quantity = newQuantity
-                    txtQuantity?.text = newQuantity.toString()
-                    model.onEvent(CartUiAction.DecreaseQuantity(data.product.id , data.quantity))} }),
+                    data.quantity
+                    val newItem = data.copy(
+                        quantity = newQuantity
+                    )
+                    if (newQuantity > 0) cartItemAdapter.changeItem(newItem, position)
+                    else cartItemAdapter.removeItem(position)
+                    model.onEvent(CartUiAction.DecreaseQuantity(data.product.id , newQuantity))} }),
             ViewListeners(R.id.delete_btn , object: OnItemClickListenerForView<CartItem> {
-                override fun onClickItem(data: CartItem, id: Int) {
-                    data.quantity = 0
+                override fun onClickItem(data: CartItem, position: Int) {
+                    cartItemAdapter.removeItem(position)
                     model.onEvent(CartUiAction.RemoveFromCart(data.product.id)) }})
         ))
 
@@ -237,6 +245,7 @@ class CustomerCartFragment @Inject constructor(
             override fun areContentsTheSame(oldItem: CartItem, newItem: CartItem): Boolean =
                 oldItem.quantity == newItem.quantity
         })
+
         val animator = DefaultItemAnimator()
         animator.apply {
             addDuration = 500

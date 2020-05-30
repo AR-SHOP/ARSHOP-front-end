@@ -1,6 +1,9 @@
 package com.arthe100.arshop.views.adapters.base
 
+import android.os.Bundle
 import androidx.recyclerview.widget.DiffUtil
+import com.arthe100.arshop.models.CartItem
+import java.util.function.Function
 
 class GenericDiffUtil<T>(
     private val oldItems: List<T>,
@@ -22,6 +25,7 @@ class GenericDiffUtil<T>(
         val new = newItems[newItemPosition]
         return itemDiff.areContentsTheSame(old , new)
     }
+
 }
 
 interface GenericItemDiff<T>{

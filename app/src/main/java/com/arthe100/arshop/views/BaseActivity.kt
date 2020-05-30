@@ -16,6 +16,7 @@ abstract class BaseActivity : AppCompatActivity(),
         inject()
         super.onCreate(savedInstanceState)
     }
+
     override fun loadFragment(klass: Class<out Fragment>) {
 
         val manager = supportFragmentManager

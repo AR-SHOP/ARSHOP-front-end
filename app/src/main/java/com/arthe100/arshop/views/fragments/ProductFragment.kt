@@ -160,6 +160,8 @@ class ProductFragment @Inject constructor(
             val cartItem = cartViewModel.getCartItemById(model.product.id) ?: return@setOnClickListener
             val newQuantity = (cart_count_text?.text.toString().toInt() - 1).coerceIn(0..Int.MAX_VALUE)
             cartItem.quantity = newQuantity
+            if(newQuantity == 0)
+                showAddToCartButton()
             cart_count_text?.text = newQuantity.toString()
             cartViewModel.onEvent(CartUiAction.DecreaseQuantity(cartItem.product.id , cartItem.quantity))
         }
@@ -167,20 +169,24 @@ class ProductFragment @Inject constructor(
             val cartItem = cartViewModel.getCartItemById(model.product.id) ?: return@setOnClickListener
             cartItem.quantity = 0
             cartViewModel.onEvent(CartUiAction.RemoveFromCart(cartItem.product.id))
-            add_to_cart_btn?.visibility = View.VISIBLE
-            inc_dec_cart_count?.visibility = View.INVISIBLE
+           showAddToCartButton()
         }
 
         if(cartViewModel.isInCart(model.product.id))
-        {
-            add_to_cart_btn?.visibility = View.INVISIBLE
-            inc_dec_cart_count?.visibility = View.VISIBLE
-        }
-        else{
-            add_to_cart_btn?.visibility = View.VISIBLE
-            inc_dec_cart_count?.visibility = View.INVISIBLE
+            showCartButtons()
+        else
+            showAddToCartButton()
 
-        }
+    }
+
+    fun showAddToCartButton(){
+        add_to_cart_btn?.visibility = View.VISIBLE
+        inc_dec_cart_count?.visibility = View.INVISIBLE
+    }
+
+    fun showCartButtons(){
+        add_to_cart_btn?.visibility = View.INVISIBLE
+        inc_dec_cart_count?.visibility = View.VISIBLE
     }
 
 }

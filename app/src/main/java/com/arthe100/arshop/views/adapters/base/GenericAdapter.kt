@@ -24,6 +24,27 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
 
     override fun getItemViewType(position: Int): Int = getLayoutId(position , dataList[position])
 
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if(payloads.isEmpty()){
+            onBindViewHolder(holder , position)
+            return
+        }
+        payloads.forEach {
+            val list = it as? Map<Int , Any>
+            val holder = holder as? CartItemViewHolder
+            if(holder != null)
+            {
+                list?.forEach {it2 ->
+                    holder.setPayload(it2.value as String)
+                }
+            }
+        }
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if(holder is Binder<*>)
             (holder as? Binder<T>)?.bind(dataList[position] , itemClickListener)
@@ -46,14 +67,24 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
                     oldItems = dataList ,
                     newItems = data ,
                     itemDiff = diffUtil!!))
+            result.dispatchUpdatesTo(this)
             dataList.clear()
             dataList.addAll(data)
-            result.dispatchUpdatesTo(this)
             return
         }
 
         dataList = data.toMutableList()
         notifyDataSetChanged()
+    }
+
+    fun changeItem(newItem: T, position: Int){
+        dataList[position] = newItem
+        notifyItemChanged(position)
+    }
+
+    fun removeItem(position: Int){
+        dataList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     fun setDiffUtil(diffUtil: GenericItemDiff<T>){
@@ -65,6 +96,7 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
     fun setViewListeners(viewListeners: List<ViewListeners<T>>) {
         this.viewListeners = viewListeners
     }
+
 
     internal interface Binder<T> {
         fun bind(data: T , clickListener: OnItemClickListener<T>?)

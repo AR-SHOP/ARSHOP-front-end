@@ -1,6 +1,7 @@
 package com.arthe100.arshop.views.adapters.base
 
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
@@ -114,6 +115,10 @@ class NestedRecyclerViewHolder(itemView: View) :
 
 class CartItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) , GenericAdapter.BinderMultiple<CartItem>{
 
+    lateinit var txtCount: TextView
+    fun setPayload(text: String){
+        txtCount.text = text
+    }
     override fun bind(
         data: CartItem,
         itemListener: OnItemClickListener<CartItem>?,
@@ -122,7 +127,7 @@ class CartItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) , G
         itemView.apply {
 
             val product = data.product
-
+            txtCount = itemView.cart_count_text
             itemView.cart_item_name.text = product.name
             itemView.cart_item_price.text = product.price.toString()
             itemView.cart_count_text.text = data.quantity.toString()

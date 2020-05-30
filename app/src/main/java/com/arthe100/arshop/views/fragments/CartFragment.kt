@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.arthe100.arshop.R
-import com.arthe100.arshop.scripts.di.BaseApplication
+import com.arthe100.arshop.scripts.di.MyFragmentFactory
 import com.arthe100.arshop.scripts.messege.MessageManager
-import com.arthe100.arshop.views.adapters.ViewPagerAdapter
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.views.adapters.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.cart_fragment_layout.*
@@ -16,9 +16,11 @@ import javax.inject.Inject
 
 
 class CartFragment @Inject constructor(
-    private val messageManager: MessageManager
+    private val messageManager: MessageManager,
+    private val fragmentFactory: MyFragmentFactory
 ) : BaseFragment() {
 
+    private lateinit var adapter: ViewPagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -28,11 +30,12 @@ class CartFragment @Inject constructor(
 
     override fun onStart() {
         super.onStart()
-
-        val viewPagerAdapter = ViewPagerAdapter(activity?.supportFragmentManager?.fragmentFactory!! ,
+        adapter = ViewPagerAdapter(activity?.supportFragmentManager?.fragmentFactory!! ,
             activity?.classLoader!!,
             requireActivity())
-        view_pager.adapter = viewPagerAdapter
+        adapter.addFragment(fragmentFactory.instantiate(requireActivity().classLoader , CustomerCartFragment::class.java.name))
+        adapter.addFragment(fragmentFactory.instantiate(requireActivity().classLoader , OrdersFragment::class.java.name))
+        view_pager.adapter = adapter
 
         val tabLayoutMediator =
             TabLayoutMediator(tab_layout, view_pager,
