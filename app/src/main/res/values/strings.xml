@@ -43,6 +43,7 @@
 
 
     <!--textView texts-->
+    <string name="title">عنوان</string>
     <string name="empty_list">موردی برای نمایش وجود ندارد!</string>
     <string name="product">محصول</string>
     <string name="price">قیمت</string>

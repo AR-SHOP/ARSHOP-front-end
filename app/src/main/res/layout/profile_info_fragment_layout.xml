@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:elevation="10dp"
-            android:translationZ="30dp"
+            android:translationZ="20dp"
             app:title="@string/profile_info"
             android:backgroundTint="@color/colorBackground"
             android:background="@drawable/small_rounded_corners"

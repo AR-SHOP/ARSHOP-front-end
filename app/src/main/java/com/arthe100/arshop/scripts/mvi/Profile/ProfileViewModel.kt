@@ -11,11 +11,11 @@ import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel(){
 
-    var currentProfile: UserProfile? = null
-
     private val _currentViewState = MutableLiveData<ProfileState>()
     val currentViewState : LiveData<ProfileState>
         get() = _currentViewState
+
+    var currentProfile: UserProfile? = null
 
     init {
         _currentViewState.value = ProfileState.Idle
@@ -23,16 +23,21 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
 
 
 
+
     fun onEvent(action: ProfileUiAction){
         when(action){
             is ProfileUiAction.GetHomePageProfileAction -> {
-                _currentViewState.value = ProfileState.LoadingState
+                if(currentProfile != null )
+                    _currentViewState.value = ProfileState.GetProfileSuccess(currentProfile!!)
+                else
+                    _currentViewState.value = ProfileState.LoadingState
 
                 viewModelScope.launch {
                     _currentViewState.value = userRepository.getInfo()
                 }
             }
             is ProfileUiAction.LogoutAction -> {
+                currentProfile = null
                 _currentViewState.value = ProfileState.LogoutState
             }
         }

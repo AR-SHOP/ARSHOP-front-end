@@ -3,7 +3,6 @@ package com.arthe100.arshop.views.adapters.base
 import android.view.View
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.HomeSales
-import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.smarteist.autoimageslider.SliderViewAdapter
@@ -35,7 +34,7 @@ class DiscountSliderViewHolder(itemView: View)
                 .load(data.image)
                 .into(discountImage)
 
-            setOnClickListener{ clickListener?.onItemClick(data) }
+            setOnClickListener{ clickListener?.onClickItem(data) }
         }
     }
 }

@@ -14,9 +14,9 @@ import com.arthe100.arshop.scripts.mvi.categories.CategoryState
 import com.arthe100.arshop.scripts.mvi.categories.CategoryUiAction
 import com.arthe100.arshop.scripts.mvi.categories.CategoryViewModel
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
+import com.arthe100.arshop.views.adapters.base.OnItemClickListener
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.categories_fragment_layout.*
@@ -130,13 +130,10 @@ class CategoriesFragment @Inject constructor(
             })
             setItemListener(object:
                 OnItemClickListener<Category> {
-                override fun onItemClick(data: Category) {
+                override fun onClickItem(data: Category) {
                     model.onEvent(CategoryUiAction.GetCategoryProduct(data))
                 }
 
-                override fun onItemClick(position: Int) {
-                    TODO("Not yet implemented")
-                }
             })
         }
     }

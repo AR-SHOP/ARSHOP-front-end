@@ -22,13 +22,13 @@ import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.views.interfaces.ILoadFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
 import com.arthe100.arshop.views.adapters.base.GenericSliderAdapter
+import com.arthe100.arshop.views.adapters.base.OnItemClickListener
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
-import com.arthe100.arshop.views.interfaces.ILoadFragment
-import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
@@ -170,13 +170,10 @@ class HomeFragment @Inject constructor(
 
         discountSliderViewAdapter.setItemListener(object :
             OnItemClickListener<HomeSales> {
-            override fun onItemClick(data: HomeSales) {
-
-            }
-
-            override fun onItemClick(position: Int) {
+            override fun onClickItem(data: HomeSales) {
                 TODO("Not yet implemented")
             }
+
         })
     }
 
@@ -226,13 +223,10 @@ class HomeFragment @Inject constructor(
             })
             setItemListener(object :
                 OnItemClickListener<Product> {
-                override fun onItemClick(data: Product) {
+                override fun onClickItem(data: Product) {
                     model.onEvent(ProductUiAction.GetProductDetails(data))
                 }
 
-                override fun onItemClick(position: Int) {
-                    TODO("Not yet implemented")
-                }
             })
         }
     }

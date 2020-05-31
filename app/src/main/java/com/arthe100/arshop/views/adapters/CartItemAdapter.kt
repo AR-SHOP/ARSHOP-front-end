@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.CartItem
-import com.arthe100.arshop.views.interfaces.OnItemClickListener
+import com.arthe100.arshop.views.adapters.base.OnItemClickListener
 
 class CartItemAdapter(dataList: List<CartItem>) : BaseItemAdapter<CartItem>() {
 

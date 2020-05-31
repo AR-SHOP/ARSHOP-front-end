@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.arthe100.arshop.views.interfaces.ISetViewType
-import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import com.smarteist.autoimageslider.SliderViewAdapter
 
 abstract class GenericSliderAdapter<T>
@@ -27,7 +26,7 @@ abstract class GenericSliderAdapter<T>
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        (holder as? GenericSliderAdapter.Binder<T>)?.bind(dataList[position] , itemClickListener)
+        (holder as? Binder<T>)?.bind(dataList[position] , itemClickListener)
     }
 
     protected open fun getViewHolder(view: View, viewType: Int): SliderViewAdapter.ViewHolder {

@@ -1,26 +1,72 @@
 package com.arthe100.arshop.views.adapters.base
 
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.CartItem
 import com.arthe100.arshop.models.Category
+import com.arthe100.arshop.models.Comment
 import com.arthe100.arshop.models.Product
-import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import kotlinx.android.synthetic.main.cart_item.view.*
+import kotlinx.android.synthetic.main.product_fragment_layout.view.cart_count_text
 import kotlinx.android.synthetic.main.category_card_item.view.*
 import kotlinx.android.synthetic.main.horizontal_product_recycler_view.view.*
+import kotlinx.android.synthetic.main.item_wish_list.view.*
 import kotlinx.android.synthetic.main.product_grid_item.view.*
+import kotlinx.android.synthetic.main.user_comment_card_item.view.*
 
 object ViewHolderFactory {
     fun create(view: View, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             R.layout.product_grid_item -> ProductGridViewHolder(view)
+            R.layout.cart_item -> CartItemViewHolder(view)
             R.layout.category_card_item -> CategoryItemViewHolder(view)
             R.layout.horizontal_product_recycler_view -> NestedRecyclerViewHolder(view)
-//            R.layout.user_comment_card_item -> CommentRecyclerViewHolder(view)
+            R.layout.item_wish_list -> WishListViewHolder(view)
+            R.layout.user_comment_card_item -> CommentRecyclerViewHolder(view)
             else -> throw IllegalArgumentException("Wrong view type")
+        }
+    }
+}
+
+
+class CommentRecyclerViewHolder(itemView: View)
+    : RecyclerView.ViewHolder(itemView), GenericAdapter.Binder<Comment> {
+
+    override fun bind(data: Comment, clickListener: OnItemClickListener<Comment>?) {
+
+        itemView.apply {
+            itemView.user_name.text = data.user
+            itemView.comment_title.text = data.title
+            itemView.user_comment.text = data.comment
+        }
+
+    }
+}
+
+
+class WishListViewHolder(itemView: View)
+    : RecyclerView.ViewHolder(itemView), GenericAdapter.Binder<Product> {
+
+    override fun bind(data: Product, clickListener: OnItemClickListener<Product>?) {
+        itemView.apply {
+            itemView.wishList_item_name?.text = data.name
+            itemView.wishList_item_price?.text = data.price.toString()
+
+            val requestOptions = RequestOptions()
+                .placeholder(R.drawable.white_background)
+                .error(R.drawable.white_background)
+
+            Glide.with(context)
+                .applyDefaultRequestOptions(requestOptions)
+                .load(data.thumbnail)
+                .into(itemView.wishList_item_image)
+
+            setOnClickListener { clickListener?.onClickItem(data) }
         }
     }
 }
@@ -29,8 +75,8 @@ class ProductGridViewHolder(itemView: View)
     : RecyclerView.ViewHolder(itemView) , GenericAdapter.Binder<Product> {
     override fun bind(data: Product, clickListener: OnItemClickListener<Product>?) {
         itemView.apply {
-            itemView.product_name.text = data.name
-            itemView.product_price.text = data.price.toString()
+            itemView.product_name?.text = data.name
+            itemView.product_price?.text = data.price.toString()
             val requestOptions = RequestOptions()
                 .placeholder(R.drawable.white_background)
                 .error(R.drawable.white_background)
@@ -40,7 +86,7 @@ class ProductGridViewHolder(itemView: View)
                 .load(data.thumbnail)
                 .into(itemView.product_image)
 
-            setOnClickListener{ clickListener?.onItemClick(data) }
+            setOnClickListener{ clickListener?.onClickItem(data) }
         }
     }
 }
@@ -55,7 +101,7 @@ class CategoryItemViewHolder(itemView: View)
     override fun bind(data: Category, clickListener: OnItemClickListener<Category>?) {
 
         itemView.apply {
-            categoryName.text = data.title
+            categoryName?.text = data.title
 
             val requestOptions = RequestOptions()
                 .placeholder(R.drawable.white_background)
@@ -65,7 +111,7 @@ class CategoryItemViewHolder(itemView: View)
                 .load(data.image)
                 .into(categoryImage)
 
-            setOnClickListener{ clickListener?.onItemClick(data) }
+            setOnClickListener{ clickListener?.onClickItem(data) }
         }
     }
 }
@@ -91,24 +137,60 @@ class NestedRecyclerViewHolder(itemView: View) :
             })
             setItemListener(object:
                 OnItemClickListener<Product> {
-                override fun onItemClick(data: Product) {
-
-                }
-
-                override fun onItemClick(position: Int) {
+                override fun onClickItem(data: Product) {
                     TODO("Not yet implemented")
                 }
             })
         }
 
         itemView.apply {
-            categoryName.text = data.title
+            categoryName?.text = data.title
             productsRecyclerView.apply {
                 layoutManager = LinearLayoutManager(this.context,
                     RecyclerView.HORIZONTAL, false)
                 adapter = productAdapter
             }
-            setOnClickListener{ clickListener?.onItemClick(data) }
+            setOnClickListener{ clickListener?.onClickItem(data) }
         }
     }
 }
+
+class CartItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) , GenericAdapter.BinderMultiple<CartItem>{
+
+    lateinit var txtCount: TextView
+    fun setPayload(text: String){
+        txtCount.text = text
+    }
+    override fun bind(
+        data: CartItem,
+        itemListener: OnItemClickListener<CartItem>?,
+        viewListeners: List<ViewListeners<CartItem>>?
+    ) {
+        itemView.apply {
+
+            val product = data.product
+            txtCount = itemView.cart_count_text
+            itemView.cart_item_name.text = product.name
+            itemView.cart_item_price.text = product.price.toString()
+            itemView.cart_count_text.text = data.quantity.toString()
+            val requestOptions = RequestOptions()
+                .placeholder(R.drawable.white_background)
+                .error(R.drawable.white_background)
+
+            Glide.with(itemView.context)
+                .applyDefaultRequestOptions(requestOptions)
+                .load(product.thumbnail)
+                .into(itemView.cart_item_image)
+
+            viewListeners?.forEach {
+                val view = itemView.findViewById(it.id) as View
+                view.setOnClickListener { _ ->
+                    it.listener?.onClickItem(data , adapterPosition)
+                }
+            }
+
+            setOnClickListener { itemListener?.onClickItem(data) }
+        }
+    }
+}
+

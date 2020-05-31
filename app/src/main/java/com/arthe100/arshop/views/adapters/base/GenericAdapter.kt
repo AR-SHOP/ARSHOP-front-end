@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.arthe100.arshop.views.interfaces.OnItemClickListener
 
 abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var dataList = mutableListOf<T>()
     private var itemClickListener: OnItemClickListener<T>? = null
     private var diffUtil: GenericItemDiff<T>? = null
+    private var viewListeners: List<ViewListeners<T>>? = null
 
     protected abstract fun getLayoutId(position: Int, obj: T) : Int
 
@@ -24,8 +24,32 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
 
     override fun getItemViewType(position: Int): Int = getLayoutId(position , dataList[position])
 
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if(payloads.isEmpty()){
+            onBindViewHolder(holder , position)
+            return
+        }
+        payloads.forEach {
+            val list = it as? Map<Int , Any>
+            val holder = holder as? CartItemViewHolder
+            if(holder != null)
+            {
+                list?.forEach {it2 ->
+                    holder.setPayload(it2.value as String)
+                }
+            }
+        }
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as? Binder<T>)?.bind(dataList[position] , itemClickListener)
+        if(holder is Binder<*>)
+            (holder as? Binder<T>)?.bind(dataList[position] , itemClickListener)
+        else if(holder is BinderMultiple<*>)
+            (holder as? BinderMultiple<T>)?.bind(dataList[position] , itemClickListener , viewListeners)
     }
 
     protected open fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
@@ -43,14 +67,24 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
                     oldItems = dataList ,
                     newItems = data ,
                     itemDiff = diffUtil!!))
+            result.dispatchUpdatesTo(this)
             dataList.clear()
             dataList.addAll(data)
-            result.dispatchUpdatesTo(this)
             return
         }
 
         dataList = data.toMutableList()
         notifyDataSetChanged()
+    }
+
+    fun changeItem(newItem: T, position: Int){
+        dataList[position] = newItem
+        notifyItemChanged(position)
+    }
+
+    fun removeItem(position: Int){
+        dataList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     fun setDiffUtil(diffUtil: GenericItemDiff<T>){
@@ -59,13 +93,27 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
     fun setItemListener(itemClickListener: OnItemClickListener<T>) {
         this.itemClickListener = itemClickListener
     }
+    fun setViewListeners(viewListeners: List<ViewListeners<T>>) {
+        this.viewListeners = viewListeners
+    }
+
 
     internal interface Binder<T> {
         fun bind(data: T , clickListener: OnItemClickListener<T>?)
     }
 
+    internal interface BinderMultiple<T> {
+        fun bind(data: T , itemListener: OnItemClickListener<T>?, viewListeners: List<ViewListeners<T>>?)
+    }
+
 }
-//
-//interface OnItemClickListener<T> {
-//    fun onClickItem(data: T)
-//}
+interface OnItemClickListener<T> {
+    fun onClickItem(data: T)
+}
+interface OnItemClickListenerForView<T> {
+    fun onClickItem(data: T , position: Int)
+}
+
+data class ViewListeners<T>(
+    val id: Int,
+    val listener: OnItemClickListenerForView<T>?)

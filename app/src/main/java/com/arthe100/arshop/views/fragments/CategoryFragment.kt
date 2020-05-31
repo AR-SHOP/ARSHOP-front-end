@@ -21,9 +21,9 @@ import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.HomeGridViewAdapter
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
+import com.arthe100.arshop.views.adapters.base.OnItemClickListener
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
-import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.categories_fragment_layout.*
 import kotlinx.android.synthetic.main.category_fragment_layout.*
@@ -113,13 +113,9 @@ class CategoryFragment @Inject constructor(
             })
             setItemListener(object :
                 OnItemClickListener<Product> {
-                override fun onItemClick(data: Product) {
+                override fun onClickItem(data: Product) {
                     productViewModel.product = data
                     loadFragment(ProductFragment::class.java)
-                }
-
-                override fun onItemClick(position: Int) {
-                    TODO("Not yet implemented")
                 }
             })
         }
@@ -127,7 +123,6 @@ class CategoryFragment @Inject constructor(
     }
 
     private fun setGridView() {
-
         if(!this::gridViewAdapter.isInitialized) setAdapter()
         category_group_recycler_view?.apply {
             layoutManager = GridLayoutManager(requireContext() , 2)

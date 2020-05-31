@@ -14,8 +14,12 @@ abstract class BaseActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         inject()
+        supportFragmentManager.addOnBackStackChangedListener {
+            supportFragmentManager.fragments
+        }
         super.onCreate(savedInstanceState)
     }
+
     override fun loadFragment(klass: Class<out Fragment>) {
 
         val manager = supportFragmentManager

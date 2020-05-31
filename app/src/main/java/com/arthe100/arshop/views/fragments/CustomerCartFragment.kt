@@ -1,13 +1,18 @@
 package com.arthe100.arshop.views.fragments
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Cart
@@ -21,9 +26,8 @@ import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.scripts.mvi.cart.CartState
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
-import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.adapters.CartItemAdapter
+import com.arthe100.arshop.views.adapters.base.*
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
@@ -40,10 +44,22 @@ class CustomerCartFragment @Inject constructor(
 ): BaseFragment() {
 
     lateinit var authViewModel: AuthViewModel
-    lateinit var cartItemAdapter: CartItemAdapter
+    lateinit var cartItemAdapter: GenericAdapter<CartItem>
     lateinit var model: CartViewModel
     lateinit var productViewModel: ProductViewModel
     lateinit var customerCartFragmentLayout: ViewGroup
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -86,7 +102,7 @@ class CustomerCartFragment @Inject constructor(
                 }
 
                 model.onEvent(
-                    if(model.currentCart.value == null) CartUiAction.GetCart
+                    if(model.currentCart == null) CartUiAction.GetCart
                     else CartUiAction.GetCartInBackground
                 )
             }
@@ -131,6 +147,7 @@ class CustomerCartFragment @Inject constructor(
 //                dialogBox.showDialog(requireActivity(),MessageType.LOAD)
             }
             is CartState.GetCartState -> {
+                model.currentCart = state.cart
                 dialogBox.cancel()
 //                requireView().visibility = View.VISIBLE
                 cart_items_list?.visibility = View.VISIBLE
@@ -140,30 +157,35 @@ class CustomerCartFragment @Inject constructor(
                 if(!this::cartItemAdapter.isInitialized) setRecyclerView(products)
             }
             is CartState.AddToCartState -> {
+                model.currentCart = state.cart
                 dialogBox.cancel()
 //                requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
-                addProducts(products)
+//                setRecyclerView(products)
             }
             is CartState.RemoveFromCartState -> {
+                model.currentCart = state.cart
                 dialogBox.cancel()
 //                requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
-                addProducts(products)
+//                setRecyclerView(products)
             }
             is CartState.Failure -> {
 //                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
-                model.updateCart(::addProducts)
+
+                if(model.currentCart != null)
+                    setRecyclerView(model.currentCart?.cartItems!!)
             }
             is CartState.ClearCart -> {
+                model.currentCart = state.cart
                 dialogBox.cancel()
 //                requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
-                addProducts(products)
+                setRecyclerView(products)
             }
             is CartState.LogoutState -> {
                 checkUserLogin()
@@ -179,64 +201,84 @@ class CustomerCartFragment @Inject constructor(
 
 
 
-    private fun addProducts(cartItems: List<CartItem>) {
-        if(!this::cartItemAdapter.isInitialized)return
-        val newList = mutableListOf<CartItem>()
-        newList.addAll(cartItems)
-        cartItemAdapter.submitList(newList)
-    }
-
     private fun setRecyclerView(cartItems: List<CartItem>) {
-        cartItemAdapter = CartItemAdapter(cartItems)
-        cartItemAdapter.setOnItemClickListener(object :
+
+        if(this::cartItemAdapter.isInitialized){
+            cart_items_list.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = cartItemAdapter
+            }
+            cartItemAdapter.addItems(cartItems)
+            return
+        }
+
+        cartItemAdapter =object: GenericAdapter<CartItem>(){
+            override fun getLayoutId(position: Int, obj: CartItem): Int = R.layout.cart_item
+        }
+
+        cartItemAdapter.setItemListener(object :
             OnItemClickListener<CartItem> {
-            override fun onItemClick(position: Int) {
-                productViewModel.product = cartItemAdapter.items[position].product
+            override fun onClickItem(data: CartItem) {
+                productViewModel.product = data.product
+
+                requireActivity()
+                    .supportFragmentManager
+                    .beginTransaction()
+                    .detach(this@CustomerCartFragment)
+                    .commit()
+
                 loadFragment(ProductFragment::class.java)
             }
-
-            override fun onItemClick(data: CartItem) {
-                TODO("Not yet implemented")
-            }
         })
-        cartItemAdapter.plusListener = object :
-            OnItemClickListener<CartItem> {
-            override fun onItemClick(position: Int) {
-                val cartItem = cartItemAdapter.items[position]
-                model.onEvent(CartUiAction.IncreaseQuantity(cartItem.product.id, cartItem.quantity))
-            }
 
-            override fun onItemClick(data: CartItem) {
-                TODO("Not yet implemented")
-            }
-        }
-        cartItemAdapter.minusListener = object:
-            OnItemClickListener<CartItem> {
-            override fun onItemClick(position: Int) {
-                val cartItem = cartItemAdapter.items[position]
-                model.onEvent(CartUiAction.DecreaseQuantity(cartItem.product.id , cartItem.quantity))
-            }
+        cartItemAdapter.setViewListeners(listOf(
+            ViewListeners(R.id.plus_btn , object: OnItemClickListenerForView<CartItem> {
+                override fun onClickItem(data: CartItem, position: Int) {
+                    val txtQuantity = cart_items_list.layoutManager?.findViewByPosition(position)?.findViewById<TextView>(R.id.cart_count_text)
+                    val newQuantity = (txtQuantity?.text.toString().toInt() + 1).coerceIn(0..Int.MAX_VALUE)
+                    data.quantity
+                    val newItem = data.copy(
+                        quantity = newQuantity
+                    )
+                    cartItemAdapter.changeItem(newItem, position)
+                    model.onEvent(CartUiAction.IncreaseQuantity(data.product.id, newQuantity))} }),
+            ViewListeners(R.id.minus_btn , object: OnItemClickListenerForView<CartItem> {
+                override fun onClickItem(data: CartItem, position: Int) {
+                    val txtQuantity = cart_items_list.layoutManager?.findViewByPosition(position)?.findViewById<TextView>(R.id.cart_count_text)
+                    val newQuantity = (txtQuantity?.text.toString().toInt() - 1).coerceIn(0..Int.MAX_VALUE)
+                    data.quantity
+                    val newItem = data.copy(
+                        quantity = newQuantity
+                    )
+                    if (newQuantity > 0) cartItemAdapter.changeItem(newItem, position)
+                    else cartItemAdapter.removeItem(position)
+                    model.onEvent(CartUiAction.DecreaseQuantity(data.product.id , newQuantity))} }),
+            ViewListeners(R.id.delete_btn , object: OnItemClickListenerForView<CartItem> {
+                override fun onClickItem(data: CartItem, position: Int) {
+                    cartItemAdapter.removeItem(position)
+                    model.onEvent(CartUiAction.RemoveFromCart(data.product.id)) }})
+        ))
 
-            override fun onItemClick(data: CartItem) {
-                TODO("Not yet implemented")
-            }
-        }
-        cartItemAdapter.deleteListener = object:
-            OnItemClickListener<CartItem> {
-            override fun onItemClick(position: Int) {
-                val cartItem = cartItemAdapter.items[position]
-                model.onEvent(CartUiAction.RemoveFromCart(cartItem.product.id))
-            }
+        cartItemAdapter.setDiffUtil(object: GenericItemDiff<CartItem>{
+            override fun areItemsTheSame(oldItem: CartItem, newItem: CartItem): Boolean =
+                oldItem.product.id == newItem.product.id
 
-            override fun onItemClick(data: CartItem) {
-                TODO("Not yet implemented")
-            }
+            override fun areContentsTheSame(oldItem: CartItem, newItem: CartItem): Boolean =
+                oldItem.quantity == newItem.quantity
+        })
+
+        val animator = DefaultItemAnimator()
+        animator.apply {
+            addDuration = 500
         }
 
         cart_items_list.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = cartItemAdapter
+            itemAnimator =animator
         }
+
+        cartItemAdapter.addItems(cartItems)
     }
 
 }

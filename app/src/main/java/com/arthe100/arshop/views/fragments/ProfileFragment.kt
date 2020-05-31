@@ -96,8 +96,7 @@ class ProfileFragment @Inject constructor(
 //                requireView().visibility = View.VISIBLE
                 val user = state.userInfo
                 model.currentProfile = user
-
-                name.text = if(!user.fName.isNullOrEmpty())
+                name.text = if(user.fName.isEmpty())
                     "نام و نام‌خانوادگی"
                 else
                     "${state.userInfo.fName} ${state.userInfo.lName}"

@@ -126,7 +126,7 @@ class LoginFragment @Inject constructor(
                 dialogBox.cancel()
 //                requireView().visibility = View.VISIBLE
                 session.saveUser(state.user)
-                cartViewModel.onEvent(CartUiAction.GetCart)
+                cartViewModel.onEvent(CartUiAction.GetCartOnStart)
                 loadFragment(ProfileFragment::class.java)
             }
             is AuthState.Failure -> {
