@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".views.fragments.PaymentFragment">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="top"
+            android:layout_marginBottom="10dp"
+            style="@style/AppTheme"
+            android:elevation="10dp"
+            android:translationZ="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/colorBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/payment_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/payment_info"
+                android:backgroundTint="@color/colorBackground"
+                android:background="@drawable/small_rounded_corners"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+            android:id="@+id/payment_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="70dp"
+            app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorEditText">
+
+
+            <LinearLayout
+                    android:id="@+id/address_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="15dp"
+                    android:elevation="10dp"
+                    android:translationZ="20dp"
+                    android:background="@drawable/small_rounded_corners"
+                    android:backgroundTint="@color/colorBackground"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        android:padding="10dp"/>
+                <TextView
+                        android:id="@+id/address_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"
+                        android:padding="10dp"
+                        android:textSize="14sp"/>
+
+                <TextView
+                        android:id="@+id/change_address_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:layout_gravity="end"
+                        android:text="@string/change_address"
+                        android:textColor="@color/colorSecondary"
+                        android:drawableEnd="@drawable/ic_action_forward_arrow"
+                        android:drawableTint="@color/colorSecondary"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:id="@+id/send_time_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="15dp"
+                    android:elevation="10dp"
+                    android:translationZ="20dp"
+                    android:background="@drawable/small_rounded_corners"
+                    android:backgroundTint="@color/colorBackground"
+                    app:layout_constraintTop_toBottomOf="@id/address_layout"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/send_time_info"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        android:padding="10dp"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/sending_info"
+                            android:padding="10dp"
+                            android:textSize="14sp"/>
+                    <TextView
+                            android:id="@+id/sending_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:text="@string/sample_text"
+                            android:padding="10dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorSecondary"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/timing_info"
+                            android:padding="10dp"
+                            android:textSize="14sp"/>
+                    <TextView
+                            android:id="@+id/timing_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:text="@string/sample_text"
+                            android:padding="10dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorSecondary"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:id="@+id/payment_method"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="15dp"
+                    android:elevation="10dp"
+                    android:translationZ="20dp"
+                    android:background="@drawable/small_rounded_corners"
+                    android:backgroundTint="@color/colorBackground"
+                    app:layout_constraintTop_toBottomOf="@id/send_time_info"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/choose_payment_method"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        android:padding="10dp"/>
+
+                <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <RadioButton
+                            android:id="@+id/online_payment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:padding="5dp"
+                            android:buttonTint="@color/colorPrimary"
+                            android:text="@string/online_payment"
+                            android:checked="true"/>
+                    <RadioButton
+                            android:id="@+id/charge_payment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:padding="5dp"
+                            android:buttonTint="@color/colorPrimary"
+                            android:text="@string/charge_payment" />
+                    <RadioButton
+                            android:id="@+id/in_person_payment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:padding="5dp"
+                            android:buttonTint="@color/colorPrimary"
+                            android:text="@string/in_person_payment"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:id="@+id/payment_gate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="15dp"
+                    android:elevation="10dp"
+                    android:translationZ="20dp"
+                    android:background="@drawable/small_rounded_corners"
+                    android:backgroundTint="@color/colorBackground"
+                    app:layout_constraintTop_toBottomOf="@id/payment_method"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/choose_payment_gateway"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        android:padding="10dp"/>
+
+                <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <RadioButton
+                            android:id="@+id/gateway1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:padding="5dp"
+                            android:text="@string/sample_gateway"
+                            android:buttonTint="@color/colorPrimary"
+                            android:checked="true"/>
+                    <RadioButton
+                            android:id="@+id/gateway2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:padding="5dp"
+                            android:buttonTint="@color/colorPrimary"
+                            android:text="@string/sample_gateway" />
+                    <RadioButton
+                            android:id="@+id/gateway3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:padding="5dp"
+                            android:buttonTint="@color/colorPrimary"
+                            android:text="@string/sample_gateway"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+
+    <LinearLayout
+            android:id="@+id/bottom_buttons"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary"
+            android:layoutDirection="rtl"
+            android:textDirection="rtl"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible">
+
+
+        <LinearLayout
+                android:id="@+id/cart_total_price_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="4"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total"
+                    android:textColor="@color/colorBackground"
+                    android:gravity="center"/>
+            <TextView
+                    android:id="@+id/cart_total_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sample_price"
+                    android:textColor="@color/colorBackground"
+                    android:gravity="center"/>
+        </LinearLayout>
+
+        <Button
+                android:id="@+id/continue_buy_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="@string/pay"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@drawable/medium_rounded_corners"
+                android:backgroundTint="@color/colorBackground"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

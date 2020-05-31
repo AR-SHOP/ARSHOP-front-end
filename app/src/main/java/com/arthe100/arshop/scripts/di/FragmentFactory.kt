@@ -99,4 +99,12 @@ abstract class FragmentModule{
     @IntoMap
     @FragmentKey(WishListFragment::class)
     internal abstract fun provideWishListFragment(fragment: WishListFragment) : Fragment
+    @Binds
+    @IntoMap
+    @FragmentKey(PaymentFragment::class)
+    internal abstract fun providePaymentFragment(fragment: PaymentFragment) : Fragment
+    @Binds
+    @IntoMap
+    @FragmentKey(AddressFragment::class)
+    internal abstract fun provideAddressFragment(fragment: AddressFragment) : Fragment
 }

@@ -80,6 +80,9 @@ class CustomerCartFragment @Inject constructor(
     override fun onStart() {
         checkUserLogin()
         super.onStart()
+        continue_buy_btn?.setOnClickListener {
+            loadFragment(PaymentFragment::class.java)
+        }
     }
 
     private fun checkUserLogin() {

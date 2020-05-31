@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.cart_item.view.*
 import kotlinx.android.synthetic.main.product_fragment_layout.view.cart_count_text
 import kotlinx.android.synthetic.main.category_card_item.view.*
 import kotlinx.android.synthetic.main.horizontal_product_recycler_view.view.*
+import kotlinx.android.synthetic.main.item_address.view.*
 import kotlinx.android.synthetic.main.item_wish_list.view.*
 import kotlinx.android.synthetic.main.product_grid_item.view.*
 import kotlinx.android.synthetic.main.user_comment_card_item.view.*
@@ -28,11 +29,21 @@ object ViewHolderFactory {
             R.layout.horizontal_product_recycler_view -> NestedRecyclerViewHolder(view)
             R.layout.item_wish_list -> WishListViewHolder(view)
             R.layout.user_comment_card_item -> CommentRecyclerViewHolder(view)
+            R.layout.item_address -> AddressViewHolder(view)
             else -> throw IllegalArgumentException("Wrong view type")
         }
     }
 }
 
+class AddressViewHolder(itemView: View)
+    : RecyclerView.ViewHolder(itemView), GenericAdapter.Binder<String> {
+
+    override fun bind(data: String, clickListener: OnItemClickListener<String>?) {
+        itemView.apply {
+            itemView.address.text = data
+        }
+    }
+}
 
 class CommentRecyclerViewHolder(itemView: View)
     : RecyclerView.ViewHolder(itemView), GenericAdapter.Binder<Comment> {
@@ -40,14 +51,11 @@ class CommentRecyclerViewHolder(itemView: View)
     override fun bind(data: Comment, clickListener: OnItemClickListener<Comment>?) {
 
         itemView.apply {
-            itemView.user_name.text = data.user
             itemView.comment_title.text = data.title
             itemView.user_comment.text = data.comment
         }
-
     }
 }
-
 
 class WishListViewHolder(itemView: View)
     : RecyclerView.ViewHolder(itemView), GenericAdapter.Binder<Product> {

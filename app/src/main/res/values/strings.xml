@@ -18,6 +18,7 @@
     <!--buttons-->
     <string name="login_or_signup">ورود یا ثبت نام</string>
     <string name="continue_payment">ادامه فرایند خرید</string>
+    <string name="pay">پرداخت</string>
     <string name="clear_cart">حذف سبد خرید</string>
     <string name="login">ورود</string>
     <string name="clear_orders">حذف سفارش‌ها</string>
@@ -27,6 +28,7 @@
     <string name="contact_us">با ما در تماس باشید</string>
     <string name="privacy_policies">قوانین حریم خصوصی</string>
     <string name="comments">نقد و نظرات</string>
+    <string name="comment">دیدگاه کاربر</string>
     <string name="user_account_info">اطلاعات حساب کاربری</string>
     <string name="logout">خروج از حساب کاربری</string>
     <string name="recieve_and_verify_code">ادامه و دریافت کد تایید</string>
@@ -40,9 +42,22 @@
     <string name="purchase">خرید</string>
     <string name="increase_balance">افزایش موجودی</string>
     <string name="change_pass">تغییر رمز عبور</string>
+    <string name="add_new_address">افزودن آدرس جدید</string>
 
 
     <!--textView texts-->
+    <string name="sample_gateway">درگاه پرداخت</string>
+    <string name="choose_payment_method">انتخاب نوع پرداخت</string>
+    <string name="choose_payment_gateway">انتخاب درگاه پرداخت</string>
+    <string name="online_payment">پرداخت اینترنتی</string>
+    <string name="charge_payment">پرداخت اعتباری</string>
+    <string name="in_person_payment">پرداخت درب منزل</string>
+    <string name="sample_text">متن نمونه</string>
+    <string name="timing_info">زمان ارسال</string>
+    <string name="address">آدرس</string>
+    <string name="send_time_info">شیوه و زمان ارسال</string>
+    <string name="sending_info">شیوه ارسال</string>
+    <string name="change_address">تغییر آدرس</string>
     <string name="title">عنوان</string>
     <string name="empty_list">موردی برای نمایش وجود ندارد!</string>
     <string name="product">محصول</string>
@@ -97,6 +112,10 @@
     <string name="enter_bank_portal">ورود به درگاه بانک</string>
     <string name="charge_account">شارژ حساب کاربری</string>
     <string name="profile_info">اطلاعات حساب کاربری</string>
+    <string name="payment_info">اطلاعات پرداخت</string>
+    <string name="province">استان</string>
+    <string name="city">شهر</string>
+    <string name="home_address">آدرس منزل</string>
 
 
     <!-- DialogBoxManager's strings -->

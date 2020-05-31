@@ -70,7 +70,12 @@ class ProfileFragment @Inject constructor(
             autViewModel.onEvent(AuthUiAction.LogoutAction)
             model.onEvent(ProfileUiAction.LogoutAction)
             cartViewModel.logout()
-        }   
+        }
+
+        address_button?.setOnClickListener {
+            loadFragment(AddressFragment::class.java)
+        }
+
         model.onEvent(ProfileUiAction.GetHomePageProfileAction)
     }
 

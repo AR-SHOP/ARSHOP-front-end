@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="rtl"
+        android:textDirection="rtl"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:elevation="10dp"
+        android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/new_address_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true">
+
+        <LinearLayout
+                android:id="@+id/address_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorBackground">
+
+            <ImageButton
+                    android:id="@+id/close_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorBackground"
+                    android:src="@drawable/ic_action_close"
+                    android:tint="@color/colorError"/>
+
+            <EditText
+                    android:id="@+id/province"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:textColorHint="@color/colorHint"
+                    android:hint="@string/province"
+                    android:padding="10dp"
+                    android:background="@drawable/small_rounded_corners"
+                    android:backgroundTint="@color/colorEditText"
+                    android:inputType="text"/>
+
+            <EditText
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:textColorHint="@color/colorHint"
+                    android:hint="@string/city"
+                    android:padding="10dp"
+                    android:background="@drawable/small_rounded_corners"
+                    android:backgroundTint="@color/colorEditText"
+                    android:inputType="text"/>
+
+
+            <EditText
+                    android:id="@+id/home_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_margin="20dp"
+                    android:textColorHint="@color/colorHint"
+                    android:hint="@string/home_address"
+                    android:padding="10dp"
+                    android:gravity="start"
+                    android:background="@drawable/small_rounded_corners"
+                    android:backgroundTint="@color/colorEditText"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:maxLength="1500"
+                    android:maxLines="4"/>
+
+
+            <Button
+                    android:id="@+id/caution_positive_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="20dp"
+                    android:padding="10dp"
+                    android:background="@drawable/large_rounded_corners"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:textColor="@color/colorBackground"
+                    android:text="@string/add_new_address"
+                    android:textSize="12sp"/>
+
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
+

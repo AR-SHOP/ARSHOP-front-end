@@ -1,13 +1,17 @@
 package com.arthe100.arshop.views.fragments
 
+import android.app.Dialog
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.Comment
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
@@ -24,6 +28,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.ar.sceneform.ux.ArFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
+import kotlinx.android.synthetic.main.dialog_comment_layout.*
 import kotlinx.android.synthetic.main.product_fragment_layout.*
 import javax.inject.Inject
 
@@ -39,6 +44,8 @@ class ProductFragment @Inject constructor(
     private lateinit var model: ProductViewModel
     private lateinit var arModel: ArViewModel
     private lateinit var menu: Menu
+    private lateinit var commentDialog: Dialog
+    private lateinit var comment: Comment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -58,6 +65,7 @@ class ProductFragment @Inject constructor(
 
     override fun onStart() {
         super.onStart()
+        commentDialog = setCommentDialog()
         (requireActivity() as AppCompatActivity).setSupportActionBar(product_toolbar)
         product_toolbar?.title = model.product.name
         product_details_name?.text = model.product.name
@@ -96,6 +104,9 @@ class ProductFragment @Inject constructor(
                 add_to_cart_btn?.visibility = View.INVISIBLE
         }
 
+        product_comment_confirm_btn?.setOnClickListener {
+            showCommentDialog()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -116,6 +127,42 @@ class ProductFragment @Inject constructor(
     override fun toString(): String {
         return "Product"
     }
+
+    private fun setCommentDialog() : Dialog {
+
+        var resultDialog = Dialog(requireContext())
+        resultDialog.setContentView(R.layout.dialog_comment_layout)
+        resultDialog.close_btn?.setOnClickListener {
+            resultDialog.cancel()
+        }
+
+        resultDialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
+        resultDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        return resultDialog
+    }
+
+    private fun showCommentDialog() {
+        if (this::commentDialog.isInitialized && commentDialog.isShowing) {
+            commentDialog.dismiss()
+            commentDialog = setCommentDialog()
+            commentDialog.show()
+        } else {
+            commentDialog = setCommentDialog()
+            commentDialog.show()
+        }
+
+        var commentTitle = resources.getString(R.string.title)
+        var commentText = resources.getString(R.string.comment)
+
+        if (!commentDialog.comment_title.text.isNullOrEmpty())
+            commentTitle = commentDialog.comment_title.text.toString()
+        if (!commentDialog.comment_text.text.isNullOrEmpty())
+            commentText = commentDialog.comment_text.text.toString()
+
+        comment = Comment(commentTitle, commentText)
+    }
+
 
     private fun render(state: ProductState){
         when(state){

@@ -11,18 +11,6 @@
             android:background="@drawable/gray_stroke">
 
         <TextView
-                android:id="@+id/user_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/name"
-                android:paddingStart="20dp"
-                android:paddingTop="10dp"
-                android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
-
-        <TextView
                 android:id="@+id/comment_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,7 +18,7 @@
                 android:paddingStart="20dp"
                 android:paddingTop="10dp"
                 android:textColor="@color/colorSecondary"
-                app:layout_constraintTop_toBottomOf="@id/user_name"
+                app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -45,8 +33,8 @@
                 android:paddingBottom="10dp"
                 android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintTop_toBottomOf="@id/comment_title"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
