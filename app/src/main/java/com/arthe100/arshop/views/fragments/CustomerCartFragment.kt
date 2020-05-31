@@ -1,5 +1,6 @@
 package com.arthe100.arshop.views.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -46,6 +48,18 @@ class CustomerCartFragment @Inject constructor(
     lateinit var model: CartViewModel
     lateinit var productViewModel: ProductViewModel
     lateinit var customerCartFragmentLayout: ViewGroup
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -126,7 +140,7 @@ class CustomerCartFragment @Inject constructor(
         when(state) {
             is CartState.IdleState -> {
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
             }
             is CartState.LoadingState -> {
                 requireView().visibility = View.INVISIBLE
@@ -135,7 +149,7 @@ class CustomerCartFragment @Inject constructor(
             is CartState.GetCartState -> {
                 model.currentCart = state.cart
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 cart_items_list?.visibility = View.VISIBLE
                 empty_cart_layout?.visibility = View.VISIBLE
                 val products = state.cart.cartItems
@@ -145,7 +159,7 @@ class CustomerCartFragment @Inject constructor(
             is CartState.AddToCartState -> {
                 model.currentCart = state.cart
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
 //                setRecyclerView(products)
@@ -153,13 +167,13 @@ class CustomerCartFragment @Inject constructor(
             is CartState.RemoveFromCartState -> {
                 model.currentCart = state.cart
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
 //                setRecyclerView(products)
             }
             is CartState.Failure -> {
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
 
                 if(model.currentCart != null)
@@ -168,7 +182,7 @@ class CustomerCartFragment @Inject constructor(
             is CartState.ClearCart -> {
                 model.currentCart = state.cart
                 dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
+//                requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
                 setRecyclerView(products)
@@ -206,6 +220,13 @@ class CustomerCartFragment @Inject constructor(
             OnItemClickListener<CartItem> {
             override fun onClickItem(data: CartItem) {
                 productViewModel.product = data.product
+
+                requireActivity()
+                    .supportFragmentManager
+                    .beginTransaction()
+                    .detach(this@CustomerCartFragment)
+                    .commit()
+
                 loadFragment(ProductFragment::class.java)
             }
         })

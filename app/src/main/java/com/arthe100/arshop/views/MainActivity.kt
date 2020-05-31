@@ -89,14 +89,14 @@ class MainActivity : BaseActivity(),
             bottom_navbar.selectedItemId = R.id.btm_navbar_home
         }
         else {
-            if(fragment is ProductFragment)
-            {
-                if(supportFragmentManager.getBackStackEntryAt(0).name.equals("Cart"))
-                {
-                    loadFragment(CartFragment::class.java)
-                    return
-                }
-            }
+//            if(fragment is ProductFragment)
+//            {
+//                if(supportFragmentManager.getBackStackEntryAt(0).name.equals("Cart"))
+//                {
+//                    loadFragment(CartFragment::class.java)
+//                    return
+//                }
+//            }
             supportFragmentManager.popBackStackImmediate()
 
         }
