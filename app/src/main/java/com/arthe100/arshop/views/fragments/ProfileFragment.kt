@@ -57,8 +57,12 @@ class ProfileFragment @Inject constructor(
     override fun onStart() {
         super.onStart()
 
-        user_account_button.setOnClickListener {
+        user_account_button?.setOnClickListener {
             loadFragment(ProfileInfoFragment::class.java)
+        }
+
+        wishlist_button?.setOnClickListener {
+            loadFragment(WishListFragment::class.java)
         }
 
         logout_button?.setOnClickListener{
@@ -66,7 +70,7 @@ class ProfileFragment @Inject constructor(
             autViewModel.onEvent(AuthUiAction.LogoutAction)
             model.onEvent(ProfileUiAction.LogoutAction)
             cartViewModel.logout()
-        }
+        }   
         model.onEvent(ProfileUiAction.GetHomePageProfileAction)
     }
 

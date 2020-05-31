@@ -38,6 +38,7 @@ class ProductFragment @Inject constructor(
     private lateinit var cartViewModel: CartViewModel
     private lateinit var model: ProductViewModel
     private lateinit var arModel: ArViewModel
+    private lateinit var menu: Menu
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -105,7 +106,8 @@ class ProductFragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.add_to_wish_list -> {
-                messageManager.toast(requireContext(), "Clicked")
+                //use this line of code to change the color of the heart icon
+                //item.icon.setTint(Color.RED)
             }
         }
         return true

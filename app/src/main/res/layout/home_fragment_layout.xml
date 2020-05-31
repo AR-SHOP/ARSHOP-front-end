@@ -8,12 +8,15 @@
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
         tools:context=".views.fragments.HomeFragment">
-    
+
+
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/home_app_bar_layout"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             style="@style/AppTheme"
+            android:elevation="10dp"
+            android:translationZ="20dp"
             android:background="@color/colorBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -23,9 +26,9 @@
 
         <SearchView
                 android:id="@+id/home_search_view"
-                style="@style/AppTheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                style="@style/AppTheme"
                 android:layout_margin="5dp"
                 android:background="@drawable/small_rounded_corners"
                 android:backgroundTint="@color/colorEditText"

@@ -95,4 +95,8 @@ abstract class FragmentModule{
     @IntoMap
     @FragmentKey(EditProfileInfoFragment::class)
     internal abstract fun provideEditProfileInfoFragment(fragment: EditProfileInfoFragment) : Fragment
+    @Binds
+    @IntoMap
+    @FragmentKey(WishListFragment::class)
+    internal abstract fun provideWishListFragment(fragment: WishListFragment) : Fragment
 }

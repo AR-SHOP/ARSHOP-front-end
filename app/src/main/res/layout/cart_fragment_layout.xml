@@ -16,6 +16,8 @@
             android:layout_gravity="top"
             android:layout_marginBottom="10dp"
             style="@style/AppTheme"
+            android:elevation="10dp"
+            android:translationZ="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             android:background="@color/colorBackground"
             app:layout_constraintEnd_toEndOf="parent"

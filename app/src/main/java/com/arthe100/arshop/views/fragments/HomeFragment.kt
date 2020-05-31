@@ -1,5 +1,6 @@
 package com.arthe100.arshop.views.fragments
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,8 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Category
 import com.arthe100.arshop.models.HomeSales
@@ -20,13 +22,13 @@ import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.interfaces.ILoadFragment
-import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
 import com.arthe100.arshop.views.adapters.base.GenericSliderAdapter
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
+import com.arthe100.arshop.views.interfaces.ILoadFragment
+import com.arthe100.arshop.views.interfaces.OnItemClickListener
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
@@ -96,7 +98,7 @@ class HomeFragment @Inject constructor(
     }
 
     private fun setSearchView() {
-        home_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        home_search_view?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }

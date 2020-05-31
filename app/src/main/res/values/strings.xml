@@ -42,8 +42,8 @@
     <string name="change_pass">تغییر رمز عبور</string>
 
 
-
     <!--textView texts-->
+    <string name="empty_list">موردی برای نمایش وجود ندارد!</string>
     <string name="product">محصول</string>
     <string name="price">قیمت</string>
     <string name="category">دسته‌بندی</string>
@@ -76,7 +76,7 @@
     <string name="send_comment">ثبت دیدگاه</string>
     <string name="add_to_wishlist">افزودن به موردعلاقه‌ها</string>
     <string name="sample_count">1</string>
-    <string name="sample_comment">خیلی خوب راضیم ازتون آفرین</string>
+    <string name="sample_comment">خیلی خوبه راضیم ازتون آفرین</string>
     <string name="account_balance">موجودی حساب</string>
     <string name="national_id">کد ملی</string>
     <string name="NID_sample">1092233886</string>
@@ -98,13 +98,14 @@
     <string name="profile_info">اطلاعات حساب کاربری</string>
 
 
-
-
     <!-- DialogBoxManager's strings -->
     <string name="dialog_positive_button">باشه</string>
     <string name="success_message">عملیات با موفقیت انجام شد</string>
     <string name="error_title">خطا!</string>
     <string name="error_message">عملیات دچار مشکل شده است</string>
     <string name="caution_message">هشدار</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

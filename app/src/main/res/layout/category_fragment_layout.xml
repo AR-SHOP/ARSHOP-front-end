@@ -13,6 +13,8 @@
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             style="@style/AppTheme"
+            android:elevation="10dp"
+            android:translationZ="20dp"
             android:background="@color/colorBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
