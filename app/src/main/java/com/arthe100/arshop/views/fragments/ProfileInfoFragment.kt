@@ -11,6 +11,7 @@ import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
@@ -34,6 +35,10 @@ class ProfileInfoFragment @Inject constructor(
         requireActivity().bottom_navbar.visibility = View.INVISIBLE
         profileViewModel = ViewModelProvider(requireActivity(), viewModelProviderFactory).get(ProfileViewModel::class.java)
         return inflater.inflate(R.layout.profile_info_fragment_layout, container, false)
+    }
+
+    override fun render(state: ViewState) {
+        TODO("Not yet implemented")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

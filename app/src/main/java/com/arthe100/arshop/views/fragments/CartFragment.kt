@@ -1,6 +1,8 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
+import android.os.Debug
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.di.MyFragmentFactory
 import com.arthe100.arshop.scripts.messege.MessageManager
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -22,11 +25,14 @@ class CartFragment @Inject constructor(
 ) : BaseFragment() {
 
     private lateinit var adapter: ViewPagerAdapter
-    private lateinit var viewPager: ViewPager2
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         return inflater.inflate(R.layout.cart_fragment_layout, container, false)
+    }
+
+    override fun render(state: ViewState) {
+        TODO("Not yet implemented")
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -50,6 +56,7 @@ class CartFragment @Inject constructor(
                     }
                 }
             }).attach()
+
     }
 
 

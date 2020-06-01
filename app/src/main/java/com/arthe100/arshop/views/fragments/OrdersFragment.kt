@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.User
-import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
+import com.arthe100.arshop.scripts.mvi.base.AuthState
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.views.BaseFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.orders_fragment.*
@@ -51,7 +52,7 @@ class OrdersFragment @Inject constructor(
         return "Orders"
     }
 
-    private fun authRender(state: AuthState) {
+    override fun render(state: ViewState) {
         when (state) {
             is AuthState.LoginSuccess -> {
                 bottom_buttons.visibility = View.VISIBLE

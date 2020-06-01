@@ -8,12 +8,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
 import com.arthe100.arshop.scripts.messege.MessageManager
-import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
-import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
-import com.arthe100.arshop.scripts.mvi.Profile.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
+import com.arthe100.arshop.scripts.mvi.base.AuthUiAction
+import com.arthe100.arshop.scripts.mvi.base.ProfileState
+import com.arthe100.arshop.scripts.mvi.base.ProfileUiAction
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
@@ -83,14 +84,14 @@ class ProfileFragment @Inject constructor(
         return "Profile"
     }
 
-    private fun render(state: ProfileState){
+    override fun render(state: ViewState){
         when(state) {
-            is ProfileState.Idle -> {
+            is ViewState.IdleState -> {
                 dialogBox.cancel()
 //                requireView().visibility = View.VISIBLE
             }
 
-            is ProfileState.GetProfileFailure -> {
+            is ViewState.Failure -> {
 //                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
                 messageManager.toast(requireContext(), state.throwable.toString())
@@ -116,7 +117,7 @@ class ProfileFragment @Inject constructor(
                     state.userInfo.phone
             }
 
-            is ProfileState.LoadingState -> {
+            is ViewState.LoadingState -> {
 //                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }

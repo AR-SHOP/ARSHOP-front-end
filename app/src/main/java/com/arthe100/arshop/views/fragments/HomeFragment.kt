@@ -1,6 +1,5 @@
 package com.arthe100.arshop.views.fragments
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +15,10 @@ import com.arthe100.arshop.models.HomeSales
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
-import com.arthe100.arshop.scripts.mvi.Products.ProductState
-import com.arthe100.arshop.scripts.mvi.Products.ProductUiAction
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
-import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
+import com.arthe100.arshop.scripts.mvi.base.*
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
+import com.arthe100.arshop.scripts.mvi.home.HomeViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.interfaces.ILoadFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
@@ -40,9 +38,10 @@ import javax.inject.Inject
 class HomeFragment @Inject constructor(
     private val viewModelProviderFactory: ViewModelProvider.Factory,
     private val session: UserSession
-): BaseFragment(), ILoadFragment {
+): BaseFragment(), ILoadFragment , IRenderable{
 
-    private lateinit var model: ProductViewModel
+    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var productViewModel: ProductViewModel
     private lateinit var cartViewModel: CartViewModel
     private lateinit var messageManager: MessageManager
     private lateinit var homePageGrid: GenericAdapter<Product>
@@ -74,9 +73,11 @@ class HomeFragment @Inject constructor(
         dialogBox = DialogBoxManager()
         messageManager = MessageManager()
         snapHelper = PagerSnapHelper()
-        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
+        productViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProductViewModel::class.java)
+        homeViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(HomeViewModel::class.java)
         cartViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(CartViewModel::class.java)
-        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
+        productViewModel.currentViewState.observe(viewLifecycleOwner , Observer(::render))
+        homeViewModel.currentViewState.observe(viewLifecycleOwner , Observer(::render))
         return inflater.inflate(R.layout.home_fragment_layout, container, false)
     }
 
@@ -85,9 +86,10 @@ class HomeFragment @Inject constructor(
         setSearchView()
         setRecyclerView()
         setImageSlider()
-        model.loadFromCache(::render)
-        model.onEvent(ProductUiAction.GetHomePageProducts)
-        model.onEvent(ProductUiAction.GetHomePageSales)
+        productViewModel.load(::render)
+        homeViewModel.load(::render)
+        productViewModel.onEvent(ProductUiAction.GetProducts)
+        homeViewModel.onEvent(HomeUiAction.GetHomePageSales)
         cartViewModel.onEvent(CartUiAction.GetCartOnStart)
     }
 
@@ -110,53 +112,29 @@ class HomeFragment @Inject constructor(
 
     }
 
-    private fun render(state: ProductState){
-        when(state){
-            is ProductState.Idle -> {
-                dialogBox.cancel()
-//                requireView().visibility = View.VISIBLE
-            }
-
-            is ProductState.LoadingState -> {
-//                requireView().visibility = View.INVISIBLE
-                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
-            }
-
-            is ProductState.GetProductsSuccess -> {
-                model.currentProducts = state.products
-                dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
-                homePageGrid.addItems(state.products)
-//                setGroupRecyclerView()
-//                addProducts(products)
-            }
-            is ProductState.ProductDetailSuccess -> {
-                dialogBox.cancel()
-                requireView().visibility = View.VISIBLE
-                loadFragment(ProductFragment::class.java)
-            }
-
-            is ProductState.GetProductsFailure -> {
-//                requireView().visibility = View.VISIBLE
-                dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
-            }
-            is ProductState.HomePageSalesSuccess ->{
-                 model.currentSales = state.sales
-                requireView().visibility = View.VISIBLE
-                addDiscounts(state.sales)
-            }
-            is ProductState.HomePageSalesFailure -> {
-//                requireView().visibility = View.VISIBLE
-                dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
+        override fun render(state: ViewState){
+            when(state){
+                is ViewState.IdleState -> dialogBox.cancel()
+                is ViewState.LoadingState -> dialogBox.showDialog(requireActivity(), MessageType.LOAD)
+                is ViewState.Failure -> dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
+                is ProductState.ProductsSuccess -> {
+                    productViewModel.currentProducts = state.products
+                    dialogBox.cancel()
+                    homePageGrid.addItems(state.products)
+                }
+                is HomeState.HomePageSalesSuccess -> {
+                    homeViewModel.currentSales = state.sales
+                    addDiscounts(state.sales)
+                }
+                is ProductState.ProductDetailSuccess -> {
+                    dialogBox.cancel()
+                    loadFragment(ProductFragment::class.java)
+                }
             }
         }
 
-    }
 
-//    private fun addProducts(products: List<Product>) {
-//        groupAdapter.products.addAll(products)
-//        groupAdapter.submitList(categoryList)
-//    }
+
 
     private fun addDiscounts(discounts: List<HomeSales>) {
         val newList = mutableListOf<HomeSales>()
@@ -224,7 +202,7 @@ class HomeFragment @Inject constructor(
             setItemListener(object :
                 OnItemClickListener<Product> {
                 override fun onClickItem(data: Product) {
-                    model.onEvent(ProductUiAction.GetProductDetails(data))
+                    productViewModel.onEvent(ProductUiAction.GetProductDetails(data))
                 }
 
             })

@@ -1,7 +1,6 @@
 package com.arthe100.arshop.views.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,23 +10,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
-import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.scripts.mvi.Products.ProductUiAction
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
-import com.arthe100.arshop.scripts.mvi.categories.CategoryState
-import com.arthe100.arshop.scripts.mvi.categories.CategoryUiAction
+import com.arthe100.arshop.scripts.mvi.base.CategoryState
+import com.arthe100.arshop.scripts.mvi.base.CategoryUiAction
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.mvi.categories.CategoryViewModel
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.adapters.HomeGridViewAdapter
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
 import com.arthe100.arshop.views.adapters.base.OnItemClickListener
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.categories_fragment_layout.*
 import kotlinx.android.synthetic.main.category_fragment_layout.*
-import kotlinx.android.synthetic.main.home_fragment_layout.*
 import javax.inject.Inject
 
 class CategoryFragment @Inject constructor(
@@ -70,12 +65,12 @@ class CategoryFragment @Inject constructor(
         return "Category"
     }
 
-    private fun render(state: CategoryState){
+    override fun render(state: ViewState){
         when(state){
-            is CategoryState.IdleState -> {
+            is ViewState.IdleState -> {
                 dialogBoxManager.cancel()
             }
-            is CategoryState.LoadingState -> {
+            is ViewState.LoadingState -> {
                 dialogBoxManager.cancel()
             }
             is CategoryState.GetProductSuccess -> {
@@ -83,7 +78,7 @@ class CategoryFragment @Inject constructor(
                 model.setProducts(state.products)
                 gridViewAdapter.addItems(state.products)
             }
-            is CategoryState.Failure -> {
+            is ViewState.Failure -> {
                 dialogBoxManager.cancel()
                 if (context == null) return
                 dialogBoxManager.showDialog(requireContext(),MessageType.ERROR)

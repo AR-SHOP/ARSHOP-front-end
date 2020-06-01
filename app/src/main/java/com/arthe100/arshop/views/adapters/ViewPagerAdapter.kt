@@ -19,21 +19,9 @@ class ViewPagerAdapter (private val fragmentFactory: FragmentFactory ,
     var currentFragment: Int = -1
 
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-    }
-
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView)
-    }
-
-
     fun addFragment(fragment: Fragment) = fragments.add(fragment)
 
-
-    override fun getItemCount(): Int {
-        return 2
-    }
+    override fun getItemCount(): Int = fragments.size
 
     override fun createFragment(position: Int): Fragment {
         currentFragment = position

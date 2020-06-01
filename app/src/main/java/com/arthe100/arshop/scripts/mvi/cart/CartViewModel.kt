@@ -1,25 +1,26 @@
 package com.arthe100.arshop.scripts.mvi.cart
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arthe100.arshop.models.AddCart
 import com.arthe100.arshop.models.Cart
 import com.arthe100.arshop.models.CartItem
 import com.arthe100.arshop.models.RemoveCart
+import com.arthe100.arshop.scripts.mvi.base.CartState.*
+import com.arthe100.arshop.scripts.mvi.base.CartUiAction
+import com.arthe100.arshop.scripts.mvi.base.UiAction
+import com.arthe100.arshop.scripts.mvi.base.ViewModelBase
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.repositories.CartRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : ViewModel(){
+class CartViewModel @Inject constructor(
+    private val cartRepo: CartRepository
+) : ViewModelBase(){
 
-    private val _currentViewState =  MutableLiveData<CartState>(CartState.IdleState)
-    val currentViewState : LiveData<CartState>
-        get() = _currentViewState
 
 
     var currentCart: Cart? = null
@@ -42,16 +43,16 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
 
     fun logout(){
         currentCart = null
-        _currentViewState.value = CartState.LogoutState
+        _currentViewState.value = LogoutState
     }
 
-    fun onEvent(action: CartUiAction)
+    override fun onEvent(action: UiAction)
     {
         when(action){
-            CartUiAction.ClearCart -> clearCart()
-            CartUiAction.GetCart -> getCart()
+            is CartUiAction.ClearCart -> clearCart()
+            is CartUiAction.GetCart -> getCart()
             is CartUiAction.GetCartInBackground -> getCart()
-            CartUiAction.GetCartOnStart -> getCartOnStart()
+            is CartUiAction.GetCartOnStart -> getCartOnStart()
             is CartUiAction.AddToCart -> add(action.id , action.quantity)
             is CartUiAction.IncreaseQuantity -> increase(action.id , action.offset)
             is CartUiAction.DecreaseQuantity -> decrease(action.id , action.offset)
@@ -70,9 +71,9 @@ class CartViewModel @Inject constructor(private val cartRepo: CartRepository) : 
     private fun getCart(){
 
         if(currentCart != null)
-            _currentViewState.value = CartState.GetCartState(currentCart!!)
+            _currentViewState.value = GetCartState(currentCart!!)
         else
-            _currentViewState.value = CartState.LoadingState
+            _currentViewState.value = ViewState.LoadingState
 
         viewModelScope.launch {
             _currentViewState.value = cartRepo.get()

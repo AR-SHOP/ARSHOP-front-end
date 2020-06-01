@@ -14,11 +14,12 @@ import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
-import com.arthe100.arshop.scripts.mvi.Auth.AuthState
-import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
-import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
+import com.arthe100.arshop.scripts.mvi.base.AuthState
+import com.arthe100.arshop.scripts.mvi.base.AuthUiAction
+import com.arthe100.arshop.scripts.mvi.base.CartUiAction
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.interfaces.ILoadFragment
@@ -112,27 +113,17 @@ class LoginFragment @Inject constructor(
         return "Login"
     }
 
-    private fun render(state: AuthState){
+    override fun render(state: ViewState){
         when(state){
-            is AuthState.Idle -> {
-                dialogBox.cancel()
-//                requireView().visibility = View.VISIBLE
-            }
-            is AuthState.LoadingState -> {
-//                requireView().visibility = View.INVISIBLE
-                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
-            }
+            is ViewState.IdleState -> dialogBox.cancel()
+            is ViewState.LoadingState -> dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             is AuthState.LoginSuccess -> {
                 dialogBox.cancel()
-//                requireView().visibility = View.VISIBLE
                 session.saveUser(state.user)
                 cartViewModel.onEvent(CartUiAction.GetCartOnStart)
                 loadFragment(ProfileFragment::class.java)
             }
-            is AuthState.Failure -> {
-//                requireView().visibility = View.VISIBLE
-                dialogBox.showDialog(requireContext(), MessageType.ERROR)
-            }
+            is ViewState.Failure -> dialogBox.showDialog(requireContext(), MessageType.ERROR)
         }
     }
 }

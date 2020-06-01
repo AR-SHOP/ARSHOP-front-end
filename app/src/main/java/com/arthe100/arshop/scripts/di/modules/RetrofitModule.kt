@@ -4,10 +4,7 @@ import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.scopes.AppScope
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.network.interceptors.TokenInterceptor
-import com.arthe100.arshop.scripts.network.services.CartService
-import com.arthe100.arshop.scripts.network.services.CategoryService
-import com.arthe100.arshop.scripts.network.services.ProductService
-import com.arthe100.arshop.scripts.network.services.UserService
+import com.arthe100.arshop.scripts.network.services.*
 import com.google.gson.Gson
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -87,5 +84,11 @@ object RetrofitModule {
     @Provides
     fun provideCategoryService(retrofit: Retrofit) : CategoryService{
         return retrofit.create(CategoryService::class.java)
+    }
+    @JvmStatic
+    @AppScope
+    @Provides
+    fun provideHomeService(retrofit: Retrofit) : HomeService{
+        return retrofit.create(HomeService::class.java)
     }
 }

@@ -1,8 +1,9 @@
 package com.arthe100.arshop.scripts.repositories
 
 import com.arthe100.arshop.models.*
-import com.arthe100.arshop.scripts.mvi.Auth.AuthState
-import com.arthe100.arshop.scripts.mvi.Profile.ProfileState
+import com.arthe100.arshop.scripts.mvi.base.AuthState
+import com.arthe100.arshop.scripts.mvi.base.ProfileState
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.network.services.UserService
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -12,26 +13,26 @@ class UserRepository @Inject constructor(private val service: UserService) {
 
     private val TAG = UserRepository::class.simpleName
 
-    suspend fun getInfo(): ProfileState {
+    suspend fun getInfo(): ViewState {
         return try {
             ProfileState.GetProfileSuccess(service.getInfo())
 
         }catch (t: Throwable) {
-            ProfileState.GetProfileFailure(t)
+            ViewState.Failure(t)
         }
     }
 
-    suspend fun signup(password: String, phone: String): AuthState {
+    suspend fun signup(password: String, phone: String): ViewState {
         return try {
             val user = AuthUser(password , phone)
             service.signup(user)
             AuthState.SingupSuccess
         }catch (t: Throwable){
-            AuthState.Failure(t)
+            ViewState.Failure(t)
         }
     }
 
-    suspend fun login(password: String , phone: String) : AuthState{
+    suspend fun login(password: String , phone: String) : ViewState {
         return try {
 
             val user = AuthUser(password , phone)
@@ -46,15 +47,15 @@ class UserRepository @Inject constructor(private val service: UserService) {
             return AuthState.LoginSuccess(currentUser)
 
         }catch (t: Throwable){
-            AuthState.Failure(t)
+            ViewState.Failure(t)
         }
     }
 
-    suspend fun checkCode(code: String) : AuthState{
+    suspend fun checkCode(code: String) : ViewState {
         delay(500)
         return if(code == "12345")
             AuthState.CodeSuccess
         else
-            AuthState.Failure(Throwable("wrongCode"))
+            ViewState.Failure(Throwable("wrongCode"))
     }
 }

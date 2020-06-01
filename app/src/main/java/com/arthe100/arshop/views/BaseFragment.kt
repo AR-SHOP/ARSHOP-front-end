@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.arthe100.arshop.R
+import com.arthe100.arshop.scripts.mvi.base.IRenderable
 import com.arthe100.arshop.views.fragments.*
 import com.arthe100.arshop.views.interfaces.ILoadFragment
 import java.lang.ClassCastException
 
 abstract class BaseFragment : Fragment(),
-    ILoadFragment {
+    ILoadFragment , IRenderable{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -113,7 +113,7 @@ class CustomArFragment @Inject constructor(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ArViewModel::class.java)
-        model.currentViewState.observe(requireActivity(), observer)
+        model.currentViewState.observe(viewLifecycleOwner, observer)
     }
 
     private fun showInfo(parent : Node , root : Node){

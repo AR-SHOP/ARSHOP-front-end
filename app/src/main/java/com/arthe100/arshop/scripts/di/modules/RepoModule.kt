@@ -1,14 +1,8 @@
 package com.arthe100.arshop.scripts.di.modules
 
 import com.arthe100.arshop.scripts.di.scopes.AppScope
-import com.arthe100.arshop.scripts.network.services.CartService
-import com.arthe100.arshop.scripts.network.services.CategoryService
-import com.arthe100.arshop.scripts.network.services.ProductService
-import com.arthe100.arshop.scripts.network.services.UserService
-import com.arthe100.arshop.scripts.repositories.CartRepository
-import com.arthe100.arshop.scripts.repositories.CategoryRepository
-import com.arthe100.arshop.scripts.repositories.ProductRepository
-import com.arthe100.arshop.scripts.repositories.UserRepository
+import com.arthe100.arshop.scripts.network.services.*
+import com.arthe100.arshop.scripts.repositories.*
 import dagger.Module
 import dagger.Provides
 
@@ -39,6 +33,12 @@ object RepoModule {
     @Provides
     fun provideCategoryRepo(service: CategoryService) : CategoryRepository{
         return CategoryRepository(service)
+    }
+    @JvmStatic
+    @AppScope
+    @Provides
+    fun provideHomeRepo(service: HomeService) : HomeRepository{
+        return HomeRepository(service)
     }
 
 }

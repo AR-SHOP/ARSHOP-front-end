@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Comment
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericDiffUtil
@@ -41,6 +42,10 @@ class AddressFragment @Inject constructor(
         requireActivity().bottom_navbar?.visibility = View.INVISIBLE
         setAddressDialog()
         return inflater.inflate(R.layout.fragment_address, container, false)
+    }
+
+    override fun render(state: ViewState) {
+        TODO("Not yet implemented")
     }
 
     override fun onStart() {

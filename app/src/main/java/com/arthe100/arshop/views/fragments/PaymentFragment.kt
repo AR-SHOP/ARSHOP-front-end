@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 
 import com.arthe100.arshop.R
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.interfaces.ILoadFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
@@ -21,6 +22,10 @@ class PaymentFragment @Inject constructor(
         savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar?.visibility = View.INVISIBLE
         return inflater.inflate(R.layout.fragment_payment, container, false)
+    }
+
+    override fun render(state: ViewState) {
+        TODO("Not yet implemented")
     }
 
 }

@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
-import com.arthe100.arshop.scripts.di.BaseApplication
 import com.arthe100.arshop.scripts.messege.MessageManager
-import com.arthe100.arshop.views.dialogBox.DialogBoxManager
-import com.arthe100.arshop.views.dialogBox.MessageType
-import com.arthe100.arshop.scripts.mvi.Auth.AuthState
-import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
-import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
+import com.arthe100.arshop.scripts.mvi.base.AuthState
+import com.arthe100.arshop.scripts.mvi.base.AuthUiAction
+import com.arthe100.arshop.scripts.mvi.base.CartUiAction
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.verify_fragment_layout.*
 import javax.inject.Inject
@@ -58,9 +58,9 @@ class VerifyFragment @Inject constructor(
         return "Verify Fragment"
     }
 
-    private fun render(state: AuthState){
+    override fun render(state: ViewState){
         when(state){
-            is AuthState.Failure -> {
+            is ViewState.Failure -> {
 //                requireView().visibility = View.VISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
@@ -79,7 +79,7 @@ class VerifyFragment @Inject constructor(
                 loadFragment(ProfileFragment::class.java)
             }
 
-            is AuthState.LoadingState ->{
+            is ViewState.LoadingState ->{
 //                requireView().visibility = View.INVISIBLE
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }

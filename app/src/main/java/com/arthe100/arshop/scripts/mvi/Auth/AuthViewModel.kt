@@ -4,20 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.arthe100.arshop.scripts.mvi.base.AuthUiAction
+import com.arthe100.arshop.scripts.mvi.base.UiAction
+import com.arthe100.arshop.scripts.mvi.base.ViewModelBase
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.mvi.mviBase.Action
 import com.arthe100.arshop.scripts.repositories.UserRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AuthViewModel @Inject constructor(private val userRepo : UserRepository) : ViewModel(){
+class AuthViewModel @Inject constructor(private val userRepo : UserRepository) : ViewModelBase(){
 
-    private val _currentViewState = MutableLiveData<AuthState>()
-    val currentViewState : LiveData<AuthState>
-        get() = _currentViewState
-
-    init {
-        _currentViewState.value = AuthState.Idle
-    }
 
     private var _phone: String = ""
     var phone: String
@@ -37,8 +34,7 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
         _password = ""
     }
 
-    fun onEvent(action: Action){
-
+    override fun onEvent(action: UiAction){
         when(action)
         {
             is AuthUiAction.SignupAction -> {
@@ -55,7 +51,7 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
 
             is AuthUiAction.LogoutAction -> {
                 logout()
-                _currentViewState.value = AuthState.Idle
+                _currentViewState.value = ViewState.IdleState
             }
 
 
@@ -63,7 +59,7 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
     }
 
     private fun checkCode(action: AuthUiAction.CheckCodeAction) {
-        _currentViewState.value = AuthState.LoadingState
+        _currentViewState.value = ViewState.LoadingState
 
         viewModelScope.launch {
             _currentViewState.value = userRepo.checkCode(action.code)
@@ -71,7 +67,7 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
     }
 
     private fun handleSignUp(action : AuthUiAction.SignupAction) {
-        _currentViewState.value = AuthState.LoadingState
+        _currentViewState.value = ViewState.LoadingState
 
         viewModelScope.launch {
             _currentViewState.value = userRepo.signup(
@@ -82,7 +78,7 @@ class AuthViewModel @Inject constructor(private val userRepo : UserRepository) :
     }
 
     private fun handleLogin(action: AuthUiAction.LoginAction){
-        _currentViewState.value = AuthState.LoadingState
+        _currentViewState.value = ViewState.LoadingState
         viewModelScope.launch {
             _currentViewState.value = userRepo.login(action.password , action.phone)
         }

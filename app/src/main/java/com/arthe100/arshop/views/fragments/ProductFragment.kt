@@ -4,9 +4,7 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,11 +13,12 @@ import com.arthe100.arshop.models.Comment
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
-import com.arthe100.arshop.scripts.mvi.Products.ProductState
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.scripts.mvi.ar.ArViewModel
-import com.arthe100.arshop.scripts.mvi.cart.CartState
-import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
+import com.arthe100.arshop.scripts.mvi.base.CartState
+import com.arthe100.arshop.scripts.mvi.base.CartUiAction
+import com.arthe100.arshop.scripts.mvi.base.ProductState
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
@@ -59,8 +58,8 @@ class ProductFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        model.currentViewState.observe(requireActivity() , Observer(::render))
-        cartViewModel.currentViewState.observe(requireActivity() , Observer(::render))
+        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
+        cartViewModel.currentViewState.observe(viewLifecycleOwner , Observer(::render))
     }
 
     override fun onStart() {
@@ -164,33 +163,17 @@ class ProductFragment @Inject constructor(
     }
 
 
-    private fun render(state: ProductState){
+    override fun render(state: ViewState){
         when(state){
-            ProductState.Idle -> {
-                dialogBox.cancel()
-            }
-
-            ProductState.LoadingState -> {
-                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
-            }
-
-            is ProductState.ProductDetailSuccess -> {
-                dialogBox.cancel()
-            }
-
-            is ProductState.GetProductsFailure -> {
-                dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
-                Log.v("TAG", state.throwable.toString())
-            }
-        }
-    }
-
-    private fun render(state: CartState){
-        when(state){
+            ViewState.IdleState ->  dialogBox.cancel()
+            ViewState.LoadingState -> dialogBox.showDialog(requireActivity(), MessageType.LOAD)
+            is ProductState.ProductDetailSuccess -> dialogBox.cancel()
+            is ViewState.Failure -> dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
             is CartState.AddToCartState -> {
                 dialogBox.cancel()
                 checkCartStatus()
             }
+
         }
     }
 
@@ -228,12 +211,12 @@ class ProductFragment @Inject constructor(
 
     }
 
-    fun showAddToCartButton(){
+    private fun showAddToCartButton(){
         add_to_cart_btn?.visibility = View.VISIBLE
         inc_dec_cart_count?.visibility = View.INVISIBLE
     }
 
-    fun showCartButtons(){
+    private fun showCartButtons(){
         add_to_cart_btn?.visibility = View.INVISIBLE
         inc_dec_cart_count?.visibility = View.VISIBLE
     }

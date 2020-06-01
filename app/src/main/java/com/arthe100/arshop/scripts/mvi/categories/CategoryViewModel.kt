@@ -1,38 +1,32 @@
 package com.arthe100.arshop.scripts.mvi.categories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arthe100.arshop.models.Category
 import com.arthe100.arshop.models.CurrentCategory
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.scripts.mvi.base.*
 import com.arthe100.arshop.scripts.repositories.CategoryRepository
 import kotlinx.coroutines.launch
-import java.lang.NullPointerException
 import javax.inject.Inject
 
-class CategoryViewModel @Inject constructor(private val catRepo: CategoryRepository) : ViewModel(){
-    private val _currentViewState =  MutableLiveData<CategoryState>(CategoryState.IdleState)
-    val currentViewState : LiveData<CategoryState>
-        get() = _currentViewState
+class CategoryViewModel @Inject constructor(private val catRepo: CategoryRepository) : ViewModelBase(){
 
     lateinit var currentCategory: CurrentCategory
     private lateinit var tempCategory: Category
 
     var categories: List<Category>? = null
 
-    fun onEvent(action: CategoryUiAction){
+    override fun onEvent(action: UiAction){
         when(action){
             is CategoryUiAction.GetCategories ->{
 
                 if(categories != null)
                     _currentViewState.value = CategoryState.GetCategorySuccess(categories!!)
                 else
-                    _currentViewState.value = CategoryState.LoadingState
+                    _currentViewState.value = ViewState.LoadingState
                 viewModelScope.launch {
                     _currentViewState.value = catRepo.getCategories()
-                    _currentViewState.value = CategoryState.IdleState
+                    _currentViewState.value = ViewState.IdleState
                 }
             }
 
@@ -40,7 +34,7 @@ class CategoryViewModel @Inject constructor(private val catRepo: CategoryReposit
                 viewModelScope.launch {
                     tempCategory = action.category
                     _currentViewState.value = catRepo.getProducts(action.category.id)
-                    _currentViewState.value = CategoryState.IdleState
+                    _currentViewState.value = ViewState.IdleState
                 }
             }
         }

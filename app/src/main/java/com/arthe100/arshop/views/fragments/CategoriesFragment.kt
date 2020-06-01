@@ -10,8 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Category
-import com.arthe100.arshop.scripts.mvi.categories.CategoryState
-import com.arthe100.arshop.scripts.mvi.categories.CategoryUiAction
+import com.arthe100.arshop.scripts.mvi.base.CategoryState
+import com.arthe100.arshop.scripts.mvi.base.CategoryUiAction
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.mvi.categories.CategoryViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
@@ -25,7 +26,7 @@ import javax.inject.Inject
 class CategoriesFragment @Inject constructor(
     private val viewModelProviderFactory: ViewModelProvider.Factory,
     private val dialogBoxManager: DialogBoxManager
-) : BaseFragment() {
+) : BaseFragment(){
 
     private lateinit var model: CategoryViewModel
     private lateinit var categoryItemAdapter: GenericAdapter<Category>
@@ -42,7 +43,7 @@ class CategoriesFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
         setSearchView()
         setRecyclerView()
-        model.currentViewState.observe(requireActivity() ,currentObserver)
+        model.currentViewState.observe(viewLifecycleOwner ,currentObserver)
     }
 
     override fun onStart() {
@@ -57,13 +58,13 @@ class CategoriesFragment @Inject constructor(
     }
 
 
-    private fun render(state: CategoryState){
+    override fun render(state: ViewState){
         when(state){
-            is CategoryState.IdleState -> {
+            is ViewState.IdleState -> {
                 dialogBoxManager.cancel()
                 categories_swipe_refresh?.isRefreshing = false
             }
-            is CategoryState.LoadingState -> {
+            is ViewState.LoadingState -> {
                 categories_swipe_refresh?.isRefreshing = true
             }
             is CategoryState.GetCategorySuccess -> {
@@ -78,7 +79,7 @@ class CategoriesFragment @Inject constructor(
                 model.setProducts(state.products)
                 loadFragment(CategoryFragment::class.java)
             }
-            is CategoryState.Failure -> {
+            is ViewState.Failure -> {
                 dialogBoxManager.cancel()
                 categories_swipe_refresh?.isRefreshing = false
             }

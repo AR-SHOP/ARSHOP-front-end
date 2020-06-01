@@ -2,13 +2,11 @@ package com.arthe100.arshop.views.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -19,12 +17,13 @@ import com.arthe100.arshop.models.Cart
 import com.arthe100.arshop.models.CartItem
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.messege.MessageManager
-import com.arthe100.arshop.scripts.mvi.Auth.AuthState
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
-import com.arthe100.arshop.scripts.mvi.cart.CartState
-import com.arthe100.arshop.scripts.mvi.cart.CartUiAction
+import com.arthe100.arshop.scripts.mvi.base.AuthState
+import com.arthe100.arshop.scripts.mvi.base.CartState
+import com.arthe100.arshop.scripts.mvi.base.CartUiAction
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.base.*
@@ -48,20 +47,7 @@ class CustomerCartFragment @Inject constructor(
     lateinit var model: CartViewModel
     lateinit var productViewModel: ProductViewModel
     lateinit var customerCartFragmentLayout: ViewGroup
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
-
+    
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         authViewModel = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(AuthViewModel::class.java)
@@ -72,9 +58,9 @@ class CustomerCartFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        model.currentViewState.observe(requireActivity() , Observer(::render))
+        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
         //model.currentCart.observe(requireActivity() , Observer{addProducts(it.cartItems)})
-        authViewModel.currentViewState.observe(requireActivity() , Observer(::authRender))
+        authViewModel.currentViewState.observe(viewLifecycleOwner , Observer(::render))
     }
 
     override fun onStart() {
@@ -124,35 +110,14 @@ class CustomerCartFragment @Inject constructor(
         }
     }
 
-    private fun authRender(state: AuthState) {
 
-        when (state) {
-            is AuthState.LoginSuccess -> {
-                login_btn?.visibility = View.INVISIBLE
-                cart_items_list?.visibility = View.VISIBLE
-                delete_all_cart_btn?.setOnClickListener{
-                    model.onEvent(CartUiAction.ClearCart)
-                }
-                model.onEvent(CartUiAction.GetCart)
-            }
-        }
-    }
-
-
-    private fun render(state: CartState){
+    override fun render(state: ViewState){
         when(state) {
-            is CartState.IdleState -> {
-                dialogBox.cancel()
-//                requireView().visibility = View.VISIBLE
-            }
-            is CartState.LoadingState -> {
-                requireView().visibility = View.INVISIBLE
-//                dialogBox.showDialog(requireActivity(),MessageType.LOAD)
-            }
+            is ViewState.IdleState -> dialogBox.cancel()
+            is ViewState.LoadingState -> { }
             is CartState.GetCartState -> {
                 model.currentCart = state.cart
                 dialogBox.cancel()
-//                requireView().visibility = View.VISIBLE
                 cart_items_list?.visibility = View.VISIBLE
                 empty_cart_layout?.visibility = View.VISIBLE
                 val products = state.cart.cartItems
@@ -162,7 +127,6 @@ class CustomerCartFragment @Inject constructor(
             is CartState.AddToCartState -> {
                 model.currentCart = state.cart
                 dialogBox.cancel()
-//                requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
 //                setRecyclerView(products)
@@ -170,13 +134,11 @@ class CustomerCartFragment @Inject constructor(
             is CartState.RemoveFromCartState -> {
                 model.currentCart = state.cart
                 dialogBox.cancel()
-//                requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
 //                setRecyclerView(products)
             }
-            is CartState.Failure -> {
-//                requireView().visibility = View.VISIBLE
+            is ViewState.Failure -> {
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
 
                 if(model.currentCart != null)
@@ -185,13 +147,20 @@ class CustomerCartFragment @Inject constructor(
             is CartState.ClearCart -> {
                 model.currentCart = state.cart
                 dialogBox.cancel()
-//                requireView().visibility = View.VISIBLE
                 val products = state.cart.cartItems
                 uiStatus(state.cart)
                 setRecyclerView(products)
             }
             is CartState.LogoutState -> {
                 checkUserLogin()
+            }
+            is AuthState.LoginSuccess -> {
+                login_btn?.visibility = View.INVISIBLE
+                cart_items_list?.visibility = View.VISIBLE
+                delete_all_cart_btn?.setOnClickListener{
+                    model.onEvent(CartUiAction.ClearCart)
+                }
+                model.onEvent(CartUiAction.GetCart)
             }
         }
     }

@@ -5,32 +5,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arthe100.arshop.models.UserProfile
+import com.arthe100.arshop.scripts.mvi.base.*
 import com.arthe100.arshop.scripts.repositories.UserRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ProfileViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel(){
-
-    private val _currentViewState = MutableLiveData<ProfileState>()
-    val currentViewState : LiveData<ProfileState>
-        get() = _currentViewState
+class ProfileViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModelBase(){
 
     var currentProfile: UserProfile? = null
 
-    init {
-        _currentViewState.value = ProfileState.Idle
-    }
-
-
-
-
-    fun onEvent(action: ProfileUiAction){
+    override fun onEvent(action: UiAction){
         when(action){
             is ProfileUiAction.GetHomePageProfileAction -> {
                 if(currentProfile != null )
                     _currentViewState.value = ProfileState.GetProfileSuccess(currentProfile!!)
                 else
-                    _currentViewState.value = ProfileState.LoadingState
+                    _currentViewState.value = ViewState.LoadingState
 
                 viewModelScope.launch {
                     _currentViewState.value = userRepository.getInfo()

@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
-import com.arthe100.arshop.scripts.di.BaseApplication
-import com.arthe100.arshop.scripts.mvi.Auth.AuthState
-import com.arthe100.arshop.scripts.mvi.Auth.AuthUiAction
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
+import com.arthe100.arshop.scripts.mvi.base.AuthState.SingupSuccess
+import com.arthe100.arshop.scripts.mvi.base.AuthUiAction.SignupAction
+import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
@@ -48,10 +48,11 @@ class SignUpFragment @Inject constructor(
 
         signup_btn.setOnClickListener {
             model.phone = signup_username.text.toString()
-            model.onEvent(AuthUiAction
-                .SignupAction(
+            model.onEvent(
+                SignupAction(
                     password = signup_password.text.toString(),
-                    phone = model.phone))
+                    phone = model.phone)
+            )
         }
     }
 
@@ -60,21 +61,18 @@ class SignUpFragment @Inject constructor(
     }
 
 
-    private fun render(state: AuthState){
+    override fun render(state: ViewState){
         when(state){
-            is AuthState.Failure -> {
-//                requireView().visibility = View.VISIBLE
+            is ViewState.Failure -> {
                 dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
 
-            is AuthState.SingupSuccess -> {
+            is SingupSuccess -> {
                 dialogBox.cancel()
-//                requireView().visibility = View.VISIBLE
                 loadFragment(VerifyFragment::class.java)
             }
 
-            is AuthState.LoadingState -> {
-//                requireView().visibility = View.INVISIBLE
+            is ViewState.LoadingState -> {
                 dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             }
         }
