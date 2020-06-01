@@ -51,8 +51,10 @@ class CommentRecyclerViewHolder(itemView: View)
     override fun bind(data: Comment, clickListener: OnItemClickListener<Comment>?) {
 
         itemView.apply {
-            itemView.comment_title.text = data.title
-            itemView.user_comment.text = data.comment
+            itemView.comment_title.text = data.rating.toString()
+            itemView.user_comment.text = data.content
+
+            setOnClickListener { clickListener?.onClickItem(data) }
         }
     }
 }

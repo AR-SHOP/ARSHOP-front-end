@@ -8,6 +8,7 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Comment
 import com.arthe100.arshop.models.User
@@ -21,6 +22,9 @@ import com.arthe100.arshop.scripts.mvi.base.ProductState
 import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.views.adapters.base.GenericAdapter
+import com.arthe100.arshop.views.adapters.base.GenericItemDiff
+import com.arthe100.arshop.views.adapters.base.OnItemClickListener
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import com.bumptech.glide.Glide
@@ -39,6 +43,7 @@ class ProductFragment @Inject constructor(
     private val session: UserSession
 ): BaseFragment() {
 
+    private lateinit var commentRVAdapter: GenericAdapter<Comment>
     private lateinit var cartViewModel: CartViewModel
     private lateinit var model: ProductViewModel
     private lateinit var arModel: ArViewModel
@@ -65,6 +70,7 @@ class ProductFragment @Inject constructor(
     override fun onStart() {
         super.onStart()
         commentDialog = setCommentDialog()
+        setComments(model.product.comments)
         (requireActivity() as AppCompatActivity).setSupportActionBar(product_toolbar)
         product_toolbar?.title = model.product.name
         product_details_name?.text = model.product.name
@@ -159,7 +165,7 @@ class ProductFragment @Inject constructor(
         if (!commentDialog.comment_text.text.isNullOrEmpty())
             commentText = commentDialog.comment_text.text.toString()
 
-        comment = Comment(commentTitle, commentText)
+//        comment = Comment(commentTitle, commentText)
     }
 
 
@@ -176,9 +182,6 @@ class ProductFragment @Inject constructor(
 
         }
     }
-
-
-
     private fun checkCartStatus(){
 
         plus_btn?.setOnClickListener{
@@ -209,6 +212,37 @@ class ProductFragment @Inject constructor(
         else
             showAddToCartButton()
 
+    }
+
+    private fun setComments(comments: List<Comment>){
+        if(this::commentRVAdapter.isInitialized)
+        {
+            user_comments_recycler_view.apply {
+                adapter = commentRVAdapter
+            }
+            commentRVAdapter.addItems(comments)
+        }
+
+        commentRVAdapter = object: GenericAdapter<Comment>(){
+            override fun getLayoutId(position: Int, obj: Comment): Int = R.layout.user_comment_card_item
+        }
+        commentRVAdapter.apply {
+            setDiffUtil(object: GenericItemDiff<Comment>{
+                override fun areItemsTheSame(oldItem: Comment, newItem: Comment): Boolean =
+                    oldItem.id == newItem.id
+
+                override fun areContentsTheSame(oldItem: Comment, newItem: Comment): Boolean =
+                    oldItem.content == newItem.content &&
+                    oldItem.rating == newItem.rating &&
+                    oldItem.timestamp == newItem.timestamp
+            })
+        }
+
+        user_comments_recycler_view?.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = commentRVAdapter
+        }
+        commentRVAdapter.addItems(comments)
     }
 
     private fun showAddToCartButton(){

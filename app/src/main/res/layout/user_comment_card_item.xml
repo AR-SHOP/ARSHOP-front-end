@@ -1,40 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:background="#FF0E0E"
+        app:cardBackgroundColor="#FFFFFF">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/gray_stroke">
 
+
         <TextView
                 android:id="@+id/comment_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title"
+                android:layout_marginTop="4dp"
                 android:paddingStart="20dp"
                 android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:text="@string/title"
                 android:textColor="@color/colorSecondary"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
-
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp" />
 
         <TextView
                 android:id="@+id/user_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/sample_comment"
                 android:paddingStart="20dp"
                 android:paddingTop="10dp"
+                android:paddingEnd="20dp"
                 android:paddingBottom="10dp"
+                android:text="@string/sample_comment"
                 android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintTop_toBottomOf="@id/comment_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/comment_title"
+                tools:layout_editor_absoluteX="16dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,21 +52,6 @@ class HomeFragment @Inject constructor(
     private lateinit var discountSliderViewAdapter: GenericSliderAdapter<HomeSales>
 
 
-    private var categoryList =
-        arrayListOf<Category>(
-            Category(1,"name1","a", ""),
-            Category(2,"name2","a", ""),
-            Category(3,"name3","a", ""),
-            Category(3,"name4","a", ""),
-            Category(3,"name5","a", "")
-        )
-
-        private var products = arrayListOf(
-        Product(1,"p1","a","b",123,"https://elcopcbonline.com/photos/product/4/176/4.jpg",""),
-        Product(1,"p2","a","b",123,"https://elcopcbonline.com/photos/product/4/176/4.jpg",""),
-        Product(1,"p3","a","b",123,"https://elcopcbonline.com/photos/product/4/176/4.jpg","")
-    )
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar.visibility = View.VISIBLE

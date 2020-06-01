@@ -434,4 +434,27 @@
     <MESSAGE value="resolved layouts' problem and fragmentFactory's problem." />
     <option name="LAST_COMMIT_MESSAGE" value="resolved layouts' problem and fragmentFactory's problem." />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProductFragment.kt</url>
+          <line>217</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/adapters/base/ViewHolderFactory.kt</url>
+          <line>53</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="app">
+        <watch expression="model.product" language="kotlin" />
+        <watch expression="itemView" language="kotlin" />
+        <watch expression="itemView.user_comment" language="kotlin" />
+      </configuration>
+    </watches-manager>
+  </component>
 </project>

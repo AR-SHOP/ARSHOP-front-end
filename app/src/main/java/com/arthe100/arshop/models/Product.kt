@@ -8,7 +8,8 @@ data class Product(
     val manufacturer : String,
     val price : Long,
     @SerializedName("image") val thumbnail : String,
-    @SerializedName("ar_model") val arModel: String
+    @SerializedName("ar_model") val arModel: String,
+    val comments: List<Comment>
 )
 
 
