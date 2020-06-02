@@ -112,6 +112,7 @@
                     android:paddingEnd="10dp"
                     android:paddingBottom="10dp"
                     android:text="@string/date_info"
+                    android:textDirection="rtl"
                     android:textColor="@color/colorHint"
                     android:textSize="10sp"/>
 

@@ -162,4 +162,7 @@ dependencies {
 
     //materialSearchView
     implementation 'br.com.mauker.materialsearchview:materialsearchview:1.2.3'
+
+    // Persian Date Converter
+    implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
 }

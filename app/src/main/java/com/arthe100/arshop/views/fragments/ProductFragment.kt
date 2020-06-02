@@ -6,10 +6,12 @@ import android.graphics.drawable.ColorDrawable
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.*
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Comment
 import com.arthe100.arshop.models.User
@@ -152,13 +154,10 @@ class ProductFragment @Inject constructor(
             var content = resultDialog.comment_text?.text.toString()
             var isAnonymous = resultDialog.anonymous_user.isChecked
             var rating = resultDialog.rating_bar?.rating
-            var shamsiDateArray = ShamsiCalendar(LocalDate.now()).currentShamsiDate()
-            var year = shamsiDateArray[0]
-            var month = shamsiDateArray[1]
-            var day = shamsiDateArray[2]
-            var date = LocalDate.of(year, Month.of(month), day)
-            var time = LocalTime.now()
-            var dateTime = LocalDateTime.of(date, time)
+
+//            var date = LocalDate.of(year, Month.of(month), day)
+//            var time = LocalTime.now()
+//            var dateTime = LocalDateTime.of(date, time)
         }
 
         resultDialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
@@ -236,6 +235,7 @@ class ProductFragment @Inject constructor(
         if(this::commentRVAdapter.isInitialized)
         {
             user_comments_recycler_view?.apply {
+                layoutManager = LinearLayoutManager(requireContext() , RecyclerView.HORIZONTAL , false)
                 adapter = commentRVAdapter
             }
             commentRVAdapter.addItems(comments)
@@ -252,12 +252,12 @@ class ProductFragment @Inject constructor(
                 override fun areContentsTheSame(oldItem: Comment, newItem: Comment): Boolean =
                     oldItem.content == newItem.content &&
                     oldItem.rating == newItem.rating &&
-                    oldItem.dateTime == newItem.dateTime
+                    oldItem.timestamp == newItem.timestamp
             })
         }
 
         user_comments_recycler_view?.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = LinearLayoutManager(requireContext() , RecyclerView.HORIZONTAL , false)
             adapter = commentRVAdapter
         }
         commentRVAdapter.addItems(comments)
