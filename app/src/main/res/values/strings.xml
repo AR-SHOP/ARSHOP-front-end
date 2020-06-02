@@ -77,6 +77,7 @@
     <string name="create_acc_link">ایجاد حساب کاربری جدید</string>
     <string name="empty_orders">شما تاکنون سفارشی ثبت نکرده‌اید!</string>
     <string name="name">نام</string>
+    <string name="reciever_name">نام و نام‌خانوادگی گیرنده</string>
     <string name="brand">سازنده محصول</string>
     <string name="description">توضیحات</string>
     <string name="product_attributes">ویژگی‌های محصول</string>
@@ -120,7 +121,12 @@
     <string name="payment_info">اطلاعات پرداخت</string>
     <string name="province">استان</string>
     <string name="city">شهر</string>
+    <string name="national_code">کد ملی</string>
     <string name="home_address">آدرس منزل</string>
+    <string name="plaque">پلاک</string>
+    <string name="floor_number">واحد</string>
+    <string name="postal_code">کد پستی</string>
+    <string name="self_recieve">گیرنده سفارش خودم هستم</string>
 
 
     <!-- DialogBoxManager's strings -->

@@ -56,6 +56,10 @@ class AddressFragment @Inject constructor(
         add_new_address_btn?.setOnClickListener {
             showAddressDialog()
         }
+
+        edit_address_btn?.setOnClickListener {
+
+        }
     }
 
     private fun setAdapter() {
@@ -93,6 +97,17 @@ class AddressFragment @Inject constructor(
         resultDialog.close_btn?.setOnClickListener {
             resultDialog.cancel()
         }
+
+        var province = resultDialog.province?.text.toString()
+        var city = resultDialog.city?.text.toString()
+        var plaque = resultDialog.plaque?.text.toString()
+        var floor = resultDialog.floor?.text.toString()
+        var postalCode = resultDialog.postal_code?.text.toString()
+        var homeAddress = resultDialog.home_details?.text.toString()
+        var isReciever = resultDialog.self_reciever?.isChecked
+        var recieverName = resultDialog.reciever_name?.text.toString()
+        var recieverNationalCode = resultDialog.national_code?.text.toString()
+        var recieverPhoneNumber = resultDialog.reciever_phone_number?.text.toString()
 
         resultDialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
         resultDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

@@ -37,41 +37,96 @@
                     android:src="@drawable/ic_action_close"
                     android:tint="@color/colorError"/>
 
-            <EditText
-                    android:id="@+id/province"
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:textColorHint="@color/colorHint"
-                    android:hint="@string/province"
-                    android:padding="10dp"
-                    android:background="@drawable/small_rounded_corners"
-                    android:backgroundTint="@color/colorEditText"
-                    android:inputType="text"/>
+                    android:orientation="horizontal">
 
-            <EditText
-                    android:id="@+id/city"
+                <EditText
+                        android:id="@+id/province"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginRight="10dp"
+                        android:textColorHint="@color/colorHint"
+                        android:hint="@string/province"
+                        android:padding="10dp"
+                        android:background="@drawable/small_rounded_corners"
+                        android:backgroundTint="@color/colorEditText"
+                        android:inputType="text"/>
+
+                <EditText
+                        android:id="@+id/city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColorHint="@color/colorHint"
+                        android:hint="@string/city"
+                        android:padding="10dp"
+                        android:background="@drawable/small_rounded_corners"
+                        android:backgroundTint="@color/colorEditText"
+                        android:inputType="text"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:textColorHint="@color/colorHint"
-                    android:hint="@string/city"
-                    android:padding="10dp"
-                    android:background="@drawable/small_rounded_corners"
-                    android:backgroundTint="@color/colorEditText"
-                    android:inputType="text"/>
+                    android:orientation="horizontal">
 
+                <EditText
+                        android:id="@+id/plaque"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:textColorHint="@color/colorHint"
+                        android:hint="@string/plaque"
+                        android:padding="10dp"
+                        android:background="@drawable/small_rounded_corners"
+                        android:backgroundTint="@color/colorEditText"
+                        android:inputType="text"/>
+
+                <EditText
+                        android:id="@+id/floor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:textColorHint="@color/colorHint"
+                        android:hint="@string/floor_number"
+                        android:padding="10dp"
+                        android:background="@drawable/small_rounded_corners"
+                        android:backgroundTint="@color/colorEditText"
+                        android:inputType="text"/>
+
+                <EditText
+                        android:id="@+id/postal_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:layout_margin="10dp"
+                        android:textColorHint="@color/colorHint"
+                        android:hint="@string/postal_code"
+                        android:padding="10dp"
+                        android:background="@drawable/small_rounded_corners"
+                        android:backgroundTint="@color/colorEditText"
+                        android:inputType="text"/>
+
+            </LinearLayout>
 
             <EditText
                     android:id="@+id/home_details"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:layout_margin="20dp"
-                    android:textColorHint="@color/colorHint"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"                    android:textColorHint="@color/colorHint"
                     android:hint="@string/home_address"
                     android:padding="10dp"
                     android:gravity="start"
@@ -80,6 +135,75 @@
                     android:inputType="textCapSentences|textMultiLine"
                     android:maxLength="1500"
                     android:maxLines="4"/>
+            
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorPrimary"/>
+
+            <CheckBox
+                    android:id="@+id/self_reciever"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:padding="10dp"
+                    android:buttonTint="@color/colorPrimary"
+                    android:text="@string/self_recieve"
+                    android:textColor="@color/colorHint"/>
+
+            <EditText
+                    android:id="@+id/reciever_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="@string/reciever_name"
+                    android:padding="10dp"
+                    android:textColorHint="@color/colorHint"
+                    android:background="@drawable/small_rounded_corners"
+                    android:backgroundTint="@color/colorEditText"
+                    android:inputType="text"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp">
+
+
+                <EditText
+                        android:id="@+id/national_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="5dp"                        android:textColorHint="@color/colorHint"
+                        android:hint="@string/national_code"
+                        android:padding="10dp"
+                        android:background="@drawable/small_rounded_corners"
+                        android:backgroundTint="@color/colorEditText"
+                        android:inputType="text"/>
+
+                <EditText
+                        android:id="@+id/reciever_phone_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:textAlignment="viewStart"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="5dp"                        android:textColorHint="@color/colorHint"
+                        android:hint="@string/phone_number"
+                        android:padding="10dp"
+                        android:background="@drawable/small_rounded_corners"
+                        android:backgroundTint="@color/colorEditText"
+                        android:inputType="phone"/>
+
+            </LinearLayout>
 
 
             <Button
