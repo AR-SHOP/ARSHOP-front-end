@@ -15,15 +15,15 @@
 
 
         <TextView
-                android:id="@+id/comment_title"
+                android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:paddingStart="20dp"
                 android:paddingTop="10dp"
                 android:paddingEnd="20dp"
-                android:text="@string/title"
-                android:textColor="@color/colorSecondary"
+                android:text="@string/name"
+                android:textColor="@color/colorPrimary"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="0dp" />
 
@@ -37,8 +37,90 @@
                 android:paddingBottom="10dp"
                 android:text="@string/sample_comment"
                 android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintTop_toBottomOf="@+id/comment_title"
+                app:layout_constraintTop_toBottomOf="@id/user_name"
                 tools:layout_editor_absoluteX="16dp" />
+
+
+        <LinearLayout
+                android:id="@+id/rating_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/user_comment"
+                app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/user_rating"
+                    android:textColor="@color/colorHint"
+                    android:textSize="10sp"/>
+
+            <TextView
+                    android:id="@+id/user_rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="10dp"
+                    android:text="@string/product_rating"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="10sp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:id="@+id/date_time_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/rating_info"
+                app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                    android:id="@+id/time_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/time_info"
+                    android:textColor="@color/colorHint"
+                    android:textSize="10sp"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/colorHint"
+                    android:textSize="10sp"/>
+
+            <TextView
+                    android:id="@+id/date_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/date_info"
+                    android:textColor="@color/colorHint"
+                    android:textSize="10sp"/>
+
+
+        </LinearLayout>
+
+
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

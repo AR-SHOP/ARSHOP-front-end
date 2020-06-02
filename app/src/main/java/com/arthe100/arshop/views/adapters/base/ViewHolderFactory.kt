@@ -51,8 +51,15 @@ class CommentRecyclerViewHolder(itemView: View)
     override fun bind(data: Comment, clickListener: OnItemClickListener<Comment>?) {
 
         itemView.apply {
-            itemView.comment_title.text = data.rating.toString()
+            itemView.user_name?.text = data.user
             itemView.user_comment.text = data.content
+            itemView.user_rating?.text = data.rating.toString()
+
+            var time = "${data.dateTime.hour}:${data.dateTime.minute}"
+            var date = "${data.dateTime.year}\\${data.dateTime.month}\\${data.dateTime.dayOfMonth}"
+
+            itemView.time_info?.text = time
+            itemView.date_info?.text = date
 
             setOnClickListener { clickListener?.onClickItem(data) }
         }

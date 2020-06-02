@@ -38,25 +38,13 @@
                     android:tint="@color/colorError"/>
 
             <EditText
-                    android:id="@+id/comment_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:textColorHint="@color/colorHint"
-                    android:hint="@string/title"
-                    android:padding="10dp"
-                    android:background="@drawable/small_rounded_corners"
-                    android:backgroundTint="@color/colorEditText"
-                    android:inputType="text"/>
-
-
-            <EditText
                     android:id="@+id/comment_text"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:layout_margin="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
                     android:textColorHint="@color/colorHint"
                     android:hint="@string/comment"
                     android:padding="10dp"
@@ -68,12 +56,51 @@
                     android:maxLines="4"/>
 
 
+            <CheckBox
+                    android:id="@+id/anonymous_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/anonymous_user_comment"
+                    android:textColor="@color/colorPrimary"
+                    android:padding="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:buttonTint="@color/colorPrimary"/>
+            
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/colorPrimary"/>
+
+            <TextView
+                    android:id="@+id/rating_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_rating"
+                    android:layout_margin="5dp"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"/>
+
+            <RatingBar
+                    android:id="@+id/rating_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:numStars="5"
+                    android:stepSize="0.5"/>
+
+
             <Button
                     android:id="@+id/comment_confirm_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="20dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
                     android:background="@drawable/large_rounded_corners"
                     android:backgroundTint="@color/colorSecondary"
                     android:textColor="@color/colorBackground"

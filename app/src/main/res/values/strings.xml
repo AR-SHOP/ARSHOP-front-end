@@ -46,6 +46,11 @@
 
 
     <!--textView texts-->
+    <string name="time_info">زمان</string>
+    <string name="date_info">تاریخ</string>
+    <string name="user_rating">امتیاز کاربر برای محصول:</string>
+    <string name="anonymous_user_comment">ارسال دیدگاه به صورت ناشناس</string>
+    <string name="product_rating">امتیاز محصول</string>
     <string name="sample_gateway">درگاه پرداخت</string>
     <string name="choose_payment_method">انتخاب نوع پرداخت</string>
     <string name="choose_payment_gateway">انتخاب درگاه پرداخت</string>

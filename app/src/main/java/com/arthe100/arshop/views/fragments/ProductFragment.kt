@@ -3,6 +3,7 @@ package com.arthe100.arshop.views.fragments
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -27,12 +28,19 @@ import com.arthe100.arshop.views.adapters.base.GenericItemDiff
 import com.arthe100.arshop.views.adapters.base.OnItemClickListener
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
+import com.arthe100.arshop.views.utility.ShamsiCalendar
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.ar.sceneform.ux.ArFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.dialog_comment_layout.*
 import kotlinx.android.synthetic.main.product_fragment_layout.*
+import java.sql.Timestamp
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.Month
+import java.util.*
 import javax.inject.Inject
 
 
@@ -47,7 +55,6 @@ class ProductFragment @Inject constructor(
     private lateinit var cartViewModel: CartViewModel
     private lateinit var model: ProductViewModel
     private lateinit var arModel: ArViewModel
-    private lateinit var menu: Menu
     private lateinit var commentDialog: Dialog
     private lateinit var comment: Comment
 
@@ -141,6 +148,19 @@ class ProductFragment @Inject constructor(
             resultDialog.cancel()
         }
 
+        resultDialog.comment_confirm_btn?.setOnClickListener {
+            var content = resultDialog.comment_text?.text.toString()
+            var isAnonymous = resultDialog.anonymous_user.isChecked
+            var rating = resultDialog.rating_bar?.rating
+            var shamsiDateArray = ShamsiCalendar(LocalDate.now()).currentShamsiDate()
+            var year = shamsiDateArray[0]
+            var month = shamsiDateArray[1]
+            var day = shamsiDateArray[2]
+            var date = LocalDate.of(year, Month.of(month), day)
+            var time = LocalTime.now()
+            var dateTime = LocalDateTime.of(date, time)
+        }
+
         resultDialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
         resultDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -160,8 +180,6 @@ class ProductFragment @Inject constructor(
         var commentTitle = resources.getString(R.string.title)
         var commentText = resources.getString(R.string.comment)
 
-        if (!commentDialog.comment_title.text.isNullOrEmpty())
-            commentTitle = commentDialog.comment_title.text.toString()
         if (!commentDialog.comment_text.text.isNullOrEmpty())
             commentText = commentDialog.comment_text.text.toString()
 
@@ -217,7 +235,7 @@ class ProductFragment @Inject constructor(
     private fun setComments(comments: List<Comment>){
         if(this::commentRVAdapter.isInitialized)
         {
-            user_comments_recycler_view.apply {
+            user_comments_recycler_view?.apply {
                 adapter = commentRVAdapter
             }
             commentRVAdapter.addItems(comments)
@@ -234,7 +252,7 @@ class ProductFragment @Inject constructor(
                 override fun areContentsTheSame(oldItem: Comment, newItem: Comment): Boolean =
                     oldItem.content == newItem.content &&
                     oldItem.rating == newItem.rating &&
-                    oldItem.timestamp == newItem.timestamp
+                    oldItem.dateTime == newItem.dateTime
             })
         }
 
