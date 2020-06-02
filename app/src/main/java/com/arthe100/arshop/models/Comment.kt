@@ -9,5 +9,5 @@ data class Comment(
     val user: String,
     val content: String,
     val rating: Float,
-    val dateTime: LocalDateTime
+    val timestamp: Timestamp
 )

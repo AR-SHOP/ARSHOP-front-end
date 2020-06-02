@@ -5,20 +5,24 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
-import com.arthe100.arshop.models.CartItem
-import com.arthe100.arshop.models.Category
-import com.arthe100.arshop.models.Comment
-import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.models.*
+import com.arthe100.arshop.views.utility.ShamsiCalendar
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.smarteist.autoimageslider.SliderViewAdapter
 import kotlinx.android.synthetic.main.cart_item.view.*
 import kotlinx.android.synthetic.main.product_fragment_layout.view.cart_count_text
 import kotlinx.android.synthetic.main.category_card_item.view.*
+import kotlinx.android.synthetic.main.discount_card_view.view.*
 import kotlinx.android.synthetic.main.horizontal_product_recycler_view.view.*
 import kotlinx.android.synthetic.main.item_address.view.*
 import kotlinx.android.synthetic.main.item_wish_list.view.*
 import kotlinx.android.synthetic.main.product_grid_item.view.*
 import kotlinx.android.synthetic.main.user_comment_card_item.view.*
+import saman.zamani.persiandate.PersianDate
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.*
 
 object ViewHolderFactory {
     fun create(view: View, viewType: Int): RecyclerView.ViewHolder {
@@ -30,7 +34,30 @@ object ViewHolderFactory {
             R.layout.item_wish_list -> WishListViewHolder(view)
             R.layout.user_comment_card_item -> CommentRecyclerViewHolder(view)
             R.layout.item_address -> AddressViewHolder(view)
+            R.layout.discount_card_view -> DiscountViewHolder(view)
             else -> throw IllegalArgumentException("Wrong view type")
+        }
+    }
+}
+
+class DiscountViewHolder(itemView: View)
+    : RecyclerView.ViewHolder(itemView), GenericAdapter.Binder<HomeSales> {
+
+    private var discountImage = itemView.discount_card_image
+
+    override fun bind(data: HomeSales, clickListener: OnItemClickListener<HomeSales>?) {
+
+        itemView.apply {
+            val requestOptions = RequestOptions()
+                .placeholder(R.drawable.white_background)
+                .error(R.drawable.white_background)
+
+            Glide.with(itemView.context)
+                .applyDefaultRequestOptions(requestOptions)
+                .load(data.image)
+                .into(discountImage)
+
+            setOnClickListener{ clickListener?.onClickItem(data) }
         }
     }
 }
@@ -54,9 +81,13 @@ class CommentRecyclerViewHolder(itemView: View)
             itemView.user_name?.text = data.user
             itemView.user_comment.text = data.content
             itemView.user_rating?.text = data.rating.toString()
+//
+            val datetime = PersianDate(data.timestamp)
 
-            var time = "${data.dateTime.hour}:${data.dateTime.minute}"
-            var date = "${data.dateTime.year}\\${data.dateTime.month}\\${data.dateTime.dayOfMonth}"
+
+            val time = "${datetime.hour}:${datetime.minute}"
+            val date = "${datetime.dayName()} ${datetime.shDay} ${datetime.monthName()} ${datetime.shYear} "
+
 
             itemView.time_info?.text = time
             itemView.date_info?.text = date
