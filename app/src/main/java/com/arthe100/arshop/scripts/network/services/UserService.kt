@@ -1,13 +1,9 @@
 package com.arthe100.arshop.scripts.network.services
 
 import com.arthe100.arshop.models.*
-import retrofit2.Call
 import retrofit2.http.*
 
 interface UserService  {
-
-    @GET("profile/")
-    suspend fun getInfo() : UserProfile
 
     @POST("signup/")
     suspend fun signup(@Body user: AuthUser)

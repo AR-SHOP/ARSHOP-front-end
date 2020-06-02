@@ -41,4 +41,5 @@ sealed class CategoryState                                          : ViewState(
 sealed class ProfileState                                           : ViewState(){
     object LogoutState                                              : ProfileState()
     data class GetProfileSuccess(val userInfo: UserProfile)         : ProfileState()
+    data class EditProfileSuccess(val  editInfo: UserProfile)       : ProfileState()
 }

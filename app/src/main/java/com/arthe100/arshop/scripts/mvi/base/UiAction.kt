@@ -45,4 +45,5 @@ sealed class CategoryUiAction                                           : UiActi
 sealed class ProfileUiAction                                            : UiAction(){
     object LogoutAction                                                 : ProfileUiAction()
     object GetHomePageProfileAction                                     : ProfileUiAction()
+    object EditProfileInfoAction                                        : ProfileUiAction()
 }

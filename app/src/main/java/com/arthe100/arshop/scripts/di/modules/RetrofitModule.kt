@@ -58,8 +58,6 @@ object RetrofitModule {
         return TokenInterceptor(session)
     }
 
-
-
     @JvmStatic
     @AppScope
     @Provides
@@ -90,5 +88,12 @@ object RetrofitModule {
     @Provides
     fun provideHomeService(retrofit: Retrofit) : HomeService{
         return retrofit.create(HomeService::class.java)
+    }
+
+    @JvmStatic
+    @AppScope
+    @Provides
+    fun provideProfileService(retrofit: Retrofit) :ProfileService{
+        return retrofit.create(ProfileService::class.java)
     }
 }

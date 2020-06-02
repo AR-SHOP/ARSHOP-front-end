@@ -5,21 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
-import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.messege.MessageManager
-import com.arthe100.arshop.scripts.mvi.Auth.UserSession
+import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
+import com.arthe100.arshop.scripts.mvi.base.ProfileState
+import com.arthe100.arshop.scripts.mvi.base.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
-import kotlinx.android.synthetic.main.activity_main_layout.*
+import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.edit_profile_info_fragment_layout.*
+import kotlinx.android.synthetic.main.profile_info_fragment_layout.*
 import javax.inject.Inject
 
 class EditProfileInfoFragment @Inject constructor(
-    private val userSession: UserSession
+    private val viewModelProviderFactory: ViewModelProvider.Factory
 ): BaseFragment(){
 
+    private lateinit var model : ProfileViewModel
     private lateinit var messageManager: MessageManager
     private lateinit var dialogBox: DialogBoxManager
     private val TAG = EditProfileInfoFragment::class.simpleName
@@ -28,40 +33,82 @@ class EditProfileInfoFragment @Inject constructor(
                               savedInstanceState: Bundle?): View? {
         messageManager = MessageManager()
         dialogBox = DialogBoxManager()
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
         return inflater.inflate(R.layout.edit_profile_info_fragment_layout, container, false)
     }
 
-    override fun render(state: ViewState) {
-        TODO("Not yet implemented")
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).setSupportActionBar(edit_profile_toolbar)
+        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
     }
 
     override fun onStart() {
         super.onStart()
 
-        when (userSession.user) {
-            is User.User -> {
-                name_last_name_editText.setText((userSession.user as User.User).username)
-                phone_number_editText.setText((userSession.user as User.User).phone)
-                email_editText.setText((userSession.user as User.User).email)
-                NID_editText.setText("1090807255")
-                birth_date_editText.setText("16/03/1374")
-                card_number_editText.setText("6037-1255-7884-3321")
-            }
-        }
+        model.onEvent(ProfileUiAction.GetHomePageProfileAction)
 
         save_changes.setOnClickListener {
-            (userSession.user as User.User).username = name_last_name_editText.text.toString()
-            (userSession.user as User.User).phone = phone_number_editText.text.toString()
-            (userSession.user as User.User).email = email_editText.text.toString()
+            model.onEvent(ProfileUiAction.EditProfileInfoAction)
         }
 
         cancel_changes.setOnClickListener {
             loadFragment(ProfileInfoFragment::class.java)
+        }
+    }
+
+    override fun render(state: ViewState) {
+        when(state) {
+            is ViewState.IdleState -> {
+                dialogBox.cancel()
+//                requireView().visibility = View.VISIBLE
+            }
+
+            is ViewState.Failure -> {
+//                requireView().visibility = View.VISIBLE
+                dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
+                messageManager.toast(requireContext(), state.throwable.toString())
+            }
+
+            is ProfileState.GetProfileSuccess -> {
+                dialogBox.cancel()
+//                requireView().visibility = View.VISIBLE
+                val user = state.userInfo
+                model.currentProfile = user
+
+                name_last_name_editText.setText(user.fName + " " + user.lName)
+
+                phone_number_editText.setText(user.phone)
+
+                email_editText.setText(user.email)
+
+                NID_editText.setText(user.ssId)
+            }
+
+            is ProfileState.EditProfileSuccess -> {
+                dialogBox.cancel()
+
+                val user = state.editInfo
+
+                user.fName = name_last_name_editText.text.toString()
+
+                user.phone = phone_number_editText.text.toString()
+
+                user.email = email_editText.text.toString()
+
+                user.ssId = NID_editText.text.toString()
+
+                model.currentProfile = user
+            }
+
+            is ViewState.LoadingState -> {
+//                requireView().visibility = View.INVISIBLE
+                dialogBox.showDialog(requireActivity(), MessageType.LOAD)
+            }
+            is ProfileState.LogoutState -> {
+                loadFragment(LoginFragment::class.java)
+            }
         }
     }
 

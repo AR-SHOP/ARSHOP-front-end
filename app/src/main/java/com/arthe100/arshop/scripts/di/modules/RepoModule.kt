@@ -40,5 +40,10 @@ object RepoModule {
     fun provideHomeRepo(service: HomeService) : HomeRepository{
         return HomeRepository(service)
     }
-
+    @JvmStatic
+    @AppScope
+    @Provides
+    fun provideProfileRepo(service: ProfileService) : ProfileRepository{
+        return ProfileRepository(service)
+    }
 }

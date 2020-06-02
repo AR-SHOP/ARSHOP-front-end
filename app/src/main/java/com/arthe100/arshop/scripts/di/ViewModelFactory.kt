@@ -2,6 +2,7 @@ package com.arthe100.arshop.scripts.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.arthe100.arshop.models.UserProfile
 import com.arthe100.arshop.scripts.di.scopes.AppScope
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel

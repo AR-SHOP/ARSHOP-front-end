@@ -2,25 +2,14 @@ package com.arthe100.arshop.scripts.repositories
 
 import com.arthe100.arshop.models.*
 import com.arthe100.arshop.scripts.mvi.base.AuthState
-import com.arthe100.arshop.scripts.mvi.base.ProfileState
 import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.network.services.UserService
 import kotlinx.coroutines.delay
 import javax.inject.Inject
-import kotlin.Exception
 
 class UserRepository @Inject constructor(private val service: UserService) {
 
     private val TAG = UserRepository::class.simpleName
-
-    suspend fun getInfo(): ViewState {
-        return try {
-            ProfileState.GetProfileSuccess(service.getInfo())
-
-        }catch (t: Throwable) {
-            ViewState.Failure(t)
-        }
-    }
 
     suspend fun signup(password: String, phone: String): ViewState {
         return try {
