@@ -87,6 +87,8 @@ class ProductFragment @Inject constructor(
         product_details_price?.text = model.product.price.toString()
         product_details_description?.text = model.product.description
         inc_dec_cart_count?.setBackgroundColor(Color.TRANSPARENT)
+        val commentSize = model.product.comments.size
+        comments_count?.text = if(commentSize == 0) "هیچ دیدگاهی ثبت نشده" else "$commentSize دیدگاه"
         checkCartStatus()
 
         val requestOptions = RequestOptions()

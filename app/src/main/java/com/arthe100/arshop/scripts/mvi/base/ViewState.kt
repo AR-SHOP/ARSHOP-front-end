@@ -41,5 +41,10 @@ sealed class CategoryState                                          : ViewState(
 
 sealed class ProfileState                                           : ViewState(){
     object LogoutState                                              : ProfileState()
+    object DeleteAddressSuccess                                     : ProfileState()
     data class GetProfileSuccess(val userInfo: UserProfile)         : ProfileState()
+    data class GetAddressesSuccess(val addresses: List<Address>)    : ProfileState()
+    data class GetAddressSuccess(val address: Address)              : ProfileState()
+    data class UpdateAddressSuccess(val address: Address)           : ProfileState()
+    data class CreateAddressSuccess(val address: Address)           : ProfileState()
 }

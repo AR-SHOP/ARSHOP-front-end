@@ -91,4 +91,10 @@ object RetrofitModule {
     fun provideHomeService(retrofit: Retrofit) : HomeService{
         return retrofit.create(HomeService::class.java)
     }
+    @JvmStatic
+    @AppScope
+    @Provides
+    fun provideAddressService(retrofit: Retrofit) : AddressService{
+        return retrofit.create(AddressService::class.java)
+    }
 }
