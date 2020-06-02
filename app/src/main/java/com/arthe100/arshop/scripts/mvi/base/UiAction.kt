@@ -1,6 +1,8 @@
 package com.arthe100.arshop.scripts.mvi.base
 
 import com.arthe100.arshop.models.Category
+import com.arthe100.arshop.models.Comment
+import com.arthe100.arshop.models.CommentNetwork
 import com.arthe100.arshop.models.Product
 import com.arthe100.arshop.scripts.mvi.mviBase.Action
 
@@ -12,6 +14,7 @@ sealed class HomeUiAction                                               : UiActi
 
 sealed class ProductUiAction                                            : UiAction(){
     object GetProducts                                                  : ProductUiAction()
+    data class SendCommentAction(val comment: CommentNetwork)                  : ProductUiAction()
     data class GetProductDetails(val product: Product)                  : ProductUiAction()
 }
 

@@ -28,6 +28,7 @@ import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
 import com.arthe100.arshop.views.adapters.base.OnItemClickListener
+import com.arthe100.arshop.views.dialogBox.CommentDialog
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import com.arthe100.arshop.views.utility.ShamsiCalendar
@@ -57,8 +58,7 @@ class ProductFragment @Inject constructor(
     private lateinit var cartViewModel: CartViewModel
     private lateinit var model: ProductViewModel
     private lateinit var arModel: ArViewModel
-    private lateinit var commentDialog: Dialog
-    private lateinit var comment: Comment
+    private lateinit var commentDialog: CommentDialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -142,45 +142,20 @@ class ProductFragment @Inject constructor(
         return "Product"
     }
 
-    private fun setCommentDialog() : Dialog {
-
-        var resultDialog = Dialog(requireContext())
-        resultDialog.setContentView(R.layout.dialog_comment_layout)
-        resultDialog.close_btn?.setOnClickListener {
-            resultDialog.cancel()
-        }
-
-        resultDialog.comment_confirm_btn?.setOnClickListener {
-            var content = resultDialog.comment_text?.text.toString()
-            var isAnonymous = resultDialog.anonymous_user.isChecked
-            var rating = resultDialog.rating_bar?.rating
-
-//            var date = LocalDate.of(year, Month.of(month), day)
-//            var time = LocalTime.now()
-//            var dateTime = LocalDateTime.of(date, time)
-        }
-
-        resultDialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
-        resultDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        return resultDialog
+    private fun setCommentDialog() : CommentDialog {
+        return CommentDialog(requireContext() , model)
     }
 
     private fun showCommentDialog() {
-        if (this::commentDialog.isInitialized && commentDialog.isShowing) {
-            commentDialog.dismiss()
+        if (!this::commentDialog.isInitialized)
             commentDialog = setCommentDialog()
-            commentDialog.show()
-        } else {
-            commentDialog = setCommentDialog()
-            commentDialog.show()
-        }
+        commentDialog.open()
 
-        var commentTitle = resources.getString(R.string.title)
-        var commentText = resources.getString(R.string.comment)
+//        } else {
+//            commentDialog = setCommentDialog()
+//            commentDialog.show()
+//        }
 
-        if (!commentDialog.comment_text.text.isNullOrEmpty())
-            commentText = commentDialog.comment_text.text.toString()
 
 //        comment = Comment(commentTitle, commentText)
     }

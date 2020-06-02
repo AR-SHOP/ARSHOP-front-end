@@ -78,7 +78,7 @@ class CommentRecyclerViewHolder(itemView: View)
     override fun bind(data: Comment, clickListener: OnItemClickListener<Comment>?) {
 
         itemView.apply {
-            itemView.user_name?.text = data.user
+            itemView.user_name?.text = if(data.user.toLowerCase(Locale.ROOT) == "anonymous") "ناشناس" else data.user
             itemView.user_comment.text = data.content
             itemView.user_rating?.text = data.rating.toString()
 //

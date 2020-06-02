@@ -1,5 +1,7 @@
 package com.arthe100.arshop.scripts.repositories
 
+import com.arthe100.arshop.models.Comment
+import com.arthe100.arshop.models.CommentNetwork
 import com.arthe100.arshop.scripts.mvi.base.ProductState
 import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.network.services.ProductService
@@ -21,6 +23,17 @@ class ProductRepository @Inject constructor (private val service : ProductServic
         return try {
             val product = service.getProduct(id)
             ProductState.ProductDetailSuccess(product)
+        }catch (throwable : Throwable)
+        {
+            ViewState.Failure(throwable)
+        }
+    }
+
+
+    suspend fun sendComment(comment: CommentNetwork) : ViewState{
+        return try {
+            service.sendComment(comment)
+            ProductState.CommentSent
         }catch (throwable : Throwable)
         {
             ViewState.Failure(throwable)

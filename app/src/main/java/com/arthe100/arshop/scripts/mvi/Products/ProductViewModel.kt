@@ -2,13 +2,15 @@ package com.arthe100.arshop.scripts.mvi.Products
 
 import androidx.lifecycle.viewModelScope
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.base.*
 import com.arthe100.arshop.scripts.repositories.ProductRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ProductViewModel @Inject constructor(
-    private val productRepo: ProductRepository
+    private val productRepo: ProductRepository,
+    private val userSession: UserSession
 ) : ViewModelBase() , ICacheLoader{
     private val TAG = ProductViewModel::class.simpleName
 
@@ -47,6 +49,15 @@ class ProductViewModel @Inject constructor(
 //                    _currentViewState.value = productState
 //                }
 
+            }
+            is ProductUiAction.SendCommentAction -> {
+                _currentViewState.value = ViewState.LoadingState
+                viewModelScope.launch {
+                    _currentViewState.value =
+                        productRepo.sendComment(action.comment)
+
+                    _currentViewState.value = ViewState.IdleState
+                }
             }
         }
     }
