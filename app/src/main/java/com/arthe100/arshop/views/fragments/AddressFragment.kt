@@ -10,18 +10,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.Address
 import com.arthe100.arshop.models.Comment
+import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
+import com.arthe100.arshop.scripts.mvi.base.ProfileState
+import com.arthe100.arshop.scripts.mvi.base.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericDiffUtil
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
+import com.arthe100.arshop.views.adapters.base.OnItemClickListener
+import com.arthe100.arshop.views.dialogBox.AddressDialog
+import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import com.arthe100.arshop.views.interfaces.ILoadFragment
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.dialog_address_layout.*
 import kotlinx.android.synthetic.main.dialog_comment_layout.*
@@ -30,58 +40,90 @@ import kotlinx.android.synthetic.main.fragment_address.*
 import javax.inject.Inject
 
 class AddressFragment @Inject constructor(
-    private val viewModelProviderFactory: ViewModelProvider.Factory
+    private val viewModelProviderFactory: ViewModelProvider.Factory,
+    private val dialogBox: DialogBoxManager
 ) : BaseFragment(), ILoadFragment {
 
     private lateinit var address: String
-    private lateinit var addressDialog: Dialog
-    private lateinit var addressAdapter: GenericAdapter<String>
+    private lateinit var addressDialog: AddressDialog
+    private lateinit var addressAdapter: GenericAdapter<Address>
+    private lateinit var model: ProfileViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         requireActivity().bottom_navbar?.visibility = View.INVISIBLE
-        setAddressDialog()
+        model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ProfileViewModel::class.java)
+        model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
+        addressDialog = setAddressDialog()
         return inflater.inflate(R.layout.fragment_address, container, false)
     }
 
     override fun render(state: ViewState) {
-        TODO("Not yet implemented")
+        when(state){
+            is ViewState.IdleState -> dialogBox.cancel()
+            is ViewState.Failure -> dialogBox.showDialog(requireContext(), MessageType.ERROR, state.throwable.toString())
+            is ViewState.LoadingState -> dialogBox.showDialog(requireActivity(), MessageType.LOAD)
+            is ProfileState.DeleteAddressSuccess -> {
+                dialogBox.cancel()
+            }
+            is ProfileState.GetAddressesSuccess -> {
+                dialogBox.cancel()
+                no_address_image?.visibility = if(state.addresses.isEmpty()) View.VISIBLE else View.INVISIBLE
+                no_address_text?.visibility = if(state.addresses.isEmpty()) View.VISIBLE else View.INVISIBLE
+                addressAdapter.addItems(state.addresses)}
+            is ProfileState.GetAddressSuccess -> {
+                dialogBox.cancel()
+            }
+            is ProfileState.UpdateAddressSuccess -> {
+                dialogBox.cancel()
+            }
+            is ProfileState.CreateAddressSuccess -> {
+                dialogBox.cancel()
+            }
+        }
     }
 
     override fun onStart() {
         super.onStart()
         setRecyclerView()
 
-
-        add_new_address_btn?.setOnClickListener {
-            showAddressDialog()
+        model.onEvent(ProfileUiAction.GetAddressListAction)
+        create_address_btn?.setOnClickListener {
+            addressDialog.open()
         }
 
         edit_address_btn?.setOnClickListener {
-
+            if(model.currentAddress == null) return@setOnClickListener
+            addressDialog.openInEditMode(model.currentAddress!!)
         }
     }
 
     private fun setAdapter() {
-        addressAdapter = object : GenericAdapter<String>() {
-            override fun getLayoutId(position: Int, obj: String): Int = R.layout.item_address
+        addressAdapter = object : GenericAdapter<Address>() {
+            override fun getLayoutId(position: Int, obj: Address): Int = R.layout.item_address
         }
 
         addressAdapter.apply {
-            setDiffUtil(object : GenericItemDiff<String> {
-                override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-                    return oldItem == newItem
+            setDiffUtil(object : GenericItemDiff<Address> {
+                override fun areItemsTheSame(oldItem: Address, newItem: Address): Boolean {
+                    return oldItem.id == newItem.id
                 }
 
-                override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-                    return oldItem == newItem
+                override fun areContentsTheSame(oldItem: Address, newItem: Address): Boolean {
+                    return oldItem.addressLine == newItem.addressLine
                 }
+            })
+            setItemListener(object: OnItemClickListener<Address> {
+                override fun onClickItem(data: Address) {
+                    model.currentAddress = data
+                }
+
             })
         }
     }
 
     private fun setRecyclerView() {
-        if (!this::addressDialog.isInitialized) setAdapter()
+        if (!this::addressAdapter.isInitialized) setAdapter()
         address_recycler_view?.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = addressAdapter
@@ -90,49 +132,28 @@ class AddressFragment @Inject constructor(
     }
 
 
-    private fun setAddressDialog() : Dialog {
-
-        var resultDialog = Dialog(requireContext())
-        resultDialog.setContentView(R.layout.dialog_address_layout)
-        resultDialog.close_btn?.setOnClickListener {
-            resultDialog.cancel()
-        }
-
-        var province = resultDialog.province?.text.toString()
-        var city = resultDialog.city?.text.toString()
-        var plaque = resultDialog.plaque?.text.toString()
-        var floor = resultDialog.floor?.text.toString()
-        var postalCode = resultDialog.postal_code?.text.toString()
-        var homeAddress = resultDialog.home_details?.text.toString()
-        var isReciever = resultDialog.self_reciever?.isChecked
-        var recieverName = resultDialog.reciever_name?.text.toString()
-        var recieverNationalCode = resultDialog.national_code?.text.toString()
-        var recieverPhoneNumber = resultDialog.reciever_phone_number?.text.toString()
-
-        resultDialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
-        resultDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        return resultDialog
+    private fun setAddressDialog() : AddressDialog {
+        return AddressDialog(requireContext() , model)
     }
 
-    private fun showAddressDialog() {
-        if (this::addressDialog.isInitialized && addressDialog.isShowing) {
-            addressDialog.dismiss()
-            addressDialog = setAddressDialog()
-            addressDialog.show()
-        } else {
-            addressDialog = setAddressDialog()
-            addressDialog.show()
-        }
-
-        var province = addressDialog.province.text.toString()
-        var city = addressDialog.city.text.toString()
-        var homeAddress = addressDialog.home_details.text.toString()
-
-        if (!province.isNullOrEmpty() && !city.isNullOrEmpty() && !homeAddress.isNullOrEmpty())
-        {
-            address = "$province،$city،$homeAddress"
-        }
-    }
+//    private fun showAddressDialog() {
+//        if (this::addressDialog.isInitialized && addressDialog.isShowing) {
+//            addressDialog.dismiss()
+//            addressDialog = setAddressDialog()
+//            addressDialog.show()
+//        } else {
+//            addressDialog = setAddressDialog()
+//            addressDialog.show()
+//        }
+//
+//        var province = addressDialog.province.text.toString()
+//        var city = addressDialog.city.text.toString()
+//        var homeAddress = addressDialog.home_details.text.toString()
+//
+//        if (!province.isNullOrEmpty() && !city.isNullOrEmpty() && !homeAddress.isNullOrEmpty())
+//        {
+//            address = "$province،$city،$homeAddress"
+//        }
+//    }
 
 }

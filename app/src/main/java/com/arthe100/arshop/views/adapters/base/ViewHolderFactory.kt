@@ -63,11 +63,12 @@ class DiscountViewHolder(itemView: View)
 }
 
 class AddressViewHolder(itemView: View)
-    : RecyclerView.ViewHolder(itemView), GenericAdapter.Binder<String> {
+    : RecyclerView.ViewHolder(itemView), GenericAdapter.Binder<Address> {
 
-    override fun bind(data: String, clickListener: OnItemClickListener<String>?) {
+    override fun bind(data: Address, clickListener: OnItemClickListener<Address>?) {
         itemView.apply {
-            itemView.address.text = data
+            itemView.address.text = data.toString()
+            itemView.address.setOnClickListener { clickListener?.onClickItem(data) }
         }
     }
 }

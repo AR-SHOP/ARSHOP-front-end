@@ -5,13 +5,13 @@ import retrofit2.http.*
 
 interface AddressService {
     @GET("address/")
-    suspend fun getAll(address:Address) : List<Address>
+    suspend fun getAll() : List<Address>
 
     @GET("address/{id}")
     suspend fun get(@Path("id") id: Long) : Address
 
-    @POST("address/")
-    suspend fun create(address:Address) : Address
+    @POST("create-address/")
+    suspend fun create(@Body address:Address) : Address
 
     @PUT("address/{id}")
     suspend fun update(@Path("id") id: Long) : Address

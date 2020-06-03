@@ -7,9 +7,9 @@ import com.arthe100.arshop.scripts.network.services.AddressService
 import javax.inject.Inject
 
 class AddressRepository @Inject constructor(private val service: AddressService){
-    suspend fun getAll(address: Address): ViewState{
+    suspend fun getAll(): ViewState{
         return try {
-            return ProfileState.GetAddressesSuccess(service.getAll(address))
+            return ProfileState.GetAddressesSuccess(service.getAll())
         }catch (t: Throwable){ ViewState.Failure(t)}
     }
 

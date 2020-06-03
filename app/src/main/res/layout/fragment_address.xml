@@ -66,12 +66,14 @@
             android:visibility="visible">
 
         <ImageView
+                android:id="@+id/no_address_image"
                 android:layout_width="wrap_content"
                 android:layout_height="180dp"
                 android:layout_gravity="center"
                 android:src="@drawable/empty_addresses"/>
 
         <TextView
+                android:id="@+id/no_address_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/empty_list"
@@ -95,7 +97,7 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/add_new_address_btn"
+                android:id="@+id/create_address_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

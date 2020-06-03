@@ -77,6 +77,7 @@
     <string name="create_acc_link">ایجاد حساب کاربری جدید</string>
     <string name="empty_orders">شما تاکنون سفارشی ثبت نکرده‌اید!</string>
     <string name="name">نام</string>
+    <string name="lname">‌نام‌خانوادگی</string>
     <string name="reciever_name">نام و نام‌خانوادگی گیرنده</string>
     <string name="brand">سازنده محصول</string>
     <string name="description">توضیحات</string>
