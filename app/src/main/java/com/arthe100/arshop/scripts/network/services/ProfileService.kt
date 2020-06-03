@@ -10,6 +10,6 @@ interface ProfileService {
     @GET("profile/")
     suspend fun getInfo() : UserProfile
 
-    @PATCH("profile/edit")
+    @PATCH("profile/")
     suspend fun editInfo(@Body userProfile: UserProfile) : UserProfile
 }

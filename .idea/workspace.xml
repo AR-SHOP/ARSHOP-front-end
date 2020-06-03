@@ -13,20 +13,10 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88792e33-6867-4903-b87c-8c672be25749" name="Default Changelist" comment="attach EditProfileInfoFragment and ProfileInfoFragment to server.">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/models/WishList.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/mvi/WishList/WishListViewModel.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/network/services/WishListService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/repositories/WishListRepository.kt" afterDir="false" />
+    <list default="true" id="88792e33-6867-4903-b87c-8c672be25749" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/ViewModelFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/ViewModelFactory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/modules/RepoModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/modules/RepoModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/modules/RetrofitModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/modules/RetrofitModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/mvi/base/UiAction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/mvi/base/UiAction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/mvi/base/ViewState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/mvi/base/ViewState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/network/api/UserApi.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProductFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProductFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/WishListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/WishListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/models/WishList.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/models/WishList.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/network/services/ProfileService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/network/services/ProfileService.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -417,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591122032430</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="attach WishListFragment to server.">
+      <created>1591198858154</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1591198858155</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -434,7 +431,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="set dialog states.&#10;set dialog strings.&#10;set dialog actions." />
     <MESSAGE value="replaced messageManager with dialog.&#10;removed useless codes.&#10;finished DialogBox messages." />
     <MESSAGE value="debugged dialogs usage." />
     <MESSAGE value="added DialogBox again." />
@@ -459,6 +455,7 @@
     <MESSAGE value="resolved layouts' problem and fragmentFactory's problem." />
     <MESSAGE value="edited recently added layouts and fragments." />
     <MESSAGE value="attach EditProfileInfoFragment and ProfileInfoFragment to server." />
-    <option name="LAST_COMMIT_MESSAGE" value="attach EditProfileInfoFragment and ProfileInfoFragment to server." />
+    <MESSAGE value="attach WishListFragment to server." />
+    <option name="LAST_COMMIT_MESSAGE" value="attach WishListFragment to server." />
   </component>
 </project>
