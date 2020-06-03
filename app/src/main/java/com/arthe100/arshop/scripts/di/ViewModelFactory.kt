@@ -7,6 +7,7 @@ import com.arthe100.arshop.scripts.di.scopes.AppScope
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
+import com.arthe100.arshop.scripts.mvi.WishList.WishListViewModel
 import com.arthe100.arshop.scripts.mvi.ar.ArViewModel
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.scripts.mvi.categories.CategoryViewModel
@@ -67,4 +68,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     internal abstract fun homeViewModel(viewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WishListViewModel::class)
+    internal abstract fun wishListViewModel(viewModel: WishListViewModel): ViewModel
 }

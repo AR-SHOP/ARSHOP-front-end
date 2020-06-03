@@ -13,29 +13,20 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88792e33-6867-4903-b87c-8c672be25749" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/network/services/ProfileService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/repositories/ProfileRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_core_1_15_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_core_1_15_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_filament_android_1_15_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_filament_android_1_15_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_rendering_1_15_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_rendering_1_15_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_sceneform_base_1_15_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_sceneform_base_1_15_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_ux_sceneform_ux_1_15_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_ar_sceneform_ux_sceneform_ux_1_15_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_miguelcatalan_materialsearchview_1_4_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_miguelcatalan_materialsearchview_1_4_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" afterDir="false" />
+    <list default="true" id="88792e33-6867-4903-b87c-8c672be25749" name="Default Changelist" comment="attach EditProfileInfoFragment and ProfileInfoFragment to server.">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/models/WishList.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/mvi/WishList/WishListViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/network/services/WishListService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/repositories/WishListRepository.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/models/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/models/User.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/ViewModelFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/ViewModelFactory.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/modules/RepoModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/modules/RepoModule.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/modules/RetrofitModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/di/modules/RetrofitModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/mvi/Profile/ProfileViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/mvi/Profile/ProfileViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/mvi/base/UiAction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/mvi/base/UiAction.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/mvi/base/ViewState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/mvi/base/ViewState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/network/services/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/network/services/UserService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/repositories/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/repositories/UserRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/EditProfileInfoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/EditProfileInfoFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProfileInfoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProfileInfoFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/scripts/network/api/UserApi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProductFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/ProductFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/WishListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/arthe100/arshop/views/fragments/WishListFragment.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -419,7 +410,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590585453460</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="attach EditProfileInfoFragment and ProfileInfoFragment to server.">
+      <created>1591122032430</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1591122032430</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -436,7 +434,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="debugged the problems." />
     <MESSAGE value="set dialog states.&#10;set dialog strings.&#10;set dialog actions." />
     <MESSAGE value="replaced messageManager with dialog.&#10;removed useless codes.&#10;finished DialogBox messages." />
     <MESSAGE value="debugged dialogs usage." />
@@ -461,6 +458,7 @@
     <MESSAGE value="added fragments of change password, edit profile info, charge account and profile info.&#10;&#10;added button action in profile fragment." />
     <MESSAGE value="resolved layouts' problem and fragmentFactory's problem." />
     <MESSAGE value="edited recently added layouts and fragments." />
-    <option name="LAST_COMMIT_MESSAGE" value="edited recently added layouts and fragments." />
+    <MESSAGE value="attach EditProfileInfoFragment and ProfileInfoFragment to server." />
+    <option name="LAST_COMMIT_MESSAGE" value="attach EditProfileInfoFragment and ProfileInfoFragment to server." />
   </component>
 </project>

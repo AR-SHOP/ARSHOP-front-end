@@ -41,9 +41,14 @@ sealed class CategoryUiAction                                           : UiActi
     data class GetCategoryProduct(val category: Category)               : CategoryUiAction()
 }
 
-
 sealed class ProfileUiAction                                            : UiAction(){
     object LogoutAction                                                 : ProfileUiAction()
     object GetHomePageProfileAction                                     : ProfileUiAction()
     object EditProfileInfoAction                                        : ProfileUiAction()
+}
+
+sealed class WishListUiAction                                           : UiAction(){
+    object GetWishListAction                                            : WishListUiAction()
+    data class AddWishListAction(val productId: Long)                   : WishListUiAction()
+    data class DeleteWishListAction(val productId: Long)                : WishListUiAction()
 }

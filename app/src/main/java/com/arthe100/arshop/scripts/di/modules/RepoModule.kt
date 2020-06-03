@@ -46,4 +46,10 @@ object RepoModule {
     fun provideProfileRepo(service: ProfileService) : ProfileRepository{
         return ProfileRepository(service)
     }
+    @JvmStatic
+    @AppScope
+    @Provides
+    fun provideWishListRepo(service: WishListService) : WishListRepository{
+        return WishListRepository(service)
+    }
 }

@@ -12,14 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Comment
 import com.arthe100.arshop.models.User
+import com.arthe100.arshop.models.WishList
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
+import com.arthe100.arshop.scripts.mvi.WishList.WishListViewModel
 import com.arthe100.arshop.scripts.mvi.ar.ArViewModel
-import com.arthe100.arshop.scripts.mvi.base.CartState
-import com.arthe100.arshop.scripts.mvi.base.CartUiAction
-import com.arthe100.arshop.scripts.mvi.base.ProductState
-import com.arthe100.arshop.scripts.mvi.base.ViewState
+import com.arthe100.arshop.scripts.mvi.base.*
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
@@ -44,6 +43,7 @@ class ProductFragment @Inject constructor(
 ): BaseFragment() {
 
     private lateinit var commentRVAdapter: GenericAdapter<Comment>
+    private lateinit var wishListViewModel: WishListViewModel
     private lateinit var cartViewModel: CartViewModel
     private lateinit var model: ProductViewModel
     private lateinit var arModel: ArViewModel
@@ -58,12 +58,14 @@ class ProductFragment @Inject constructor(
         model = ViewModelProvider(requireActivity() , viewModelFactory).get(ProductViewModel::class.java)
         arModel = ViewModelProvider(requireActivity() , viewModelFactory).get(ArViewModel::class.java)
         cartViewModel = ViewModelProvider(requireActivity() , viewModelFactory).get(CartViewModel::class.java)
+        wishListViewModel = ViewModelProvider(requireActivity() , viewModelFactory).get(WishListViewModel::class.java)
         return inflater.inflate(R.layout.product_fragment_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.currentViewState.observe(viewLifecycleOwner , Observer(::render))
+        wishListViewModel.currentViewState.observe(viewLifecycleOwner , Observer(::render))
         cartViewModel.currentViewState.observe(viewLifecycleOwner , Observer(::render))
     }
 
@@ -122,8 +124,13 @@ class ProductFragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.add_to_wish_list -> {
-                //use this line of code to change the color of the heart icon
-                //item.icon.setTint(Color.RED)
+                if (item.isChecked) {
+                    item.icon.setTint(Color.WHITE)
+                    wishListViewModel.onEvent(WishListUiAction.DeleteWishListAction(model.product.id))
+                }else {
+                    item.icon.setTint(Color.RED)
+                    wishListViewModel.onEvent(WishListUiAction.AddWishListAction(model.product.id))
+                }
             }
         }
         return true
@@ -179,7 +186,16 @@ class ProductFragment @Inject constructor(
                 dialogBox.cancel()
                 checkCartStatus()
             }
-
+            is WishListState.AddWishListSuccess -> {
+                dialogBox.cancel()
+                val wishList: WishList = state.addWishList
+                wishListViewModel.currentWishList = wishList
+            }
+            is WishListState.DeleteWishListSuccess -> {
+                dialogBox.cancel()
+                val wishList: WishList = state.deleteWishList
+                wishListViewModel.currentWishList = wishList
+            }
         }
     }
     private fun checkCartStatus(){

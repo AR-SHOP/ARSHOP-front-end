@@ -43,3 +43,9 @@ sealed class ProfileState                                           : ViewState(
     data class GetProfileSuccess(val userInfo: UserProfile)         : ProfileState()
     data class EditProfileSuccess(val  editInfo: UserProfile)       : ProfileState()
 }
+
+sealed class WishListState                                          : ViewState(){
+    data class GetWishListSuccess(val getWishList: WishList)        : WishListState()
+    data class AddWishListSuccess(val addWishList: WishList)        : WishListState()
+    data class DeleteWishListSuccess(val deleteWishList: WishList)  : WishListState()
+}

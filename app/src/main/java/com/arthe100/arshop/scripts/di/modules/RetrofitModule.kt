@@ -96,4 +96,11 @@ object RetrofitModule {
     fun provideProfileService(retrofit: Retrofit) :ProfileService{
         return retrofit.create(ProfileService::class.java)
     }
+
+    @JvmStatic
+    @AppScope
+    @Provides
+    fun provideWishListService(retrofit: Retrofit) :WishListService{
+        return retrofit.create(WishListService::class.java)
+    }
 }
