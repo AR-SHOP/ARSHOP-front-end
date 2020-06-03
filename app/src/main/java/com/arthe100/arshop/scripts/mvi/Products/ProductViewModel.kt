@@ -34,7 +34,7 @@ class ProductViewModel @Inject constructor(
                     _currentViewState.value = ViewState.IdleState
                 }
             }
-            is ProductUiAction.GetProductDetails -> {
+            is ProductUiAction.GetProductDetailsOffline -> {
 
                 _product = action.product
                 _currentViewState.value = ProductState.ProductDetailSuccess(action.product)
@@ -49,6 +49,20 @@ class ProductViewModel @Inject constructor(
 //                    _currentViewState.value = productState
 //                }
 
+            }
+            is ProductUiAction.GetProductDetails -> {
+                _product = action.product
+//                _currentViewState.value = ViewState.LoadingState
+
+                viewModelScope.launch {
+                    val productState = productRepo.getProduct(action.product.id)
+                    when(productState){
+                        is ProductState.ProductDetailSuccess -> {
+                            _product = productState.product
+                        }
+                    }
+                    _currentViewState.value = productState
+                }
             }
             is ProductUiAction.SendCommentAction -> {
                 _currentViewState.value = ViewState.LoadingState

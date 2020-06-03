@@ -221,7 +221,7 @@ class HomeFragment @Inject constructor(
             setItemListener(object :
                 OnItemClickListener<Product> {
                 override fun onClickItem(data: Product) {
-                    productViewModel.onEvent(ProductUiAction.GetProductDetails(data))
+                    productViewModel.onEvent(ProductUiAction.GetProductDetailsOffline(data))
                 }
 
             })

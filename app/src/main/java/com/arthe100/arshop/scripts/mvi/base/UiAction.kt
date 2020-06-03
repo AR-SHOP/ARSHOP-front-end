@@ -13,6 +13,7 @@ sealed class ProductUiAction                                            : UiActi
     object GetProducts                                                  : ProductUiAction()
     data class SendCommentAction(val comment: CommentNetwork)                  : ProductUiAction()
     data class GetProductDetails(val product: Product)                  : ProductUiAction()
+    data class GetProductDetailsOffline(val product: Product)                  : ProductUiAction()
 }
 
 

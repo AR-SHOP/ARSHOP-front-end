@@ -19,10 +19,7 @@ import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
 import com.arthe100.arshop.scripts.mvi.ar.ArViewModel
-import com.arthe100.arshop.scripts.mvi.base.CartState
-import com.arthe100.arshop.scripts.mvi.base.CartUiAction
-import com.arthe100.arshop.scripts.mvi.base.ProductState
-import com.arthe100.arshop.scripts.mvi.base.ViewState
+import com.arthe100.arshop.scripts.mvi.base.*
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
@@ -167,11 +164,29 @@ class ProductFragment @Inject constructor(
         when(state){
             ViewState.IdleState ->  dialogBox.cancel()
             ViewState.LoadingState -> dialogBox.showDialog(requireActivity(), MessageType.LOAD)
-            is ProductState.ProductDetailSuccess -> dialogBox.cancel()
+            is ProductState.ProductDetailSuccess -> {
+                model.product = state.product
+                commentDialog = setCommentDialog()
+                commentRVAdapter.addItems(model.product.comments)
+                (requireActivity() as AppCompatActivity).setSupportActionBar(product_toolbar)
+                product_toolbar?.title = model.product.name
+                product_details_name?.text = model.product.name
+                product_details_brand?.text = model.product.manufacturer
+                product_details_price?.text = model.product.price.toString()
+                product_details_description?.text = model.product.description
+                inc_dec_cart_count?.setBackgroundColor(Color.TRANSPARENT)
+                val commentSize = model.product.comments.size
+                comments_count?.text = if(commentSize == 0) "هیچ دیدگاهی ثبت نشده" else "$commentSize دیدگاه"
+                dialogBox.cancel()
+            }
             is ViewState.Failure -> dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
             is CartState.AddToCartState -> {
                 dialogBox.cancel()
                 checkCartStatus()
+            }
+            is ProductState.CommentSent -> {
+                model.onEvent(ProductUiAction.GetProductDetails(model.product))
+                commentDialog.close()
             }
 
         }

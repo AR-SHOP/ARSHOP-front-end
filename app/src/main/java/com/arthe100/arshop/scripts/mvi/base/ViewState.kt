@@ -13,7 +13,7 @@ sealed class HomeState                                              : ViewState(
 }
 
 sealed class ProductState                                           : ViewState(){
-    object CommentSent                                            : ProductState()
+    object CommentSent                                              : ProductState()
     data class ProductDetailSuccess(val product: Product)           : ProductState()
     data class ProductsSuccess(val products: List<Product>)         : ProductState()
 }
