@@ -3,12 +3,16 @@ package com.arthe100.arshop.scripts.di.modules
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.di.scopes.AppScope
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
+import com.arthe100.arshop.scripts.network.interceptors.TokenAuthenticator
 import com.arthe100.arshop.scripts.network.interceptors.TokenInterceptor
 import com.arthe100.arshop.scripts.network.services.*
+import com.arthe100.arshop.scripts.repositories.UserRepository
 import com.google.gson.Gson
 import com.squareup.moshi.Moshi
+import dagger.Lazy
 import dagger.Module
 import dagger.Provides
+import okhttp3.Authenticator
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -43,7 +47,7 @@ object RetrofitModule {
     @JvmStatic
     @AppScope
     @Provides
-    fun provideOkHttpClient(interceptor : Interceptor, tokenInterceptor: TokenInterceptor ) : OkHttpClient{
+    fun provideOkHttpClient(interceptor : Interceptor, tokenInterceptor: TokenInterceptor) : OkHttpClient{
 
         return OkHttpClient.Builder()
             .addInterceptor(tokenInterceptor)
@@ -56,6 +60,14 @@ object RetrofitModule {
     @Provides
     fun provideTokenInterceptor(session: UserSession) : TokenInterceptor{
         return TokenInterceptor(session)
+    }
+
+
+    @JvmStatic
+    @AppScope
+    @Provides
+    fun provideTokenAuthenticator(session: UserSession , userService: Lazy<UserService>) : TokenAuthenticator{
+        return TokenAuthenticator(session , userService)
     }
 
 

@@ -29,9 +29,11 @@ sealed class CartState                                              : ViewState(
 
 
 sealed class AuthState                                              : ViewState(){
-    object CodeSuccess                                              : AuthState()
     object SingupSuccess                                            : AuthState()
+    data class CodeGetSuccess(val code: String)                     : AuthState()
+    object CodeSuccess                                              : AuthState()
     data class LoginSuccess(val user: User.User)                    : AuthState()
+    data class RefreshTokenSuccess(val token: RefreshedTokenModel)  : AuthState()
 }
 
 sealed class CategoryState                                          : ViewState(){

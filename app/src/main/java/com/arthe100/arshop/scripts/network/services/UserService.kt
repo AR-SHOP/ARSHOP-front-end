@@ -10,8 +10,16 @@ interface UserService  {
     suspend fun getInfo() : UserProfile
 
     @POST("signup/")
-    suspend fun signup(@Body user: AuthUser)
+    suspend fun signup(@Body user: SignupUser)
 
     @POST("login/")
     suspend fun login(@Body user: AuthUser) : UserToken
+
+    @POST("signup/send-sms/")
+    suspend fun getCode(@Body phone: PhoneNetwork) : CodeNetwork
+
+
+    //TODO()
+    @POST("refresh-token/")
+    fun refreshToken(@Body token: RefreshedTokenModel) : RefreshedTokenModel
 }

@@ -35,6 +35,7 @@ sealed class CartUiAction                                               : UiActi
 sealed class AuthUiAction                                               : UiAction(){
     object LogoutAction                                                 : AuthUiAction()
     data class CheckCodeAction(val code: String)                        : AuthUiAction()
+    data class GetCodeAction(val phone: String)                        : AuthUiAction()
     data class SignupAction(val password: String , val phone: String)   : AuthUiAction()
     data class LoginAction(val password: String , val phone: String)    : AuthUiAction()
 }

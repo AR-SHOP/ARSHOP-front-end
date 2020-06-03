@@ -18,9 +18,24 @@ data class UserToken(
     val token: String
 )
 
-data class AuthUser(
+data class RefreshedTokenModel(
+    @SerializedName("token") val newToken: String
+)
+
+data class CodeNetwork(
+    val code: String
+)
+data class PhoneNetwork(
+    val phone: String
+)
+
+data class SignupUser(
     val password: String,
     val phone: String
+)
+data class AuthUser(
+    val password: String,
+    val username: String
 )
 
 data class UserProfile(
