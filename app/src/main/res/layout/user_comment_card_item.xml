@@ -2,8 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="10dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp"
@@ -11,8 +11,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layoutDirection="rtl"
+            android:textDirection="rtl"
             android:background="@drawable/gray_stroke">
 
 
@@ -27,8 +28,11 @@
                 android:paddingEnd="20dp"
                 android:text="@string/name"
                 android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="0dp" />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintVertical_bias="0"/>
 
         <TextView
                 android:id="@+id/user_comment"
@@ -41,8 +45,9 @@
                 android:paddingBottom="10dp"
                 android:text="@string/sample_comment"
                 android:textColor="@color/colorPrimaryDark"
+                android:textSize="10sp"
                 app:layout_constraintTop_toBottomOf="@id/user_name"
-                tools:layout_editor_absoluteX="16dp" />
+                app:layout_constraintRight_toRightOf="parent"/>
 
 
         <LinearLayout
@@ -57,72 +62,65 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="15dp"
                     android:textDirection="rtl"
-                    android:paddingEnd="10dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/user_rating"
                     android:textColor="@color/colorHint"
-                    android:textSize="10sp"/>
+                    android:textSize="8sp"/>
 
             <TextView
                     android:id="@+id/user_rating"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textDirection="rtl"
-                    android:paddingEnd="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/product_rating"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="10sp"/>
+                    android:textSize="8sp"/>
 
         </LinearLayout>
 
 
         <LinearLayout
                 android:id="@+id/date_time_info"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layoutDirection="rtl"
+                android:layout_margin="5dp"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/rating_info"
-                app:layout_constraintRight_toRightOf="parent">
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="1">
 
             <TextView
                     android:id="@+id/time_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:textDirection="rtl"
-                    android:paddingStart="15dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="10dp"
+                    android:padding="10dp"
                     android:text="@string/time_info"
                     android:textColor="@color/colorHint"
-                    android:textSize="10sp"/>
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textDirection="rtl"
-                    android:paddingStart="15dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="10dp"
-                    android:text="-"
-                    android:textColor="@color/colorHint"
-                    android:textSize="10sp"/>
+                    android:textSize="8sp"/>
 
             <TextView
                     android:id="@+id/date_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="15dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:padding="10dp"
                     android:text="@string/date_info"
                     android:textDirection="rtl"
                     android:textColor="@color/colorHint"
-                    android:textSize="10sp"/>
+                    android:textSize="8sp"/>
 
 
         </LinearLayout>
