@@ -50,12 +50,12 @@
             <ImageButton
                     android:id="@+id/delete_btn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_delete"
+                    android:layout_height="13dp"
                     android:layout_gravity="end"
+                    android:layout_margin="5dp"
                     android:background="@color/colorBackground"
-                    android:tint="@color/colorError"
-                    android:layout_margin="5dp"/>
+                    android:src="@drawable/ic_delete"
+                    android:tint="@color/colorError" />
 
         </LinearLayout>
 
