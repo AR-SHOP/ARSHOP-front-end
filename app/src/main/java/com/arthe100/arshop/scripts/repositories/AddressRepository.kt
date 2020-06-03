@@ -25,9 +25,9 @@ class AddressRepository @Inject constructor(private val service: AddressService)
         }catch (t: Throwable){ ViewState.Failure(t)}
     }
 
-    suspend fun update(id: Long) : ViewState{
+    suspend fun update(address: Address) : ViewState{
         return try {
-            return ProfileState.UpdateAddressSuccess(service.update(id))
+            return ProfileState.UpdateAddressSuccess(service.update(address.id , address))
         }catch (t: Throwable){ ViewState.Failure(t)}
     }
 

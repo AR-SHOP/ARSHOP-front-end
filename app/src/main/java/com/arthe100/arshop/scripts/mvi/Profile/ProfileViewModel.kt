@@ -54,7 +54,7 @@ class ProfileViewModel @Inject constructor(
            is ProfileUiAction.UpdateAddressAction -> {
                _currentViewState.value = ViewState.LoadingState
                viewModelScope.launch {
-                   _currentViewState.value = addressRepository.update(action.id)
+                   _currentViewState.value = addressRepository.update(action.address)
                }
            }
            is ProfileUiAction.DeleteAddressAction -> {

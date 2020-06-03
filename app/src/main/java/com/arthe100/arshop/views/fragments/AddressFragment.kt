@@ -23,10 +23,7 @@ import com.arthe100.arshop.scripts.mvi.base.ProfileState
 import com.arthe100.arshop.scripts.mvi.base.ProfileUiAction
 import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.adapters.base.GenericAdapter
-import com.arthe100.arshop.views.adapters.base.GenericDiffUtil
-import com.arthe100.arshop.views.adapters.base.GenericItemDiff
-import com.arthe100.arshop.views.adapters.base.OnItemClickListener
+import com.arthe100.arshop.views.adapters.base.*
 import com.arthe100.arshop.views.dialogBox.AddressDialog
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
@@ -64,6 +61,8 @@ class AddressFragment @Inject constructor(
             is ViewState.Failure -> dialogBox.showDialog(requireContext(), MessageType.ERROR, state.throwable.toString())
             is ViewState.LoadingState -> dialogBox.showDialog(requireActivity(), MessageType.LOAD)
             is ProfileState.DeleteAddressSuccess -> {
+                no_address_image?.visibility = if(addressAdapter.itemCount == 0) View.VISIBLE else View.INVISIBLE
+                no_address_text?.visibility = if(addressAdapter.itemCount == 0) View.VISIBLE else View.INVISIBLE
                 dialogBox.cancel()
             }
             is ProfileState.GetAddressesSuccess -> {
@@ -75,6 +74,8 @@ class AddressFragment @Inject constructor(
                 dialogBox.cancel()
             }
             is ProfileState.UpdateAddressSuccess -> {
+                addressAdapter.changeItem(state.address,addressAdapter.getItemAt(model.currentAddress!!))
+                addressDialog.close()
                 dialogBox.cancel()
             }
             is ProfileState.CreateAddressSuccess -> {
@@ -119,6 +120,15 @@ class AddressFragment @Inject constructor(
                 }
 
             })
+
+            setViewListeners(listOf(
+                ViewListeners(
+                    R.id.delete_btn , object: OnItemClickListenerForView<Address> {
+                    override fun onClickItem(data: Address, position: Int) {
+                        model.onEvent(ProfileUiAction.DeleteAddressAction(data.id))
+                        removeItem(position)
+                    }
+                    })))
         }
     }
 

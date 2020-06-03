@@ -1,6 +1,7 @@
 package com.arthe100.arshop.scripts.network.services
 
 import com.arthe100.arshop.models.Address
+import okhttp3.Response
 import retrofit2.http.*
 
 interface AddressService {
@@ -14,9 +15,9 @@ interface AddressService {
     suspend fun create(@Body address:Address) : Address
 
     @PUT("address/{id}")
-    suspend fun update(@Path("id") id: Long) : Address
+    suspend fun update(@Path("id") id: Long , @Body address: Address) : Address
 
     @DELETE("address/{id}")
-    suspend fun delete(@Path("id") id: Long)
+    suspend fun delete(@Path("id") id: Long) : retrofit2.Response<Unit>
 
 }

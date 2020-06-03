@@ -49,7 +49,7 @@ sealed class ProfileUiAction                                            : UiActi
     object GetAddressListAction                                         : ProfileUiAction()
     data class CreateAddressAction(val address: Address)                : ProfileUiAction()
     data class GetAddressDetail(val id: Long)                           : ProfileUiAction()
-    data class UpdateAddressAction(val id: Long)                        : ProfileUiAction()
+    data class UpdateAddressAction(val address: Address)                        : ProfileUiAction()
     data class DeleteAddressAction(val id: Long)                        : ProfileUiAction()
 
 }

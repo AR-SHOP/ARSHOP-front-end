@@ -73,8 +73,8 @@ class AddressDialog(
     }
 
     private fun updateAddress(){
-        val address = getAddress() ?: return
-        model.onEvent(ProfileUiAction.UpdateAddressAction(address.id))
+        val address = updateAddress(model.currentAddress!!) ?: return
+        model.onEvent(ProfileUiAction.UpdateAddressAction(address))
     }
 
     private fun isReceiver(address: Address) : Boolean{
@@ -113,6 +113,41 @@ class AddressDialog(
                 plaque = plaque,
                 floorNumber = floor,
                 user = prof.id
+            )
+        }catch (t: Throwable){
+            return null
+        }
+    }
+
+
+    private fun updateAddress(address: Address) : Address?{
+        try {
+            val province = province?.text.toString()
+            val city = city?.text.toString()
+            val plaque = plaque?.text.toString().toInt()
+            val floor = floor?.text.toString().toInt()
+            val postalCode = postal_code?.text.toString()
+            val homeAddress = home_details?.text.toString()
+            val isReceiver = self_reciever?.isChecked!!
+            val fName = first_name?.text.toString()
+            val lName = last_name?.text.toString()
+            val nationalId = national_code?.text.toString()
+            val phone = reciever_phone_number?.text.toString()
+            val prof = model.currentProfile ?: throw NullPointerException("profile is null")
+            return Address(
+                id = address.id,
+                firstName = if(isReceiver) prof.fName else fName,
+                lastName = if(isReceiver) prof.lName else lName,
+                nationalId = if(isReceiver) prof.ssId else nationalId,
+                phone = if(isReceiver) prof.phone else phone,
+                postalCode = postalCode,
+                city = city,
+                province = province,
+                country = "IR",
+                addressLine = homeAddress,
+                plaque = plaque,
+                floorNumber = floor,
+                user = address.user
             )
         }catch (t: Throwable){
             return null

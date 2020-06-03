@@ -58,6 +58,10 @@ abstract class GenericAdapter <T> : RecyclerView.Adapter<RecyclerView.ViewHolder
 
     override fun getItemCount(): Int = dataList.size
 
+    fun getItemAt(t: T) : Int {
+        return dataList.indexOf(t)
+    }
+
     fun addItems(data: List<T>){
 
         if(diffUtil != null)

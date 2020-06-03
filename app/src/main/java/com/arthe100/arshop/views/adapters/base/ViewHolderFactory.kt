@@ -63,12 +63,22 @@ class DiscountViewHolder(itemView: View)
 }
 
 class AddressViewHolder(itemView: View)
-    : RecyclerView.ViewHolder(itemView), GenericAdapter.Binder<Address> {
+    : RecyclerView.ViewHolder(itemView), GenericAdapter.BinderMultiple<Address> {
 
-    override fun bind(data: Address, clickListener: OnItemClickListener<Address>?) {
+    override fun bind(
+        data: Address,
+        itemListener: OnItemClickListener<Address>?,
+        viewListeners: List<ViewListeners<Address>>?
+    ) {
         itemView.apply {
             itemView.address.text = data.toString()
-            itemView.address.setOnClickListener { clickListener?.onClickItem(data) }
+            itemView.address.setOnClickListener { itemListener?.onClickItem(data) }
+            viewListeners?.forEach {
+                val view = itemView.findViewById(it.id) as View
+                view.setOnClickListener { _ ->
+                    it.listener?.onClickItem(data , adapterPosition)
+                }
+            }
         }
     }
 }
