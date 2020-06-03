@@ -24,10 +24,10 @@ abstract class BaseFragment : Fragment(),
     override fun loadFragment(klass: Class<out Fragment>) {
 
         try {
-            val fragment = requireActivity()
+            val fragment: Fragment = requireActivity()
                 .supportFragmentManager
                 .fragmentFactory
-                .instantiate(requireActivity().classLoader , klass.name) as? BaseFragment
+                .instantiate(requireActivity().classLoader , klass.name) as? Fragment
                 ?: throw ClassCastException("${klass.simpleName} is not a subclass of BaseFragment!")
 
 //            if(fragment.isMain()){

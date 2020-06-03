@@ -46,6 +46,11 @@
 
 
     <!--textView texts-->
+    <string name="time_info">زمان</string>
+    <string name="date_info">تاریخ</string>
+    <string name="user_rating">امتیاز کاربر برای محصول:</string>
+    <string name="anonymous_user_comment">ارسال دیدگاه به صورت ناشناس</string>
+    <string name="product_rating">امتیاز محصول</string>
     <string name="sample_gateway">درگاه پرداخت</string>
     <string name="choose_payment_method">انتخاب نوع پرداخت</string>
     <string name="choose_payment_gateway">انتخاب درگاه پرداخت</string>
@@ -72,6 +77,8 @@
     <string name="create_acc_link">ایجاد حساب کاربری جدید</string>
     <string name="empty_orders">شما تاکنون سفارشی ثبت نکرده‌اید!</string>
     <string name="name">نام</string>
+    <string name="lname">‌نام‌خانوادگی</string>
+    <string name="reciever_name">نام و نام‌خانوادگی گیرنده</string>
     <string name="brand">سازنده محصول</string>
     <string name="description">توضیحات</string>
     <string name="product_attributes">ویژگی‌های محصول</string>
@@ -115,7 +122,12 @@
     <string name="payment_info">اطلاعات پرداخت</string>
     <string name="province">استان</string>
     <string name="city">شهر</string>
+    <string name="national_code">کد ملی</string>
     <string name="home_address">آدرس منزل</string>
+    <string name="plaque">پلاک</string>
+    <string name="floor_number">واحد</string>
+    <string name="postal_code">کد پستی</string>
+    <string name="self_recieve">گیرنده سفارش خودم هستم</string>
 
 
     <!-- DialogBoxManager's strings -->

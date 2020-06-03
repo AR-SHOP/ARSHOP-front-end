@@ -3,12 +3,15 @@ package com.arthe100.arshop.views.fragments
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.*
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Comment
 import com.arthe100.arshop.models.User
@@ -24,14 +27,22 @@ import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
 import com.arthe100.arshop.views.adapters.base.OnItemClickListener
+import com.arthe100.arshop.views.dialogBox.CommentDialog
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
+import com.arthe100.arshop.views.utility.ShamsiCalendar
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.ar.sceneform.ux.ArFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.dialog_comment_layout.*
 import kotlinx.android.synthetic.main.product_fragment_layout.*
+import java.sql.Timestamp
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.Month
+import java.util.*
 import javax.inject.Inject
 
 
@@ -47,9 +58,7 @@ class ProductFragment @Inject constructor(
     private lateinit var cartViewModel: CartViewModel
     private lateinit var model: ProductViewModel
     private lateinit var arModel: ArViewModel
-    private lateinit var menu: Menu
-    private lateinit var commentDialog: Dialog
-    private lateinit var comment: Comment
+    private lateinit var commentDialog: CommentDialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -80,6 +89,8 @@ class ProductFragment @Inject constructor(
         product_details_price?.text = model.product.price.toString()
         product_details_description?.text = model.product.description
         inc_dec_cart_count?.setBackgroundColor(Color.TRANSPARENT)
+        val commentSize = model.product.comments.size
+        comments_count?.text = if(commentSize == 0) "هیچ دیدگاهی ثبت نشده" else "$commentSize دیدگاه"
         checkCartStatus()
 
         val requestOptions = RequestOptions()
@@ -140,37 +151,20 @@ class ProductFragment @Inject constructor(
         return "Product"
     }
 
-    private fun setCommentDialog() : Dialog {
-
-        var resultDialog = Dialog(requireContext())
-        resultDialog.setContentView(R.layout.dialog_comment_layout)
-        resultDialog.close_btn?.setOnClickListener {
-            resultDialog.cancel()
-        }
-
-        resultDialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
-        resultDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        return resultDialog
+    private fun setCommentDialog() : CommentDialog {
+        return CommentDialog(requireContext() , model)
     }
 
     private fun showCommentDialog() {
-        if (this::commentDialog.isInitialized && commentDialog.isShowing) {
-            commentDialog.dismiss()
+        if (!this::commentDialog.isInitialized)
             commentDialog = setCommentDialog()
-            commentDialog.show()
-        } else {
-            commentDialog = setCommentDialog()
-            commentDialog.show()
-        }
+        commentDialog.open()
 
-        var commentTitle = resources.getString(R.string.title)
-        var commentText = resources.getString(R.string.comment)
+//        } else {
+//            commentDialog = setCommentDialog()
+//            commentDialog.show()
+//        }
 
-        if (!commentDialog.comment_title.text.isNullOrEmpty())
-            commentTitle = commentDialog.comment_title.text.toString()
-        if (!commentDialog.comment_text.text.isNullOrEmpty())
-            commentText = commentDialog.comment_text.text.toString()
 
 //        comment = Comment(commentTitle, commentText)
     }
@@ -180,12 +174,27 @@ class ProductFragment @Inject constructor(
         when(state){
             ViewState.IdleState ->  dialogBox.cancel()
             ViewState.LoadingState -> dialogBox.showDialog(requireActivity(), MessageType.LOAD)
-            is ProductState.ProductDetailSuccess -> dialogBox.cancel()
+            is ProductState.ProductDetailSuccess -> {
+                model.product = state.product
+                commentDialog = setCommentDialog()
+                commentRVAdapter.addItems(model.product.comments)
+                (requireActivity() as AppCompatActivity).setSupportActionBar(product_toolbar)
+                product_toolbar?.title = model.product.name
+                product_details_name?.text = model.product.name
+                product_details_brand?.text = model.product.manufacturer
+                product_details_price?.text = model.product.price.toString()
+                product_details_description?.text = model.product.description
+                inc_dec_cart_count?.setBackgroundColor(Color.TRANSPARENT)
+                val commentSize = model.product.comments.size
+                comments_count?.text = if(commentSize == 0) "هیچ دیدگاهی ثبت نشده" else "$commentSize دیدگاه"
+                dialogBox.cancel()
+            }
             is ViewState.Failure -> dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
             is CartState.AddToCartState -> {
                 dialogBox.cancel()
                 checkCartStatus()
             }
+
             is WishListState.AddWishListSuccess -> {
                 dialogBox.cancel()
                 val wishList: WishList = state.addWishList
@@ -195,6 +204,10 @@ class ProductFragment @Inject constructor(
                 dialogBox.cancel()
                 val wishList: WishList = state.deleteWishList
                 wishListViewModel.currentWishList = wishList
+            }
+            is ProductState.CommentSent -> {
+                model.onEvent(ProductUiAction.GetProductDetails(model.product))
+                commentDialog.close()
             }
         }
     }
@@ -233,7 +246,8 @@ class ProductFragment @Inject constructor(
     private fun setComments(comments: List<Comment>){
         if(this::commentRVAdapter.isInitialized)
         {
-            user_comments_recycler_view.apply {
+            user_comments_recycler_view?.apply {
+                layoutManager = LinearLayoutManager(requireContext() , RecyclerView.HORIZONTAL , false)
                 adapter = commentRVAdapter
             }
             commentRVAdapter.addItems(comments)
@@ -255,7 +269,7 @@ class ProductFragment @Inject constructor(
         }
 
         user_comments_recycler_view?.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = LinearLayoutManager(requireContext() , RecyclerView.HORIZONTAL , false)
             adapter = commentRVAdapter
         }
         commentRVAdapter.addItems(comments)

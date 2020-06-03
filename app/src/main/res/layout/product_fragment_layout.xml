@@ -8,6 +8,7 @@
         android:layout_height="match_parent"
         tools:context=".views.fragments.ProductFragment"
         style="@style/AppTheme"
+        android:backgroundTint="@color/colorEditText"
         android:layoutDirection="rtl"
         android:textDirection="rtl">
 
@@ -201,6 +202,8 @@
                         android:id="@+id/user_comments_recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@color/colorBackground"
                         android:orientation="horizontal"
                         android:padding="10dp" />

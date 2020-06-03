@@ -1,7 +1,6 @@
 package com.arthe100.arshop.scripts.mvi.base
 
-import com.arthe100.arshop.models.Category
-import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.models.*
 import com.arthe100.arshop.scripts.mvi.mviBase.Action
 
 sealed class UiAction
@@ -12,7 +11,9 @@ sealed class HomeUiAction                                               : UiActi
 
 sealed class ProductUiAction                                            : UiAction(){
     object GetProducts                                                  : ProductUiAction()
+    data class SendCommentAction(val comment: CommentNetwork)                  : ProductUiAction()
     data class GetProductDetails(val product: Product)                  : ProductUiAction()
+    data class GetProductDetailsOffline(val product: Product)                  : ProductUiAction()
 }
 
 
@@ -32,6 +33,7 @@ sealed class CartUiAction                                               : UiActi
 sealed class AuthUiAction                                               : UiAction(){
     object LogoutAction                                                 : AuthUiAction()
     data class CheckCodeAction(val code: String)                        : AuthUiAction()
+    data class GetCodeAction(val phone: String)                         : AuthUiAction()
     data class SignupAction(val password: String , val phone: String)   : AuthUiAction()
     data class LoginAction(val password: String , val phone: String)    : AuthUiAction()
 }
@@ -45,10 +47,17 @@ sealed class ProfileUiAction                                            : UiActi
     object LogoutAction                                                 : ProfileUiAction()
     object GetHomePageProfileAction                                     : ProfileUiAction()
     object EditProfileInfoAction                                        : ProfileUiAction()
+    object GetAddressListAction                                         : ProfileUiAction()
+    data class CreateAddressAction(val address: Address)                : ProfileUiAction()
+    data class GetAddressDetail(val id: Long)                           : ProfileUiAction()
+    data class UpdateAddressAction(val address: Address)                        : ProfileUiAction()
+    data class DeleteAddressAction(val id: Long)                        : ProfileUiAction()
+
 }
 
 sealed class WishListUiAction                                           : UiAction(){
     object GetWishListAction                                            : WishListUiAction()
     data class AddWishListAction(val productId: Long)                   : WishListUiAction()
     data class DeleteWishListAction(val productId: Long)                : WishListUiAction()
+
 }

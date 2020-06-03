@@ -4,7 +4,6 @@ import com.arthe100.arshop.models.*
 import com.arthe100.arshop.scripts.mvi.base.AuthState
 import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.network.services.UserService
-import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(private val service: UserService) {
@@ -13,7 +12,7 @@ class UserRepository @Inject constructor(private val service: UserService) {
 
     suspend fun signup(password: String, phone: String): ViewState {
         return try {
-            val user = AuthUser(password , phone)
+            val user = SignupUser(password , phone)
             service.signup(user)
             AuthState.SingupSuccess
         }catch (t: Throwable){
@@ -40,11 +39,10 @@ class UserRepository @Inject constructor(private val service: UserService) {
         }
     }
 
-    suspend fun checkCode(code: String) : ViewState {
-        delay(500)
-        return if(code == "12345")
-            AuthState.CodeSuccess
-        else
-            ViewState.Failure(Throwable("wrongCode"))
+    suspend fun getCode(phone: String) : ViewState {
+        return try {
+            AuthState.CodeGetSuccess(service.getCode(PhoneNetwork(phone)).code)
+        }catch (t: Throwable)
+        { ViewState.Failure(t) }
     }
 }

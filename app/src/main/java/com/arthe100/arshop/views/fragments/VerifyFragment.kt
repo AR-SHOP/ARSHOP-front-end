@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arthe100.arshop.R
+import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.AuthViewModel
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
@@ -47,9 +48,12 @@ class VerifyFragment @Inject constructor(
     }
 
     override fun onStart() {
-
-        verify_btn.setOnClickListener {
+        model.onEvent(AuthUiAction.GetCodeAction(model.phone))
+        verify_btn?.setOnClickListener {
             model.onEvent(AuthUiAction.CheckCodeAction(code_input.text.toString()))
+        }
+        send_again_btn?.setOnClickListener {
+            model.onEvent(AuthUiAction.GetCodeAction(model.phone))
         }
         super.onStart()
     }
@@ -65,9 +69,14 @@ class VerifyFragment @Inject constructor(
                 dialogBox.showDialog(requireActivity(), MessageType.ERROR)
             }
 
-            is AuthState.CodeSuccess -> {
+            is AuthState.CodeGetSuccess -> {
                 dialogBox.cancel()
+                val reg = "\\d+".toRegex()
+                model.code = reg.find(state.code , 0)?.value
+                messageManager.toast(requireContext() , "your code is: ${model.code}")
 //                requireView().visibility = View.VISIBLE
+            }
+            is AuthState.CodeSuccess -> {
                 model.onEvent(AuthUiAction.LoginAction(model.password , model.phone))
             }
 

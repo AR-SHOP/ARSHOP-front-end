@@ -2,13 +2,15 @@ package com.arthe100.arshop.scripts.mvi.Products
 
 import androidx.lifecycle.viewModelScope
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.base.*
 import com.arthe100.arshop.scripts.repositories.ProductRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ProductViewModel @Inject constructor(
-    private val productRepo: ProductRepository
+    private val productRepo: ProductRepository,
+    private val userSession: UserSession
 ) : ViewModelBase() , ICacheLoader{
     private val TAG = ProductViewModel::class.simpleName
 
@@ -32,7 +34,7 @@ class ProductViewModel @Inject constructor(
                     _currentViewState.value = ViewState.IdleState
                 }
             }
-            is ProductUiAction.GetProductDetails -> {
+            is ProductUiAction.GetProductDetailsOffline -> {
 
                 _product = action.product
                 _currentViewState.value = ProductState.ProductDetailSuccess(action.product)
@@ -47,6 +49,29 @@ class ProductViewModel @Inject constructor(
 //                    _currentViewState.value = productState
 //                }
 
+            }
+            is ProductUiAction.GetProductDetails -> {
+                _product = action.product
+//                _currentViewState.value = ViewState.LoadingState
+
+                viewModelScope.launch {
+                    val productState = productRepo.getProduct(action.product.id)
+                    when(productState){
+                        is ProductState.ProductDetailSuccess -> {
+                            _product = productState.product
+                        }
+                    }
+                    _currentViewState.value = productState
+                }
+            }
+            is ProductUiAction.SendCommentAction -> {
+                _currentViewState.value = ViewState.LoadingState
+                viewModelScope.launch {
+                    _currentViewState.value =
+                        productRepo.sendComment(action.comment)
+
+                    _currentViewState.value = ViewState.IdleState
+                }
             }
         }
     }

@@ -60,22 +60,36 @@
                 android:orientation="vertical">
 
 
-            <com.smarteist.autoimageslider.SliderView
-                    android:id="@+id/image_slider"
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/discount_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    app:sliderAnimationDuration="400"
-                    app:sliderIndicatorAnimationDuration="400"
-                    app:sliderIndicatorGravity="bottom"
-                    app:sliderIndicatorMargin="10dp"
-                    app:sliderIndicatorOrientation="horizontal"
-                    app:sliderIndicatorRadius="3dp"
-                    app:sliderScrollTimeInSec="4"
-                    app:sliderIndicatorSelectedColor="@color/colorSecondary"
-                    app:sliderIndicatorUnselectedColor="@color/colorBackground"/>
+                    android:layout_height="160dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layoutDirection="rtl"
+                    android:textDirection="rtl"/>
+
+
+            <!--            <com.smarteist.autoimageslider.SliderView-->
+<!--                    android:id="@+id/image_slider"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="170dp"-->
+<!--                    android:paddingRight="10dp"-->
+<!--                    android:paddingLeft="10dp"-->
+<!--                    android:paddingTop="5dp"-->
+<!--                    app:sliderAnimationDuration="400"-->
+<!--                    app:sliderIndicatorAnimationDuration="400"-->
+<!--                    app:sliderIndicatorGravity="bottom"-->
+<!--                    app:sliderIndicatorMargin="10dp"-->
+<!--                    app:sliderIndicatorOrientation="horizontal"-->
+<!--                    app:sliderIndicatorRadius="3dp"-->
+<!--                    app:sliderScrollTimeInSec="4"-->
+<!--                    app:sliderIndicatorSelectedColor="@color/colorSecondary"-->
+<!--                    app:sliderIndicatorUnselectedColor="@color/colorBackground"/>-->
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/group_recycler_view"

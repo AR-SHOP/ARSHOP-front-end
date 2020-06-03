@@ -101,6 +101,7 @@ class ProfileFragment @Inject constructor(
                 dialogBox.cancel()
 //                requireView().visibility = View.VISIBLE
                 val user = state.userInfo
+                session.saveProfile(user)
                 model.currentProfile = user
                 name.text = if(user.fName.isEmpty())
                     "نام و نام‌خانوادگی"

@@ -51,5 +51,8 @@ object RepoModule {
     @Provides
     fun provideWishListRepo(service: WishListService) : WishListRepository{
         return WishListRepository(service)
+    }    fun provideAddressRepo(service: AddressService) : AddressRepository{
+        return AddressRepository(service)
     }
+
 }

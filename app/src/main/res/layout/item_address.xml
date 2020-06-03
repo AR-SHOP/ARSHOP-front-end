@@ -4,15 +4,37 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:cardCornerRadius="15dp"
+        android:layout_margin="5dp"
         android:background="@color/colorBackground">
 
-    <RadioButton
-            android:id="@+id/address"
+    <LinearLayout
+            android:id="@+id/address_item_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:buttonTint="@color/colorPrimary"
-            android:text="@string/sample_text" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+        <RadioButton
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:layout_margin="10dp"
+                android:buttonTint="@color/colorPrimary"
+                android:text="@string/sample_text" />
+
+        <ImageButton
+                android:id="@+id/delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_margin="10dp"
+                android:background="@color/colorBackground"
+                android:src="@drawable/ic_delete"
+                android:tint="@color/colorError" />
+
+
+    </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

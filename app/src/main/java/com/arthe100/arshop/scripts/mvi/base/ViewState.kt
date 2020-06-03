@@ -13,6 +13,7 @@ sealed class HomeState                                              : ViewState(
 }
 
 sealed class ProductState                                           : ViewState(){
+    object CommentSent                                              : ProductState()
     data class ProductDetailSuccess(val product: Product)           : ProductState()
     data class ProductsSuccess(val products: List<Product>)         : ProductState()
 }
@@ -28,9 +29,11 @@ sealed class CartState                                              : ViewState(
 
 
 sealed class AuthState                                              : ViewState(){
-    object CodeSuccess                                              : AuthState()
     object SingupSuccess                                            : AuthState()
+    data class CodeGetSuccess(val code: String)                     : AuthState()
+    object CodeSuccess                                              : AuthState()
     data class LoginSuccess(val user: User.User)                    : AuthState()
+    data class RefreshTokenSuccess(val token: RefreshedTokenModel)  : AuthState()
 }
 
 sealed class CategoryState                                          : ViewState(){
@@ -40,7 +43,12 @@ sealed class CategoryState                                          : ViewState(
 
 sealed class ProfileState                                           : ViewState(){
     object LogoutState                                              : ProfileState()
+    object DeleteAddressSuccess                                     : ProfileState()
     data class GetProfileSuccess(val userInfo: UserProfile)         : ProfileState()
+    data class GetAddressesSuccess(val addresses: List<Address>)    : ProfileState()
+    data class GetAddressSuccess(val address: Address)              : ProfileState()
+    data class UpdateAddressSuccess(val address: Address)           : ProfileState()
+    data class CreateAddressSuccess(val address: Address)           : ProfileState()
     data class EditProfileSuccess(val  editInfo: UserProfile)       : ProfileState()
 }
 
