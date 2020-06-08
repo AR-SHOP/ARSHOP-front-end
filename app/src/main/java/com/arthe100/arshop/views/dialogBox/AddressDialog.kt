@@ -24,7 +24,7 @@ class AddressDialog(
         add_new_address_btn?.setOnClickListener {
             when (mode){
                 Mode.Normal -> addNewAddress()
-                Mode.Edit ->updateAddress()
+                Mode.Edit -> updateAddress()
             }
         }
 
@@ -50,6 +50,7 @@ class AddressDialog(
     fun open(){
         mode = Mode.Normal
         show()
+        add_new_address_btn.text = "افزودن آدرس جدید"
     }
     fun openInEditMode(address: Address){
         mode = Mode.Edit
@@ -65,6 +66,7 @@ class AddressDialog(
         plaque?.setText(address.plaque.toString())
         floor?.setText(address.floorNumber.toString())
         self_reciever?.isChecked = isReceiver(address)
+        add_new_address_btn.text = "ویرایش آدرس"
     }
 
     private fun addNewAddress(){

@@ -73,7 +73,7 @@
             app:fabSize="normal"
             app:backgroundTint="@color/colorBackground"
             app:tint="@color/colorPrimary"
-            app:srcCompat="@drawable/ic_pencil"
+            app:srcCompat="@drawable/ic_pencil_36"
             app:layout_constraintTop_toTopOf="@id/profile_image"
             app:layout_constraintBottom_toBottomOf="@id/profile_image"
             app:layout_constraintLeft_toLeftOf="@id/profile_image"

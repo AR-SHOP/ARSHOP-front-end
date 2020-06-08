@@ -11,27 +11,188 @@
             android:id="@+id/address_item_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="10dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_urban"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    app:tint="@color/colorHint" />
+
+            <TextView
+                    android:id="@+id/province_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/province"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="center"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="،"
+                    android:padding="5dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="center"/>
+            <TextView
+                    android:id="@+id/city_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTint="@color/colorHint"
+                    android:padding="5dp"
+                    android:text="@string/city"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="center"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="،"
+                    android:padding="5dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="center"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plaque"
+                    android:padding="5dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="center"/>
+
+            <TextView
+                    android:id="@+id/plaque_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sample_number"
+                    android:padding="5dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="center"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="،"
+                    android:padding="5dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="center"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/apartment_number"
+                    android:padding="5dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="center"/>
+
+            <TextView
+                    android:id="@+id/apartment_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sample_number"
+                    android:padding="5dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_home_address"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    app:tint="@color/colorHint" />
+
+            <TextView
+                    android:id="@+id/home_address_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/home_address"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="center"/>
 
 
-        <RadioButton
-                android:id="@+id/address"
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_home_address"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    app:tint="@color/colorHint" />
+
+            <TextView
+                    android:id="@+id/postal_code_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/postal_code"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+        </LinearLayout>
+
+        <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="8"
-                android:layout_margin="10dp"
-                android:buttonTint="@color/colorPrimary"
-                android:text="@string/sample_text" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="end"
+                android:layout_marginTop="5dp">
 
-        <ImageButton
-                android:id="@+id/delete_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:layout_margin="10dp"
-                android:background="@color/colorBackground"
-                android:src="@drawable/ic_delete"
-                android:tint="@color/colorError" />
+            <ImageButton
+                    android:id="@+id/edit_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorBackground"
+                    android:src="@drawable/ic_pencil_24"
+                    android:tint="@color/colorPrimary" />
+
+            <ImageButton
+                    android:id="@+id/delete_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorBackground"
+                    android:src="@drawable/ic_delete"
+                    android:tint="@color/colorError" />
+
+
+        </LinearLayout>
 
 
     </LinearLayout>

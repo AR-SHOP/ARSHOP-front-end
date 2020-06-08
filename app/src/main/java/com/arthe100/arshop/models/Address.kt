@@ -15,12 +15,12 @@ data class Address(
     val floorNumber: Int,
     val user: Long
 ){
-    override fun toString(): String {
-        return "name: $firstName $lastName \n" +
-                "id: $nationalId\n" +
-                "phone: $phone\n" +
-                "address: $province $city $addressLine " +
-                "floor num: $floorNumber" +
-                "plaque: $plaque"
-    }
+//    override fun toString(): String {
+//        return "name: $firstName $lastName \n" +
+//                "id: $nationalId\n" +
+//                "phone: $phone\n" +
+//                "address: $province $city $addressLine " +
+//                "floor num: $floorNumber" +
+//                "plaque: $plaque"
+//    }
 }

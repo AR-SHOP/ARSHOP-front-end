@@ -46,6 +46,7 @@
 
 
     <!--textView texts-->
+    <string name="sample_number">1</string>
     <string name="time_info">زمان</string>
     <string name="date_info">تاریخ</string>
     <string name="user_rating">امتیاز کاربر برای محصول:</string>
@@ -125,9 +126,12 @@
     <string name="national_code">کد ملی</string>
     <string name="home_address">آدرس منزل</string>
     <string name="plaque">پلاک</string>
-    <string name="floor_number">واحد</string>
+    <string name="apartment_number">واحد</string>
     <string name="postal_code">کد پستی</string>
     <string name="self_recieve">گیرنده سفارش خودم هستم</string>
+    <string name="default_address">آدرس پیش‌فرض</string>
+    <string name="special_events">مناسبت‌های ویژه</string>
+    <string name="shop_products">محصولات فروشگاه</string>
 
 
     <!-- DialogBoxManager's strings -->

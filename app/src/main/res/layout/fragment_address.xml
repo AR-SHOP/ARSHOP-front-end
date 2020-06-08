@@ -106,15 +106,15 @@
                 app:tint="@color/colorBackground"
                 app:srcCompat="@drawable/ic_plus"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/edit_address_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                app:fabSize="normal"
-                app:backgroundTint="@color/colorPrimary"
-                app:tint="@color/colorBackground"
-                app:srcCompat="@drawable/ic_pencil"/>
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                android:id="@+id/edit_address_btn"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="5dp"-->
+<!--                app:fabSize="normal"-->
+<!--                app:backgroundTint="@color/colorPrimary"-->
+<!--                app:tint="@color/colorBackground"-->
+<!--                app:srcCompat="@drawable/ic_pencil_36"/>-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/map_btn"

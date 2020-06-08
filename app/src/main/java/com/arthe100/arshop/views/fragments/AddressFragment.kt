@@ -93,10 +93,10 @@ class AddressFragment @Inject constructor(
             addressDialog.open()
         }
 
-        edit_address_btn?.setOnClickListener {
-            if(model.currentAddress == null) return@setOnClickListener
-            addressDialog.openInEditMode(model.currentAddress!!)
-        }
+//        edit_address_btn?.setOnClickListener {
+//            if(model.currentAddress == null) return@setOnClickListener
+//            addressDialog.openInEditMode(model.currentAddress!!)
+//        }
     }
 
     private fun setAdapter() {
@@ -124,11 +124,18 @@ class AddressFragment @Inject constructor(
             setViewListeners(listOf(
                 ViewListeners(
                     R.id.delete_btn , object: OnItemClickListenerForView<Address> {
-                    override fun onClickItem(data: Address, position: Int) {
-                        model.onEvent(ProfileUiAction.DeleteAddressAction(data.id))
-                        removeItem(position)
-                    }
-                    })))
+                        override fun onClickItem(data: Address, position: Int) {
+                            model.onEvent(ProfileUiAction.DeleteAddressAction(data.id))
+                            removeItem(position)
+                        }
+                    }),
+                ViewListeners(
+                    R.id.edit_btn, object : OnItemClickListenerForView<Address> {
+                        override fun onClickItem(data: Address, position: Int) {
+                            addressDialog.openInEditMode(data)
+                        }
+                    })
+            ))
         }
     }
 

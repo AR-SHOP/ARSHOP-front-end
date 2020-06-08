@@ -60,7 +60,15 @@
                 android:orientation="vertical">
 
 
-
+            <TextView
+                    android:id="@+id/special_events"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/special_events"
+                    android:textAlignment="center"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimary"/>
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/discount_recycler_view"
@@ -90,6 +98,16 @@
 <!--                    app:sliderScrollTimeInSec="4"-->
 <!--                    app:sliderIndicatorSelectedColor="@color/colorSecondary"-->
 <!--                    app:sliderIndicatorUnselectedColor="@color/colorBackground"/>-->
+
+            <TextView
+                    android:id="@+id/shop_products"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shop_products"
+                    android:textAlignment="center"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorSecondary"/>
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/group_recycler_view"

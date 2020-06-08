@@ -71,8 +71,13 @@ class AddressViewHolder(itemView: View)
         viewListeners: List<ViewListeners<Address>>?
     ) {
         itemView.apply {
-            itemView.address.text = data.toString()
-            itemView.address.setOnClickListener { itemListener?.onClickItem(data) }
+            itemView.province_text?.text = data.province
+            itemView.city_text?.text = data.city
+            itemView.plaque_text?.text = data.plaque.toString()
+            itemView.apartment_text?.text = data.floorNumber.toString()
+            itemView.home_address_text?.text = data.addressLine
+            itemView.postal_code_text?.text = data.postalCode
+//            itemView.edit_btn.setOnClickListener { itemListener?.onClickItem(data) }
             viewListeners?.forEach {
                 val view = itemView.findViewById(it.id) as View
                 view.setOnClickListener { _ ->

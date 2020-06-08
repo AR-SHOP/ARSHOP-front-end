@@ -103,7 +103,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"
                         android:textColorHint="@color/colorHint"
-                        android:hint="@string/floor_number"
+                        android:hint="@string/apartment_number"
                         android:padding="10dp"
                         android:background="@drawable/small_rounded_corners"
                         android:backgroundTint="@color/colorEditText"
@@ -246,19 +246,40 @@
 
             </LinearLayout>
 
-
-            <Button
-                    android:id="@+id/add_new_address_btn"
-                    android:layout_width="wrap_content"
+            <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="20dp"
-                    android:background="@drawable/large_rounded_corners"
-                    android:backgroundTint="@color/colorSecondary"
-                    android:padding="10dp"
-                    android:text="@string/add_new_address"
-                    android:textColor="@color/colorBackground"
-                    android:textSize="12sp" />
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                <CheckBox
+                        android:id="@+id/default_address_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:padding="10dp"
+                        android:layout_gravity="center"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="@string/default_address"
+                        android:textColor="@color/colorHint"
+                        android:textSize="10sp"/>
+
+                <Button
+                        android:id="@+id/add_new_address_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
+                        android:background="@drawable/large_rounded_corners"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:padding="10dp"
+                        android:text="@string/add_new_address"
+                        android:textColor="@color/colorBackground"
+                        android:textSize="12sp" />
+
+
+            </LinearLayout>
+
 
 
         </LinearLayout>
