@@ -82,8 +82,12 @@ class ProductFragment @Inject constructor(
         super.onStart()
         commentDialog = setCommentDialog()
         setComments(model.product.comments)
-        (requireActivity() as AppCompatActivity).setSupportActionBar(product_toolbar)
-        product_toolbar?.title = model.product.name
+//        (requireActivity() as AppCompatActivity).setSupportActionBar(product_toolbar)
+//        product_toolbar?.title = model.product.name
+        HandleWishListAdder()
+        back_button?.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
         product_details_name?.text = model.product.name
         product_details_brand?.text = model.product.manufacturer
         product_details_price?.text = model.product.price.toString()
@@ -127,28 +131,34 @@ class ProductFragment @Inject constructor(
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.product_toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.add_to_wish_list -> {
-                if (item.isChecked) {
-                    item.icon.setTint(Color.WHITE)
-                    wishListViewModel.onEvent(WishListUiAction.DeleteWishListAction(model.product.id))
-                }else {
-                    item.icon.setTint(Color.RED)
-                    wishListViewModel.onEvent(WishListUiAction.AddWishListAction(model.product.id))
-                }
-            }
-        }
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.product_toolbar_menu, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.add_to_wish_list -> {
+//                if (item.isChecked) {
+//                    item.icon.setTint(Color.WHITE)
+//                    wishListViewModel.onEvent(WishListUiAction.DeleteWishListAction(model.product.id))
+//                }else {
+//                    item.icon.setTint(Color.RED)
+//                    wishListViewModel.onEvent(WishListUiAction.AddWishListAction(model.product.id))
+//                }
+//            }
+//        }
+//        return true
+//    }
 
     override fun toString(): String {
         return "Product"
+    }
+
+    private fun HandleWishListAdder() {
+        add_to_wish_list?.setOnClickListener {
+
+        }
     }
 
     private fun setCommentDialog() : CommentDialog {
@@ -178,8 +188,8 @@ class ProductFragment @Inject constructor(
                 model.product = state.product
                 commentDialog = setCommentDialog()
                 commentRVAdapter.addItems(model.product.comments)
-                (requireActivity() as AppCompatActivity).setSupportActionBar(product_toolbar)
-                product_toolbar?.title = model.product.name
+//                (requireActivity() as AppCompatActivity).setSupportActionBar(product_toolbar)
+//                product_toolbar?.title = model.product.name
                 product_details_name?.text = model.product.name
                 product_details_brand?.text = model.product.manufacturer
                 product_details_price?.text = model.product.price.toString()

@@ -34,7 +34,7 @@
                 android:backgroundTint="@color/colorEditText"
                 android:layoutDirection="rtl"
                 android:textDirection="rtl"
-                android:queryHint="@string/search"
+                android:queryHint="@string/search_in_shop"
                 android:elevation="10dp"/>
 
     </com.google.android.material.appbar.AppBarLayout>

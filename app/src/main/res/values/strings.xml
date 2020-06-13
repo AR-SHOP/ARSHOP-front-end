@@ -84,6 +84,7 @@
     <string name="description">توضیحات</string>
     <string name="product_attributes">ویژگی‌های محصول</string>
     <string name="search">جستجو</string>
+    <string name="search_in_shop">جستجو در ARSHOP</string>
     <string name="phone_number">شماره تلفن</string>
     <string name="password">کلمه عبور</string>
     <string name="sample_phone_number">01234567889</string>

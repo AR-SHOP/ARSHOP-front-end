@@ -29,35 +29,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <com.google.android.material.appbar.AppBarLayout
+
+            <LinearLayout
                     android:id="@+id/product_app_bar_layout"
-                    style="@style/AppTheme"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_gravity="top"
-                    android:layout_marginBottom="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="15dp"
                     android:background="@color/colorBackground"
-                    android:elevation="10dp"
-                    android:translationZ="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/details"
+                    app:layout_constraintVertical_bias="0">
 
-
-                <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/product_toolbar"
+                <TextView
+                        android:id="@+id/back_button"
                         android:layout_width="match_parent"
-                        android:layout_height="?attr/actionBarSize"
-                        android:background="@drawable/small_rounded_corners"
-                        android:backgroundTint="@color/colorBackground"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="start"
+                        android:drawableStart="@drawable/ic_action_navigation_arrow_back_inverted"
+                        android:background="@color/colorBackground"/>
 
-            </com.google.android.material.appbar.AppBarLayout>
+                <TextView
+                        android:id="@+id/add_to_wish_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:drawableEnd="@drawable/ic_heart_outlined"
+                        android:background="@color/colorBackground" />
+
+            </LinearLayout>
 
 
             <ImageView

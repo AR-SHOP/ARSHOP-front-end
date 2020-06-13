@@ -1,10 +1,18 @@
 package com.arthe100.arshop.views.fragments
 
+import android.app.SearchManager
+import android.content.Context
+import android.database.Cursor
+import android.database.MatrixCursor
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.provider.BaseColumns
+import android.view.*
+import android.view.inputmethod.InputMethodManager
+import android.widget.CursorAdapter
 import android.widget.SearchView
+import android.widget.SimpleCursorAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -52,6 +60,7 @@ class HomeFragment @Inject constructor(
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         requireActivity().bottom_navbar.visibility = View.VISIBLE
         dialogBox = DialogBoxManager()
         messageManager = MessageManager()
@@ -79,46 +88,90 @@ class HomeFragment @Inject constructor(
     }
 
 
-
     override fun toString(): String {
         return "Home"
     }
 
     private fun setSearchView() {
+
+        val from = arrayOf(SearchManager.SUGGEST_COLUMN_TEXT_1)
+        val to = intArrayOf(R.id.suggestion_text)
+        val cursorAdapter = SimpleCursorAdapter(context, R.layout.item_suggestion, null, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER)
+        val suggestions = listOf("Apple", "Appie" , "Appe" , "Blueberry", "Carrot", "Daikon")
+
+        home_search_view?.suggestionsAdapter = cursorAdapter
+
         home_search_view?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                val cursor = MatrixCursor(arrayOf(BaseColumns._ID, SearchManager.SUGGEST_COLUMN_TEXT_1))
+                newText?.let {
+                    suggestions.forEachIndexed { index, suggestion ->
+                        if (suggestion.contains(newText, true))
+                            cursor.addRow(arrayOf(index, suggestion))
+                    }
+                }
+
+                cursorAdapter.changeCursor(cursor)
+                return true
+            }
+        })
+
+        home_search_view?.setOnSuggestionListener(object: SearchView.OnSuggestionListener {
+            override fun onSuggestionSelect(position: Int): Boolean {
+                return false
+            }
+
+            override fun onSuggestionClick(position: Int): Boolean {
+                hideKeyboard()
+                val cursor = home_search_view?.suggestionsAdapter?.getItem(position) as Cursor
+                val selection = cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1))
+                home_search_view?.setQuery(selection, false)
+
+                // Do something with selection
                 return true
             }
         })
 
     }
 
-        override fun render(state: ViewState){
-            when(state){
-                is ViewState.IdleState -> dialogBox.cancel()
-                is ViewState.LoadingState -> dialogBox.showDialog(requireActivity(), MessageType.LOAD)
-                is ViewState.Failure -> {
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE)
+                as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
 
-                    dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")}
-                is ProductState.ProductsSuccess -> {
-                    productViewModel.currentProducts = state.products
-                    dialogBox.cancel()
-                    homePageGrid.addItems(state.products)
-                }
-                is HomeState.HomePageSalesSuccess -> {
-                    homeViewModel.currentSales = state.sales
-                    addDiscounts(state.sales)
-                }
-                is ProductState.ProductDetailSuccess -> {
-                    dialogBox.cancel()
-                    loadFragment(ProductFragment::class.java)
-                }
+    private fun Fragment.hideKeyboard() {
+        view?.let {
+            activity?.hideKeyboard(it)
+        }
+    }
+
+    override fun render(state: ViewState){
+        when(state){
+            is ViewState.IdleState -> dialogBox.cancel()
+            is ViewState.LoadingState -> dialogBox.showDialog(requireActivity(), MessageType.LOAD)
+            is ViewState.Failure -> {
+
+                dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")}
+            is ProductState.ProductsSuccess -> {
+                productViewModel.currentProducts = state.products
+                dialogBox.cancel()
+                homePageGrid.addItems(state.products)
+            }
+            is HomeState.HomePageSalesSuccess -> {
+                homeViewModel.currentSales = state.sales
+                addDiscounts(state.sales)
+            }
+            is ProductState.ProductDetailSuccess -> {
+                dialogBox.cancel()
+                loadFragment(ProductFragment::class.java)
             }
         }
+    }
 
 
 
