@@ -154,7 +154,7 @@ class ProductFragment @Inject constructor(
         add_to_wish_list?.setOnClickListener {
             if (isCheckedWishList) {
                 isCheckedWishList = false
-                add_to_wish_list.compoundDrawables[0]?.setTint(Color.BLUE)
+                add_to_wish_list.compoundDrawables[0]?.setTint(resources.getColor(R.color.colorPrimary))
                 wishListViewModel.onEvent(WishListUiAction.DeleteWishListAction(wishListProductID))
             }else {
                 isCheckedWishList = true
@@ -219,7 +219,7 @@ class ProductFragment @Inject constructor(
                         add_to_wish_list.compoundDrawables[0]?.setTint(Color.RED)
                     } else {
                         isCheckedWishList = false
-                        add_to_wish_list.compoundDrawables[0]?.setTint(Color.BLUE)
+                        add_to_wish_list.compoundDrawables[0]?.setTint(resources.getColor(R.color.colorPrimary))
                     }
                 }
             }
