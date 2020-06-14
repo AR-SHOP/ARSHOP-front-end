@@ -49,11 +49,11 @@ class CustomArFragment @Inject constructor(
     private lateinit var model: ArViewModel
     private val observer = Observer(::render)
 
-    override fun inject() {
-        (activity?.application as BaseApplication)
-                .mainComponent(requireActivity())
-                .arComponent().create()
-    }
+//    override fun inject() {
+//        (activity?.application as BaseApplication)
+//                .mainComponent(requireActivity())
+//                .arComponent().create()
+//    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.ar_fragment_layout , container , false)
@@ -110,8 +110,9 @@ class CustomArFragment @Inject constructor(
         return conf
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         model = ViewModelProvider(requireActivity() , viewModelProviderFactory).get(ArViewModel::class.java)
         model.currentViewState.observe(viewLifecycleOwner, observer)
     }

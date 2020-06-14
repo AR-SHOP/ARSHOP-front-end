@@ -6,9 +6,11 @@ import android.database.Cursor
 import android.database.MatrixCursor
 import android.os.Bundle
 import android.provider.BaseColumns
-import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.CursorAdapter
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.SimpleCursorAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -86,7 +88,6 @@ class HomeFragment @Inject constructor(
         homeViewModel.onEvent(HomeUiAction.GetHomePageSales)
         cartViewModel.onEvent(CartUiAction.GetCartOnStart)
     }
-
 
     override fun toString(): String {
         return "Home"
@@ -199,7 +200,7 @@ class HomeFragment @Inject constructor(
             setItemListener(object :
                 OnItemClickListener<HomeSales> {
                 override fun onClickItem(data: HomeSales) {
-                    homeViewModel.onEvent(HomeUiAction.GetHomePageSales)
+                    //ignored
                 }
 
             })

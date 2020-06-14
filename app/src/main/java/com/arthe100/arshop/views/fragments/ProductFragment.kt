@@ -23,6 +23,7 @@ import com.arthe100.arshop.scripts.mvi.ar.ArViewModel
 import com.arthe100.arshop.scripts.mvi.base.*
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
+import com.arthe100.arshop.views.CustomBaseArFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
 import com.arthe100.arshop.views.dialogBox.CommentDialog
@@ -104,7 +105,7 @@ class ProductFragment @Inject constructor(
             ar_btn?.visibility = View.INVISIBLE
         ar_btn?.setOnClickListener {
             arModel.currentUri = model.product.arModel
-            loadFragment(ArFragment::class.java)
+            loadFragment(CustomArFragment::class.java)
         }
         add_to_cart_btn?.setOnClickListener {
             cartViewModel.onEvent(CartUiAction.AddToCart(model.product.id , 1))
