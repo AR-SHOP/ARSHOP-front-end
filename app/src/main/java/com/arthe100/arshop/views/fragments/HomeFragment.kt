@@ -3,8 +3,15 @@ package com.arthe100.arshop.views.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.SearchView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.NestedScrollView
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,12 +27,12 @@ import com.arthe100.arshop.scripts.mvi.base.*
 import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.scripts.mvi.home.HomeViewModel
 import com.arthe100.arshop.views.BaseFragment
-import com.arthe100.arshop.views.interfaces.ILoadFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
 import com.arthe100.arshop.views.adapters.base.OnItemClickListener
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
+import com.arthe100.arshop.views.interfaces.ILoadFragment
 import com.arthe100.arshop.views.utility.CircleIndicator
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
@@ -45,6 +52,7 @@ class HomeFragment @Inject constructor(
     private lateinit var dialogBox: DialogBoxManager
     private lateinit var snapHelper: PagerSnapHelper
     private lateinit var circleIndicator: CircleIndicator
+    private var isHide: Boolean = false;
 //    private lateinit var suggestions: ArrayList<String>
 //    private lateinit var groupAdapter: GroupRecyclerViewAdapter
     private lateinit var discountSliderViewAdapter: GenericAdapter<HomeSales>
@@ -77,6 +85,8 @@ class HomeFragment @Inject constructor(
         homeViewModel.onEvent(HomeUiAction.GetHomePageSales)
         cartViewModel.onEvent(CartUiAction.GetCartOnStart)
     }
+
+
 
 
 
@@ -146,7 +156,7 @@ class HomeFragment @Inject constructor(
             setItemListener(object :
                 OnItemClickListener<HomeSales> {
                 override fun onClickItem(data: HomeSales) {
-                    homeViewModel.onEvent(HomeUiAction.GetHomePageSales)
+                    // ignored
                 }
 
             })

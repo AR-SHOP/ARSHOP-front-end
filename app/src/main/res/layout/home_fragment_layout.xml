@@ -40,18 +40,17 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-
-
     <androidx.core.widget.NestedScrollView
             android:id="@+id/home_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/home_app_bar_layout"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintVertical_bias="0">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_app_bar_layout"
+            app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
                 android:id="@+id/recycler_views_layout"
@@ -60,44 +59,42 @@
                 android:orientation="vertical">
 
 
-
-
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/discount_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
-                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:layoutDirection="rtl"
-                    android:textDirection="rtl"/>
+                    android:orientation="horizontal"
+                    android:textDirection="rtl" />
 
 
             <!--            <com.smarteist.autoimageslider.SliderView-->
-<!--                    android:id="@+id/image_slider"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="170dp"-->
-<!--                    android:paddingRight="10dp"-->
-<!--                    android:paddingLeft="10dp"-->
-<!--                    android:paddingTop="5dp"-->
-<!--                    app:sliderAnimationDuration="400"-->
-<!--                    app:sliderIndicatorAnimationDuration="400"-->
-<!--                    app:sliderIndicatorGravity="bottom"-->
-<!--                    app:sliderIndicatorMargin="10dp"-->
-<!--                    app:sliderIndicatorOrientation="horizontal"-->
-<!--                    app:sliderIndicatorRadius="3dp"-->
-<!--                    app:sliderScrollTimeInSec="4"-->
-<!--                    app:sliderIndicatorSelectedColor="@color/colorSecondary"-->
-<!--                    app:sliderIndicatorUnselectedColor="@color/colorBackground"/>-->
+            <!--                    android:id="@+id/image_slider"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="170dp"-->
+            <!--                    android:paddingRight="10dp"-->
+            <!--                    android:paddingLeft="10dp"-->
+            <!--                    android:paddingTop="5dp"-->
+            <!--                    app:sliderAnimationDuration="400"-->
+            <!--                    app:sliderIndicatorAnimationDuration="400"-->
+            <!--                    app:sliderIndicatorGravity="bottom"-->
+            <!--                    app:sliderIndicatorMargin="10dp"-->
+            <!--                    app:sliderIndicatorOrientation="horizontal"-->
+            <!--                    app:sliderIndicatorRadius="3dp"-->
+            <!--                    app:sliderScrollTimeInSec="4"-->
+            <!--                    app:sliderIndicatorSelectedColor="@color/colorSecondary"-->
+            <!--                    app:sliderIndicatorUnselectedColor="@color/colorBackground"/>-->
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/group_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:background="@color/colorBackground"
                     android:layoutDirection="rtl"
                     android:textDirection="rtl" />
