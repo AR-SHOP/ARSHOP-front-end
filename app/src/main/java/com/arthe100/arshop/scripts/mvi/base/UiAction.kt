@@ -50,14 +50,14 @@ sealed class ProfileUiAction                                            : UiActi
     object GetAddressListAction                                         : ProfileUiAction()
     data class CreateAddressAction(val address: Address)                : ProfileUiAction()
     data class GetAddressDetail(val id: Long)                           : ProfileUiAction()
-    data class UpdateAddressAction(val address: Address)                        : ProfileUiAction()
+    data class UpdateAddressAction(val address: Address)                : ProfileUiAction()
     data class DeleteAddressAction(val id: Long)                        : ProfileUiAction()
-
 }
 
 sealed class WishListUiAction                                           : UiAction(){
     object GetWishListAction                                            : WishListUiAction()
-    data class AddWishListAction(val productId: Long)                   : WishListUiAction()
-    data class DeleteWishListAction(val productId: Long)                : WishListUiAction()
-
+    data class AddWishListAction(val wishListProductID:
+                                 WishListProductID)                     : WishListUiAction()
+    data class DeleteWishListAction(val wishListProductID:
+                                    WishListProductID)                  : WishListUiAction()
 }

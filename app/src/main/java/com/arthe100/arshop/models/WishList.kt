@@ -7,3 +7,7 @@ data class WishList (
     val user : Long,
     @SerializedName("wish_items") var wishListItems : List<Product>
 )
+
+data class WishListProductID (
+    @SerializedName("product_id") var productID : Long
+)

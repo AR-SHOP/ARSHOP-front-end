@@ -1,13 +1,11 @@
 package com.arthe100.arshop.views.fragments
 
-import android.app.Dialog
+import android.annotation.SuppressLint
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.icu.util.Calendar
 import android.os.Bundle
-import android.view.*
-import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +14,7 @@ import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Comment
 import com.arthe100.arshop.models.User
 import com.arthe100.arshop.models.WishList
+import com.arthe100.arshop.models.WishListProductID
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
@@ -26,23 +25,15 @@ import com.arthe100.arshop.scripts.mvi.cart.CartViewModel
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
-import com.arthe100.arshop.views.adapters.base.OnItemClickListener
 import com.arthe100.arshop.views.dialogBox.CommentDialog
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
-import com.arthe100.arshop.views.utility.ShamsiCalendar
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.ar.sceneform.ux.ArFragment
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.dialog_comment_layout.*
+import kotlinx.android.synthetic.main.fragment_wish_list.*
 import kotlinx.android.synthetic.main.product_fragment_layout.*
-import java.sql.Timestamp
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.Month
-import java.util.*
 import javax.inject.Inject
 
 
@@ -59,6 +50,7 @@ class ProductFragment @Inject constructor(
     private lateinit var model: ProductViewModel
     private lateinit var arModel: ArViewModel
     private lateinit var commentDialog: CommentDialog
+    private var isCheckedWishList = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -84,7 +76,7 @@ class ProductFragment @Inject constructor(
         setComments(model.product.comments)
 //        (requireActivity() as AppCompatActivity).setSupportActionBar(product_toolbar)
 //        product_toolbar?.title = model.product.name
-        HandleWishListAdder()
+        handleWishListAdder()
         back_button?.setOnClickListener {
             requireActivity().onBackPressed()
         }
@@ -155,9 +147,20 @@ class ProductFragment @Inject constructor(
         return "Product"
     }
 
-    private fun HandleWishListAdder() {
-        add_to_wish_list?.setOnClickListener {
+    private fun handleWishListAdder() {
+        val wishListProductID = WishListProductID(model.product.id)
+        wishListViewModel.onEvent(WishListUiAction.GetWishListAction)
 
+        add_to_wish_list?.setOnClickListener {
+            if (isCheckedWishList) {
+                isCheckedWishList = false
+                add_to_wish_list.compoundDrawables[0]?.setTint(Color.BLUE)
+                wishListViewModel.onEvent(WishListUiAction.DeleteWishListAction(wishListProductID))
+            }else {
+                isCheckedWishList = true
+                add_to_wish_list.compoundDrawables[0]?.setTint(Color.RED)
+                wishListViewModel.onEvent(WishListUiAction.AddWishListAction(wishListProductID))
+            }
         }
     }
 
@@ -203,6 +206,22 @@ class ProductFragment @Inject constructor(
             is CartState.AddToCartState -> {
                 dialogBox.cancel()
                 checkCartStatus()
+            }
+
+            is WishListState.GetWishListSuccess -> {
+                dialogBox.cancel()
+                val wishList = state.getWishList
+                wishListViewModel.currentWishList = wishList
+
+                if (wishListViewModel.currentWishList != null) {
+                    if (wishListViewModel.currentWishList!!.wishListItems.contains(model.product)) {
+                        isCheckedWishList = true
+                        add_to_wish_list.compoundDrawables[0]?.setTint(Color.RED)
+                    } else {
+                        isCheckedWishList = false
+                        add_to_wish_list.compoundDrawables[0]?.setTint(Color.BLUE)
+                    }
+                }
             }
 
             is WishListState.AddWishListSuccess -> {

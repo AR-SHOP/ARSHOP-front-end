@@ -1,5 +1,6 @@
 package com.arthe100.arshop.scripts.repositories
 
+import com.arthe100.arshop.models.WishListProductID
 import com.arthe100.arshop.scripts.mvi.base.ViewState
 import com.arthe100.arshop.scripts.mvi.base.WishListState
 import com.arthe100.arshop.scripts.network.services.WishListService
@@ -18,18 +19,18 @@ class WishListRepository @Inject constructor(private val service : WishListServi
         }
     }
 
-    suspend fun addWishList(productId: Long): ViewState {
+    suspend fun addWishList(wishListProductID: WishListProductID): ViewState {
         return try {
-            WishListState.AddWishListSuccess(service.addWishList(productId))
+            WishListState.AddWishListSuccess(service.addWishList(wishListProductID))
 
         }catch (t: Throwable) {
             ViewState.Failure(t)
         }
     }
 
-    suspend fun deleteWishList(productId: Long): ViewState {
+    suspend fun deleteWishList(wishListProductID: WishListProductID): ViewState {
         return try {
-            WishListState.DeleteWishListSuccess(service.deleteWishList(productId))
+            WishListState.DeleteWishListSuccess(service.deleteWishList(wishListProductID))
 
         }catch (t: Throwable) {
             ViewState.Failure(t)

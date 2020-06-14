@@ -31,7 +31,7 @@ class WishListViewModel @Inject constructor(private val wishListRepository: Wish
 
 
                 viewModelScope.launch {
-                    _currentViewState.value = wishListRepository.addWishList(action.productId)
+                    _currentViewState.value = wishListRepository.addWishList(action.wishListProductID)
                 }
             }
             is WishListUiAction.DeleteWishListAction -> {
@@ -42,7 +42,7 @@ class WishListViewModel @Inject constructor(private val wishListRepository: Wish
 
 
                 viewModelScope.launch {
-                    _currentViewState.value = wishListRepository.deleteWishList(action.productId)
+                    _currentViewState.value = wishListRepository.deleteWishList(action.wishListProductID)
                 }
             }
         }
