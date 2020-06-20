@@ -23,7 +23,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 @Module
 object RetrofitModule {
 
-    private val baseUrl = "http://babk.pythonanywhere.com/core/api/"
+    private val baseUrl = "http://185.97.116.138:8800/core/api/"
 
     @JvmStatic
     @AppScope

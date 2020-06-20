@@ -41,7 +41,7 @@ class UserRepository @Inject constructor(private val service: UserService) {
 
     suspend fun getCode(phone: String) : ViewState {
         return try {
-            AuthState.CodeGetSuccess(service.getCode(PhoneNetwork(phone)).code)
+            AuthState.CodeGetSuccess(service.getCode(PhoneNetwork(phone))[0].message)
         }catch (t: Throwable)
         { ViewState.Failure(t) }
     }

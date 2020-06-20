@@ -10,19 +10,19 @@ interface CartService {
     @GET("cart/")
     suspend fun getCart() : Cart
 
-    @POST("add-to-cart/")
+    @POST("cart/add/")
     suspend fun add(@Body item: AddCart) : Cart
 
-    @PUT("remove-from-cart/")
+    @PUT("cart/remove/")
     suspend fun remove(@Body item: RemoveCart) : Cart
 
-    @PATCH("remove-from-cart/")
+    @PATCH("cart/remove/")
     suspend fun decrease(@Body item: AddCart): Cart
 
-    @PATCH("add-to-cart/")
+    @PATCH("cart/add/")
     suspend fun increase(@Body item: AddCart): Cart
 
-    @DELETE("clear-cart/")
+    @DELETE("cart/clear/")
     suspend fun clear(): Cart
 
 }

@@ -73,8 +73,6 @@ class VerifyFragment @Inject constructor(
                 dialogBox.cancel()
                 val reg = "\\d+".toRegex()
                 model.code = reg.find(state.code , 0)?.value
-                messageManager.toast(requireContext() , "your code is: ${model.code}")
-//                requireView().visibility = View.VISIBLE
             }
             is AuthState.CodeSuccess -> {
                 model.onEvent(AuthUiAction.LoginAction(model.password , model.phone))

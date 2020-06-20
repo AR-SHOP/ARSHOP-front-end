@@ -23,7 +23,7 @@ data class RefreshedTokenModel(
 )
 
 data class CodeNetwork(
-    val code: String
+    val message: String
 )
 data class PhoneNetwork(
     val phone: String

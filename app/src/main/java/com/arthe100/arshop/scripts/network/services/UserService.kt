@@ -12,7 +12,7 @@ interface UserService  {
     suspend fun login(@Body user: AuthUser) : UserToken
 
     @POST("signup/send-sms/")
-    suspend fun getCode(@Body phone: PhoneNetwork) : CodeNetwork
+    suspend fun getCode(@Body phone: PhoneNetwork) : List<CodeNetwork>
 
 
     //TODO()

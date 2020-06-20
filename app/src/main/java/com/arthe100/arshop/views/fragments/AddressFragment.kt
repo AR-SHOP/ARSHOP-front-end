@@ -80,6 +80,8 @@ class AddressFragment @Inject constructor(
             }
             is ProfileState.CreateAddressSuccess -> {
                 dialogBox.cancel()
+                addressDialog.close()
+                addressAdapter.addItem(state.address)
             }
         }
     }
