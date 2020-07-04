@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.HomeSales
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.models.User
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.Auth.UserSession
 import com.arthe100.arshop.scripts.mvi.Products.ProductViewModel
@@ -86,7 +87,12 @@ class HomeFragment @Inject constructor(
         homeViewModel.load(::render)
         productViewModel.onEvent(ProductUiAction.GetProducts)
         homeViewModel.onEvent(HomeUiAction.GetHomePageSales)
-        cartViewModel.onEvent(CartUiAction.GetCartOnStart)
+        when(session.user)
+        {
+            is User.User ->
+                cartViewModel.onEvent(CartUiAction.GetCartOnStart)
+        }
+
     }
 
     override fun toString(): String {

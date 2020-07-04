@@ -149,6 +149,8 @@ class ProductFragment @Inject constructor(
     }
 
     private fun handleWishListAdder() {
+        if(session.user is User.GuestUser) return
+
         val wishListProductID = WishListProductID(model.product.id)
         wishListViewModel.onEvent(WishListUiAction.GetWishListAction)
 
