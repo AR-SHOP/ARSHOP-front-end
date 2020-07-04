@@ -29,6 +29,7 @@ import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
 import com.arthe100.arshop.views.adapters.base.OnItemClickListener
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
+import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.activity_main_layout.*
 import kotlinx.android.synthetic.main.categories_fragment_layout.*
 import kotlinx.android.synthetic.main.category_fragment_layout.*
@@ -92,6 +93,7 @@ class CategoriesFragment @Inject constructor(
             }
             is ViewState.Failure -> {
                 dialogBoxManager.cancel()
+                dialogBoxManager.showDialog(requireContext(), MessageType.ERROR, state.throwable.toString())
                 categories_swipe_refresh?.isRefreshing = false
             }
         }

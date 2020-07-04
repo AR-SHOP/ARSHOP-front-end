@@ -123,7 +123,7 @@ class LoginFragment @Inject constructor(
                 cartViewModel.onEvent(CartUiAction.GetCartOnStart)
                 loadFragment(ProfileFragment::class.java)
             }
-            is ViewState.Failure -> dialogBox.showDialog(requireContext(), MessageType.ERROR)
+            is ViewState.Failure -> dialogBox.showDialog(requireContext(), MessageType.ERROR , state.throwable.toString())
         }
     }
 }

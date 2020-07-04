@@ -92,7 +92,7 @@ class CategoryFragment @Inject constructor(
             is ViewState.Failure -> {
                 dialogBoxManager.cancel()
                 if (context == null) return
-                dialogBoxManager.showDialog(requireContext(),MessageType.ERROR)
+                dialogBoxManager.showDialog(requireContext(),MessageType.ERROR , state.throwable.toString())
             }
         }
     }

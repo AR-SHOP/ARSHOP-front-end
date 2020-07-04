@@ -203,7 +203,7 @@ class ProductFragment @Inject constructor(
                 comments_count?.text = if(commentSize == 0) "هیچ دیدگاهی ثبت نشده" else "$commentSize دیدگاه"
                 dialogBox.cancel()
             }
-            is ViewState.Failure -> dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
+            is ViewState.Failure -> dialogBox.showDialog(requireContext(), MessageType.ERROR, state.throwable.toString())
             is CartState.AddToCartState -> {
                 dialogBox.cancel()
                 checkCartStatus()

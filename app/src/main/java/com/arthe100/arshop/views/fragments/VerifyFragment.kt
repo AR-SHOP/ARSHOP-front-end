@@ -66,7 +66,7 @@ class VerifyFragment @Inject constructor(
         when(state){
             is ViewState.Failure -> {
 //                requireView().visibility = View.VISIBLE
-                dialogBox.showDialog(requireActivity(), MessageType.ERROR)
+                dialogBox.showDialog(requireActivity(), MessageType.ERROR , state.throwable.toString())
             }
 
             is AuthState.CodeGetSuccess -> {

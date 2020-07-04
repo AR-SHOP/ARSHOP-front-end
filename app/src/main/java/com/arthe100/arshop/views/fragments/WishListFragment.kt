@@ -61,7 +61,7 @@ class WishListFragment @Inject constructor(
             }
 
             is ViewState.Failure -> {
-                dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
+                dialogBox.showDialog(requireContext(), MessageType.ERROR, state.throwable.toString())
                 messageManager.toast(requireContext(), state.throwable.toString())
             }
 

@@ -93,7 +93,7 @@ class ProfileFragment @Inject constructor(
 
             is ViewState.Failure -> {
 //                requireView().visibility = View.VISIBLE
-                dialogBox.showDialog(requireContext(), MessageType.ERROR, "خطا در برقراری ارتباط با سرور")
+                dialogBox.showDialog(requireContext(), MessageType.ERROR, state.throwable.toString())
                 messageManager.toast(requireContext(), state.throwable.toString())
             }
 
