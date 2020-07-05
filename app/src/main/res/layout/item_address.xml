@@ -141,6 +141,9 @@
         </LinearLayout>
 
 
+
+
+
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,7 +153,7 @@
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_home_address"
+                    android:src="@drawable/ic_mail"
                     android:layout_gravity="center"
                     android:padding="5dp"
                     app:tint="@color/colorHint" />
@@ -165,6 +168,58 @@
                     android:textColor="@color/colorPrimaryDark"/>
 
         </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_contact"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    app:tint="@color/colorHint" />
+
+            <TextView
+                    android:id="@+id/phone_number_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/phone_number"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_profile_outlined"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    app:tint="@color/colorHint" />
+
+            <TextView
+                    android:id="@+id/reciever_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/reciever_name"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+        </LinearLayout>
+
 
         <LinearLayout
                 android:layout_width="wrap_content"

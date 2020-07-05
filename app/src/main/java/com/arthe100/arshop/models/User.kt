@@ -41,7 +41,7 @@ data class AuthUser(
 data class UserProfile(
     val id: Long,
     @SerializedName("first_name") var fName : String,
-    @SerializedName("last_name") val lName : String,
+    @SerializedName("last_name") var lName : String,
     @SerializedName("phone") var phone : String,
     var email : String,
     @SerializedName("social_security_number") var ssId : String

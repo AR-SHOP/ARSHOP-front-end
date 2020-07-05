@@ -68,6 +68,7 @@
     <string name="empty_list">موردی برای نمایش وجود ندارد!</string>
     <string name="product">محصول</string>
     <string name="price">قیمت</string>
+    <string name="toman">تومان</string>
     <string name="category">دسته‌بندی</string>
     <string name="empty_cart">سبد خرید شما خالی است.</string>
     <string name="total">مجموع</string>
@@ -78,7 +79,7 @@
     <string name="create_acc_link">ایجاد حساب کاربری جدید</string>
     <string name="empty_orders">شما تاکنون سفارشی ثبت نکرده‌اید!</string>
     <string name="name">نام</string>
-    <string name="lname">‌نام‌خانوادگی</string>
+    <string name="lname">نام خانوادگی</string>
     <string name="reciever_name">نام و نام‌خانوادگی گیرنده</string>
     <string name="brand">سازنده محصول</string>
     <string name="description">توضیحات</string>

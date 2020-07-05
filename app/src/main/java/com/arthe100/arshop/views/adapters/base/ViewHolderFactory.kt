@@ -73,6 +73,8 @@ class AddressViewHolder(itemView: View)
             itemView.apartment_text?.text = data.floorNumber.toString()
             itemView.home_address_text?.text = data.address
             itemView.postal_code_text?.text = data.postalCode
+            itemView.phone_number_text?.text = data.phone
+            itemView.reciever_text?.text = "${data.firstName} ${data.lastName}"
 //            itemView.edit_btn.setOnClickListener { itemListener?.onClickItem(data) }
             viewListeners?.forEach {
                 val view = itemView.findViewById(it.id) as View
