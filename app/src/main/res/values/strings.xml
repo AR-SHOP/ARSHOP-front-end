@@ -68,6 +68,7 @@
     <string name="empty_list">موردی برای نمایش وجود ندارد!</string>
     <string name="product">محصول</string>
     <string name="price">قیمت</string>
+    <string name="toman">تومان</string>
     <string name="category">دسته‌بندی</string>
     <string name="empty_cart">سبد خرید شما خالی است.</string>
     <string name="total">مجموع</string>
