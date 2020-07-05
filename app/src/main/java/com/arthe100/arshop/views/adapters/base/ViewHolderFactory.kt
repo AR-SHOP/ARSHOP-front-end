@@ -110,9 +110,12 @@ class CommentRecyclerViewHolder(itemView: View)
 }
 
 class WishListViewHolder(itemView: View)
-    : RecyclerView.ViewHolder(itemView), GenericAdapter.Binder<Product> {
-
-    override fun bind(data: Product, clickListener: OnItemClickListener<Product>?) {
+    : RecyclerView.ViewHolder(itemView), GenericAdapter.BinderMultiple<Product> {
+    override fun bind(
+        data: Product,
+        itemListener: OnItemClickListener<Product>?,
+        viewListeners: List<ViewListeners<Product>>?
+    ) {
         itemView.apply {
             itemView.wishList_item_name?.text = data.name
             itemView.wishList_item_price?.text = data.price.toString()
@@ -126,7 +129,14 @@ class WishListViewHolder(itemView: View)
                 .load(data.thumbnail)
                 .into(itemView.wishList_item_image)
 
-            setOnClickListener { clickListener?.onClickItem(data) }
+            viewListeners?.forEach {
+                val view = itemView.findViewById(it.id) as View
+                view.setOnClickListener { _ ->
+                    it.listener?.onClickItem(data , adapterPosition)
+                }
+            }
+
+            setOnClickListener { itemListener?.onClickItem(data) }
         }
     }
 }

@@ -8,6 +8,7 @@ data class WishList (
     @SerializedName("wish_items") var wishListItems : List<Product>
 )
 
+
 data class WishListProductID (
     @SerializedName("product_id") var productID : Long
 )

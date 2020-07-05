@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Product
+import com.arthe100.arshop.models.WishListProductID
 import com.arthe100.arshop.scripts.messege.MessageManager
 import com.arthe100.arshop.scripts.mvi.WishList.WishListViewModel
 import com.arthe100.arshop.scripts.mvi.base.ViewState
@@ -17,6 +18,8 @@ import com.arthe100.arshop.scripts.mvi.base.WishListUiAction
 import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.adapters.base.GenericAdapter
 import com.arthe100.arshop.views.adapters.base.GenericItemDiff
+import com.arthe100.arshop.views.adapters.base.OnItemClickListenerForView
+import com.arthe100.arshop.views.adapters.base.ViewListeners
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import com.arthe100.arshop.views.interfaces.ILoadFragment
@@ -63,6 +66,8 @@ class WishListFragment @Inject constructor(
             is ViewState.Failure -> {
                 dialogBox.showDialog(requireContext(), MessageType.ERROR, state.throwable.toString())
                 messageManager.toast(requireContext(), state.throwable.toString())
+                if(model.currentWishList != null)
+                    wishListAdapter.addItems(model.currentWishList?.wishListItems!!)
             }
 
             is WishListState.GetWishListSuccess -> {
@@ -75,6 +80,11 @@ class WishListFragment @Inject constructor(
                     empty_wishList_layout.visibility = View.INVISIBLE
                     wishListAdapter.addItems(wishList.wishListItems)
                 }
+            }
+
+            is WishListState.DeleteWishListSuccess -> {
+                empty_wishList_layout?.visibility = if(wishListAdapter.itemCount == 0) View.VISIBLE else View.INVISIBLE
+                model.currentWishList = state.deleteWishList
             }
 
             is ViewState.LoadingState -> {
@@ -98,6 +108,19 @@ class WishListFragment @Inject constructor(
                     return oldItem == newItem
                 }
             })
+
+            setViewListeners(listOf(
+                ViewListeners(
+                    id = R.id.delete_btn,
+                    listener = object: OnItemClickListenerForView<Product>{
+                        override fun onClickItem(data: Product, position: Int) {
+                            model.onEvent(WishListUiAction.DeleteWishListAction(WishListProductID(data.id)))
+                            wishListAdapter.removeItem(position)
+                        }
+
+                    }
+                )
+            ))
         }
     }
 

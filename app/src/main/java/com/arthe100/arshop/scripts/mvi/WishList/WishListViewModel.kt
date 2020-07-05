@@ -35,11 +35,10 @@ class WishListViewModel @Inject constructor(private val wishListRepository: Wish
                 }
             }
             is WishListUiAction.DeleteWishListAction -> {
-                if (currentWishList != null)
-                    _currentViewState.value = WishListState.DeleteWishListSuccess(currentWishList!!)
-                else
-                    _currentViewState.value = ViewState.LoadingState
-
+//                if (currentWishList != null)
+//                    _currentViewState.value = WishListState.DeleteWishListSuccess(currentWishList!!)
+//                else
+//                    _currentViewState.value = ViewState.LoadingState
 
                 viewModelScope.launch {
                     _currentViewState.value = wishListRepository.deleteWishList(action.wishListProductID)

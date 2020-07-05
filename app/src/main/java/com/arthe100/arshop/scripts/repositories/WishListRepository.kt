@@ -30,8 +30,8 @@ class WishListRepository @Inject constructor(private val service : WishListServi
 
     suspend fun deleteWishList(wishListProductID: WishListProductID): ViewState {
         return try {
-            WishListState.DeleteWishListSuccess(service.deleteWishList(wishListProductID))
-
+            val wishlist = service.deleteWishList(wishListProductID)
+            WishListState.DeleteWishListSuccess(wishlist)
         }catch (t: Throwable) {
             ViewState.Failure(t)
         }
