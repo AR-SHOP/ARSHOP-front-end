@@ -123,7 +123,7 @@
                     android:paddingBottom="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/name_last_name_editText"
+                        android:id="@+id/first_name_editText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
@@ -137,6 +137,30 @@
                         android:text="@string/name"/>
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:paddingBottom="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/last_name_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorPrimary"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:textCursorDrawable="@drawable/cursor"
+                        android:cursorVisible="true"
+                        android:hint="@string/lname"
+                        android:text="@string/lname"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"

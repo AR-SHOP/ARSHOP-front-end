@@ -17,7 +17,6 @@ import com.arthe100.arshop.views.BaseFragment
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import kotlinx.android.synthetic.main.edit_profile_info_fragment_layout.*
-import kotlinx.android.synthetic.main.profile_info_fragment_layout.*
 import javax.inject.Inject
 
 class EditProfileInfoFragment @Inject constructor(
@@ -77,7 +76,7 @@ class EditProfileInfoFragment @Inject constructor(
                 val user = state.userInfo
                 model.currentProfile = user
 
-                name_last_name_editText.setText(user.fName + " " + user.lName)
+                first_name_editText.setText(user.fName + " " + user.lName)
 
                 phone_number_editText.setText(user.phone)
 
@@ -91,7 +90,7 @@ class EditProfileInfoFragment @Inject constructor(
 
                 val user = state.editInfo
 
-                user.fName = name_last_name_editText.text.toString()
+                user.fName = first_name_editText.text.toString()
 
                 user.phone = phone_number_editText.text.toString()
 
