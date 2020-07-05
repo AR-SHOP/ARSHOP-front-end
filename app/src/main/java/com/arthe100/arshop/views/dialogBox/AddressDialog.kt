@@ -62,11 +62,12 @@ class AddressDialog(
         postal_code?.setText(address.postalCode)
         city?.setText(address.city)
         province?.setText(address.province)
-        home_details?.setText(address.addressLine)
+        home_details?.setText(address.address)
         plaque?.setText(address.plaque.toString())
         floor?.setText(address.floorNumber.toString())
         self_reciever?.isChecked = isReceiver(address)
         add_new_address_btn.text = "ویرایش آدرس"
+        model.currentAddress = address
     }
 
     private fun addNewAddress(){
@@ -111,7 +112,7 @@ class AddressDialog(
                 city = city,
                 province = province,
                 country = "IR",
-                addressLine = homeAddress,
+                address = homeAddress,
                 plaque = plaque,
                 floorNumber = floor,
                 user = prof.id
@@ -146,7 +147,7 @@ class AddressDialog(
                 city = city,
                 province = province,
                 country = "IR",
-                addressLine = homeAddress,
+                address = homeAddress,
                 plaque = plaque,
                 floorNumber = floor,
                 user = address.user

@@ -10,7 +10,7 @@ data class Address(
     val city: String,
     val province: String,
     val country: String,
-    val addressLine: String,
+    val address: String,
     val plaque: Int,
     val floorNumber: Int,
     val user: Long

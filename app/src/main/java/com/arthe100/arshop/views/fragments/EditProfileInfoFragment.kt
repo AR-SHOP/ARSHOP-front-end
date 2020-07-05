@@ -87,7 +87,7 @@ class EditProfileInfoFragment @Inject constructor(
             }
 
             is ProfileState.EditProfileSuccess -> {
-                dialogBox.cancel()
+                dialogBox.showDialog(requireContext() , MessageType.SUCCESS)
 
                 val user = state.editInfo
 

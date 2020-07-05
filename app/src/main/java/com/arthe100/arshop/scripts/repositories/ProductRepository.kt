@@ -39,5 +39,4 @@ class ProductRepository @Inject constructor (private val service : ProductServic
             ViewState.Failure(throwable)
         }
     }
-
 }

@@ -6,10 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.*
-import com.arthe100.arshop.views.utility.ShamsiCalendar
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.smarteist.autoimageslider.SliderViewAdapter
 import kotlinx.android.synthetic.main.cart_item.view.*
 import kotlinx.android.synthetic.main.product_fragment_layout.view.cart_count_text
 import kotlinx.android.synthetic.main.category_card_item.view.*
@@ -20,8 +18,6 @@ import kotlinx.android.synthetic.main.item_wish_list.view.*
 import kotlinx.android.synthetic.main.product_grid_item.view.*
 import kotlinx.android.synthetic.main.user_comment_card_item.view.*
 import saman.zamani.persiandate.PersianDate
-import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 object ViewHolderFactory {
@@ -75,7 +71,7 @@ class AddressViewHolder(itemView: View)
             itemView.city_text?.text = data.city
             itemView.plaque_text?.text = data.plaque.toString()
             itemView.apartment_text?.text = data.floorNumber.toString()
-            itemView.home_address_text?.text = data.addressLine
+            itemView.home_address_text?.text = data.address
             itemView.postal_code_text?.text = data.postalCode
 //            itemView.edit_btn.setOnClickListener { itemListener?.onClickItem(data) }
             viewListeners?.forEach {

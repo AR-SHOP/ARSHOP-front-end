@@ -1,23 +1,15 @@
 package com.arthe100.arshop.views.fragments
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.LinearGradient
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.arthe100.arshop.R
 import com.arthe100.arshop.models.Address
-import com.arthe100.arshop.models.Comment
 import com.arthe100.arshop.scripts.mvi.Profile.ProfileViewModel
 import com.arthe100.arshop.scripts.mvi.base.ProfileState
 import com.arthe100.arshop.scripts.mvi.base.ProfileUiAction
@@ -28,11 +20,7 @@ import com.arthe100.arshop.views.dialogBox.AddressDialog
 import com.arthe100.arshop.views.dialogBox.DialogBoxManager
 import com.arthe100.arshop.views.dialogBox.MessageType
 import com.arthe100.arshop.views.interfaces.ILoadFragment
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.dialog_address_layout.*
-import kotlinx.android.synthetic.main.dialog_comment_layout.*
-import kotlinx.android.synthetic.main.dialog_comment_layout.close_btn
 import kotlinx.android.synthetic.main.fragment_address.*
 import javax.inject.Inject
 
@@ -82,6 +70,8 @@ class AddressFragment @Inject constructor(
                 dialogBox.cancel()
                 addressDialog.close()
                 addressAdapter.addItem(state.address)
+                no_address_image?.visibility = if(addressAdapter.itemCount == 0) View.VISIBLE else View.INVISIBLE
+                no_address_text?.visibility = if(addressAdapter.itemCount == 0) View.VISIBLE else View.INVISIBLE
             }
         }
     }
@@ -113,14 +103,13 @@ class AddressFragment @Inject constructor(
                 }
 
                 override fun areContentsTheSame(oldItem: Address, newItem: Address): Boolean {
-                    return oldItem.addressLine == newItem.addressLine
+                    return oldItem.address == newItem.address
                 }
             })
             setItemListener(object: OnItemClickListener<Address> {
                 override fun onClickItem(data: Address) {
                     model.currentAddress = data
                 }
-
             })
 
             setViewListeners(listOf(
